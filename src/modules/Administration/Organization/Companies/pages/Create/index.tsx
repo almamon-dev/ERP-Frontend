@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Save, Building2, Phone, Briefcase, ChevronRight, Image, Paperclip, FileText } from 'lucide-react';
+import { ArrowLeft, Save, Building2, Phone, Briefcase, ChevronRight, Image as ImageIcon, Paperclip, FileText, MapPin, Globe, Clock, CreditCard, Bell, Shield, Activity } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
@@ -9,15 +9,29 @@ import Select from '@/components/ui/select';
 
 const CREATE_TABS = [
     { id: 'general', label: 'General Information', icon: Building2 },
-    { id: 'contact', label: 'Contact & Location', icon: Phone },
+    { id: 'contact', label: 'Contact & Location', icon: MapPin },
     { id: 'settings', label: 'Business Settings', icon: Briefcase },
-    { id: 'files', label: 'Files & Notes', icon: FileText },
+    { id: 'files', label: 'Documents & Extras', icon: FileText },
 ];
+
+const SectionHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
+    <div className="col-span-1 md:col-span-2 mt-4 pt-3 border-t border-slate-100 first:mt-0 first:pt-0 first:border-t-0 mb-2">
+        <h3 className="text-[14px] font-bold text-slate-800 flex items-center gap-2">
+            {Icon && <Icon size={16} className="text-slate-400" />}
+            {title}
+        </h3>
+    </div>
+);
+
+const FormLabel = ({ children, required }: { children: React.ReactNode, required?: boolean }) => (
+    <label className="block text-[13px] font-medium text-slate-700 mb-1.5">
+        {children} {required && <span className="text-red-500">*</span>}
+    </label>
+);
 
 export default function CompanyCreate() {
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('general');
-    const [isActive, setIsActive] = useState(true);
 
     return (
         <div className="p-6 md:p-8 mx-auto bg-[#f8f9fa] h-full">
@@ -73,54 +87,93 @@ export default function CompanyCreate() {
                         {activeTab === 'general' && (
                             <div className="space-y-3 animate-in fade-in duration-300">
                                 
-                                <div className="mb-6 pb-4 border-b border-slate-100">
-                                    <div>
-                                        <h2 className="text-[16px] font-bold text-slate-800">General Information</h2>
-                                        <p className="text-[13px] text-slate-500 mt-1">Core identity and business overview.</p>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-3 w-full">
-                                    <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Company Logo</label>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
+                                    <SectionHeader title="Company Overview" icon={Building2} />
+                                    <div className="col-span-1 md:col-span-2 mb-2">
+                                        <FormLabel>Company Logo</FormLabel>
                                         <div className="flex items-center gap-4">
-                                            <div className="w-16 h-16 rounded-md border-2 border-dashed border-slate-300 flex items-center justify-center bg-slate-50 text-slate-400">
-                                                <Image size={24} />
+                                            <div className="w-14 h-14 rounded-md border-2 border-dashed border-slate-300 flex items-center justify-center bg-slate-50 text-slate-400">
+                                                <ImageIcon size={20} />
                                             </div>
                                             <div>
-                                                <Button variant="outline" size="sm" className="h-[30px] text-[12px] font-semibold">Upload Logo</Button>
-                                                <p className="text-[11px] text-slate-500 mt-1.5">PNG, JPG up to 2MB.</p>
+                                                <Button variant="outline" size="sm" className="h-[28px] text-[12px] font-semibold">Upload Logo</Button>
+                                                <p className="text-[11px] text-slate-500 mt-1">PNG, JPG up to 2MB.</p>
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    <div>
+                                        <FormLabel required>Company Name</FormLabel>
+                                        <Input placeholder="Enter company name" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel required>Company Code</FormLabel>
+                                        <Input placeholder="e.g. CMP-001" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Legal Name</FormLabel>
+                                        <Input placeholder="Full legal entity name" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel required>Status</FormLabel>
+                                        <Select className="h-[36px]">
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                        </Select>
+                                    </div>
+                                    <div className="col-span-1 md:col-span-2 flex items-center gap-2 mt-1">
+                                        <Switch id="default-company" />
+                                        <label htmlFor="default-company" className="text-[13px] font-medium text-slate-700 cursor-pointer">Set as Default Company</label>
+                                    </div>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
-                                        <div className="col-span-1 md:col-span-2">
-                                            <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Company Name <span className="text-red-500">*</span></label>
-                                            <Input placeholder="Enter company name" className="h-[38px] text-[13px]" />
-                                        </div>
-                                        <div>
-                                            <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Company Code <span className="text-red-500">*</span></label>
-                                            <Input placeholder="e.g. CMP-001" className="h-[38px] text-[13px]" />
-                                        </div>
-                                        <div>
-                                            <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Business Type <span className="text-red-500">*</span></label>
-                                            <Select className="h-[38px]">
-                                                <option value="">Select Type</option>
-                                                <option value="LLC">LLC</option>
-                                                <option value="Corporation">Corporation</option>
-                                                <option value="Partnership">Partnership</option>
-                                                <option value="Sole Proprietorship">Sole Proprietorship</option>
-                                            </Select>
-                                        </div>
-                                        <div className="col-span-1 md:col-span-2 pt-1">
-                                            <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Industry / Sector</label>
-                                            <Input placeholder="e.g. Technology, Healthcare, Manufacturing" className="h-[38px] text-[13px]" />
-                                        </div>
-                                        <div className="col-span-1 md:col-span-2">
-                                            <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Short Description</label>
-                                            <Textarea placeholder="A brief description of what the company does..." rows={2} className="text-[13px]" />
-                                        </div>
+                                    <SectionHeader title="Basic Information" />
+                                    <div>
+                                        <FormLabel required>Business Type</FormLabel>
+                                        <Select className="h-[36px]">
+                                            <option value="">Select Type</option>
+                                            <option value="Sole Proprietorship">Sole Proprietorship</option>
+                                            <option value="Partnership">Partnership</option>
+                                            <option value="LLC">LLC</option>
+                                            <option value="Corporation">Corporation</option>
+                                        </Select>
+                                    </div>
+                                    <div>
+                                        <FormLabel required>Industry</FormLabel>
+                                        <Select className="h-[36px]">
+                                            <option value="">Select Industry</option>
+                                            <option value="Technology">Technology</option>
+                                            <option value="Healthcare">Healthcare</option>
+                                            <option value="Retail">Retail</option>
+                                            <option value="Manufacturing">Manufacturing</option>
+                                            <option value="Finance">Finance</option>
+                                        </Select>
+                                    </div>
+                                    <div>
+                                        <FormLabel>Company Size</FormLabel>
+                                        <Select className="h-[36px]">
+                                            <option value="">Select Size</option>
+                                            <option value="1-10">1-10 Employees</option>
+                                            <option value="11-50">11-50 Employees</option>
+                                            <option value="51-200">51-200 Employees</option>
+                                            <option value="201-500">201-500 Employees</option>
+                                            <option value="500+">500+ Employees</option>
+                                        </Select>
+                                    </div>
+                                    <div>
+                                        <FormLabel>Established Date</FormLabel>
+                                        <Input type="date" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Registration Number</FormLabel>
+                                        <Input placeholder="Registration no" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Trade License Number</FormLabel>
+                                        <Input placeholder="Trade license no" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div className="col-span-1 md:col-span-2">
+                                        <FormLabel>Description</FormLabel>
+                                        <Textarea placeholder="A brief description of the company..." rows={3} className="text-[13px]" />
                                     </div>
                                 </div>
                             </div>
@@ -128,34 +181,54 @@ export default function CompanyCreate() {
 
                         {activeTab === 'contact' && (
                             <div className="space-y-3 animate-in fade-in duration-300">
-                                <div className="mb-6 pb-4 border-b border-slate-100">
-                                    <h2 className="text-[16px] font-bold text-slate-800">Contact & Location</h2>
-                                    <p className="text-[13px] text-slate-500 mt-1">Communication details and physical addresses.</p>
-                                </div>
-
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 w-full">
-                                    <div className="col-span-1 md:col-span-2">
-                                        <h3 className="text-[14px] font-bold text-slate-800 mb-4 mt-2">Contact Channels</h3>
+                                    
+                                    <SectionHeader title="Contact Information" icon={Phone} />
+                                    <div>
+                                        <FormLabel required>Primary Email</FormLabel>
+                                        <Input type="email" placeholder="contact@company.com" className="h-[36px] text-[13px]" />
                                     </div>
                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Email Address <span className="text-red-500">*</span></label>
-                                        <Input type="email" placeholder="contact@company.com" className="h-[38px] text-[13px]" />
+                                        <FormLabel>Secondary Email</FormLabel>
+                                        <Input type="email" placeholder="support@company.com" className="h-[36px] text-[13px]" />
                                     </div>
                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Phone Number <span className="text-red-500">*</span></label>
-                                        <Input placeholder="+1 (555) 000-0000" className="h-[38px] text-[13px]" />
+                                        <FormLabel required>Phone Number</FormLabel>
+                                        <Input placeholder="+1 555 000 0000" className="h-[36px] text-[13px]" />
                                     </div>
-                                    <div className="col-span-1 md:col-span-2">
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Primary Website</label>
-                                        <Input placeholder="https://www.example.com" className="h-[38px] text-[13px]" />
+                                    <div>
+                                        <FormLabel>Mobile Number</FormLabel>
+                                        <Input placeholder="+1 555 111 1111" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Fax</FormLabel>
+                                        <Input placeholder="Fax number" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Support Email</FormLabel>
+                                        <Input type="email" placeholder="help@company.com" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Contact Person</FormLabel>
+                                        <Input placeholder="Name of primary contact" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Contact Person Email</FormLabel>
+                                        <Input type="email" placeholder="Email of primary contact" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Contact Person Phone</FormLabel>
+                                        <Input placeholder="Phone of primary contact" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Website</FormLabel>
+                                        <Input placeholder="https://www.example.com" className="h-[36px] text-[13px]" />
                                     </div>
 
-                                    <div className="col-span-1 md:col-span-2 mt-4 pt-5 border-t border-slate-100">
-                                        <h3 className="text-[14px] font-bold text-slate-800 mb-4 mt-2">Physical Address</h3>
-                                    </div>
+                                    <SectionHeader title="Address Information" icon={MapPin} />
                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Country <span className="text-red-500">*</span></label>
-                                        <Select className="h-[38px]">
+                                        <FormLabel required>Country</FormLabel>
+                                        <Select className="h-[36px]">
                                             <option value="">Select Country</option>
                                             <option value="US">United States</option>
                                             <option value="UK">United Kingdom</option>
@@ -163,20 +236,76 @@ export default function CompanyCreate() {
                                         </Select>
                                     </div>
                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">State / Province</label>
-                                        <Input placeholder="State name" className="h-[38px] text-[13px]" />
+                                        <FormLabel>State / Province</FormLabel>
+                                        <Input placeholder="State name" className="h-[36px] text-[13px]" />
                                     </div>
                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">City <span className="text-red-500">*</span></label>
-                                        <Input placeholder="City name" className="h-[38px] text-[13px]" />
+                                        <FormLabel required>City</FormLabel>
+                                        <Input placeholder="City name" className="h-[36px] text-[13px]" />
                                     </div>
                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">ZIP / Postal Code</label>
-                                        <Input placeholder="ZIP Code" className="h-[38px] text-[13px]" />
+                                        <FormLabel>ZIP / Postal Code</FormLabel>
+                                        <Input placeholder="ZIP Code" className="h-[36px] text-[13px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2">
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Full Street Address <span className="text-red-500">*</span></label>
+                                        <FormLabel required>Street Address</FormLabel>
                                         <Textarea placeholder="Enter full street address" rows={2} className="text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Landmark</FormLabel>
+                                        <Input placeholder="Nearest landmark" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Google Map URL</FormLabel>
+                                        <Input placeholder="Map URL" className="h-[36px] text-[13px]" />
+                                    </div>
+
+                                    <SectionHeader title="Working Hours" icon={Clock} />
+                                    <div>
+                                        <FormLabel>Working Days</FormLabel>
+                                        <Select className="h-[36px]">
+                                            <option value="Mon-Fri">Monday - Friday</option>
+                                            <option value="Mon-Sat">Monday - Saturday</option>
+                                            <option value="Sun-Thu">Sunday - Thursday</option>
+                                        </Select>
+                                    </div>
+                                    <div>
+                                        <FormLabel>Weekend</FormLabel>
+                                        <Select className="h-[36px]">
+                                            <option value="Sat-Sun">Saturday, Sunday</option>
+                                            <option value="Fri-Sat">Friday, Saturday</option>
+                                            <option value="Sun">Sunday</option>
+                                        </Select>
+                                    </div>
+                                    <div>
+                                        <FormLabel>Office Start Time</FormLabel>
+                                        <Input type="time" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Office End Time</FormLabel>
+                                        <Input type="time" className="h-[36px] text-[13px]" />
+                                    </div>
+
+                                    <SectionHeader title="Social Media" icon={Globe} />
+                                    <div>
+                                        <FormLabel>LinkedIn URL</FormLabel>
+                                        <Input placeholder="LinkedIn profile" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Twitter (X) URL</FormLabel>
+                                        <Input placeholder="Twitter profile" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Facebook URL</FormLabel>
+                                        <Input placeholder="Facebook page" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Instagram URL</FormLabel>
+                                        <Input placeholder="Instagram profile" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>YouTube URL</FormLabel>
+                                        <Input placeholder="YouTube channel" className="h-[36px] text-[13px]" />
                                     </div>
                                 </div>
                             </div>
@@ -184,80 +313,177 @@ export default function CompanyCreate() {
 
                         {activeTab === 'settings' && (
                             <div className="space-y-3 animate-in fade-in duration-300">
-                                <div className="mb-6 pb-4 border-b border-slate-100">
-                                    <h2 className="text-[16px] font-bold text-slate-800">Business Settings</h2>
-                                    <p className="text-[13px] text-slate-500 mt-1">Business configuration and legal documents.</p>
-                                </div>
-
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 w-full">
-                                    <div className="col-span-1 md:col-span-2">
-                                        <h3 className="text-[14px] font-bold text-slate-800 mb-4 mt-2">Preferences</h3>
-                                    </div>
+                                    
+                                    <SectionHeader title="Business Configuration" icon={Briefcase} />
                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Currency <span className="text-red-500">*</span></label>
-                                        <Select className="h-[38px]">
+                                        <FormLabel required>Currency</FormLabel>
+                                        <Select className="h-[36px]">
                                             <option value="">Select Currency</option>
                                             <option value="USD">USD ($)</option>
                                             <option value="EUR">EUR (€)</option>
                                             <option value="GBP">GBP (£)</option>
+                                            <option value="BDT">BDT (৳)</option>
                                         </Select>
                                     </div>
                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Language <span className="text-red-500">*</span></label>
-                                        <Select className="h-[38px]">
-                                            <option value="">Select Language</option>
+                                        <FormLabel required>Language</FormLabel>
+                                        <Select className="h-[36px]">
                                             <option value="en">English</option>
                                             <option value="bn">Bengali</option>
+                                            <option value="es">Spanish</option>
                                         </Select>
                                     </div>
                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Time Zone <span className="text-red-500">*</span></label>
-                                        <Select className="h-[38px]">
+                                        <FormLabel required>Time Zone</FormLabel>
+                                        <Select className="h-[36px]">
                                             <option value="">Select Time Zone</option>
-                                            <option value="UTC">UTC (Coordinated Universal Time)</option>
-                                            <option value="Asia/Dhaka">Asia/Dhaka (GMT+6)</option>
+                                            <option value="UTC">UTC</option>
+                                            <option value="Asia/Dhaka">Asia/Dhaka</option>
                                         </Select>
                                     </div>
                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Date Format <span className="text-red-500">*</span></label>
-                                        <Select className="h-[38px]">
-                                            <option value="">Select Date Format</option>
+                                        <FormLabel required>Date Format</FormLabel>
+                                        <Select className="h-[36px]">
                                             <option value="YYYY-MM-DD">YYYY-MM-DD</option>
                                             <option value="DD-MM-YYYY">DD-MM-YYYY</option>
+                                            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
                                         </Select>
                                     </div>
-                                    
-                            
-                                    <div className="col-span-1 md:col-span-2 mt-4 pt-5 border-t border-slate-100">
-                                        <h3 className="text-[14px] font-bold text-slate-800 mb-4 mt-2">Legal Information</h3>
+                                    <div>
+                                        <FormLabel required>Time Format</FormLabel>
+                                        <Select className="h-[36px]">
+                                            <option value="12">12-hour (AM/PM)</option>
+                                            <option value="24">24-hour</option>
+                                        </Select>
+                                    </div>
+                                    <div>
+                                        <FormLabel required>Fiscal Year Start</FormLabel>
+                                        <Select className="h-[36px]">
+                                            <option value="Jan">January</option>
+                                            <option value="Apr">April</option>
+                                            <option value="Jul">July</option>
+                                            <option value="Oct">October</option>
+                                        </Select>
+                                    </div>
+                                    <div>
+                                        <FormLabel required>Week Start Day</FormLabel>
+                                        <Select className="h-[36px]">
+                                            <option value="Mon">Monday</option>
+                                            <option value="Sun">Sunday</option>
+                                            <option value="Sat">Saturday</option>
+                                        </Select>
+                                    </div>
+
+                                    <SectionHeader title="Financial Information" icon={CreditCard} />
+                                    <div>
+                                        <FormLabel>Bank Name</FormLabel>
+                                        <Input placeholder="Enter bank name" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Branch Name</FormLabel>
+                                        <Input placeholder="Enter branch name" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Account Name</FormLabel>
+                                        <Input placeholder="Account holder name" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Account Number</FormLabel>
+                                        <Input placeholder="Bank account number" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Swift Code</FormLabel>
+                                        <Input placeholder="Bank Swift/BIC" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>IBAN</FormLabel>
+                                        <Input placeholder="IBAN number" className="h-[36px] text-[13px]" />
+                                    </div>
+
+                                    <SectionHeader title="Tax & Compliance" icon={FileText} />
+                                    <div>
+                                        <FormLabel>Tax Number</FormLabel>
+                                        <Input placeholder="Tax Number" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>VAT Number</FormLabel>
+                                        <Input placeholder="VAT Number" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>BIN Number</FormLabel>
+                                        <Input placeholder="BIN Number" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>TIN Number</FormLabel>
+                                        <Input placeholder="TIN Number" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Tax Region</FormLabel>
+                                        <Input placeholder="Tax Region" className="h-[36px] text-[13px]" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Tax Office</FormLabel>
+                                        <Input placeholder="Tax Office" className="h-[36px] text-[13px]" />
+                                    </div>
+
+                                    <SectionHeader title="Branding" icon={ImageIcon} />
+                                    <div className="col-span-1 md:col-span-2 grid grid-cols-2 gap-8">
+                                        <div>
+                                            <FormLabel>Primary Color</FormLabel>
+                                            <div className="flex items-center gap-3">
+                                                <Input type="color" defaultValue="#008060" className="w-10 h-[36px] p-1 cursor-pointer" />
+                                                <Input type="text" defaultValue="#008060" className="h-[36px] font-mono text-[13px]" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <FormLabel>Secondary Color</FormLabel>
+                                            <div className="flex items-center gap-3">
+                                                <Input type="color" defaultValue="#1a1a1a" className="w-10 h-[36px] p-1 cursor-pointer" />
+                                                <Input type="text" defaultValue="#1a1a1a" className="h-[36px] font-mono text-[13px]" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <FormLabel>Favicon</FormLabel>
+                                        <Input type="file" className="h-[36px] text-[13px] pt-1.5" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Email Header Logo</FormLabel>
+                                        <Input type="file" className="h-[36px] text-[13px] pt-1.5" />
+                                    </div>
+
+                                    <SectionHeader title="Notification Settings" icon={Bell} />
+                                    <div className="col-span-1 md:col-span-2 flex items-center gap-8 mb-2">
+                                        <div className="flex items-center gap-2">
+                                            <Switch id="email-notif" defaultChecked />
+                                            <label htmlFor="email-notif" className="text-[13px] text-slate-700 cursor-pointer">Email Notifications</label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Switch id="sms-notif" />
+                                            <label htmlFor="sms-notif" className="text-[13px] text-slate-700 cursor-pointer">SMS Notifications</label>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <Switch id="push-notif" defaultChecked />
+                                            <label htmlFor="push-notif" className="text-[13px] text-slate-700 cursor-pointer">Push Notifications</label>
+                                        </div>
+                                    </div>
+
+                                    <SectionHeader title="Security Settings" icon={Shield} />
+                                    <div className="col-span-1 md:col-span-2 flex items-center gap-2 mb-2">
+                                        <Switch id="2fa" defaultChecked />
+                                        <label htmlFor="2fa" className="text-[13px] text-slate-700 font-medium cursor-pointer">Require Two-Factor Authentication (2FA) for all users</label>
+                                    </div>
+                                    <div>
+                                        <FormLabel>Password Policy</FormLabel>
+                                        <Select className="h-[36px]">
+                                            <option value="Standard">Standard (Min 8 chars)</option>
+                                            <option value="Strict">Strict (Alphanumeric + Special)</option>
+                                        </Select>
                                     </div>
                                     <div className="col-span-1 md:col-span-2">
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Official Legal Name</label>
-                                        <Input placeholder="Full registered legal entity name" className="h-[38px] text-[13px]" />
-                                    </div>
-                                    <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Registration Number</label>
-                                        <Input placeholder="Business Reg Number" className="h-[38px] text-[13px]" />
-                                    </div>
-                                    <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Tax / VAT Number</label>
-                                        <Input placeholder="Tax Identification Number" className="h-[38px] text-[13px]" />
-                                    </div>
-                                    <div>
-                                        <label className="block text-[12px] font-semibold text-slate-800 mb-1">Fiscal Year <span className="text-red-500">*</span></label>
-                                        <Select className="h-[34px]">
-                                            <option value="">Select Fiscal Year Start</option>
-                                            <option value="January">January - December</option>
-                                            <option value="April">April - March</option>
-                                            <option value="July">July - June</option>
-                                        </Select>
-                                    </div>
-                                     <div>
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Primary Brand Color</label>
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-7 h-7 rounded-full bg-[#008060] border-2 border-slate-200 shadow-sm cursor-pointer"></div>
-                                            <Input type="text" value="#008060" className="h-[34px] w-24 font-mono text-[13px]" readOnly />
-                                        </div>
+                                        <FormLabel>IP Restriction (Whitelist)</FormLabel>
+                                        <Textarea placeholder="Enter IP addresses separated by commas" rows={2} className="text-[13px] font-mono" />
                                     </div>
                                 </div>
                             </div>
@@ -265,24 +491,37 @@ export default function CompanyCreate() {
 
                         {activeTab === 'files' && (
                             <div className="space-y-3 animate-in fade-in duration-300">
-                                <div className="mb-6 pb-4 border-b border-slate-100">
-                                    <h2 className="text-[16px] font-bold text-slate-800">Files & Notes</h2>
-                                    <p className="text-[13px] text-slate-500 mt-1">Document uploads and internal notes.</p>
-                                </div>
-
+                                
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 w-full">
+                                    <SectionHeader title="Documents & Attachments" icon={FileText} />
+                                    
+                                    <div>
+                                        <FormLabel>Trade License</FormLabel>
+                                        <Input type="file" className="h-[36px] text-[13px] pt-1.5" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Company Certificate</FormLabel>
+                                        <Input type="file" className="h-[36px] text-[13px] pt-1.5" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Tax Certificate</FormLabel>
+                                        <Input type="file" className="h-[36px] text-[13px] pt-1.5" />
+                                    </div>
+                                    <div>
+                                        <FormLabel>Other Documents</FormLabel>
+                                        <Input type="file" multiple className="h-[36px] text-[13px] pt-1.5" />
+                                    </div>
+
+                                    <SectionHeader title="Additional Information" icon={Activity} />
                                     <div className="col-span-1 md:col-span-2">
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Attachments</label>
-                                        <div className="border-2 border-dashed border-slate-300 rounded-md p-4 flex flex-col items-center justify-center bg-[#fafafa] hover:bg-slate-100 transition-colors cursor-pointer text-slate-500 h-24">
-                                            <Paperclip size={20} className="mb-1 text-slate-400" />
-                                            <p className="text-[12px] font-semibold text-slate-700">Click or drag files here</p>
-                                            <p className="text-[11px] text-slate-500">Supports PDF, DOCX, JPG (Max 10MB)</p>
-                                        </div>
+                                        <FormLabel>Remarks</FormLabel>
+                                        <Textarea placeholder="Add any public remarks about this company..." rows={3} className="text-[13px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2">
-                                        <label className="block text-[13px] font-medium text-slate-700 mb-1.5">Internal Notes</label>
-                                        <Textarea placeholder="Add any private notes or context about this company..." rows={2} className="text-[13px]" />
+                                        <FormLabel>Internal Notes</FormLabel>
+                                        <Textarea placeholder="Add any private notes or context about this company (visible to admins only)..." rows={3} className="text-[13px]" />
                                     </div>
+                                    
                                 </div>
                             </div>
                         )}

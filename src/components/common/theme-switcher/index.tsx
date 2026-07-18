@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export interface ThemeSwitcherProps {
     className?: string;
 }
 
-export default function ThemeSwitcher({ className }: ThemeSwitcherProps) {
+export default function ThemeSwitcher({ className = '' }: ThemeSwitcherProps) {
+    const [isDark, setIsDark] = useState(false);
     return (
-        <div className={className}>
-            {/* ThemeSwitcher Component */}
-        </div>
+        <button 
+            onClick={() => setIsDark(!isDark)} 
+            className={`p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-colors ${className}`}
+            title="Toggle Theme"
+        >
+            {isDark ? '🌙' : '☀️'}
+        </button>
     );
 }

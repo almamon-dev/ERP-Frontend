@@ -50,7 +50,7 @@ export default function TableColumnToggle({
                 <div className="absolute right-0 mt-1 w-[240px] bg-white border border-[#ebebeb] rounded-[4px] shadow-xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-100">
                     <div className="p-3">
                         <h3 className="text-[11px] font-bold text-[#6d7175] mb-2 px-1 uppercase">Visible Columns</h3>
-                        <div className="space-y-0.5 max-h-[300px] overflow-y-auto">
+                        <div className="space-y-0.5 max-h-[300px] overflow-y-auto custom-scrollbar">
                             {columns.map(col => {
                                 const isVisible = visibleColumns.includes(col.id);
                                 return (

@@ -22,6 +22,7 @@ export interface DataTableProps<T = any> {
     onDeleteSelected?: (selectedIds: number[]) => void;
     keyExtractor?: (item: T) => number | string;
     actions?: (item: T) => React.ReactNode;
+    filterContent?: React.ReactNode;
 }
 
 export default function DataTable<T extends Record<string, any>>({ 
@@ -30,22 +31,49 @@ export default function DataTable<T extends Record<string, any>>({
     searchPlaceholder = "Search...", 
     onDeleteSelected,
     keyExtractor = (item: any) => item.id,
-    actions
+    actions,
+    filterContent
 }: DataTableProps<T>) {
     const [search, setSearch] = useState('');
+    const [showFilters, setShowFilters] = useState(false);
     const [selectedIds, setSelectedIds] = useState<(number | string)[]>([]);
     const [visibleColumns, setVisibleColumns] = useState<string[]>(columns.map(c => c.id));
+    const [currentPage, setCurrentPage] = useState(1);
+    const [perPage, setPerPage] = useState(10);
+
+    // Reset to page 1 when search changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search]);
+
+    // Apply Search Filtering
+    const filteredData = data.filter(item => {
+        if (!search) return true;
+        return Object.values(item).some(val => 
+            String(val).toLowerCase().includes(search.toLowerCase())
+        );
+    });
+
+    // Pagination Logic
+    const totalItems = filteredData.length;
+    const totalPages = Math.ceil(totalItems / perPage);
+    const startIndex = (currentPage - 1) * perPage;
+    const paginatedData = filteredData.slice(startIndex, startIndex + perPage);
 
     const toggleColumn = (id: string) => {
         setVisibleColumns(prev => prev.includes(id) ? prev.filter(c => c !== id) : [...prev, id]);
     };
 
     const toggleSelectAll = () => {
-        if (selectedIds.length === data.length && data.length > 0) {
+        if (selectedIds.length === paginatedData.length && paginatedData.length > 0) {
             setSelectedIds([]);
         } else {
-            setSelectedIds(data.map(item => keyExtractor(item)));
+            setSelectedIds(paginatedData.map(item => keyExtractor(item)));
         }
+    };
+
+    const handleSelectAll = () => {
+        setSelectedIds(filteredData.map(item => keyExtractor(item)));
     };
 
     const toggleSelect = (id: number | string) => {
@@ -58,8 +86,10 @@ export default function DataTable<T extends Record<string, any>>({
                 {/* Toolbar (Polaris Style) */}
                 <TableToolbar 
                     selectedCount={selectedIds.length}
+                    totalCount={totalItems}
                     onClearSelection={() => setSelectedIds([])}
                     onDeleteSelected={onDeleteSelected ? () => onDeleteSelected(selectedIds as number[]) : undefined}
+                    onSelectAll={handleSelectAll}
                 >
                     <TableSearch 
                         value={search} 
@@ -68,7 +98,7 @@ export default function DataTable<T extends Record<string, any>>({
                     />
                     <div className="flex items-center gap-1.5">
                         <TableFilter 
-                            onFilterClick={() => {}} 
+                            onFilterClick={() => setShowFilters(!showFilters)} 
                             onResetClick={() => {}} 
                         />
                         
@@ -82,39 +112,46 @@ export default function DataTable<T extends Record<string, any>>({
                     </div>
                 </TableToolbar>
 
+                {/* Filter Content Area */}
+                {showFilters && filterContent && (
+                    <div className="p-4 border-b border-[#ebebeb] bg-[#fcfcfc] animate-in slide-in-from-top-2 duration-200">
+                        {filterContent}
+                    </div>
+                )}
+
                 {/* Data Table */}
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto custom-scrollbar">
                     <table className="w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-[#f9fafb] border-b border-[#ebebeb] text-[11px] font-bold text-[#6d7175] uppercase tracking-wider">
-                                <th className="px-4 py-2 w-[40px]">
+                                <th className="px-3 py-1.5 w-[40px]">
                                     <input 
                                         type="checkbox" 
-                                        checked={selectedIds.length === data.length && data.length > 0}
+                                        checked={selectedIds.length === paginatedData.length && paginatedData.length > 0}
                                         onChange={toggleSelectAll}
                                         className="w-4 h-4 text-[#008060] border-[#d1d1d1] rounded-[2px] focus:ring-[#008060] cursor-pointer"
                                     />
                                 </th>
                                 {columns.map(col => visibleColumns.includes(col.id) && (
-                                    <th key={col.id} className="px-4 py-2">{col.label}</th>
+                                    <th key={col.id} className="px-3 py-1.5">{col.label}</th>
                                 ))}
-                                {actions && <th className="px-4 py-2 text-right">Actions</th>}
+                                {actions && <th className="px-3 py-1.5 text-center">Actions</th>}
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-[#ebebeb]">
-                            {data.length === 0 ? (
+                            {paginatedData.length === 0 ? (
                                 <tr>
                                     <td colSpan={columns.length + (actions ? 2 : 1)} className="p-0">
                                         <EmptyState />
                                     </td>
                                 </tr>
                             ) : (
-                                data.map(item => {
+                                paginatedData.map(item => {
                                     const id = keyExtractor(item);
                                     const isSelected = selectedIds.includes(id);
                                     return (
                                         <tr key={id} className={`transition-colors group ${isSelected ? 'bg-[#f4f6f8]' : 'hover:bg-[#f9fafb]'}`}>
-                                            <td className="px-4 py-3 whitespace-nowrap">
+                                            <td className="px-3 py-1.5 whitespace-nowrap">
                                                 <input 
                                                     type="checkbox" 
                                                     checked={isSelected}
@@ -123,12 +160,12 @@ export default function DataTable<T extends Record<string, any>>({
                                                 />
                                             </td>
                                             {columns.map(col => visibleColumns.includes(col.id) && (
-                                                <td key={col.id} className="px-4 py-3 whitespace-nowrap text-[13px] text-[#202223]">
+                                                <td key={col.id} className="px-3 py-1.5 whitespace-nowrap text-[12px] text-[#202223]">
                                                     {col.render ? col.render(item) : item[col.id]}
                                                 </td>
                                             ))}
                                             {actions && (
-                                                <td className="px-4 py-3 whitespace-nowrap text-right">
+                                                <td className="px-3 py-1.5 whitespace-nowrap text-center">
                                                     {actions(item)}
                                                 </td>
                                             )}
@@ -142,15 +179,18 @@ export default function DataTable<T extends Record<string, any>>({
                 
                 {/* Pagination */}
                 <TablePagination 
-                    total={data.length}
-                    fromIdx={data.length > 0 ? 1 : 0}
-                    toIdx={data.length}
-                    perPage={10}
-                    onPerPageChange={() => {}}
-                    onPrevPage={() => {}}
-                    onNextPage={() => {}}
-                    hasPrev={false}
-                    hasNext={false}
+                    total={totalItems}
+                    fromIdx={totalItems > 0 ? startIndex + 1 : 0}
+                    toIdx={Math.min(startIndex + perPage, totalItems)}
+                    perPage={perPage}
+                    onPerPageChange={(val) => {
+                        setPerPage(Number(val));
+                        setCurrentPage(1);
+                    }}
+                    onPrevPage={() => setCurrentPage(p => Math.max(1, p - 1))}
+                    onNextPage={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                    hasPrev={currentPage > 1}
+                    hasNext={currentPage < totalPages}
                 />
             </div>
         </div>

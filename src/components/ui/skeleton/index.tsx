@@ -4,10 +4,8 @@ export interface SkeletonProps {
     className?: string;
 }
 
-export default function Skeleton({ className }: SkeletonProps) {
+export default function Skeleton({ className = '' }: SkeletonProps) {
     return (
-        <div className={className}>
-            {/* Skeleton Component */}
-        </div>
+        <div className={`animate-pulse bg-gray-200 rounded-md ${className}`}></div>
     );
 }

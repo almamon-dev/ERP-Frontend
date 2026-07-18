@@ -1,48 +1,66 @@
-import React from 'react';
-import { Loader2 } from 'lucide-react';
-
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'primary' | 'secondary' | 'danger' | 'ghost';
-    size?: 'sm' | 'md' | 'lg';
-    isLoading?: boolean;
-    fullWidth?: boolean;
-}
-
-export default function Button({ 
-    variant = 'secondary', 
-    size = 'md', 
-    isLoading = false, 
-    fullWidth = false, 
-    className = '', 
-    children, 
-    disabled, 
-    ...props 
-}: ButtonProps) {
-    const baseClasses = "inline-flex items-center justify-center rounded-[3px] font-bold transition-all shadow-sm outline-none disabled:opacity-50 disabled:cursor-not-allowed";
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Loader2 } from "lucide-react"
+import { cn } from "@/lib/utils"
     
-    const variants = {
-        primary: "bg-[#008060] text-white hover:bg-[#006e52] border border-transparent shadow-[0_1px_0_rgba(0,0,0,0.05)]",
-        secondary: "bg-white text-[#202223] border border-[#d1d1d1] hover:bg-[#f9fafb] shadow-[0_1px_0_rgba(0,0,0,0.05)]",
-        danger: "bg-white text-[#d82c0d] border border-[#d1d1d1] hover:bg-[#fff5f5] hover:border-[#d82c0d]",
-        ghost: "bg-transparent text-[#6d7175] border-transparent hover:bg-[#f6f6f7] shadow-none",
-    };
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-sm text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950 disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default:
+          "bg-blue-600 text-white shadow hover:bg-blue-700",
+        primary: 
+          "bg-slate-900 text-white shadow hover:bg-slate-800",
+        destructive:
+          "bg-red-500 text-white shadow-sm hover:bg-red-600",
+        danger:
+          "bg-red-500 text-white shadow-sm hover:bg-red-600",
+        outline:
+          "border border-slate-200 bg-white shadow-sm hover:bg-slate-100 hover:text-slate-900",
+        secondary:
+          "bg-slate-100 text-slate-900 shadow-sm hover:bg-slate-200",
+        ghost: "hover:bg-slate-100 hover:text-slate-900",
+        link: "text-blue-600 underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-sm px-3 text-xs",
+        md: "h-9 px-4 py-2",
+        lg: "h-10 rounded-sm px-8",
+        icon: "h-9 w-9",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
 
-    const sizes = {
-        sm: "h-[28px] px-3 text-[11px]",
-        md: "h-[32px] px-4 text-[12px]",
-        lg: "h-[44px] px-6 text-[14px]",
-    };
-
-    const widthClass = fullWidth ? "w-full" : "";
-
-    return (
-        <button 
-            className={`${baseClasses} ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`}
-            disabled={disabled || isLoading}
-            {...props}
-        >
-            {isLoading && <Loader2 className="mr-2 animate-spin" size={14} />}
-            {children}
-        </button>
-    );
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  isLoading?: boolean
+  fullWidth?: boolean
 }
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, isLoading, fullWidth, children, disabled, ...props }, ref) => {
+    return (
+      <button
+        className={cn(buttonVariants({ variant, size, className }), fullWidth && "w-full")}
+        ref={ref}
+        disabled={disabled || isLoading}
+        {...props}
+      >
+        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {children}
+      </button>
+    )
+  }
+)
+Button.displayName = "Button"
+
+export { Button, buttonVariants }
+export default Button

@@ -1,4 +1,4 @@
-import { RouteObject } from 'react-router-dom';
+import { RouteObject, Navigate } from 'react-router-dom';
 import CompaniesModule from './Companies';
 import { companyRoutes } from './Companies/routes';
 import BranchesModule from './Branches';
@@ -13,6 +13,10 @@ import TeamsModule from './Teams';
 import { teamRoutes } from './Teams/routes';
 
 export const organizationRoutes: RouteObject[] = [
+  {
+      index: true,
+      element: <Navigate to="companies" replace />
+  },
   { 
       path: 'companies', 
       element: <CompaniesModule />,

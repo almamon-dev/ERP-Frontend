@@ -6,6 +6,7 @@ import Input from '@/components/ui/input';
 import Textarea from '@/components/ui/textarea';
 import Select from '@/components/ui/select';
 import Switch from '@/components/ui/switch';
+import FormLabel from '@/components/ui/label';
 
 const EDIT_TABS = [
     { id: 'general', label: 'General Info', icon: Briefcase },
@@ -32,12 +33,6 @@ const SectionHeader = ({ title, icon: Icon, className = "col-span-1 md:col-span-
             {title}
         </h3>
     </div>
-);
-
-const FormLabel = ({ children, required }: { children: React.ReactNode, required?: boolean }) => (
-    <label className="text-[14px] font-medium text-slate-700 mt-2">
-        {children} {required && <span className="text-red-500">*</span>}
-    </label>
 );
 
 export default function BusinessUnitEdit() {

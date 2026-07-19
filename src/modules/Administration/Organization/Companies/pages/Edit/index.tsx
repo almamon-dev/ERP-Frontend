@@ -6,6 +6,8 @@ import Input from '@/components/ui/input';
 import Switch from '@/components/ui/switch';
 import Textarea from '@/components/ui/textarea';
 import Select from '@/components/ui/select';
+import TabHeader from '@/components/ui/tab-header';
+import FormLabel from '@/components/ui/label';
 
 const EDIT_TABS = [
     { id: 'general', label: 'General Info', icon: Building2 },
@@ -24,21 +26,6 @@ const SectionHeader = ({ title, icon: Icon, className = "col-span-1 md:col-span-
             {title}
         </h3>
     </div>
-);
-
-const TabHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-5 pb-4 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
-        <h2 className="text-[18px] font-bold text-slate-800 flex items-center gap-2">
-            {Icon && <Icon size={18} className="text-slate-600" />}
-            {title}
-        </h2>
-    </div>
-);
-
-const FormLabel = ({ children, required }: { children: React.ReactNode, required?: boolean }) => (
-    <label className="text-[14px] font-medium text-slate-700 mt-2">
-        {children} {required && <span className="text-red-500">*</span>}
-    </label>
 );
 
 export default function CompanyEdit() {

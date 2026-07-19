@@ -65,15 +65,17 @@ export const navigationMap: Record<string, any[]> = {
             icon: Settings,
             items: [
                 { name: 'General', path: '/administration/settings/general', icon: Settings },
-                { name: 'Company Profile', path: '/administration/settings/profile', icon: Building2 },
                 { name: 'Localization', path: '/administration/settings/localization', icon: Globe },
-                { name: 'Date & Time', path: '/administration/settings/date-time', icon: Clock },
-                { name: 'Currency', path: '/administration/settings/currency', icon: DollarSign },
-                { name: 'Language', path: '/administration/settings/language', icon: Languages },
+                { name: 'Email (SMTP)', path: '/administration/settings/email-smtp', icon: Mail },
                 { name: 'Notifications', path: '/administration/settings/notifications', icon: Bell },
-                { name: 'Email Templates', path: '/administration/settings/email-templates', icon: Mail },
-                { name: 'Maintenance Mode', path: '/administration/settings/maintenance', icon: Wrench },
+                { name: 'Storage', path: '/administration/settings/storage', icon: HardDrive },
                 { name: 'Backup & Restore', path: '/administration/settings/backup', icon: Database },
+                { name: 'Maintenance Mode', path: '/administration/settings/maintenance', icon: Wrench },
+                { name: 'Security', path: '/administration/settings/security', icon: Shield },
+                { name: 'Queue & Scheduler', path: '/administration/settings/queue', icon: Timer },
+                { name: 'Cache Management', path: '/administration/settings/cache', icon: RefreshCcw },
+                { name: 'System Logs', path: '/administration/settings/logs', icon: Terminal },
+                { name: 'License', path: '/administration/settings/license', icon: Key },
             ]
         },
         {

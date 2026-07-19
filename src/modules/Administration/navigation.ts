@@ -1,5 +1,7 @@
-import { userManagementNavigation } from './UserManagement/navigation';
-import { organizationNavigation } from './Organization/navigation';
+import { accessManagementNavigation } from './AccessManagement';
+import { organizationNavigation } from './Organization';
+import { securityNavigation } from './Security';
+import { settingsNavigation } from './Settings';
 
 export const administrationSidebar = [
   {
@@ -8,21 +10,14 @@ export const administrationSidebar = [
     items: organizationNavigation
   },
   {
-    title: 'User Management',
-    icon: 'Users',
-    items: userManagementNavigation
+    title: 'Access Management',
+    icon: 'ShieldAlert',
+    items: accessManagementNavigation
   },
   {
     title: 'Security',
     icon: 'Shield',
-    items: [
-      { name: 'Password Policy', path: '/administration/security/password-policy' },
-      { name: 'Two-Factor Authentication', path: '/administration/security/2fa' },
-      { name: 'Active Sessions', path: '/administration/security/active-sessions' },
-      { name: 'Login History', path: '/administration/security/login-history' },
-      { name: 'Activity Logs', path: '/administration/security/activity-logs' },
-      { name: 'Audit Logs', path: '/administration/security/audit-logs' },
-    ]
+    items: securityNavigation
   },
   {
     title: 'Integrations',
@@ -36,17 +31,8 @@ export const administrationSidebar = [
     ]
   },
   {
-    title: 'Settings',
+    title: 'System Settings',
     icon: 'Settings',
-    items: [
-      { name: 'General', path: '/administration/settings/general' },
-      { name: 'Company', path: '/administration/settings/company' },
-      { name: 'Localization', path: '/administration/settings/localization' },
-      { name: 'Email (SMTP)', path: '/administration/settings/email' },
-      { name: 'Notifications', path: '/administration/settings/notifications' },
-      { name: 'Storage', path: '/administration/settings/storage' },
-      { name: 'Backup & Restore', path: '/administration/settings/backup' },
-      { name: 'Maintenance Mode', path: '/administration/settings/maintenance' },
-    ]
+    items: settingsNavigation
   }
 ];

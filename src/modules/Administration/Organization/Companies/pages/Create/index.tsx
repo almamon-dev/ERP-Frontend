@@ -6,14 +6,14 @@ import Input from '@/components/ui/input';
 import Switch from '@/components/ui/switch';
 import Textarea from '@/components/ui/textarea';
 import Select from '@/components/ui/select';
+import TabHeader from '@/components/ui/tab-header';
+import FormLabel from '@/components/ui/label';
 
 const CREATE_TABS = [
     { id: 'general', label: 'General Info', icon: Building2 },
     { id: 'contact', label: 'Contact & Location', icon: MapPin },
-    { id: 'preferences', label: 'System Preferences', icon: Settings },
     { id: 'finance', label: 'Financial & Tax', icon: CreditCard },
     { id: 'branding', label: 'Branding', icon: ImageIcon },
-    { id: 'security', label: 'Security & Alerts', icon: Shield },
     { id: 'files', label: 'Documents & Extras', icon: FileText },
 ];
 
@@ -24,21 +24,6 @@ const SectionHeader = ({ title, icon: Icon, className = "col-span-1 md:col-span-
             {title}
         </h3>
     </div>
-);
-
-const TabHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-5 pb-4 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
-        <h2 className="text-[18px] font-bold text-slate-800 flex items-center gap-2">
-            {Icon && <Icon size={18} className="text-slate-600" />}
-            {title}
-        </h2>
-    </div>
-);
-
-const FormLabel = ({ children, required }: { children: React.ReactNode, required?: boolean }) => (
-    <label className="text-[14px] font-medium text-slate-700 mt-2">
-        {children} {required && <span className="text-red-500">*</span>}
-    </label>
 );
 
 export default function CompanyCreate() {
@@ -374,80 +359,7 @@ export default function CompanyCreate() {
                             </div>
                         )}
 
-                        {activeTab === 'preferences' && (
-                            <div className="space-y-3 animate-in fade-in duration-300">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 w-full">
-                                    
-                                    <TabHeader title="System Preferences" icon={Settings} />
-                                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Currency</FormLabel>
-                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
-                                        <Select className="h-[36px]">
-                                            <option value="">Select Currency</option>
-                                            <option value="USD">USD ($)</option>
-                                            <option value="EUR">EUR (€)</option>
-                                            <option value="GBP">GBP (£)</option>
-                                            <option value="BDT">BDT (৳)</option>
-                                        </Select>
-                                    </div>
-                                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Language</FormLabel>
-                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
-                                        <Select className="h-[36px]">
-                                            <option value="en">English</option>
-                                            <option value="bn">Bengali</option>
-                                            <option value="es">Spanish</option>
-                                        </Select>
-                                    </div>
-                                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Time Zone</FormLabel>
-                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
-                                        <Select className="h-[36px]">
-                                            <option value="">Select Time Zone</option>
-                                            <option value="UTC">UTC</option>
-                                            <option value="Asia/Dhaka">Asia/Dhaka</option>
-                                        </Select>
-                                    </div>
-                                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Date Format</FormLabel>
-                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
-                                        <Select className="h-[36px]">
-                                            <option value="YYYY-MM-DD">YYYY-MM-DD</option>
-                                            <option value="DD-MM-YYYY">DD-MM-YYYY</option>
-                                            <option value="MM/DD/YYYY">MM/DD/YYYY</option>
-                                        </Select>
-                                    </div>
-                                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Time Format</FormLabel>
-                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
-                                        <Select className="h-[36px]">
-                                            <option value="12">12-hour (AM/PM)</option>
-                                            <option value="24">24-hour</option>
-                                        </Select>
-                                    </div>
-                                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Fiscal Year Start</FormLabel>
-                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
-                                        <Select className="h-[36px]">
-                                            <option value="Jan">January</option>
-                                            <option value="Apr">April</option>
-                                            <option value="Jul">July</option>
-                                            <option value="Oct">October</option>
-                                        </Select>
-                                    </div>
-                                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Week Start Day</FormLabel>
-                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
-                                        <Select className="h-[36px]">
-                                            <option value="Mon">Monday</option>
-                                            <option value="Sun">Sunday</option>
-                                            <option value="Sat">Saturday</option>
-                                        </Select>
-                                    </div>
 
-                                </div>
-                            </div>
-                        )}
 
                         {activeTab === 'finance' && (
                             <div className="space-y-3 animate-in fade-in duration-300">
@@ -557,57 +469,7 @@ export default function CompanyCreate() {
                             </div>
                         )}
 
-                        {activeTab === 'security' && (
-                            <div className="space-y-3 animate-in fade-in duration-300">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 w-full">
-                                    <TabHeader title="Security & Alerts" icon={Shield} />
-                                    <div className="col-span-1">
-                                        <SectionHeader title="Notification Settings" icon={Bell} className="col-span-1" />
-                                        <div className="flex flex-col gap-4 mt-2">
-                                            <div className="flex items-center gap-3">
-                                                <Switch id="email-notif" defaultChecked />
-                                                <label htmlFor="email-notif" className="text-[14px] text-slate-700 cursor-pointer">Email Notifications</label>
-                                            </div>
-                                            <div className="flex items-center gap-3">
-                                                <Switch id="sms-notif" />
-                                                <label htmlFor="sms-notif" className="text-[14px] text-slate-700 cursor-pointer">SMS Notifications</label>
-                                            </div>
-                                            <div className="flex items-center gap-3">
-                                                <Switch id="push-notif" defaultChecked />
-                                                <label htmlFor="push-notif" className="text-[14px] text-slate-700 cursor-pointer">Push Notifications</label>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div className="col-span-1">
-                                        <SectionHeader title="Security Settings" icon={Shield} className="col-span-1" />
-                                        <div className="flex flex-col gap-4 mt-2">
-                                            <div className="flex items-center gap-3">
-                                                <Switch id="2fa" defaultChecked />
-                                                <label htmlFor="2fa" className="text-[14px] text-slate-700 font-medium cursor-pointer">Require 2FA for all users</label>
-                                            </div>
-                                            
-                                            <div className="grid grid-cols-[110px_10px_1fr] items-start gap-2 mt-1">
-                                                <FormLabel>Password Policy</FormLabel>
-                                                <p className="text-[14px] text-slate-400 mt-2">:</p>
-                                                <Select className="h-[32px] text-[13px]">
-                                                    <option value="Standard">Standard (Min 8)</option>
-                                                    <option value="Strict">Strict (Special Chars)</option>
-                                                </Select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-span-1 md:col-span-2 mt-2 pt-4 border-t border-slate-100">
-                                        <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                            <FormLabel>IP Restriction (Whitelist)</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
-                                            <Textarea placeholder="Enter IP addresses separated by commas" rows={2} className="text-[14px] font-mono" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
 
                         {activeTab === 'files' && (
                             <div className="space-y-3 animate-in fade-in duration-300">

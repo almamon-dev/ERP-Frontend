@@ -93,12 +93,12 @@ export default function UserView() {
                                     <TabHeader title="User Overview" icon={UserCircle} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -112,12 +112,12 @@ export default function UserView() {
                                     <TabHeader title="Personal Information" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -131,12 +131,12 @@ export default function UserView() {
                                     <TabHeader title="Contact Information" icon={Phone} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -150,12 +150,12 @@ export default function UserView() {
                                     <TabHeader title="Organization Assignment" icon={Building2} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -169,12 +169,12 @@ export default function UserView() {
                                     <TabHeader title="Roles & Permissions" icon={Shield} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -188,12 +188,12 @@ export default function UserView() {
                                     <TabHeader title="Security" icon={Lock} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -207,12 +207,12 @@ export default function UserView() {
                                     <TabHeader title="Additional Information" icon={Info} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -226,12 +226,12 @@ export default function UserView() {
                                     <TabHeader title="Status" icon={Activity} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>

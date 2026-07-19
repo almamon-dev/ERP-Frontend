@@ -36,14 +36,20 @@ export default function IpWhitelistList() {
     
     const FormContent = ({ isEdit = false }: { isEdit?: boolean }) => (
         <div className="space-y-4">
-            <div>
-                <FormLabel required>IP Address or CIDR Range</FormLabel>
-                <Input defaultValue={isEdit ? editItem?.ip : ''} placeholder="e.g. 192.168.1.1 or 10.0.0.0/24" className="font-mono" />
-            </div>
-            <div>
-                <FormLabel>Description</FormLabel>
-                <Textarea defaultValue={isEdit ? editItem?.description : ''} placeholder="Why is this IP whitelisted?" className="min-h-[80px]" />
-            </div>
+            <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2" required>IP Address or CIDR Range</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Input defaultValue={isEdit ? editItem?.ip : ''} placeholder="e.g. 192.168.1.1 or 10.0.0.0/24" className="font-mono" />
+    </div>
+</div>
+            <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2">Description</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Textarea defaultValue={isEdit ? editItem?.description : ''} placeholder="Why is this IP whitelisted?" className="min-h-[80px]" />
+    </div>
+</div>
         </div>
     );
 

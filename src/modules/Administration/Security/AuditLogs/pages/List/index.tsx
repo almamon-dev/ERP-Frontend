@@ -39,6 +39,7 @@ export default function AuditLogsList() {
                 data={data} 
                 columns={columns}
                 searchPlaceholder="Search audit events..."
+                compact
             />
         </div>
     );

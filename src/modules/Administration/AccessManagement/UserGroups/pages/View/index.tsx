@@ -91,12 +91,12 @@ export default function UserGroupView() {
                                     <TabHeader title="Group Overview" icon={Users} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -110,12 +110,12 @@ export default function UserGroupView() {
                                     <TabHeader title="Basic Information" icon={Info} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -129,12 +129,12 @@ export default function UserGroupView() {
                                     <TabHeader title="Members" icon={Users} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -148,12 +148,12 @@ export default function UserGroupView() {
                                     <TabHeader title="Assigned Roles" icon={Shield} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -167,12 +167,12 @@ export default function UserGroupView() {
                                     <TabHeader title="Additional Information" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -186,12 +186,12 @@ export default function UserGroupView() {
                                     <TabHeader title="Status" icon={Activity} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>

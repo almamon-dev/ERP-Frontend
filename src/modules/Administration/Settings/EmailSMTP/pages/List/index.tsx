@@ -23,44 +23,68 @@ export default function EmailSMTPList() {
 
             <div className="bg-white border border-slate-200 rounded-md shadow-sm w-full p-6 md:p-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                    <div>
-                        <FormLabel required>Mail Driver</FormLabel>
-                        <Select defaultValue="smtp">
+                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2" required>Mail Driver</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Select defaultValue="smtp">
                             <option value="smtp">SMTP</option>
                             <option value="sendmail">Sendmail</option>
                         </Select>
-                    </div>
-                    <div>
-                        <FormLabel required>Mail Host</FormLabel>
-                        <Input defaultValue="smtp.mailtrap.io" />
-                    </div>
-                    <div>
-                        <FormLabel required>Mail Port</FormLabel>
-                        <Input defaultValue="2525" />
-                    </div>
-                    <div>
-                        <FormLabel>Encryption</FormLabel>
-                        <Select defaultValue="tls">
+    </div>
+</div>
+                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2" required>Mail Host</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Input defaultValue="smtp.mailtrap.io" />
+    </div>
+</div>
+                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2" required>Mail Port</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Input defaultValue="2525" />
+    </div>
+</div>
+                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2">Encryption</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Select defaultValue="tls">
                             <option value="tls">TLS</option>
                             <option value="ssl">SSL</option>
                         </Select>
-                    </div>
-                    <div>
-                        <FormLabel required>Mail Username</FormLabel>
-                        <Input defaultValue="admin_user" />
-                    </div>
-                    <div>
-                        <FormLabel required>Mail Password</FormLabel>
-                        <Input type="password" defaultValue="********" />
-                    </div>
-                    <div>
-                        <FormLabel required>From Email Address</FormLabel>
-                        <Input type="email" defaultValue="noreply@company.com" />
-                    </div>
-                    <div>
-                        <FormLabel required>From Name</FormLabel>
-                        <Input defaultValue="ERP System" />
-                    </div>
+    </div>
+</div>
+                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2" required>Mail Username</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Input defaultValue="admin_user" />
+    </div>
+</div>
+                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2" required>Mail Password</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Input type="password" defaultValue="********" />
+    </div>
+</div>
+                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2" required>From Email Address</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Input type="email" defaultValue="noreply@company.com" />
+    </div>
+</div>
+                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2" required>From Name</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Input defaultValue="ERP System" />
+    </div>
+</div>
                 </div>
 
                 <div className="mt-10 pt-8 border-t border-slate-200">

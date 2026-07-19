@@ -29,8 +29,8 @@ export default function GeneralList() {
                             {/* Left Side */}
                             <div className="space-y-4">
                                 <div className="grid grid-cols-[140px_10px_1fr] items-start gap-3">
-                                    <FormLabel required>Application Name</FormLabel>
-                                    <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                    <FormLabel required className="!mb-0 mt-2">Application Name</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                     <div>
                                         <Input defaultValue="Softvence ERP System" className="h-[36px]" />
                                         <p className="text-[12px] text-slate-500 mt-1">This name appears in the header.</p>
@@ -38,8 +38,8 @@ export default function GeneralList() {
                                 </div>
 
                                 <div className="grid grid-cols-[140px_10px_1fr] items-center gap-3">
-                                    <FormLabel required>Support Email</FormLabel>
-                                    <p className="text-[14px] text-slate-400">:</p>
+                                    <FormLabel required className="!mb-0">Support Email</FormLabel>
+                                        <p className="text-[14px] text-slate-400">:</p>
                                     <Input type="email" defaultValue="support@softvence.com" className="h-[36px]" />
                                 </div>
                             </div>
@@ -47,8 +47,8 @@ export default function GeneralList() {
                             {/* Right Side */}
                             <div>
                                 <div className="grid grid-cols-[140px_12px_1fr] items-start gap-3">
-                                    <FormLabel>App Description</FormLabel>
-                                    <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                    <FormLabel className="!mb-0 mt-2">App Description</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                     <Textarea defaultValue="Enterprise Resource Planning system for managing internal company operations." className="min-h-[96px] text-[14px]" />
                                 </div>
                             </div>

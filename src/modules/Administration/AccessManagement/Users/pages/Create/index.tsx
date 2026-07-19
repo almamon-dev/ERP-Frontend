@@ -91,22 +91,22 @@ export default function UserCreate() {
                                     <TabHeader title="Account Information" icon={UserCircle} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-center gap-3">
-                                        <FormLabel required>First Name</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">First Name</FormLabel>
                                         <p className="text-[14px] text-slate-400">:</p>
                                         <Input placeholder="John" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-center gap-3">
-                                        <FormLabel required>Last Name</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Last Name</FormLabel>
                                         <p className="text-[14px] text-slate-400">:</p>
                                         <Input placeholder="Doe" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-center gap-3">
-                                        <FormLabel required>Email Address</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Email Address</FormLabel>
                                         <p className="text-[14px] text-slate-400">:</p>
                                         <Input type="email" placeholder="john.doe@example.com" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-center gap-3">
-                                        <FormLabel required>Phone Number</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Phone Number</FormLabel>
                                         <p className="text-[14px] text-slate-400">:</p>
                                         <Input placeholder="+1 (555) 000-0000" className="h-[36px] text-[14px]" />
                                     </div>
@@ -121,7 +121,7 @@ export default function UserCreate() {
                                     <TabHeader title="Roles & Organization" icon={Shield} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-center gap-3">
-                                        <FormLabel required>Primary Role</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Primary Role</FormLabel>
                                         <p className="text-[14px] text-slate-400">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select a role...</option>
@@ -131,7 +131,7 @@ export default function UserCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-center gap-3">
-                                        <FormLabel>Department</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Department</FormLabel>
                                         <p className="text-[14px] text-slate-400">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select a department...</option>
@@ -140,7 +140,7 @@ export default function UserCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-center gap-3">
-                                        <FormLabel>Branch / Location</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Branch / Location</FormLabel>
                                         <p className="text-[14px] text-slate-400">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select a branch...</option>
@@ -159,12 +159,12 @@ export default function UserCreate() {
                                     <TabHeader title="Security & Settings" icon={Lock} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-center gap-3">
-                                        <FormLabel required>Temporary Password</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Temporary Password</FormLabel>
                                         <p className="text-[14px] text-slate-400">:</p>
                                         <Input type="password" placeholder="••••••••" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-center gap-3">
-                                        <FormLabel required>Confirm Password</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Confirm Password</FormLabel>
                                         <p className="text-[14px] text-slate-400">:</p>
                                         <Input type="password" placeholder="••••••••" className="h-[36px] text-[14px]" />
                                     </div>

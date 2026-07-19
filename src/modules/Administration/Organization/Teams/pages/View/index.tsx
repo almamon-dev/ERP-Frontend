@@ -16,7 +16,7 @@ const VIEW_TABS = [
 ];
 
 const TabHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-5 pb-4 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
+    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-3 pb-3 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
         <h2 className="text-[18px] font-bold text-slate-800 flex items-center gap-2">
             {Icon && <Icon size={20} className="text-slate-600" />}
             {title}

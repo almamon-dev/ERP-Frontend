@@ -18,7 +18,7 @@ const CREATE_TABS = [
 ];
 
 const TabHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-5 pb-4 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
+    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-3 pb-3 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
         <h2 className="text-[18px] font-bold text-slate-800 flex items-center gap-2">
             {Icon && <Icon size={20} className="text-slate-600" />}
             {title}
@@ -105,27 +105,27 @@ export default function BranchCreate() {
                                             <span className="text-[12px] font-medium">Branch Image</span>
                                         </div>
                                         <div className="flex-1 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                            <FormLabel required>Company</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel required className="!mb-0 mt-2">Company</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Select className="h-[36px]">
                                                 <option value="">Select Company</option>
                                                 <option value="1">Global Enterprise Ltd.</option>
                                                 <option value="2">TechFlow Solutions</option>
                                             </Select>
                                             
-                                            <FormLabel required>Branch Name</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel required className="!mb-0 mt-2">Branch Name</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Input placeholder="Enter branch name" className="h-[36px] text-[14px]" />
                                             
-                                            <FormLabel required>Branch Code</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel required className="!mb-0 mt-2">Branch Code</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Input placeholder="e.g. BR-001" className="h-[36px] text-[14px]" />
                                         </div>
                                     </div>
 
                                     <SectionHeader title="Basic Information" />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Business Unit</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Business Unit</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Business Unit</option>
@@ -135,7 +135,7 @@ export default function BranchCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Branch Type</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Branch Type</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Physical">Physical Store</option>
@@ -144,7 +144,7 @@ export default function BranchCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Branch Category</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Branch Category</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Category</option>
@@ -153,12 +153,12 @@ export default function BranchCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Opening Date</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Opening Date</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="date" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Description</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Description</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="A brief description of the branch..." rows={3} className="text-[14px]" />
                                     </div>
@@ -189,34 +189,34 @@ export default function BranchCreate() {
                                     <TabHeader title="Contact Information" icon={Phone} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Branch Email</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Branch Email</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="email" placeholder="branch@example.com" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Phone Number</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Phone Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="+1 234 567 8900" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Mobile Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Mobile Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="+1 987 654 3210" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Fax</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Fax</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Fax number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Website</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Website</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="https://www.branch-site.com" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Address Information" icon={MapPin} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Country</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Country</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Country</option>
@@ -225,37 +225,37 @@ export default function BranchCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>State</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">State</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="State/Province" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>City</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">City</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="City name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>ZIP Code</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">ZIP Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Postal code" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Street Address</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Street Address</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Full street address..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Landmark</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Landmark</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Near..." className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Google Map URL</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Google Map URL</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="https://maps.google.com/..." className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>GPS Coordinates</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">GPS Coordinates</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. 40.7128, -74.0060" className="h-[36px] text-[14px] font-mono" />
                                     </div>
@@ -270,37 +270,37 @@ export default function BranchCreate() {
                                     <TabHeader title="Management Structure" icon={Users} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Branch Manager</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Branch Manager</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Manager Name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assistant Manager</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assistant Manager</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Asst. Manager Name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Department Head</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Department Head</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Dept Head Name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Manager Email</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Manager Email</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="email" placeholder="manager@branch.com" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Manager Phone</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Manager Phone</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Manager phone" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Total Employees</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Total Employees</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="0" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Reporting Branch</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Reporting Branch</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Head Office</option>
@@ -310,7 +310,7 @@ export default function BranchCreate() {
 
                                     <SectionHeader title="Working Hours" icon={Clock} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Working Days</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Working Days</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Mon-Fri">Monday - Friday</option>
@@ -319,7 +319,7 @@ export default function BranchCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Weekend</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Weekend</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Sat-Sun">Saturday - Sunday</option>
@@ -328,17 +328,17 @@ export default function BranchCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Opening Time</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Opening Time</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="time" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Closing Time</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Closing Time</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="time" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Holiday Calendar</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Holiday Calendar</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Default">Default Company Calendar</option>
@@ -379,54 +379,54 @@ export default function BranchCreate() {
                                     <TabHeader title="Financial & Tax" icon={CreditCard} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Cost Center</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Cost Center</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Cost Center Code" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Profit Center</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Profit Center</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Profit Center Code" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Bank Name</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Bank Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter bank name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Account Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Account Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Bank account number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Payment Terms</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Payment Terms</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. Net 30, Net 60" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Tax & Compliance" icon={FileText} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Tax Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Tax Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Tax Number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>VAT Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">VAT Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="VAT Number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>BIN Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">BIN Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="BIN Number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>TIN Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">TIN Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="TIN Number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>License Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">License Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Business License Number" className="h-[36px] text-[14px]" />
                                     </div>
@@ -440,7 +440,7 @@ export default function BranchCreate() {
                                     <TabHeader title="System Configuration" icon={Settings} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Currency</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Currency</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="USD">USD ($)</option>
@@ -448,7 +448,7 @@ export default function BranchCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Language</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Language</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="en">English</option>
@@ -456,7 +456,7 @@ export default function BranchCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Time Zone</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Time Zone</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="UTC">UTC</option>
@@ -464,7 +464,7 @@ export default function BranchCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Date Format</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Date Format</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="YYYY-MM-DD">YYYY-MM-DD</option>
@@ -472,7 +472,7 @@ export default function BranchCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Fiscal Year</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Fiscal Year</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Jan">January - December</option>
@@ -500,8 +500,8 @@ export default function BranchCreate() {
 
                                     <div className="col-span-1 md:col-span-2 mt-2 pt-4 border-t border-slate-100">
                                         <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                            <FormLabel>IP Restriction (Whitelist)</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel className="!mb-0 mt-2">IP Restriction (Whitelist)</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Textarea placeholder="Enter IP addresses separated by commas" rows={2} className="text-[14px] font-mono" />
                                         </div>
                                     </div>
@@ -516,44 +516,44 @@ export default function BranchCreate() {
                                     <TabHeader title="Documents & Notes" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Branch License</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Branch License</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Lease Agreement</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Lease Agreement</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Utility Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Utility Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Other Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Other Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" multiple className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
 
                                     <SectionHeader title="Additional Information & Notes" icon={Activity} />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Custom Fields</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Custom Fields</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Extra tags or data..." className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Public Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Public Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Add any public notes about this branch..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Internal Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Internal Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Add any private notes or context about this branch..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Remarks</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Remarks</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Final remarks..." rows={2} className="text-[14px]" />
                                     </div>

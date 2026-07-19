@@ -18,7 +18,7 @@ const EDIT_TABS = [
 ];
 
 const TabHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-5 pb-4 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
+    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-3 pb-3 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
         <h2 className="text-[18px] font-bold text-slate-800 flex items-center gap-2">
             {Icon && <Icon size={20} className="text-slate-600" />}
             {title}
@@ -113,27 +113,27 @@ export default function BranchEdit() {
                                             </div>
                                         </div>
                                         <div className="flex-1 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                            <FormLabel required>Company</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel required className="!mb-0 mt-2">Company</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Select defaultValue="1" className="h-[36px]">
                                                 <option value="">Select Company</option>
                                                 <option value="1">Global Enterprise Ltd.</option>
                                                 <option value="2">TechFlow Solutions</option>
                                             </Select>
                                             
-                                            <FormLabel required>Branch Name</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel required className="!mb-0 mt-2">Branch Name</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Input defaultValue="Manhattan Main" className="h-[36px] text-[14px]" />
                                             
-                                            <FormLabel required>Branch Code</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel required className="!mb-0 mt-2">Branch Code</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Input defaultValue="BR-001" className="h-[36px] text-[14px]" />
                                         </div>
                                     </div>
 
                                     <SectionHeader title="Basic Information" />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Business Unit</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Business Unit</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Retail" className="h-[36px]">
                                             <option value="">Select Business Unit</option>
@@ -143,7 +143,7 @@ export default function BranchEdit() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Branch Type</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Branch Type</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Physical" className="h-[36px]">
                                             <option value="Physical">Physical Store</option>
@@ -152,7 +152,7 @@ export default function BranchEdit() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Branch Category</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Branch Category</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="A" className="h-[36px]">
                                             <option value="">Select Category</option>
@@ -161,12 +161,12 @@ export default function BranchEdit() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Opening Date</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Opening Date</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="date" defaultValue="2018-05-12" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Description</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Description</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Flagship branch in Manhattan, New York." rows={3} className="text-[14px]" />
                                     </div>
@@ -197,34 +197,34 @@ export default function BranchEdit() {
                                     <TabHeader title="Contact Information" icon={Phone} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Branch Email</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Branch Email</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="email" defaultValue="manhattan@globalent.com" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Phone Number</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Phone Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="+1 212 555 0198" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Mobile Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Mobile Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="+1 917 555 0199" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Fax</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Fax</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="+1 212 555 0197" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Website</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Website</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="https://www.globalent.com/ny" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Address Information" icon={MapPin} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Country</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Country</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="US" className="h-[36px]">
                                             <option value="US">United States</option>
@@ -232,37 +232,37 @@ export default function BranchEdit() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>State</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">State</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="New York" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>City</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">City</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="New York City" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>ZIP Code</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">ZIP Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="10001" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Street Address</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Street Address</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="123 Corporate Ave, Suite 500" rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Landmark</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Landmark</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Opposite Central Park" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Google Map URL</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Google Map URL</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="https://maps.google.com/?q=40.7128,-74.0060" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>GPS Coordinates</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">GPS Coordinates</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="40.7128, -74.0060" className="h-[36px] text-[14px] font-mono" />
                                     </div>
@@ -277,37 +277,37 @@ export default function BranchEdit() {
                                     <TabHeader title="Management Structure" icon={Users} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Branch Manager</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Branch Manager</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="John Doe" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assistant Manager</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assistant Manager</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Jane Smith" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Department Head</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Department Head</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Mike Ross" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Manager Email</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Manager Email</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="email" defaultValue="johndoe@globalent.com" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Manager Phone</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Manager Phone</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="+1 917 555 1234" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Total Employees</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Total Employees</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" defaultValue="45" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Reporting Branch</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Reporting Branch</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Head Office</option>
@@ -316,31 +316,31 @@ export default function BranchEdit() {
 
                                     <SectionHeader title="Working Hours" icon={Clock} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Working Days</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Working Days</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Mon-Fri" className="h-[36px]">
                                             <option value="Mon-Fri">Monday - Friday</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Weekend</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Weekend</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Sat-Sun" className="h-[36px]">
                                             <option value="Sat-Sun">Saturday - Sunday</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Opening Time</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Opening Time</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="time" defaultValue="09:00" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Closing Time</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Closing Time</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="time" defaultValue="18:00" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Holiday Calendar</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Holiday Calendar</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="US" className="h-[36px]">
                                             <option value="Default">Default Company Calendar</option>
@@ -381,54 +381,54 @@ export default function BranchEdit() {
                                     <TabHeader title="Financial & Tax" icon={CreditCard} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Cost Center</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Cost Center</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="CC-NY-001" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Profit Center</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Profit Center</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="PC-NY-001" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Bank Name</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Bank Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Chase Bank" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Account Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Account Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="**** **** 5521" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Payment Terms</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Payment Terms</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Net 30" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Tax & Compliance" icon={FileText} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Tax Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Tax Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="TAX-89912" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>VAT Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">VAT Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="VAT-NY-001" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>BIN Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">BIN Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="BIN-45561" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>TIN Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">TIN Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="TIN-77889" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>License Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">License Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="LIC-2023-NY" className="h-[36px] text-[14px]" />
                                     </div>
@@ -442,7 +442,7 @@ export default function BranchEdit() {
                                     <TabHeader title="System Configuration" icon={Settings} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Currency</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Currency</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="USD" className="h-[36px]">
                                             <option value="USD">USD ($)</option>
@@ -450,28 +450,28 @@ export default function BranchEdit() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Language</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Language</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="en" className="h-[36px]">
                                             <option value="en">English</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Time Zone</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Time Zone</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="UTC" className="h-[36px]">
                                             <option value="UTC">UTC</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Date Format</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Date Format</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="YYYY-MM-DD" className="h-[36px]">
                                             <option value="YYYY-MM-DD">YYYY-MM-DD</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Fiscal Year</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Fiscal Year</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Jan" className="h-[36px]">
                                             <option value="Jan">January - December</option>
@@ -498,8 +498,8 @@ export default function BranchEdit() {
 
                                     <div className="col-span-1 md:col-span-2 mt-2 pt-4 border-t border-slate-100">
                                         <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                            <FormLabel>IP Restriction (Whitelist)</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel className="!mb-0 mt-2">IP Restriction (Whitelist)</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Textarea defaultValue="192.168.1.*" rows={2} className="text-[14px] font-mono" />
                                         </div>
                                     </div>
@@ -514,7 +514,7 @@ export default function BranchEdit() {
                                     <TabHeader title="Documents & Notes" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Branch License</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Branch License</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <div className="flex items-center gap-3">
                                             <span className="text-[13px] text-slate-700 font-medium">branch_license_2023.pdf</span>
@@ -522,7 +522,7 @@ export default function BranchEdit() {
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Lease Agreement</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Lease Agreement</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <div className="flex items-center gap-3">
                                             <span className="text-[13px] text-slate-700 font-medium">lease_agreement_ny.pdf</span>
@@ -530,34 +530,34 @@ export default function BranchEdit() {
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Utility Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Utility Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Other Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Other Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" multiple className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
 
                                     <SectionHeader title="Additional Information & Notes" icon={Activity} />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Custom Fields</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Custom Fields</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Premium Tier Branch" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Public Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Public Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Flagship operations running normally." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Internal Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Internal Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Needs AC maintenance next month." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Remarks</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Remarks</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Top performing branch." rows={2} className="text-[14px]" />
                                     </div>

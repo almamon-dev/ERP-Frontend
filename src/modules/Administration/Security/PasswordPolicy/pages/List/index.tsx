@@ -26,16 +26,22 @@ export default function PasswordPolicyList() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
-                    <div>
-                        <FormLabel>Minimum Password Length</FormLabel>
-                        <Input type="number" defaultValue={8} min={6} max={32} />
+                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2">Minimum Password Length</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Input type="number" defaultValue={8} min={6} max={32} />
                         <p className="text-[12px] text-slate-500 mt-1">Recommended: 8 or more characters.</p>
-                    </div>
-                    <div>
-                        <FormLabel>Maximum Password Age (Days)</FormLabel>
-                        <Input type="number" defaultValue={90} min={0} />
+    </div>
+</div>
+                    <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
+    <FormLabel className="!mb-0 mt-2">Maximum Password Age (Days)</FormLabel>
+    <p className="text-[14px] text-slate-400 mt-2">:</p>
+    <div>
+        <Input type="number" defaultValue={90} min={0} />
                         <p className="text-[12px] text-slate-500 mt-1">Set to 0 to disable password expiration.</p>
-                    </div>
+    </div>
+</div>
 
                     <div className="col-span-1 md:col-span-2 space-y-4 mt-2">
                         <div className="flex items-center justify-between p-4 bg-slate-50 rounded-md border border-slate-100">

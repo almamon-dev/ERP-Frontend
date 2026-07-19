@@ -18,7 +18,7 @@ const CREATE_TABS = [
 ];
 
 const TabHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-5 pb-4 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
+    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-3 pb-3 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
         <h2 className="text-[18px] font-bold text-slate-800 flex items-center gap-2">
             {Icon && <Icon size={20} className="text-slate-600" />}
             {title}
@@ -105,26 +105,26 @@ export default function DepartmentCreate() {
                                             <span className="text-[12px] font-medium">Dept Icon</span>
                                         </div>
                                         <div className="flex-1 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                            <FormLabel required>Company</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel required className="!mb-0 mt-2">Company</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Select className="h-[36px]">
                                                 <option value="">Select Company</option>
                                                 <option value="1">Global Enterprise Ltd.</option>
                                             </Select>
                                             
-                                            <FormLabel required>Department Name</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel required className="!mb-0 mt-2">Department Name</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Input placeholder="Enter department name" className="h-[36px] text-[14px]" />
                                             
-                                            <FormLabel required>Department Code</FormLabel>
-                                            <p className="text-[14px] text-slate-400 mt-2">:</p>
+                                            <FormLabel required className="!mb-0 mt-2">Department Code</FormLabel>
+                                        <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <Input placeholder="e.g. IT-001" className="h-[36px] text-[14px]" />
                                         </div>
                                     </div>
 
                                     <SectionHeader title="Basic Information" />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Department Type</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Department Type</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Type</option>
@@ -134,7 +134,7 @@ export default function DepartmentCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Status</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Status</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <div className="flex items-center gap-2 mt-2">
                                             <Switch id="dept-status" defaultChecked />
@@ -142,7 +142,7 @@ export default function DepartmentCreate() {
                                         </div>
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Description</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Description</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="A brief description of the department..." rows={3} className="text-[14px]" />
                                     </div>
@@ -156,7 +156,7 @@ export default function DepartmentCreate() {
                                     <TabHeader title="Organization Assignment" icon={Network} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Company</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Company</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Company</option>
@@ -164,7 +164,7 @@ export default function DepartmentCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Branch</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Branch</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Branch</option>
@@ -172,7 +172,7 @@ export default function DepartmentCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Business Unit</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Business Unit</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Business Unit</option>
@@ -181,7 +181,7 @@ export default function DepartmentCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Division</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Division</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Division</option>
@@ -190,7 +190,7 @@ export default function DepartmentCreate() {
                                         </Select>
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Parent Department</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Parent Department</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">None (Top Level)</option>
@@ -209,34 +209,34 @@ export default function DepartmentCreate() {
                                     <TabHeader title="Department Management" icon={Users} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Department Head</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Department Head</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter Head Name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assistant Head</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assistant Head</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter Assistant Name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Team Lead</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Team Lead</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter Team Lead Name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Reporting Manager</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Reporting Manager</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter Reporting Manager" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Maximum Employees</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Maximum Employees</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="e.g. 50" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Working Configuration" icon={Clock} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Working Days</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Working Days</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Mon-Fri">Monday - Friday</option>
@@ -244,7 +244,7 @@ export default function DepartmentCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Shift</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Shift</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Morning">Morning Shift</option>
@@ -253,12 +253,12 @@ export default function DepartmentCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Office Hours</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Office Hours</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. 09:00 AM - 06:00 PM" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Holiday Calendar</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Holiday Calendar</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Default">Company Default</option>
@@ -276,44 +276,44 @@ export default function DepartmentCreate() {
                                     <TabHeader title="Contact Information" icon={Phone} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Department Email</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Department Email</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="email" placeholder="dept@example.com" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Phone Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Phone Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="+1 234 567 8900" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Extension Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Extension Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. 101" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Internal Contact</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Internal Contact</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Intercom or internal ID" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Location Information" icon={MapPin} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Building</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Building</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. Main Block" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Floor</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Floor</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. 3rd Floor" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Room Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Room Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. 305" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Office Location</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Office Location</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Additional location info" className="h-[36px] text-[14px]" />
                                     </div>
@@ -327,22 +327,22 @@ export default function DepartmentCreate() {
                                     <TabHeader title="Budget & Cost Center" icon={CreditCard} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Cost Center</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Cost Center</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Cost Center ID" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Budget Code</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Budget Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Budget Code" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Annual Budget</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Annual Budget</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="Enter amount" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Expense Limit</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Expense Limit</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="Enter amount" className="h-[36px] text-[14px]" />
                                     </div>
@@ -357,44 +357,44 @@ export default function DepartmentCreate() {
                                     <TabHeader title="Documents & Attachments" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Department Policy</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Department Policy</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>SOP Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">SOP Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Organizational Chart</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Organizational Chart</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Other Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Other Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" multiple className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
 
                                     <SectionHeader title="Additional Information & Notes" icon={CheckCircle} />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Custom Fields</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Custom Fields</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Extra tags or data..." className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Remarks</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Remarks</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Final remarks..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Internal Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Internal Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Add any private notes or context..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Public Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Public Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Add any public notes..." rows={2} className="text-[14px]" />
                                     </div>

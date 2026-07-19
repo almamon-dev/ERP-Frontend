@@ -90,7 +90,7 @@ export default function CompanyCreate() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3">
                                     <TabHeader title="Company Overview" icon={Building2} />
                                     <div className="col-span-1 md:col-span-2 mb-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Company Logo</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Company Logo</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <div className="flex items-center gap-4">
                                             <div className="w-14 h-14 rounded-md border-2 border-dashed border-slate-300 flex items-center justify-center bg-slate-50 text-slate-400">
@@ -104,22 +104,22 @@ export default function CompanyCreate() {
                                     </div>
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Company Name</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Company Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter company name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Company Code</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Company Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. CMP-001" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Legal Name</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Legal Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Full legal entity name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Status</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Status</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Active">Active</option>
@@ -133,7 +133,7 @@ export default function CompanyCreate() {
 
                                     <SectionHeader title="Basic Information" />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Business Type</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Business Type</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Type</option>
@@ -144,7 +144,7 @@ export default function CompanyCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Industry</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Industry</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Industry</option>
@@ -156,7 +156,7 @@ export default function CompanyCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Company Size</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Company Size</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Size</option>
@@ -168,22 +168,22 @@ export default function CompanyCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Established Date</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Established Date</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="date" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Registration Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Registration Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Registration no" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Trade License Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Trade License Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Trade license no" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Description</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Description</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="A brief description of the company..." rows={3} className="text-[14px]" />
                                     </div>
@@ -197,59 +197,59 @@ export default function CompanyCreate() {
                                     
                                     <TabHeader title="Contact Information" icon={Phone} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Primary Email</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Primary Email</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="email" placeholder="contact@company.com" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Secondary Email</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Secondary Email</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="email" placeholder="support@company.com" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Phone Number</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Phone Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="+1 555 000 0000" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Mobile Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Mobile Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="+1 555 111 1111" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Fax</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Fax</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Fax number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Support Email</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Support Email</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="email" placeholder="help@company.com" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Contact Person</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Contact Person</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Name of primary contact" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Contact Person Email</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Contact Person Email</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="email" placeholder="Email of primary contact" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Contact Person Phone</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Contact Person Phone</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Phone of primary contact" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Website</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Website</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="https://www.example.com" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Address Information" icon={MapPin} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Country</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Country</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Country</option>
@@ -259,32 +259,32 @@ export default function CompanyCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>State / Province</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">State / Province</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="State name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>City</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">City</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="City name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>ZIP / Postal Code</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">ZIP / Postal Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="ZIP Code" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Street Address</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Street Address</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Enter full street address" rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Landmark</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Landmark</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Nearest landmark" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Google Map URL</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Google Map URL</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Map URL" className="h-[36px] text-[14px]" />
                                     </div>
@@ -294,7 +294,7 @@ export default function CompanyCreate() {
                                             <SectionHeader title="Working Hours" icon={Clock} />
                                             <div className="flex flex-col gap-y-3 mt-1">
                                                 <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                                    <FormLabel>Working Days</FormLabel>
+                                                    <FormLabel className="!mb-0 mt-2">Working Days</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                                     <Select className="h-[36px]">
                                                         <option value="Mon-Fri">Monday - Friday</option>
@@ -303,7 +303,7 @@ export default function CompanyCreate() {
                                                     </Select>
                                                 </div>
                                                 <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                                    <FormLabel>Weekend</FormLabel>
+                                                    <FormLabel className="!mb-0 mt-2">Weekend</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                                     <Select className="h-[36px]">
                                                         <option value="Sat-Sun">Saturday, Sunday</option>
@@ -312,12 +312,12 @@ export default function CompanyCreate() {
                                                     </Select>
                                                 </div>
                                                 <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                                    <FormLabel>Office Start Time</FormLabel>
+                                                    <FormLabel className="!mb-0 mt-2">Office Start Time</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                                     <Input type="time" className="h-[36px] text-[14px]" />
                                                 </div>
                                                 <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                                    <FormLabel>Office End Time</FormLabel>
+                                                    <FormLabel className="!mb-0 mt-2">Office End Time</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                                     <Input type="time" className="h-[36px] text-[14px]" />
                                                 </div>
@@ -328,27 +328,27 @@ export default function CompanyCreate() {
                                             <SectionHeader title="Social Media" icon={Globe} />
                                             <div className="flex flex-col gap-y-3 mt-1">
                                                 <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                                    <FormLabel>LinkedIn URL</FormLabel>
+                                                    <FormLabel className="!mb-0 mt-2">LinkedIn URL</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                                     <Input placeholder="LinkedIn profile" className="h-[36px] text-[14px]" />
                                                 </div>
                                                 <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                                    <FormLabel>Twitter (X) URL</FormLabel>
+                                                    <FormLabel className="!mb-0 mt-2">Twitter (X) URL</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                                     <Input placeholder="Twitter profile" className="h-[36px] text-[14px]" />
                                                 </div>
                                                 <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                                    <FormLabel>Facebook URL</FormLabel>
+                                                    <FormLabel className="!mb-0 mt-2">Facebook URL</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                                     <Input placeholder="Facebook page" className="h-[36px] text-[14px]" />
                                                 </div>
                                                 <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                                    <FormLabel>Instagram URL</FormLabel>
+                                                    <FormLabel className="!mb-0 mt-2">Instagram URL</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                                     <Input placeholder="Instagram profile" className="h-[36px] text-[14px]" />
                                                 </div>
                                                 <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                                    <FormLabel>YouTube URL</FormLabel>
+                                                    <FormLabel className="!mb-0 mt-2">YouTube URL</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                                     <Input placeholder="YouTube channel" className="h-[36px] text-[14px]" />
                                                 </div>
@@ -366,64 +366,64 @@ export default function CompanyCreate() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 w-full">
                                     <TabHeader title="Financial & Tax" icon={CreditCard} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Bank Name</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Bank Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter bank name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Branch Name</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Branch Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter branch name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Account Name</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Account Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Account holder name" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Account Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Account Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Bank account number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Swift Code</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Swift Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Bank Swift/BIC" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>IBAN</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">IBAN</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="IBAN number" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Tax & Compliance" icon={FileText} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Tax Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Tax Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Tax Number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>VAT Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">VAT Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="VAT Number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>BIN Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">BIN Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="BIN Number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>TIN Number</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">TIN Number</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="TIN Number" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Tax Region</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Tax Region</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Tax Region" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Tax Office</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Tax Office</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Tax Office" className="h-[36px] text-[14px]" />
                                     </div>
@@ -438,7 +438,7 @@ export default function CompanyCreate() {
                                     <TabHeader title="Branding" icon={ImageIcon} />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-2 gap-8">
                                         <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                            <FormLabel>Primary Color</FormLabel>
+                                            <FormLabel className="!mb-0 mt-2">Primary Color</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <div className="flex items-center gap-3">
                                                 <Input type="color" defaultValue="#008060" className="w-10 h-[36px] p-1 cursor-pointer" />
@@ -446,7 +446,7 @@ export default function CompanyCreate() {
                                             </div>
                                         </div>
                                         <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                            <FormLabel>Secondary Color</FormLabel>
+                                            <FormLabel className="!mb-0 mt-2">Secondary Color</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                             <div className="flex items-center gap-3">
                                                 <Input type="color" defaultValue="#1a1a1a" className="w-10 h-[36px] p-1 cursor-pointer" />
@@ -455,12 +455,12 @@ export default function CompanyCreate() {
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Favicon</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Favicon</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Email Header Logo</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Email Header Logo</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
@@ -478,34 +478,34 @@ export default function CompanyCreate() {
                                     <TabHeader title="Documents & Attachments" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Trade License</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Trade License</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Company Certificate</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Company Certificate</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Tax Certificate</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Tax Certificate</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Other Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Other Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" multiple className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
 
                                     <SectionHeader title="Additional Information" icon={Activity} />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Remarks</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Remarks</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Add any public remarks about this company..." rows={3} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Internal Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Internal Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Add any private notes or context about this company (visible to admins only)..." rows={3} className="text-[14px]" />
                                     </div>

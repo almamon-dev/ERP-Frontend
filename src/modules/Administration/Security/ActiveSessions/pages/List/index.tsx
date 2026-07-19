@@ -21,12 +21,10 @@ export default function ActiveSessionsList() {
             id: 'user', 
             label: 'User',
             render: (item) => (
-                <div>
-                    <p className="font-bold text-slate-800">{item.user}</p>
-                    <p className="text-slate-500 text-[12px]">{item.email}</p>
-                </div>
+                <p className="font-bold text-slate-800">{item.user}</p>
             )
         },
+        { id: 'email', label: 'Email' },
         { id: 'ip', label: 'IP Address' },
         { 
             id: 'device', 
@@ -70,6 +68,7 @@ export default function ActiveSessionsList() {
                 columns={columns}
                 searchPlaceholder="Search by user or IP..."
                 actions={renderActions}
+                compact
             />
         </div>
     );

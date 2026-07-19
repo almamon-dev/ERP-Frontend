@@ -92,12 +92,12 @@ export default function AccessPolicyView() {
                                     <TabHeader title="Policy Overview" icon={ShieldAlert} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -111,12 +111,12 @@ export default function AccessPolicyView() {
                                     <TabHeader title="Basic Information" icon={Info} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -130,12 +130,12 @@ export default function AccessPolicyView() {
                                     <TabHeader title="Authentication Rules" icon={Lock} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -149,12 +149,12 @@ export default function AccessPolicyView() {
                                     <TabHeader title="Session Rules" icon={Clock} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -168,12 +168,12 @@ export default function AccessPolicyView() {
                                     <TabHeader title="IP Restrictions" icon={Globe} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -187,12 +187,12 @@ export default function AccessPolicyView() {
                                     <TabHeader title="Additional Information" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -206,12 +206,12 @@ export default function AccessPolicyView() {
                                     <TabHeader title="Status" icon={Activity} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Example Field</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Example Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Another Field</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Another Field</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Enter value" className="h-[36px] text-[14px]" disabled />
                                     </div>

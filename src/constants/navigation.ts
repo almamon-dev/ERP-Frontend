@@ -66,9 +66,7 @@ export const navigationMap: Record<string, any[]> = {
             items: [
                 { name: 'General', path: '/administration/settings/general', icon: Settings },
                 { name: 'Localization', path: '/administration/settings/localization', icon: Globe },
-                { name: 'Email (SMTP)', path: '/administration/settings/email-smtp', icon: Mail },
                 { name: 'Notifications', path: '/administration/settings/notifications', icon: Bell },
-                { name: 'Storage', path: '/administration/settings/storage', icon: HardDrive },
                 { name: 'Backup & Restore', path: '/administration/settings/backup', icon: Database },
                 { name: 'Maintenance Mode', path: '/administration/settings/maintenance', icon: Wrench },
                 { name: 'Security', path: '/administration/settings/security', icon: Shield },
@@ -88,9 +86,9 @@ export const navigationMap: Record<string, any[]> = {
                 { name: 'Google Workspace', path: '/administration/integrations/google', icon: Cloud },
                 { name: 'Microsoft 365', path: '/administration/integrations/microsoft', icon: Cloud },
                 { name: 'Payment Gateways', path: '/administration/integrations/payment-gateways', icon: CreditCard },
-                { name: 'SMTP Providers', path: '/administration/integrations/smtp', icon: Mail },
+                { name: 'SMTP Providers', path: '/administration/settings/email-smtp', icon: Mail },
                 { name: 'SMS Providers', path: '/administration/integrations/sms', icon: MessageSquare },
-                { name: 'Storage Providers', path: '/administration/integrations/storage', icon: HardDrive },
+                { name: 'Storage Providers', path: '/administration/settings/storage', icon: HardDrive },
                 { name: 'OAuth Providers', path: '/administration/integrations/oauth', icon: Link },
             ]
         },

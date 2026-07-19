@@ -18,7 +18,7 @@ const EDIT_TABS = [
 ];
 
 const TabHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-5 pb-4 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
+    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-3 pb-3 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
         <h2 className="text-[18px] font-bold text-slate-800 flex items-center gap-2">
             {Icon && <Icon size={20} className="text-slate-600" />}
             {title}
@@ -106,25 +106,25 @@ export default function BusinessUnitEdit() {
                                     <TabHeader title="Business Unit Overview" icon={Briefcase} />
                                     
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3 mb-2">
-                                        <FormLabel required>Business Unit Name</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Business Unit Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Enterprise Solutions" className="h-[36px] text-[14px]" />
                                         
-                                        <FormLabel required>Business Unit Code</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Business Unit Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="BU-ENT-01" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Basic Information" />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Company</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Company</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="1" className="h-[36px]">
                                             <option value="1">Global Enterprise Ltd.</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Parent Business Unit</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Parent Business Unit</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">None (Top Level)</option>
@@ -132,7 +132,7 @@ export default function BusinessUnitEdit() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Business Unit Type</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Business Unit Type</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Product" className="h-[36px]">
                                             <option value="Product">Product Line</option>
@@ -141,14 +141,14 @@ export default function BusinessUnitEdit() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Industry</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Industry</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="IT" className="h-[36px]">
                                             <option value="IT">Information Technology</option>
                                         </Select>
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Description</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Description</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Handles enterprise client solutions and large-scale deployments." rows={3} className="text-[14px]" />
                                     </div>
@@ -174,7 +174,7 @@ export default function BusinessUnitEdit() {
                                     <TabHeader title="Organization Assignment" icon={Network} />
                                     
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assigned Branches</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assigned Branches</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select multiple defaultValue={['1']} className="h-[100px] text-[14px]">
                                             <option value="1">Manhattan Main</option>
@@ -182,7 +182,7 @@ export default function BusinessUnitEdit() {
                                         </Select>
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assigned Departments</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assigned Departments</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select multiple defaultValue={['it']} className="h-[100px] text-[14px]">
                                             <option value="it">Information Technology</option>
@@ -190,7 +190,7 @@ export default function BusinessUnitEdit() {
                                         </Select>
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assigned Teams</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assigned Teams</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select multiple defaultValue={['fe', 'be']} className="h-[100px] text-[14px]">
                                             <option value="fe">Frontend Development Team</option>
@@ -208,35 +208,35 @@ export default function BusinessUnitEdit() {
                                     <TabHeader title="Management" icon={UserCheck} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Business Unit Head</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Business Unit Head</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="john" className="h-[36px]">
                                             <option value="john">John Doe (VP)</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assistant Head</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assistant Head</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="jane" className="h-[36px]">
                                             <option value="jane">Jane Smith (Director)</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Reporting Executive</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Reporting Executive</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="ceo" className="h-[36px]">
                                             <option value="ceo">CEO</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Organization Level</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Organization Level</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="L1" className="h-[36px]">
                                             <option value="L1">Level 1 (Top)</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Maximum Employees</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Maximum Employees</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" defaultValue="500" className="h-[36px] text-[14px]" />
                                     </div>
@@ -250,65 +250,65 @@ export default function BusinessUnitEdit() {
                                     <TabHeader title="Financial Configuration" icon={DollarSign} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Cost Center</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Cost Center</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="CC-101" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Profit Center</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Profit Center</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="PC-201" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Budget Code</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Budget Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="B-ENT-2026" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Currency</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Currency</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="USD" className="h-[36px]">
                                             <option value="USD">USD ($)</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Annual Budget</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Annual Budget</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" defaultValue="5000000" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Revenue Target</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Revenue Target</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" defaultValue="15000000" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Expense Limit</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Expense Limit</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" defaultValue="4500000" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Operational Settings" icon={Clock} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Working Days</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Working Days</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Mon-Fri" className="h-[36px]">
                                             <option value="Mon-Fri">Monday - Friday</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Working Hours</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Working Hours</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="09:00 AM - 06:00 PM" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Time Zone</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Time Zone</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="EST" className="h-[36px]">
                                             <option value="EST">EST (UTC-5)</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Fiscal Year</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Fiscal Year</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Jan-Dec" className="h-[36px]">
                                             <option value="Jan-Dec">January - December</option>
@@ -324,29 +324,29 @@ export default function BusinessUnitEdit() {
                                     <TabHeader title="Performance & KPIs" icon={Target} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>KPI Template</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">KPI Template</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Sales" className="h-[36px]">
                                             <option value="Sales">Sales & Growth KPI</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Performance Target</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Performance Target</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Exceed industry average by 10%" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Sales Target</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Sales Target</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="$15M Annual" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Productivity Goal</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Productivity Goal</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="20% margin improvement" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Growth Target</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Growth Target</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="25% YoY" className="h-[36px] text-[14px]" />
                                     </div>
@@ -361,7 +361,7 @@ export default function BusinessUnitEdit() {
                                     <TabHeader title="Documents & Attachments" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Business Plan</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Business Plan</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <div className="flex items-center gap-3">
                                             <span className="text-[13px] text-slate-700 font-medium">BizPlan_2026.pdf</span>
@@ -369,39 +369,39 @@ export default function BusinessUnitEdit() {
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>SOP Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">SOP Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Policy Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Policy Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Agreements</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Agreements</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" multiple className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
 
                                     <SectionHeader title="Additional Information & Notes" icon={CheckCircle} />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Custom Fields</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Custom Fields</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Flagship BU" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Remarks</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Remarks</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Highly profitable unit." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Internal Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Internal Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Focus on Q4 growth." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Public Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Public Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Leading solutions provider." rows={2} className="text-[14px]" />
                                     </div>

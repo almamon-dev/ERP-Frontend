@@ -18,7 +18,7 @@ const EDIT_TABS = [
 ];
 
 const TabHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-5 pb-4 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
+    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-3 pb-3 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
         <h2 className="text-[18px] font-bold text-slate-800 flex items-center gap-2">
             {Icon && <Icon size={20} className="text-slate-600" />}
             {title}
@@ -106,25 +106,25 @@ export default function TeamEdit() {
                                     <TabHeader title="Team Overview" icon={Users} />
                                     
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3 mb-2">
-                                        <FormLabel required>Team Name</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Team Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Frontend Development Team" className="h-[36px] text-[14px]" />
                                         
-                                        <FormLabel required>Team Code</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Team Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="TM-FE-01" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Basic Information" />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Team Type</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Team Type</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Project" className="h-[36px]">
                                             <option value="Project">Project Team</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Status</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Status</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <div className="flex items-center gap-2 mt-2">
                                             <Switch id="team-status" defaultChecked />
@@ -132,7 +132,7 @@ export default function TeamEdit() {
                                         </div>
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Description</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Description</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Handles all user-facing web applications." rows={3} className="text-[14px]" />
                                     </div>
@@ -146,28 +146,28 @@ export default function TeamEdit() {
                                     <TabHeader title="Organization Assignment" icon={Network} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Company</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Company</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="1" className="h-[36px]">
                                             <option value="1">Global Enterprise Ltd.</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Branch</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Branch</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="1" className="h-[36px]">
                                             <option value="1">Manhattan Main</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Department</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Department</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="1" className="h-[36px]">
                                             <option value="1">Information Technology</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Business Unit</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Business Unit</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Corporate" className="h-[36px]">
                                             <option value="Corporate">Corporate</option>
@@ -176,22 +176,22 @@ export default function TeamEdit() {
 
                                     <SectionHeader title="Communication" icon={MessageSquare} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Team Email</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Team Email</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="email" defaultValue="frontend@globalent.com" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Team Phone</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Team Phone</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="+1 212 555 1022" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Microsoft Teams</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Microsoft Teams</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="https://teams.microsoft.com/frontend" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Slack Channel</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Slack Channel</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="#frontend-devs" className="h-[36px] text-[14px]" />
                                     </div>
@@ -205,35 +205,35 @@ export default function TeamEdit() {
                                     <TabHeader title="Management & Members" icon={UserCheck} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Team Leader</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Team Leader</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="john" className="h-[36px]">
                                             <option value="john">John Doe</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assistant Team Leader</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assistant Team Leader</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="jane" className="h-[36px]">
                                             <option value="jane">Jane Smith</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Reporting Manager</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Reporting Manager</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="director" className="h-[36px]">
                                             <option value="director">IT Director</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Maximum Members</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Maximum Members</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" defaultValue="12" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Team Members List" />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Select Members</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Select Members</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select multiple defaultValue={['1', '2']} className="h-[120px] text-[14px]">
                                             <option value="1">Alex Johnson (Frontend)</option>
@@ -243,7 +243,7 @@ export default function TeamEdit() {
                                         <p className="col-start-3 text-[12px] text-slate-500 mt-1">Hold Ctrl/Cmd to select multiple members</p>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Total Members</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Total Members</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" value="2" className="h-[36px] text-[14px]" disabled />
                                     </div>
@@ -257,26 +257,26 @@ export default function TeamEdit() {
                                     <TabHeader title="Working Configuration" icon={Clock} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Shift</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Shift</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Morning" className="h-[36px]">
                                             <option value="Morning">Morning Shift</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Working Days</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Working Days</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="Mon-Fri" className="h-[36px]">
                                             <option value="Mon-Fri">Monday - Friday</option>
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Office Hours</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Office Hours</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="09:00 AM - 06:00 PM" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Holiday Calendar</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Holiday Calendar</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select defaultValue="US" className="h-[36px]">
                                             <option value="US">US Public Holidays</option>
@@ -292,22 +292,22 @@ export default function TeamEdit() {
                                     <TabHeader title="Objectives & KPIs" icon={Target} />
                                     
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Team Goal</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Team Goal</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Maintain highly responsive and fast user interfaces." rows={3} className="text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>KPI</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">KPI</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Page Load Time, Zero Bugs" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Performance Target</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Performance Target</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="100% Uptime" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Monthly Target</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Monthly Target</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="3 Major Feature Releases" className="h-[36px] text-[14px]" />
                                     </div>
@@ -322,7 +322,7 @@ export default function TeamEdit() {
                                     <TabHeader title="Documents & Attachments" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>SOP Document</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">SOP Document</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <div className="flex items-center gap-3">
                                             <span className="text-[13px] text-slate-700 font-medium">FE_SOP.pdf</span>
@@ -330,34 +330,34 @@ export default function TeamEdit() {
                                         </div>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Team Guidelines</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Team Guidelines</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Other Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Other Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" multiple className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
 
                                     <SectionHeader title="Additional Information & Notes" icon={CheckCircle} />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Custom Fields</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Custom Fields</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input defaultValue="Core Sprint Team" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Remarks</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Remarks</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Highly efficient output." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Internal Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Internal Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Needs budget for new testing devices." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Public Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Public Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea defaultValue="Frontend experts." rows={2} className="text-[14px]" />
                                     </div>

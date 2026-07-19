@@ -18,7 +18,7 @@ const CREATE_TABS = [
 ];
 
 const TabHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-5 pb-4 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
+    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-3 pb-3 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
         <h2 className="text-[18px] font-bold text-slate-800 flex items-center gap-2">
             {Icon && <Icon size={20} className="text-slate-600" />}
             {title}
@@ -100,18 +100,18 @@ export default function BusinessUnitCreate() {
                                     <TabHeader title="Business Unit Overview" icon={Briefcase} />
                                     
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3 mb-2">
-                                        <FormLabel required>Business Unit Name</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Business Unit Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. Enterprise Solutions BU" className="h-[36px] text-[14px]" />
                                         
-                                        <FormLabel required>Business Unit Code</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Business Unit Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. BU-ENT-01" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Basic Information" />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Company</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Company</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Company</option>
@@ -119,7 +119,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Parent Business Unit</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Parent Business Unit</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">None (Top Level)</option>
@@ -127,7 +127,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Business Unit Type</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Business Unit Type</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Type</option>
@@ -137,7 +137,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Industry</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Industry</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Industry</option>
@@ -147,7 +147,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Description</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Description</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="A brief description of this business unit..." rows={3} className="text-[14px]" />
                                     </div>
@@ -173,7 +173,7 @@ export default function BusinessUnitCreate() {
                                     <TabHeader title="Organization Assignment" icon={Network} />
                                     
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assigned Branches</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assigned Branches</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select multiple className="h-[100px] text-[14px]">
                                             <option value="1">Manhattan Main</option>
@@ -182,7 +182,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assigned Departments</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assigned Departments</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select multiple className="h-[100px] text-[14px]">
                                             <option value="it">Information Technology</option>
@@ -191,7 +191,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assigned Teams</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assigned Teams</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select multiple className="h-[100px] text-[14px]">
                                             <option value="fe">Frontend Development Team</option>
@@ -209,7 +209,7 @@ export default function BusinessUnitCreate() {
                                     <TabHeader title="Management" icon={UserCheck} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Business Unit Head</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Business Unit Head</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select BU Head</option>
@@ -217,7 +217,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Assistant Head</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Assistant Head</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Assistant</option>
@@ -225,7 +225,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Reporting Executive</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Reporting Executive</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Executive</option>
@@ -234,7 +234,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Organization Level</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Organization Level</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="L1">Level 1 (Top)</option>
@@ -243,7 +243,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Maximum Employees</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Maximum Employees</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="No limit if blank" className="h-[36px] text-[14px]" />
                                     </div>
@@ -257,22 +257,22 @@ export default function BusinessUnitCreate() {
                                     <TabHeader title="Financial Configuration" icon={DollarSign} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Cost Center</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Cost Center</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Cost Center Code" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Profit Center</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Profit Center</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Profit Center Code" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Budget Code</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Budget Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Budget Code" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Currency</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Currency</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="USD">USD ($)</option>
@@ -281,24 +281,24 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Annual Budget</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Annual Budget</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="Enter amount" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Revenue Target</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Revenue Target</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="Enter target amount" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Expense Limit</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Expense Limit</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="Max allowed expense" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Operational Settings" icon={Clock} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Working Days</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Working Days</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Working Days</option>
@@ -306,12 +306,12 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Working Hours</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Working Hours</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. 09:00 AM - 06:00 PM" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Time Zone</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Time Zone</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Time Zone</option>
@@ -320,7 +320,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Fiscal Year</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Fiscal Year</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Fiscal Year</option>
@@ -329,7 +329,7 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Holiday Calendar</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Holiday Calendar</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Calendar</option>
@@ -346,7 +346,7 @@ export default function BusinessUnitCreate() {
                                     <TabHeader title="Performance & KPIs" icon={Target} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>KPI Template</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">KPI Template</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Template</option>
@@ -355,22 +355,22 @@ export default function BusinessUnitCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Performance Target</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Performance Target</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="General Performance Target" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Sales Target</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Sales Target</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Annual Sales Target" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Productivity Goal</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Productivity Goal</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="E.g. 15% increase in output" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Growth Target</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Growth Target</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Year over year growth %" className="h-[36px] text-[14px]" />
                                     </div>
@@ -385,49 +385,49 @@ export default function BusinessUnitCreate() {
                                     <TabHeader title="Documents & Attachments" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Business Plan</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Business Plan</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>SOP Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">SOP Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Policy Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Policy Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Agreements</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Agreements</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" multiple className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Other Attachments</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Other Attachments</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" multiple className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
 
                                     <SectionHeader title="Additional Information & Notes" icon={CheckCircle} />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Custom Fields</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Custom Fields</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Extra tags or data..." className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Remarks</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Remarks</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Final remarks..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Internal Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Internal Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Add any private notes or context..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Public Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Public Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Add any public notes..." rows={2} className="text-[14px]" />
                                     </div>

@@ -18,7 +18,7 @@ const CREATE_TABS = [
 ];
 
 const TabHeader = ({ title, icon: Icon }: { title: string, icon?: any }) => (
-    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-5 pb-4 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
+    <div className="col-span-1 md:col-span-2 -mt-2 md:-mt-4 mb-3 pb-3 border-b border-slate-200 -mx-6 md:-mx-8 px-6 md:px-8">
         <h2 className="text-[18px] font-bold text-slate-800 flex items-center gap-2">
             {Icon && <Icon size={20} className="text-slate-600" />}
             {title}
@@ -100,18 +100,18 @@ export default function DesignationCreate() {
                                     <TabHeader title="Designation Overview" icon={Briefcase} />
                                     
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3 mb-2">
-                                        <FormLabel required>Designation Name</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Designation Name</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. Senior Software Engineer" className="h-[36px] text-[14px]" />
                                         
-                                        <FormLabel required>Designation Code</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Designation Code</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. SSE-01" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Basic Information" />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Designation Level</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Designation Level</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Level</option>
@@ -123,7 +123,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Job Category</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Job Category</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Category</option>
@@ -132,7 +132,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Description</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Description</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="A brief description of this designation..." rows={3} className="text-[14px]" />
                                     </div>
@@ -158,7 +158,7 @@ export default function DesignationCreate() {
                                     <TabHeader title="Organization Assignment" icon={Network} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Company</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Company</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Company</option>
@@ -166,7 +166,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Branch</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Branch</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Branch</option>
@@ -174,7 +174,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Department</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Department</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Department</option>
@@ -182,7 +182,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Team</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Team</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Team</option>
@@ -191,7 +191,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Business Unit</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Business Unit</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Business Unit</option>
@@ -201,7 +201,7 @@ export default function DesignationCreate() {
 
                                     <SectionHeader title="Reporting Structure" icon={Users} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Reports To (Role)</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Reports To (Role)</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Designation</option>
@@ -209,7 +209,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Supervises</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Supervises</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">None</option>
@@ -217,12 +217,12 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Max Employees Allow</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Max Employees Allow</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="No limit if blank" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Approval Authority</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Approval Authority</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="None">None</option>
@@ -240,12 +240,12 @@ export default function DesignationCreate() {
                                     <TabHeader title="Job Information" icon={Briefcase} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Job Title</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Job Title</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Official Job Title" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel required>Employment Type</FormLabel>
+                                        <FormLabel required className="!mb-0 mt-2">Employment Type</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Full-Time">Full-Time</option>
@@ -254,7 +254,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Shift</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Shift</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="Morning">Morning</option>
@@ -262,7 +262,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Work Location</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Work Location</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="On-Site">On-Site</option>
@@ -273,44 +273,44 @@ export default function DesignationCreate() {
 
                                     <SectionHeader title="Responsibilities & Metrics" icon={BookOpen} />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Key Responsibilities</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Key Responsibilities</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="List main responsibilities..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Daily Tasks</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Daily Tasks</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Typical daily routine..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>KPIs</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">KPIs</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Key Performance Indicators" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Performance Metrics</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Performance Metrics</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="How performance is measured" className="h-[36px] text-[14px]" />
                                     </div>
 
                                     <SectionHeader title="Required Skills & Qualifications" icon={GraduationCap} />
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Minimum Education</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Minimum Education</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. Bachelor's in CS" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Experience Required</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Experience Required</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="e.g. 5+ years" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Technical Skills</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Technical Skills</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="React, Node.js, AWS..." className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Certifications</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Certifications</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="AWS Certified Architect, PMP..." className="h-[36px] text-[14px]" />
                                     </div>
@@ -324,7 +324,7 @@ export default function DesignationCreate() {
                                     <TabHeader title="Salary & Grade" icon={DollarSign} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Salary Grade</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Salary Grade</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Grade</option>
@@ -334,7 +334,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Pay Scale</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Pay Scale</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Pay Scale</option>
@@ -343,12 +343,12 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Minimum Salary</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Minimum Salary</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="Enter amount" className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Maximum Salary</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Maximum Salary</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="number" placeholder="Enter amount" className="h-[36px] text-[14px]" />
                                     </div>
@@ -373,7 +373,7 @@ export default function DesignationCreate() {
                                     <TabHeader title="Permissions & Access" icon={ShieldCheck} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Default Role</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Default Role</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Default Role</option>
@@ -383,7 +383,7 @@ export default function DesignationCreate() {
                                         </Select>
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Access Level</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Access Level</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Select className="h-[36px]">
                                             <option value="">Select Access Level</option>
@@ -421,44 +421,44 @@ export default function DesignationCreate() {
                                     <TabHeader title="Documents & Attachments" icon={FileText} />
                                     
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Job Description (JD)</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Job Description (JD)</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>SOP Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">SOP Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Policies</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Policies</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
                                     <div className="grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Other Documents</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Other Documents</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input type="file" multiple className="h-[36px] text-[14px] p-0 file:h-full file:mr-4 file:px-4 file:py-0 file:bg-slate-50 file:border-0 file:border-r file:border-slate-200 file:text-slate-700 file:font-medium file:cursor-pointer hover:file:bg-slate-100 cursor-pointer text-slate-500" />
                                     </div>
 
                                     <SectionHeader title="Additional Information & Notes" icon={CheckCircle} />
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Custom Fields</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Custom Fields</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Input placeholder="Extra tags or data..." className="h-[36px] text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Remarks</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Remarks</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Final remarks..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Internal Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Internal Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Add any private notes or context..." rows={2} className="text-[14px]" />
                                     </div>
                                     <div className="col-span-1 md:col-span-2 grid grid-cols-[160px_10px_1fr] items-start gap-3">
-                                        <FormLabel>Public Notes</FormLabel>
+                                        <FormLabel className="!mb-0 mt-2">Public Notes</FormLabel>
                                         <p className="text-[14px] text-slate-400 mt-2">:</p>
                                         <Textarea placeholder="Add any public notes..." rows={2} className="text-[14px]" />
                                     </div>

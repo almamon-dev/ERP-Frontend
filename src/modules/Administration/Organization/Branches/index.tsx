@@ -1,3 +1,4 @@
-export default function BranchesPage() {
-  return <div className="p-6 text-2xl font-bold">Branches Management</div>;
+import { Outlet } from 'react-router-dom';
+export default function BranchesModule() {
+    return <Outlet />;
 }

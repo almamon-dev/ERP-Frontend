@@ -65,8 +65,8 @@ export default function CompanyList() {
             label: 'Company Name',
             render: (item) => (
                 <div className="flex flex-col">
-                    <span className="font-semibold text-gray-900 leading-tight">{item.name}</span>
-                    <span className="text-[11px] text-gray-500 leading-tight">{item.code}</span>
+                    <span className="text-[14px] font-semibold text-gray-900 leading-tight">{item.name}</span>
+                    <span className="text-[13px] text-gray-500 leading-tight mt-0.5">{item.code}</span>
                 </div>
             )
         },
@@ -79,7 +79,7 @@ export default function CompanyList() {
             id: 'status',
             label: 'Status',
             render: (item) => (
-                <span className={`px-2 py-0.5 text-[10px] font-medium rounded-full ${item.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                <span className={`px-2.5 py-1 text-[12px] font-medium rounded-full ${item.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                     {item.status}
                 </span>
             )
@@ -115,11 +115,11 @@ export default function CompanyList() {
     const renderFilters = (
         <div className="flex flex-wrap items-center gap-4">
             <div className="w-full sm:w-[200px]">
-                <label className="block text-[12px] font-bold text-slate-700 mb-1">Status</label>
+                <label className="block text-[13px] font-bold text-slate-700 mb-1">Status</label>
                 <select 
                     value={statusFilter} 
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="w-full h-[32px] px-2 bg-white border border-[#d1d1d1] rounded-[3px] text-[13px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
+                    className="w-full h-[36px] px-2 bg-white border border-[#d1d1d1] rounded-[4px] text-[14px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
                 >
                     <option value="All">All Statuses</option>
                     <option value="Active">Active</option>
@@ -127,11 +127,11 @@ export default function CompanyList() {
                 </select>
             </div>
             <div className="w-full sm:w-[200px]">
-                <label className="block text-[12px] font-bold text-slate-700 mb-1">Country</label>
+                <label className="block text-[13px] font-bold text-slate-700 mb-1">Country</label>
                 <select 
                     value={countryFilter} 
                     onChange={(e) => setCountryFilter(e.target.value)}
-                    className="w-full h-[32px] px-2 bg-white border border-[#d1d1d1] rounded-[3px] text-[13px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
+                    className="w-full h-[36px] px-2 bg-white border border-[#d1d1d1] rounded-[4px] text-[14px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
                 >
                     <option value="All">All Countries</option>
                     <option value="United States">United States</option>
@@ -143,11 +143,11 @@ export default function CompanyList() {
                 </select>
             </div>
             <div className="w-full sm:w-[200px]">
-                <label className="block text-[12px] font-bold text-slate-700 mb-1">City</label>
+                <label className="block text-[13px] font-bold text-slate-700 mb-1">City</label>
                 <select 
                     value={cityFilter} 
                     onChange={(e) => setCityFilter(e.target.value)}
-                    className="w-full h-[32px] px-2 bg-white border border-[#d1d1d1] rounded-[3px] text-[13px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
+                    className="w-full h-[36px] px-2 bg-white border border-[#d1d1d1] rounded-[4px] text-[14px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
                 >
                     <option value="All">All Cities</option>
                     <option value="New York">New York</option>
@@ -159,11 +159,11 @@ export default function CompanyList() {
                 </select>
             </div>
             <div className="w-full sm:w-[200px]">
-                <label className="block text-[12px] font-bold text-slate-700 mb-1">Created By</label>
+                <label className="block text-[13px] font-bold text-slate-700 mb-1">Created By</label>
                 <select 
                     value={createdByFilter} 
                     onChange={(e) => setCreatedByFilter(e.target.value)}
-                    className="w-full h-[32px] px-2 bg-white border border-[#d1d1d1] rounded-[3px] text-[13px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
+                    className="w-full h-[36px] px-2 bg-white border border-[#d1d1d1] rounded-[4px] text-[14px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
                 >
                     <option value="All">All Users</option>
                     <option value="Admin">Admin</option>
@@ -172,21 +172,21 @@ export default function CompanyList() {
                 </select>
             </div>
             <div className="w-full sm:w-[150px]">
-                <label className="block text-[12px] font-bold text-slate-700 mb-1">From Date</label>
+                <label className="block text-[13px] font-bold text-slate-700 mb-1">From Date</label>
                 <input 
                     type="date"
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
-                    className="w-full h-[32px] px-2 bg-white border border-[#d1d1d1] rounded-[3px] text-[12px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
+                    className="w-full h-[36px] px-2 bg-white border border-[#d1d1d1] rounded-[4px] text-[14px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
                 />
             </div>
             <div className="w-full sm:w-[150px]">
-                <label className="block text-[12px] font-bold text-slate-700 mb-1">To Date</label>
+                <label className="block text-[13px] font-bold text-slate-700 mb-1">To Date</label>
                 <input 
                     type="date"
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
-                    className="w-full h-[32px] px-2 bg-white border border-[#d1d1d1] rounded-[3px] text-[12px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
+                    className="w-full h-[36px] px-2 bg-white border border-[#d1d1d1] rounded-[4px] text-[14px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
                 />
             </div>
             <div className="mt-5">
@@ -199,7 +199,7 @@ export default function CompanyList() {
                         setStartDate('');
                         setEndDate('');
                     }} 
-                    className="h-[32px] w-[32px] flex items-center justify-center bg-white border border-[#d1d1d1] text-[#6d7175] rounded-[3px] hover:border-[#008060] hover:text-[#008060] transition-all group outline-none shadow-sm"
+                    className="h-[36px] w-[36px] flex items-center justify-center bg-white border border-[#d1d1d1] text-[#6d7175] rounded-[4px] hover:border-[#008060] hover:text-[#008060] transition-all group outline-none shadow-sm"
                     title="Clear Filters"
                 >
                     <RotateCcw size={14} className="group-hover:rotate-[-45deg] transition-transform" />
@@ -209,11 +209,11 @@ export default function CompanyList() {
     );
 
     return (
-        <div className="p-6">
+        <div className="p-6 md:p-8 mx-auto bg-[#f8f9fa] min-h-screen pb-24">
             <div className="flex justify-between items-center mb-6">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-900">Companies</h1>
-                    <p className="text-sm text-gray-500 mt-1">Manage all registered companies across the organization</p>
+                    <h1 className="text-[22px] font-bold text-slate-900">Companies</h1>
+                    <p className="text-[14px] font-medium text-[#008060] mt-1">Manage all registered companies across the organization</p>
                 </div>
                 <Link to="/administration/organization/companies/create">
                     <Button className="flex items-center gap-2 bg-[#008060] hover:bg-[#006e52] text-white">

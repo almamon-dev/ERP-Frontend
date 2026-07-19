@@ -123,19 +123,20 @@ export default function DataTable<T extends Record<string, any>>({
                 <div className="overflow-x-auto custom-scrollbar">
                     <table className="w-full text-left border-collapse">
                         <thead>
-                            <tr className="bg-[#f9fafb] border-b border-[#ebebeb] text-[11px] font-bold text-[#6d7175] uppercase tracking-wider">
-                                <th className="px-3 py-1.5 w-[40px]">
-                                    <input 
+                            <tr className="bg-[#f9fafb] border-b border-[#ebebeb] text-[13px] font-bold text-[#6d7175] uppercase tracking-wider">
+                                <th className="px-3 py-2 w-[40px]">
+                                    <div className="flex items-center justify-center">
+                                        <input 
                                         type="checkbox" 
                                         checked={selectedIds.length === paginatedData.length && paginatedData.length > 0}
                                         onChange={toggleSelectAll}
-                                        className="w-4 h-4 text-[#008060] border-[#d1d1d1] rounded-[2px] focus:ring-[#008060] cursor-pointer"
-                                    />
+                                        className="w-4 h-4 text-[#008060] border-[#d1d1d1] rounded-[2px] focus:ring-[#008060] cursor-pointer" />
+                                                </div>
                                 </th>
                                 {columns.map(col => visibleColumns.includes(col.id) && (
-                                    <th key={col.id} className="px-3 py-1.5">{col.label}</th>
+                                    <th key={col.id} className="px-3 py-2">{col.label}</th>
                                 ))}
-                                {actions && <th className="px-3 py-1.5 text-center">Actions</th>}
+                                {actions && <th className="px-3 py-2 text-center">Actions</th>}
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-[#ebebeb]">
@@ -151,21 +152,22 @@ export default function DataTable<T extends Record<string, any>>({
                                     const isSelected = selectedIds.includes(id);
                                     return (
                                         <tr key={id} className={`transition-colors group ${isSelected ? 'bg-[#f4f6f8]' : 'hover:bg-[#f9fafb]'}`}>
-                                            <td className="px-3 py-1.5 whitespace-nowrap">
-                                                <input 
+                                            <td className="px-3 py-2.5 whitespace-nowrap">
+                                                <div className="flex items-center justify-center">
+                                                    <input 
                                                     type="checkbox" 
                                                     checked={isSelected}
                                                     onChange={() => toggleSelect(id)}
-                                                    className="w-4 h-4 text-[#008060] border-[#d1d1d1] rounded-[2px] focus:ring-[#008060] cursor-pointer"
-                                                />
+                                                    className="w-4 h-4 text-[#008060] border-[#d1d1d1] rounded-[2px] focus:ring-[#008060] cursor-pointer" />
+                                                </div>
                                             </td>
                                             {columns.map(col => visibleColumns.includes(col.id) && (
-                                                <td key={col.id} className="px-3 py-1.5 whitespace-nowrap text-[12px] text-[#202223]">
+                                                <td key={col.id} className="px-3 py-2.5 whitespace-nowrap text-[14px] text-[#202223]">
                                                     {col.render ? col.render(item) : item[col.id]}
                                                 </td>
                                             ))}
                                             {actions && (
-                                                <td className="px-3 py-1.5 whitespace-nowrap text-center">
+                                                <td className="px-3 py-2.5 whitespace-nowrap text-center">
                                                     {actions(item)}
                                                 </td>
                                             )}

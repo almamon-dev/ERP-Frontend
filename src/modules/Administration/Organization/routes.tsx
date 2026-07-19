@@ -1,10 +1,16 @@
 import { RouteObject } from 'react-router-dom';
 import CompaniesModule from './Companies';
 import { companyRoutes } from './Companies/routes';
-import BranchesPage from './Branches';
-import DepartmentsPage from './Departments';
-import DesignationsPage from './Designations';
-import TeamsPage from './Teams';
+import BranchesModule from './Branches';
+import { branchRoutes } from './Branches/routes';
+import BusinessUnitsModule from './BusinessUnits';
+import { businessUnitRoutes } from './BusinessUnits/routes';
+import DepartmentsModule from './Departments';
+import { departmentRoutes } from './Departments/routes';
+import DesignationsModule from './Designations';
+import { designationRoutes } from './Designations/routes';
+import TeamsModule from './Teams';
+import { teamRoutes } from './Teams/routes';
 
 export const organizationRoutes: RouteObject[] = [
   { 
@@ -12,8 +18,29 @@ export const organizationRoutes: RouteObject[] = [
       element: <CompaniesModule />,
       children: companyRoutes
   },
-  { path: 'branches', element: <BranchesPage /> },
-  { path: 'departments', element: <DepartmentsPage /> },
-  { path: 'designations', element: <DesignationsPage /> },
-  { path: 'teams', element: <TeamsPage /> },
+  { 
+      path: 'branches', 
+      element: <BranchesModule />,
+      children: branchRoutes
+  },
+  { 
+      path: 'departments', 
+      element: <DepartmentsModule />,
+      children: departmentRoutes
+  },
+  { 
+      path: 'business-units', 
+      element: <BusinessUnitsModule />,
+      children: businessUnitRoutes
+  },
+  { 
+      path: 'designations', 
+      element: <DesignationsModule />,
+      children: designationRoutes
+  },
+  { 
+      path: 'teams', 
+      element: <TeamsModule />,
+      children: teamRoutes
+  },
 ];

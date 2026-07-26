@@ -6,12 +6,10 @@ import {
   ExternalLink, Building, MapPin, ChevronRight
 } from 'lucide-react';
 import Button from '@/components/ui/button';
+import DatePicker from '@/components/ui/date-picker';
 
 export default function EmployeeDashboardPage() {
   const [selectedMonth, setSelectedMonth] = useState('July 2026');
-  const [selectedMonthShort, setSelectedMonthShort] = useState('Jul');
-  const [selectedYear, setSelectedYear] = useState('2026');
-  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [selectedNoticeYear, setSelectedNoticeYear] = useState('2026');
 
   const monthMap: Record<string, string> = {
@@ -143,86 +141,9 @@ export default function EmployeeDashboardPage() {
           <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm overflow-visible">
             {/* Header & Stats Bar */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-              <div className="flex items-center gap-2 relative">
-                <h3 className="text-[14px] font-bold text-[#1e3a8a]">Attendance Calendar</h3>
-                
-                {/* CUSTOM MONTH / YEAR PICKER TRIGGER & POPOVER */}
-                <div className="relative">
-                  <button 
-                    onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
-                    className="flex items-center gap-1.5 bg-[#f0f4f9] hover:bg-[#e2e8f0] text-[#1e3a8a] text-[12.5px] font-bold px-3 py-1 rounded border border-[#dbeafe] transition-colors outline-none shadow-2xs cursor-pointer"
-                  >
-                    <span>{selectedMonth}</span>
-                    <ChevronDown size={14} className="text-[#1e3a8a]" />
-                  </button>
-
-                  {/* CUSTOM MONTH/YEAR PICKER POPOVER (MATCHING USER SCREENSHOT EXACTLY) */}
-                  {isDatePickerOpen && (
-                    <div className="absolute left-0 top-full mt-1.5 w-[220px] bg-white border border-slate-300 rounded shadow-xl z-50 p-2 text-slate-900 font-sans">
-                      {/* YEAR SELECTOR BAR */}
-                      <div className="bg-[#eeeeee] border border-slate-300 rounded-t divide-y divide-slate-300 max-h-[85px] overflow-y-auto text-[13px]">
-                        {['2025', '2026', '2027'].map((yr) => (
-                          <div 
-                            key={yr}
-                            onClick={() => setSelectedYear(yr)}
-                            className={`px-3 py-1 cursor-pointer font-semibold ${selectedYear === yr ? 'bg-[#d4d4d4] text-black font-bold' : 'hover:bg-[#e2e2e2] text-slate-800'}`}
-                          >
-                            {yr}
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* MONTH GRID (4 COLS x 3 ROWS) */}
-                      <div className="grid grid-cols-4 gap-1.5 p-2 bg-white text-center text-[12px] font-medium">
-                        {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((m) => {
-                          const isSelected = m === selectedMonthShort;
-                          return (
-                            <div
-                              key={m}
-                              onClick={() => {
-                                setSelectedMonthShort(m);
-                                setSelectedMonth(`${monthMap[m]} ${selectedYear}`);
-                                setIsDatePickerOpen(false);
-                              }}
-                              className={`py-1.5 cursor-pointer rounded transition-all ${
-                                isSelected 
-                                  ? 'bg-[#0070f3] text-white font-extrabold border-2 border-black shadow-sm' 
-                                  : 'hover:bg-slate-100 text-slate-800 font-normal'
-                              }`}
-                            >
-                              {m}
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* ACTION FOOTER */}
-                      <div className="flex items-center justify-between pt-2 border-t border-slate-200 px-1 text-[12px] font-semibold text-[#0070f3]">
-                        <button 
-                          onClick={() => { 
-                            setSelectedMonthShort('Jul'); 
-                            setSelectedMonth('July 2026'); 
-                            setIsDatePickerOpen(false); 
-                          }} 
-                          className="hover:underline cursor-pointer"
-                        >
-                          Clear
-                        </button>
-                        <button 
-                          onClick={() => { 
-                            setSelectedMonthShort('Jul'); 
-                            setSelectedMonth('July 2026'); 
-                            setIsDatePickerOpen(false); 
-                          }} 
-                          className="hover:underline cursor-pointer"
-                        >
-                          This month
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
+              <div className="flex items-center gap-2.5">
+                <h3 className="text-[14px] font-bold text-[#1e3a8a] leading-none shrink-0">Attendance Calendar</h3>
+                <DatePicker size="sm" variant="compact" format="monthYear" className="w-[140px]" placeholder="July 2026" />
               </div>
 
               {/* Attendance Counts Pill List */}

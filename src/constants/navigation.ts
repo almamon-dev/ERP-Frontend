@@ -212,12 +212,80 @@ export const navigationMap: Record<string, any[]> = {
         },
     ],
     'crm': [
-        { category: 'Main Menu', name: 'Leads', path: '/crm/leads', icon: UserPlus },
-        { category: 'Main Menu', name: 'Customers', path: '/crm/customers', icon: Users },
-        { category: 'Main Menu', name: 'Contacts', path: '/crm/contacts', icon: UserCircle },
-        { category: 'Main Menu', name: 'Opportunities', path: '/crm/opportunities', icon: Target },
-        { category: 'Main Menu', name: 'Follow Ups', path: '/crm/follow-ups', icon: Calendar },
-        { category: 'Main Menu', name: 'Communications', path: '/crm/communications', icon: Phone },
+        {
+            category: 'Sales & Prospecting',
+            group: 'Lead Management',
+            icon: UserPlus,
+            items: [
+                { name: 'Leads', path: '/crm/leads', icon: UserPlus },
+                { name: 'Lead Sources', path: '/crm/lead-sources', icon: Share2 },
+                { name: 'Lead Statuses', path: '/crm/lead-statuses', icon: ListTree },
+                { name: 'Scoring Rules', path: '/crm/lead-scoring', icon: Zap },
+            ]
+        },
+        {
+            category: 'Sales & Prospecting',
+            group: 'Customer & Contacts',
+            icon: Users,
+            items: [
+                { name: 'Customers', path: '/crm/customers', icon: Users },
+                { name: 'Contacts', path: '/crm/contacts', icon: UserCircle },
+                { name: 'Accounts & Companies', path: '/crm/accounts', icon: Building2 },
+                { name: 'Customer Segments', path: '/crm/segments', icon: Tags },
+            ]
+        },
+        {
+            category: 'Sales & Prospecting',
+            group: 'Deals & Pipeline',
+            icon: Target,
+            items: [
+                { name: 'Opportunities & Deals', path: '/crm/opportunities', icon: Target },
+                { name: 'Pipeline Kanban', path: '/crm/pipeline', icon: FolderKanban },
+                { name: 'Sales Forecasts', path: '/crm/forecasts', icon: TrendingUp },
+                { name: 'Quotations & Proposals', path: '/crm/quotations', icon: FileText },
+            ]
+        },
+        {
+            category: 'Engagement & Service',
+            group: 'Activities & Tasks',
+            icon: Calendar,
+            items: [
+                { name: 'Tasks & Follow-ups', path: '/crm/follow-ups', icon: Calendar },
+                { name: 'Call & Log History', path: '/crm/communications', icon: Phone },
+                { name: 'Meeting Scheduler', path: '/crm/meetings', icon: Clock },
+                { name: 'Email Campaigns', path: '/crm/email-campaigns', icon: Mail },
+            ]
+        },
+        {
+            category: 'Engagement & Service',
+            group: 'Customer Support',
+            icon: Headphones,
+            items: [
+                { name: 'Support Tickets', path: '/crm/tickets', icon: FileCheck },
+                { name: 'SLA Rules', path: '/crm/sla-rules', icon: ShieldCheck },
+                { name: 'Feedback & Surveys', path: '/crm/feedback', icon: MessageSquare },
+            ]
+        },
+        {
+            category: 'Intelligence & Config',
+            group: 'Analytics & Reports',
+            icon: FileBarChart,
+            items: [
+                { name: 'Lead Analytics', path: '/crm/analytics/leads', icon: PieChart },
+                { name: 'Sales Performance', path: '/crm/analytics/sales', icon: LineChart },
+                { name: 'Campaign ROI', path: '/crm/analytics/campaigns', icon: DollarSign },
+            ]
+        },
+        {
+            category: 'Intelligence & Config',
+            group: 'CRM Settings',
+            icon: Settings,
+            items: [
+                { name: 'General Settings', path: '/crm/settings/general', icon: Settings },
+                { name: 'Integration Setup', path: '/crm/settings/integrations', icon: Link },
+                { name: 'Web Forms Widget', path: '/crm/settings/web-forms', icon: Globe },
+            ]
+        },
     ],
     'sales': [
         { category: 'Main Menu', name: 'Customers', path: '/sales/customers', icon: Users },
@@ -246,13 +314,79 @@ export const navigationMap: Record<string, any[]> = {
         { category: 'Main Menu', name: 'Stock Adjustment', path: '/inventory/stock-adjustment', icon: Settings },
     ],
     'hr': [
-        { category: 'Main Menu', name: 'Employees', path: '/hr/employees', icon: Users },
-        { category: 'Main Menu', name: 'Attendance', path: '/hr/attendance', icon: Calendar },
-        { category: 'Main Menu', name: 'Leave', path: '/hr/leave', icon: Home },
-        { category: 'Main Menu', name: 'Payroll', path: '/hr/payroll', icon: HandCoins },
-        { category: 'Main Menu', name: 'Recruitment', path: '/hr/recruitment', icon: UserPlus },
-        { category: 'Main Menu', name: 'Performance', path: '/hr/performance', icon: Target },
-        { category: 'Main Menu', name: 'Documents', path: '/hr/documents', icon: FileText },
+        {
+            category: 'Workforce & Time',
+            group: 'Employee Management',
+            icon: Users,
+            items: [
+                { name: 'Employee Directory', path: '/hr/employees', icon: Users },
+                { name: 'Onboarding & Joining', path: '/hr/onboarding', icon: UserPlus },
+                { name: 'Transfers & Promotions', path: '/hr/transfers', icon: Layers },
+                { name: 'Exit & Offboarding', path: '/hr/offboarding', icon: UserCircle },
+            ]
+        },
+        {
+            category: 'Workforce & Time',
+            group: 'Time & Attendance',
+            icon: Calendar,
+            items: [
+                { name: 'Daily Attendance', path: '/hr/attendance', icon: Calendar },
+                { name: 'Shifts & Rosters', path: '/hr/shifts', icon: Clock },
+                { name: 'Overtime Tracking', path: '/hr/overtime', icon: Activity },
+                { name: 'Holidays Calendar', path: '/hr/holidays', icon: CheckCircle },
+            ]
+        },
+        {
+            category: 'Workforce & Time',
+            group: 'Leave Management',
+            icon: Home,
+            items: [
+                { name: 'Leave Requests', path: '/hr/leave/requests', icon: Home },
+                { name: 'Leave Allocations', path: '/hr/leave/allocations', icon: ClipboardList },
+                { name: 'Leave Policies', path: '/hr/leave/policies', icon: FileText },
+            ]
+        },
+        {
+            category: 'Compensation & Growth',
+            group: 'Payroll & Benefits',
+            icon: HandCoins,
+            items: [
+                { name: 'Monthly Payroll', path: '/hr/payroll', icon: HandCoins },
+                { name: 'Salary Structures', path: '/hr/salary-structures', icon: Calculator },
+                { name: 'Payslips Generator', path: '/hr/payslips', icon: Receipt },
+                { name: 'Provident Fund & Gratuity', path: '/hr/benefits', icon: DollarSign },
+            ]
+        },
+        {
+            category: 'Compensation & Growth',
+            group: 'Recruitment & Talent',
+            icon: UserPlus,
+            items: [
+                { name: 'Job Openings', path: '/hr/recruitment/jobs', icon: Briefcase },
+                { name: 'Job Applicants', path: '/hr/recruitment/applicants', icon: UserPlus },
+                { name: 'Interview Schedules', path: '/hr/recruitment/interviews', icon: Calendar },
+            ]
+        },
+        {
+            category: 'Compensation & Growth',
+            group: 'Performance & Training',
+            icon: Target,
+            items: [
+                { name: 'Appraisal Reviews', path: '/hr/performance', icon: Target },
+                { name: 'KPI & Goals Setup', path: '/hr/kpi-goals', icon: Zap },
+                { name: 'Training Programs', path: '/hr/training', icon: FileCheck },
+            ]
+        },
+        {
+            category: 'Administration',
+            group: 'HR Documents & Settings',
+            icon: Settings,
+            items: [
+                { name: 'HR Documents', path: '/hr/documents', icon: FileText },
+                { name: 'General HR Settings', path: '/hr/settings/general', icon: Settings },
+                { name: 'Organization Setup', path: '/hr/settings/organization', icon: Building2 },
+            ]
+        },
     ],
     'accounting': [
         { category: 'Main Menu', name: 'Chart Of Accounts', path: '/accounting/chart-of-accounts', icon: FileSpreadsheet },

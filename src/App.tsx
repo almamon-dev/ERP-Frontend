@@ -2,6 +2,8 @@ import React from 'react';
 import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
 import { authRoutes } from './modules/Auth';
 import { administrationRoutes } from './modules/Administration';
+import { crmRoutes } from './modules/CRM';
+import { hrRoutes } from './modules/HR';
 import { supportRoutes } from './modules/Support/routes';
 import ModulesSelectorPage from './modules/Dashboard/pages/ModulesSelectorPage';
 
@@ -14,6 +16,8 @@ const router = createBrowserRouter([
   },
   ...authRoutes,
   ...administrationRoutes,
+  ...crmRoutes,
+  ...hrRoutes,
   ...supportRoutes,
   {
     path: '/admin/modules',

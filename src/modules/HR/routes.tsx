@@ -2,6 +2,7 @@ import React from 'react';
 import { RouteObject, Navigate } from 'react-router-dom';
 import AdminLayout from '@/layouts/AdminLayout';
 
+import StaffPortalPage from './Portal/pages/StaffPortalPage';
 import EmployeesPage from './Employees/pages/EmployeesPage';
 import OnboardingPage from './Onboarding/pages';
 import TransfersPage from './Transfers/pages';
@@ -40,8 +41,9 @@ export const hrRoutes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <Navigate to="employees" replace />,
+        element: <Navigate to="portal" replace />,
       },
+      { path: 'portal', element: <StaffPortalPage /> },
       { path: 'employees', element: <EmployeesPage /> },
       { path: 'onboarding', element: <OnboardingPage /> },
       { path: 'transfers', element: <TransfersPage /> },

@@ -319,6 +319,7 @@ export const navigationMap: Record<string, any[]> = {
             group: 'Employee Management',
             icon: Users,
             items: [
+                { name: 'Staff Self-Service Portal', path: '/hr/portal', icon: UserCheck },
                 { name: 'Employee Directory', path: '/hr/employees', icon: Users },
                 { name: 'Onboarding & Joining', path: '/hr/onboarding', icon: UserPlus },
                 { name: 'Transfers & Promotions', path: '/hr/transfers', icon: Layers },

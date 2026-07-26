@@ -10,7 +10,7 @@ import {
     Languages, Cloud, MessageSquare, Link, Workflow, ListTree, Zap, TrendingUp,
     ListPlus, TextCursorInput, FileCode, MapPin, FolderOpen, UploadCloud, Image, Printer,
     Bot, TerminalSquare, Gauge, Cpu, Type, Wrench, ListOrdered, Timer, Terminal, Server,
-    AlertTriangle, LineChart, ShieldAlert, UserCheck
+    AlertTriangle, LineChart, ShieldAlert, UserCheck, Award
 } from 'lucide-react';
 
 export const navigationMap: Record<string, any[]> = {

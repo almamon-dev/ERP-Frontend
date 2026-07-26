@@ -81,6 +81,15 @@ const modulesList = [
     bg: 'bg-emerald-50'
   },
   {
+    id: 'ess',
+    name: 'Employee Self Service',
+    desc: 'Personal employee portal for leave, IOU, payslips, assets, and time logs.',
+    path: '/employee-portal',
+    icon: Users,
+    color: 'text-teal-600',
+    bg: 'bg-teal-50'
+  },
+  {
     id: 'reports',
     name: 'Reports',
     desc: 'Custom data visualization, financial statements, and exportable analytics.',

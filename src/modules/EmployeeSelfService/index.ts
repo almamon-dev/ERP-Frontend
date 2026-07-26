@@ -1,0 +1,1 @@
+export { employeeSelfServiceRoutes } from './routes';

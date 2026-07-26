@@ -418,4 +418,48 @@ export const navigationMap: Record<string, any[]> = {
         { category: 'Main Menu', name: 'Knowledge Base', path: '/support/knowledge-base', icon: Database },
         { category: 'Main Menu', name: 'FAQ', path: '/support/faq', icon: CheckCircle },
     ],
+    'ess': [
+        {
+            category: 'Personal Portal',
+            group: 'Employee Self Service',
+            icon: UserCheck,
+            items: [
+                { name: 'Dashboard', path: '/employee-portal/dashboard', icon: LayoutDashboard },
+                { name: 'About Me', path: '/employee-portal/about-me', icon: UserCircle },
+                { name: 'Time Management', path: '/employee-portal/time-management', icon: Clock },
+                { name: 'Leave And Movement', path: '/employee-portal/leave-movement', icon: Calendar },
+                { name: 'IOU', path: '/employee-portal/iou', icon: CreditCard },
+                { name: 'Loan & Financial Aid', path: '/employee-portal/financial-aid', icon: DollarSign },
+                { name: 'Asset', path: '/employee-portal/assets', icon: HardDrive },
+                { name: 'Expense', path: '/employee-portal/expenses', icon: Receipt },
+                { name: 'Contact Book', path: '/employee-portal/contact-book', icon: Phone },
+                { name: 'Separation', path: '/employee-portal/separation', icon: FileCheck },
+                { name: 'PaySlip', path: '/employee-portal/payslip', icon: FileText },
+                { name: 'Supervisor', path: '/employee-portal/supervisor', icon: Users },
+                { name: 'Salary Certificate', path: '/employee-portal/salary-certificate', icon: Award },
+            ]
+        }
+    ],
+    'employee-portal': [
+        {
+            category: 'Personal Portal',
+            group: 'Employee Self Service',
+            icon: UserCheck,
+            items: [
+                { name: 'Dashboard', path: '/employee-portal/dashboard', icon: LayoutDashboard },
+                { name: 'About Me', path: '/employee-portal/about-me', icon: UserCircle },
+                { name: 'Time Management', path: '/employee-portal/time-management', icon: Clock },
+                { name: 'Leave And Movement', path: '/employee-portal/leave-movement', icon: Calendar },
+                { name: 'IOU', path: '/employee-portal/iou', icon: CreditCard },
+                { name: 'Loan & Financial Aid', path: '/employee-portal/financial-aid', icon: DollarSign },
+                { name: 'Asset', path: '/employee-portal/assets', icon: HardDrive },
+                { name: 'Expense', path: '/employee-portal/expenses', icon: Receipt },
+                { name: 'Contact Book', path: '/employee-portal/contact-book', icon: Phone },
+                { name: 'Separation', path: '/employee-portal/separation', icon: FileCheck },
+                { name: 'PaySlip', path: '/employee-portal/payslip', icon: FileText },
+                { name: 'Supervisor', path: '/employee-portal/supervisor', icon: Users },
+                { name: 'Salary Certificate', path: '/employee-portal/salary-certificate', icon: Award },
+            ]
+        }
+    ],
 };

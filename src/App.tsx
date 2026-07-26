@@ -4,6 +4,7 @@ import { authRoutes } from './modules/Auth';
 import { administrationRoutes } from './modules/Administration';
 import { crmRoutes } from './modules/CRM';
 import { hrRoutes } from './modules/HR';
+import { employeeSelfServiceRoutes } from './modules/EmployeeSelfService';
 import { supportRoutes } from './modules/Support/routes';
 import ModulesSelectorPage from './modules/Dashboard/pages/ModulesSelectorPage';
 
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
   ...administrationRoutes,
   ...crmRoutes,
   ...hrRoutes,
+  ...employeeSelfServiceRoutes,
   ...supportRoutes,
   {
     path: '/admin/modules',

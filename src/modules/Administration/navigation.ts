@@ -2,6 +2,7 @@ import { accessManagementNavigation } from './AccessManagement';
 import { organizationNavigation } from './Organization';
 import { securityNavigation } from './Security';
 import { settingsNavigation } from './Settings';
+import { integrationsNavigation } from './Integrations';
 
 export const administrationSidebar = [
   {
@@ -22,13 +23,7 @@ export const administrationSidebar = [
   {
     title: 'Integrations',
     icon: 'Plug',
-    items: [
-      { name: 'API Keys', path: '/administration/integrations/api-keys' },
-      { name: 'Webhooks', path: '/administration/integrations/webhooks' },
-      { name: 'Google', path: '/administration/integrations/google' },
-      { name: 'Microsoft', path: '/administration/integrations/microsoft' },
-      { name: 'Payment Gateways', path: '/administration/integrations/payments' },
-    ]
+    items: integrationsNavigation
   },
   {
     title: 'System Settings',
@@ -36,3 +31,4 @@ export const administrationSidebar = [
     items: settingsNavigation
   }
 ];
+

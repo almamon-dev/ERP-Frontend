@@ -8,8 +8,8 @@ interface SidebarProps {
 }
 
 const NavGroup = ({ item, location, isOpen }: { item: any; location: any; isOpen: boolean }) => {
-    const isActiveGroup = item.items.some((subItem: any) => 
-        location.pathname === subItem.path || 
+    const isActiveGroup = item.items.some((subItem: any) =>
+        location.pathname === subItem.path ||
         (subItem.path !== '/' && location.pathname.startsWith(subItem.path))
     );
 
@@ -22,31 +22,30 @@ const NavGroup = ({ item, location, isOpen }: { item: any; location: any; isOpen
                     if (isOpen) setIsExpanded(!isExpanded);
                 }}
                 title={!isOpen ? item.group : undefined}
-                className={`w-full flex items-center ${isOpen ? 'justify-between px-3' : 'justify-center'} py-2 rounded-lg text-[14px] font-medium transition-colors group ${
-                    isActiveGroup 
-                        ? 'text-slate-900 font-semibold' 
+                className={`w-full flex items-center ${isOpen ? 'justify-between px-3' : 'justify-center'} py-2 rounded-lg text-[14px] font-medium transition-colors group ${isActiveGroup
+                        ? 'text-slate-900 font-semibold'
                         : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50/50'
-                }`}
+                    }`}
             >
                 <div className={`flex items-center ${isOpen ? 'gap-2.5' : 'justify-center'}`}>
                     {item.icon && (
-                        <item.icon 
-                            size={20} 
+                        <item.icon
+                            size={20}
                             strokeWidth={1.5}
-                            className={isActiveGroup ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'} 
+                            className={isActiveGroup ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'}
                         />
                     )}
                     {isOpen && <span className="whitespace-nowrap">{item.group}</span>}
                 </div>
                 {isOpen && (
-                    <ChevronRight 
-                        size={16} 
+                    <ChevronRight
+                        size={16}
                         strokeWidth={1.5}
-                        className={`text-slate-400 transition-transform duration-200 shrink-0 ${isExpanded ? 'rotate-90' : ''}`} 
+                        className={`text-slate-400 transition-transform duration-200 shrink-0 ${isExpanded ? 'rotate-90' : ''}`}
                     />
                 )}
             </button>
-            
+
             {isOpen && isExpanded && (
                 <div className="pl-[34px] pr-3 space-y-1 mb-1.5 mt-0.5">
                     {item.items.map((subItem: any) => {
@@ -55,11 +54,10 @@ const NavGroup = ({ item, location, isOpen }: { item: any; location: any; isOpen
                             <Link
                                 key={subItem.name}
                                 to={subItem.path}
-                                className={`flex items-center justify-between py-1.5 rounded-md text-[13px] font-medium transition-colors group ${
-                                    isActive 
-                                        ? 'text-blue-600 font-semibold' 
+                                className={`flex items-center justify-between py-1.5 rounded-md text-[13px] font-medium transition-colors group ${isActive
+                                        ? 'text-blue-600 font-semibold'
                                         : 'text-slate-500 hover:text-slate-900'
-                                }`}
+                                    }`}
                             >
                                 <div className="flex items-center gap-3 whitespace-nowrap">
                                     <span className={`w-1 h-1 rounded-full shrink-0 ${isActive ? 'bg-blue-600' : 'bg-slate-300 group-hover:bg-slate-400'}`} />
@@ -77,7 +75,7 @@ const NavGroup = ({ item, location, isOpen }: { item: any; location: any; isOpen
 export default function Sidebar({ isOpen }: SidebarProps) {
     const location = useLocation();
     const currentModule = location.pathname.split('/')[1] || 'dashboard';
-    
+
     const navItems = navigationMap[currentModule] || [
         { name: 'Dashboard', path: `/${currentModule}`, icon: LayoutDashboard },
         { name: 'Settings', path: `/${currentModule}/settings`, icon: Settings },
@@ -111,24 +109,23 @@ export default function Sidebar({ isOpen }: SidebarProps) {
                                     <div className="mb-2 mt-4 border-t border-slate-100 mx-2" />
                                 )
                             )}
-                            
+
                             {item.group ? (
                                 <NavGroup item={item} location={location} isOpen={isOpen} />
                             ) : (
                                 <Link
                                     to={item.path}
                                     title={!isOpen ? item.name : undefined}
-                                    className={`flex items-center ${isOpen ? 'justify-between px-3' : 'justify-center'} py-2 rounded-lg text-[14px] font-medium transition-colors group mb-0.5 ${
-                                        (location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path)))
-                                            ? 'text-slate-900 font-semibold' 
+                                    className={`flex items-center ${isOpen ? 'justify-between px-3' : 'justify-center'} py-2 rounded-lg text-[14px] font-medium transition-colors group mb-0.5 ${(location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path)))
+                                            ? 'text-slate-900 font-semibold'
                                             : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50/50'
-                                    }`}
+                                        }`}
                                 >
                                     <div className={`flex items-center ${isOpen ? 'gap-2.5' : 'justify-center'}`}>
-                                        <item.icon 
-                                            size={20} 
+                                        <item.icon
+                                            size={20}
                                             strokeWidth={1.5}
-                                            className={(location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path))) ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'} 
+                                            className={(location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path))) ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'}
                                         />
                                         {isOpen && <span className="whitespace-nowrap">{item.name}</span>}
                                     </div>
@@ -140,15 +137,15 @@ export default function Sidebar({ isOpen }: SidebarProps) {
             </div>
 
             <div className="p-4 border-t border-gray-100 shrink-0 space-y-2">
-                <Link 
-                    to="/admin/modules" 
+                <Link
+                    to="/admin/modules"
                     title={!isOpen ? "Modules" : undefined}
                     className={`flex items-center ${isOpen ? 'gap-3 px-3' : 'justify-center'} py-2 w-full rounded-lg text-[13px] font-medium text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors`}
                 >
                     <ArrowLeft size={20} className="text-slate-400" />
                     {isOpen && <span className="whitespace-nowrap">Back to Modules</span>}
                 </Link>
-                <button 
+                <button
                     title={!isOpen ? "Logout" : undefined}
                     className={`flex items-center ${isOpen ? 'gap-3 px-3' : 'justify-center'} py-2 w-full rounded-lg text-[13px] font-medium text-red-600 hover:bg-red-50 transition-colors`}
                 >

@@ -130,30 +130,34 @@ export default function CompanyView() {
 
                         {activeTab === 'contact' && (
                             <div className="space-y-4 animate-in fade-in duration-300">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-6">
 
-                                    <SectionHeader title="Contact Information" icon={Phone} />
-                                    <ViewField label="Primary Email" value="contact@enterprise.com" isLink linkHref="mailto:contact@enterprise.com" />
-                                    <ViewField label="Secondary Email" value="support@enterprise.com" isLink linkHref="mailto:support@enterprise.com" />
-                                    <ViewField label="Phone Number" value="+1 234 567 8900" />
-                                    <ViewField label="Mobile Number" value="+1 987 654 3210" />
-                                    <ViewField label="Website" value="www.enterprise.com" isLink linkHref="https://www.enterprise.com" />
-                                    <ViewField label="Fax" value="+1 234 567 8901" />
-                                    <ViewField label="Support Email" value="help@enterprise.com" isLink linkHref="mailto:help@enterprise.com" />
-                                    <ViewField label="Contact Person" value="John Doe" />
-                                    <ViewField label="Contact Person Email" value="john.doe@enterprise.com" isLink linkHref="mailto:john.doe@enterprise.com" />
-                                    <ViewField label="Contact Person Phone" value="+1 555 123 4567" />
+                                    <div className="flex flex-col gap-y-2">
+                                        <SectionHeader title="Contact Information" icon={Phone} />
+                                        <ViewField label="Primary Email" value="contact@enterprise.com" isLink linkHref="mailto:contact@enterprise.com" />
+                                        <ViewField label="Secondary Email" value="support@enterprise.com" isLink linkHref="mailto:support@enterprise.com" />
+                                        <ViewField label="Phone Number" value="+1 234 567 8900" />
+                                        <ViewField label="Mobile Number" value="+1 987 654 3210" />
+                                        <ViewField label="Website" value="www.enterprise.com" isLink linkHref="https://www.enterprise.com" />
+                                        <ViewField label="Fax" value="+1 234 567 8901" />
+                                        <ViewField label="Support Email" value="help@enterprise.com" isLink linkHref="mailto:help@enterprise.com" />
+                                        <ViewField label="Contact Person" value="John Doe" />
+                                        <ViewField label="Contact Person Email" value="john.doe@enterprise.com" isLink linkHref="mailto:john.doe@enterprise.com" />
+                                        <ViewField label="Contact Person Phone" value="+1 555 123 4567" />
+                                    </div>
 
-                                    <SectionHeader title="Address Information" icon={MapPin} />
-                                    <ViewField label="Country" value="United States" />
-                                    <ViewField label="State" value="New York" />
-                                    <ViewField label="City" value="New York" />
-                                    <ViewField label="ZIP Code" value="10001" />
-                                    <ViewField label="Street Address" value="123 Business Avenue, Tech Park, Suite 100" />
-                                    <ViewField label="Landmark" value="Near Central Station" />
-                                    <ViewField label="Google Map URL" value="https://maps.google.com/?q=..." isLink linkHref="https://maps.google.com" />
+                                    <div className="flex flex-col gap-y-2">
+                                        <SectionHeader title="Location Information" icon={MapPin} />
+                                        <ViewField label="Country" value="United States" />
+                                        <ViewField label="State" value="New York" />
+                                        <ViewField label="City" value="New York" />
+                                        <ViewField label="ZIP Code" value="10001" />
+                                        <ViewField label="Street Address" value="123 Business Avenue, Tech Park, Suite 100" />
+                                        <ViewField label="Landmark" value="Near Central Station" />
+                                        <ViewField label="Google Map URL" value="https://maps.google.com/?q=..." isLink linkHref="https://maps.google.com" />
+                                    </div>
 
-                                    <div className="col-span-1 md:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4 border-t border-slate-100 mt-4 pt-3">
+                                    <div className="col-span-1 lg:col-span-2 grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4 border-t border-slate-100 mt-4 pt-3">
                                         <div className="col-span-1">
                                             <SectionHeader title="Working Hours" icon={Clock} />
                                             <div className="flex flex-col gap-y-2 mt-1">

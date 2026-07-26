@@ -24,13 +24,13 @@ export default function AuditLogsList() {
     ];
 
     return (
-        <div className="p-6 md:p-8 mx-auto bg-[#f8f9fa] min-h-screen pb-24">
-            <div className="flex justify-between items-center mb-6">
+        <div className="p-4 md:p-6 max-w-full mx-auto bg-[#f8f9fa] min-h-screen pb-20">
+            <div className="flex justify-between items-center mb-5">
                 <div>
-                    <h1 className="text-[22px] font-bold text-slate-900">Audit Logs</h1>
-                    <p className="text-[14px] font-medium text-[#008060] mt-1">Deep system-level auditing and data change tracking.</p>
+                    <h1 className="text-[20px] font-bold text-slate-900">Audit Logs</h1>
+                    <p className="text-[13px] font-medium text-[#008060] mt-0.5">Deep system-level auditing and data change tracking.</p>
                 </div>
-                <Button variant="outline" className="flex items-center gap-2">
+                <Button variant="outline" className="flex items-center gap-1.5 text-[13px] h-9 px-3.5">
                     <Download size={14} /> Export CSV
                 </Button>
             </div>
@@ -44,3 +44,4 @@ export default function AuditLogsList() {
         </div>
     );
 }
+

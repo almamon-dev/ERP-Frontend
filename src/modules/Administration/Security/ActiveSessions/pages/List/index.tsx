@@ -52,13 +52,13 @@ export default function ActiveSessionsList() {
     );
 
     return (
-        <div className="p-6 md:p-8 mx-auto bg-[#f8f9fa] min-h-screen pb-24">
-            <div className="flex justify-between items-center mb-6">
+        <div className="p-4 md:p-6 max-w-full mx-auto bg-[#f8f9fa] min-h-screen pb-20">
+            <div className="flex justify-between items-center mb-5">
                 <div>
-                    <h1 className="text-[22px] font-bold text-slate-900">Active Sessions</h1>
-                    <p className="text-[14px] font-medium text-[#008060] mt-1">Monitor and manage users currently logged into the system.</p>
+                    <h1 className="text-[20px] font-bold text-slate-900">Active Sessions</h1>
+                    <p className="text-[13px] font-medium text-[#008060] mt-0.5">Monitor and manage users currently logged into the system.</p>
                 </div>
-                <Button variant="outline" className="text-red-600 hover:bg-red-50 border-red-200">
+                <Button variant="outline" className="text-red-600 hover:bg-red-50 border-red-200 text-[13px] h-9 px-3.5 flex items-center gap-1.5">
                     Terminate All Other Sessions
                 </Button>
             </div>
@@ -73,3 +73,4 @@ export default function ActiveSessionsList() {
         </div>
     );
 }
+

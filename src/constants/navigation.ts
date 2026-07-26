@@ -85,7 +85,7 @@ export const navigationMap: Record<string, any[]> = {
                 { name: 'Webhooks', path: '/administration/integrations/webhooks', icon: Webhook },
                 { name: 'Google Workspace', path: '/administration/integrations/google', icon: Cloud },
                 { name: 'Microsoft 365', path: '/administration/integrations/microsoft', icon: Cloud },
-                { name: 'Payment Gateways', path: '/administration/integrations/payment-gateways', icon: CreditCard },
+                { name: 'Payment Gateways', path: '/administration/integrations/payments', icon: CreditCard },
                 { name: 'SMTP Providers', path: '/administration/settings/email-smtp', icon: Mail },
                 { name: 'SMS Providers', path: '/administration/integrations/sms', icon: MessageSquare },
                 { name: 'Storage Providers', path: '/administration/settings/storage', icon: HardDrive },

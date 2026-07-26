@@ -36,10 +36,10 @@ export default function ActivityLogsList() {
     ];
 
     return (
-        <div className="p-6 md:p-8 mx-auto bg-[#f8f9fa] min-h-screen pb-24">
-            <div className="mb-6">
-                <h1 className="text-[22px] font-bold text-slate-900">Activity Logs</h1>
-                <p className="text-[14px] font-medium text-[#008060] mt-1">Track user actions and modifications across the system.</p>
+        <div className="p-4 md:p-6 max-w-full mx-auto bg-[#f8f9fa] min-h-screen pb-20">
+            <div className="mb-5">
+                <h1 className="text-[20px] font-bold text-slate-900">Activity Logs</h1>
+                <p className="text-[13px] font-medium text-[#008060] mt-0.5">Track user actions and modifications across the system.</p>
             </div>
 
             <DataTable 
@@ -50,3 +50,4 @@ export default function ActivityLogsList() {
         </div>
     );
 }
+

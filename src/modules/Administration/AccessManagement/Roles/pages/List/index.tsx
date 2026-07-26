@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { Plus, Eye, Edit, Trash2, RotateCcw, Save } from 'lucide-react';
+import { Plus, Edit, Trash2, RotateCcw, Save } from 'lucide-react';
 import DataTable, { Column } from '@/components/tables/data-table';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import Textarea from '@/components/ui/textarea';
 import Switch from '@/components/ui/switch';
-import Select from '@/components/ui/select';
 import Modal from '@/components/modals/modal';
 import FormLabel from '@/components/ui/label';
 
 export default function RoleList() {
     const [data, setData] = useState([
-        { id: 1, name: 'Sample Role 1', code: 'CODE_001', status: 'Active', createdAt: '2026-07-10' },
-        { id: 2, name: 'Sample Role 2', code: 'CODE_002', status: 'Inactive', createdAt: '2026-07-12' },
+        { id: 1, name: 'System Administrator', code: 'ROLE_ADMIN', status: 'Active', createdAt: '2026-07-10' },
+        { id: 2, name: 'HR Manager', code: 'ROLE_HR', status: 'Active', createdAt: '2026-07-12' },
+        { id: 3, name: 'Finance Executive', code: 'ROLE_FIN', status: 'Inactive', createdAt: '2026-07-15' },
     ]);
     
     const [statusFilter, setStatusFilter] = useState('All');
@@ -22,26 +22,26 @@ export default function RoleList() {
     const [editItem, setEditItem] = useState<any>(null);
 
     const handleDelete = (id: number) => {
-        if (confirm('Are you sure you want to delete this record?')) {
+        if (confirm('Are you sure you want to delete this role?')) {
             setData(prev => prev.filter(c => c.id !== id));
         }
     };
 
     const handleBulkDelete = (ids: number[]) => {
-        if (confirm(`Are you sure you want to delete ${ids.length} records?`)) {
+        if (confirm(`Are you sure you want to delete ${ids.length} roles?`)) {
             setData(prev => prev.filter(c => !ids.includes(c.id)));
         }
     };
 
     const columns: Column[] = [
-        { id: 'id', label: 'ID' },
-        { id: 'name', label: 'Name' },
-        { id: 'code', label: 'Code' },
+        { id: 'id', label: 'ID', render: (item) => <span className="text-slate-400 font-mono text-[12px]">#{item.id}</span> },
+        { id: 'name', label: 'Role Name', render: (item) => <span className="font-bold text-slate-800 text-[13px]">{item.name}</span> },
+        { id: 'code', label: 'Role Code', render: (item) => <span className="font-mono text-slate-600 bg-slate-100 px-2 py-0.5 rounded text-[11.5px]">{item.code}</span> },
         {
             id: 'status',
             label: 'Status',
             render: (item) => (
-                <span className={`px-2.5 py-1 text-[12px] font-medium rounded-full ${item.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                <span className={`px-2 py-0.5 text-[11.5px] font-bold rounded-full ${item.status === 'Active' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
                     {item.status}
                 </span>
             )
@@ -52,10 +52,10 @@ export default function RoleList() {
     const renderActions = (item: any) => (
         <div className="flex items-center justify-center gap-1">
             <button onClick={() => setEditItem(item)} className="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-colors" title="Edit">
-                <Edit size={15} strokeWidth={1.5} />
+                <Edit size={14} strokeWidth={1.5} />
             </button>
             <button onClick={() => handleDelete(item.id)} className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors" title="Delete">
-                <Trash2 size={15} strokeWidth={1.5} />
+                <Trash2 size={14} strokeWidth={1.5} />
             </button>
         </div>
     );
@@ -68,11 +68,11 @@ export default function RoleList() {
     const renderFilters = (
         <div className="flex flex-wrap items-center gap-4">
             <div className="w-full sm:w-[200px]">
-                <label className="block text-[13px] font-bold text-slate-700 mb-1">Status</label>
+                <label className="block text-[12px] font-bold text-slate-700 mb-1">Status</label>
                 <select 
                     value={statusFilter} 
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="w-full h-[36px] px-2 bg-white border border-[#d1d1d1] rounded-[4px] text-[14px] text-[#202223] outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors"
+                    className="w-full h-[32px] px-2 bg-white border border-[#d1d1d1] rounded-[3px] text-[12px] text-[#202223] outline-none focus:border-[#d1d1d1] focus:ring-0 transition-colors"
                 >
                     <option value="All">All Statuses</option>
                     <option value="Active">Active</option>
@@ -82,36 +82,46 @@ export default function RoleList() {
             <div className="mt-5">
                 <button 
                     onClick={() => setStatusFilter('All')} 
-                    className="h-[36px] w-[36px] flex items-center justify-center bg-white border border-[#d1d1d1] text-[#6d7175] rounded-[4px] hover:border-[#008060] hover:text-[#008060] transition-all group outline-none shadow-sm"
+                    className="h-[32px] w-[32px] flex items-center justify-center bg-white border border-[#d1d1d1] text-[#6d7175] rounded-[3px] hover:border-slate-400 transition-all group outline-none"
                     title="Clear Filters"
                 >
-                    <RotateCcw size={14} className="group-hover:rotate-[-45deg] transition-transform" />
+                    <RotateCcw size={13} />
                 </button>
             </div>
         </div>
     );
     
-    // Reusable Form Content for Modals
+    // Reusable Compact Form Content for Modals
     const FormContent = ({ isEdit = false }: { isEdit?: boolean }) => (
-        <div className="space-y-5">
-            <div className="grid grid-cols-2 gap-4">
-                <div className="col-span-2">
-                    <FormLabel required>Name</FormLabel>
-                    <Input defaultValue={isEdit ? editItem?.name : ''} placeholder="Enter Role Name" />
-                </div>
-                <div className="col-span-2">
-                    <FormLabel required>Code / Identifier</FormLabel>
-                    <Input defaultValue={isEdit ? editItem?.code : ''} placeholder="e.g. CODE_001" />
-                </div>
-                <div className="col-span-2">
-                    <FormLabel>Description</FormLabel>
-                    <Textarea placeholder="Detailed description..." className="min-h-[80px]" />
+        <div className="space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2.5">
+                <FormLabel className="!mb-0 sm:w-32 text-[12.5px] font-semibold text-slate-700 shrink-0" required>Role Name</FormLabel>
+                <span className="text-[12.5px] text-slate-400 hidden sm:inline">:</span>
+                <div className="flex-1">
+                    <Input defaultValue={isEdit ? editItem?.name : ''} placeholder="e.g. System Administrator" className="h-8 text-[12.5px]" />
                 </div>
             </div>
-            <div className="p-4 bg-slate-50 border border-slate-100 rounded-md flex items-center justify-between">
+
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2.5">
+                <FormLabel className="!mb-0 sm:w-32 text-[12.5px] font-semibold text-slate-700 shrink-0" required>Role Code</FormLabel>
+                <span className="text-[12.5px] text-slate-400 hidden sm:inline">:</span>
+                <div className="flex-1">
+                    <Input defaultValue={isEdit ? editItem?.code : ''} placeholder="e.g. ROLE_ADMIN" className="font-mono h-8 text-[12.5px]" />
+                </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-start gap-1.5 sm:gap-2.5">
+                <FormLabel className="!mb-0 sm:w-32 text-[12.5px] font-semibold text-slate-700 shrink-0 mt-1">Description</FormLabel>
+                <span className="text-[12.5px] text-slate-400 hidden sm:inline mt-1">:</span>
+                <div className="flex-1">
+                    <Textarea defaultValue={isEdit ? editItem?.description : ''} placeholder="Describe role permissions..." className="min-h-[60px] text-[12.5px] py-1.5" />
+                </div>
+            </div>
+
+            <div className="p-2.5 px-3 bg-slate-50 border border-slate-200/70 rounded-md flex items-center justify-between mt-1">
                 <div>
-                    <h4 className="text-[13px] font-bold text-slate-800">Active Status</h4>
-                    <p className="text-[12px] text-slate-500 mt-0.5">Is this role active in the system?</p>
+                    <h4 className="text-[12.5px] font-bold text-slate-800">Active Status</h4>
+                    <p className="text-[11px] text-slate-500 mt-0.5">Is this role active in the system?</p>
                 </div>
                 <Switch defaultChecked={isEdit ? editItem?.status === 'Active' : true} />
             </div>
@@ -119,17 +129,17 @@ export default function RoleList() {
     );
 
     return (
-        <div className="p-6 md:p-8 mx-auto bg-[#f8f9fa] min-h-screen pb-24">
-            <div className="flex justify-between items-center mb-6">
+        <div className="p-4 md:p-6 max-w-full mx-auto bg-[#f8f9fa] min-h-screen pb-20">
+            <div className="flex justify-between items-center mb-5">
                 <div>
-                    <h1 className="text-[22px] font-bold text-slate-900">Roles</h1>
-                    <p className="text-[14px] font-medium text-[#008060] mt-1">Manage system roles and configurations.</p>
+                    <h1 className="text-[20px] font-bold text-slate-900">Roles</h1>
+                    <p className="text-[13px] font-medium text-[#008060] mt-0.5">Manage system roles and configurations.</p>
                 </div>
                 <Button 
                     onClick={() => setIsCreateModalOpen(true)} 
-                    className="flex items-center gap-2 bg-[#008060] hover:bg-[#006e52] text-white"
+                    className="flex items-center gap-1.5 bg-[#008060] hover:bg-[#006e52] text-white text-[13px] h-9 px-4"
                 >
-                    <Plus size={16} />
+                    <Plus size={15} />
                     Add Role
                 </Button>
             </div>
@@ -141,19 +151,20 @@ export default function RoleList() {
                 actions={renderActions}
                 onDeleteSelected={handleBulkDelete}
                 filterContent={renderFilters}
+                compact
             />
 
             {/* Create Modal */}
             <Modal
                 isOpen={isCreateModalOpen}
                 onClose={() => setIsCreateModalOpen(false)}
-                title={`Create New $Role`}
-                size="md"
+                title="Create New Role"
+                size="lg"
                 footer={
                     <>
-                        <Button variant="outline" onClick={() => setIsCreateModalOpen(false)}>Cancel</Button>
-                        <Button className="bg-[#008060] hover:bg-[#006e52] text-white gap-2 flex items-center">
-                            <Save size={14} /> Save Role
+                        <Button variant="outline" onClick={() => setIsCreateModalOpen(false)} className="h-8.5 text-[12.5px]">Cancel</Button>
+                        <Button className="bg-[#008060] hover:bg-[#006e52] text-white gap-1.5 flex items-center text-[12.5px] h-8.5 px-3.5">
+                            <Save size={13} /> Save Role
                         </Button>
                     </>
                 }
@@ -165,13 +176,13 @@ export default function RoleList() {
             <Modal
                 isOpen={!!editItem}
                 onClose={() => setEditItem(null)}
-                title={`Edit $Role`}
-                size="md"
+                title="Edit Role"
+                size="lg"
                 footer={
                     <>
-                        <Button variant="outline" onClick={() => setEditItem(null)}>Cancel</Button>
-                        <Button className="bg-[#008060] hover:bg-[#006e52] text-white gap-2 flex items-center">
-                            <Save size={14} /> Save Changes
+                        <Button variant="outline" onClick={() => setEditItem(null)} className="h-8.5 text-[12.5px]">Cancel</Button>
+                        <Button className="bg-[#008060] hover:bg-[#006e52] text-white gap-1.5 flex items-center text-[12.5px] h-8.5 px-3.5">
+                            <Save size={13} /> Save Changes
                         </Button>
                     </>
                 }
@@ -181,3 +192,4 @@ export default function RoleList() {
         </div>
     );
 }
+

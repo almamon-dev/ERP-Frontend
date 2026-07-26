@@ -3,6 +3,7 @@ import { accessManagementRoutes } from './AccessManagement';
 import { organizationRoutes } from './Organization';
 import { securityRoutes } from './Security';
 import { settingsRoutes } from './Settings';
+import { integrationsRoutes } from './Integrations';
 import AdminLayout from '@/layouts/AdminLayout';
 
 export const administrationRoutes: RouteObject[] = [
@@ -30,6 +31,11 @@ export const administrationRoutes: RouteObject[] = [
         path: 'settings',
         children: settingsRoutes,
       },
+      {
+        path: 'integrations',
+        children: integrationsRoutes,
+      },
     ]
   }
 ];
+

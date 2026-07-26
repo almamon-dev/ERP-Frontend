@@ -22,7 +22,7 @@ export default function TableSearch({
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={placeholder} 
-                className="w-full h-[32px] pl-9 pr-3 border border-[#d1d1d1] rounded-[3px] text-[12px] font-medium placeholder:text-[#6d7175] focus:outline-none focus:border-[#008060] focus:ring-1 focus:ring-[#008060] transition-colors shadow-none"
+                className="w-full h-[32px] pl-9 pr-3 border border-[#d1d1d1] rounded-[3px] text-[12px] font-medium placeholder:text-[#6d7175] focus:outline-none focus:border-[#d1d1d1] focus:ring-0 transition-colors shadow-none"
             />
         </div>
     );

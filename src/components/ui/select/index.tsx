@@ -112,20 +112,20 @@ export default function Select({
 
 
     return (
-        <div className={cn("w-full", className, disabled && "opacity-60 cursor-not-allowed pointer-events-none")}>
+        <div className={cn("w-full shrink-0", className, disabled && "opacity-60 cursor-not-allowed pointer-events-none")}>
             <Listbox value={normalizedValue} onChange={handleChange} multiple={multiple} disabled={disabled}>
                 {({ open }) => (
-                    <div className="relative h-full">
+                    <div className="relative w-full">
                         <Listbox.Button className={cn(
-                            "relative w-full h-full min-h-[32px] cursor-pointer rounded-[3px] border border-[#d1d1d1] bg-white py-1 pr-10 text-left text-[12px] font-medium text-[#202223] focus:outline-none focus:border-[#008060] transition-all flex items-center",
-                            Icon ? "pl-9" : "pl-3"
+                            "relative w-full py-1.5 cursor-pointer rounded-[3px] border border-[#d1d1d1] bg-white pr-7 text-left text-[12.5px] font-medium text-[#202223] outline-none focus:outline-none focus:ring-0 focus-visible:outline-none focus:border-[#008060] transition-colors flex items-center shadow-none",
+                            Icon ? "pl-8" : "pl-2.5"
                         )}>
                             {Icon && (
-                                <span className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center text-[#8c9196]">
+                                <span className="pointer-events-none absolute inset-y-0 left-0 pl-2.5 flex items-center text-[#8c9196]">
                                     <Icon size={14} aria-hidden="true" />
                                 </span>
                             )}
-                            <span className={cn("block", multiple ? "break-words whitespace-normal pb-0.5" : "truncate")}>
+                            <span className={cn("block truncate w-full text-[12.5px] leading-tight text-slate-800", multiple && "break-words whitespace-normal")}>
                                 {getSelectedDisplay()}
                             </span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-slate-400">
@@ -140,7 +140,7 @@ export default function Select({
                             leaveTo="opacity-0 scale-95"
                         >
                             <Listbox.Options className={cn(
-                                "absolute z-[100] max-h-64 w-full overflow-hidden rounded-[3px] bg-white text-[12px] shadow-[0_4px_12px_rgba(0,0,0,0.08),0_0_1px_rgba(0,0,0,0.1)] border border-[#ebebeb] focus:outline-none flex flex-col",
+                                "absolute z-[100] max-h-64 w-full overflow-hidden rounded-[3px] bg-white text-[12px] shadow-[0_4px_12px_rgba(0,0,0,0.08),0_0_1px_rgba(0,0,0,0.1)] border border-[#ebebeb] outline-none focus:outline-none focus:ring-0 focus-visible:outline-none flex flex-col",
                                 direction === "up" ? "bottom-full mb-1" : "mt-1"
                             )}>
                                 {/* Search Input Container */}
@@ -152,7 +152,7 @@ export default function Select({
                                             placeholder="Search..."
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
-                                            className="w-full h-7 px-2.5 text-[12px] bg-[#F3F4F7] border-none focus:ring-0 outline-none placeholder:text-slate-400 font-medium"
+                                            className="w-full h-7 px-2.5 text-[12px] bg-[#F3F4F7] border-none focus:border-none focus:ring-0 outline-none focus:outline-none placeholder:text-slate-400 font-medium"
                                             onKeyDown={(e) => e.stopPropagation()}
                                         />
                                     </div>

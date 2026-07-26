@@ -4,40 +4,40 @@ import Button from '@/components/ui/button';
 
 export default function CacheManagementList() {
     return (
-        <div className="w-full p-6 md:p-8 bg-[#f8f9fa] min-h-screen pb-24">
-            <div className="flex items-center justify-between mb-6">
+        <div className="w-full p-4 md:p-6 bg-[#f8f9fa] min-h-screen pb-20">
+            <div className="flex items-center justify-between mb-5">
                 <div>
-                    <h1 className="text-[22px] font-bold text-slate-900">Cache Management</h1>
-                    <p className="text-[14px] font-medium text-slate-500 mt-1">Clear system cache to apply new configurations.</p>
+                    <h1 className="text-[20px] font-bold text-slate-900">Cache Management</h1>
+                    <p className="text-[13px] font-medium text-[#008060] mt-0.5">Clear system cache to apply new configurations.</p>
                 </div>
-                <Button size="sm" className="h-[32px] text-[13px] flex items-center gap-2 bg-[#008060] hover:bg-[#006e52] text-white">
+                <Button size="sm" className="h-9 text-[13px] px-4 flex items-center gap-1.5 bg-[#008060] hover:bg-[#006e52] text-white">
                     <Zap size={14} /> Clear All Cache
                 </Button>
             </div>
             
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 items-start">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 items-start">
                 
                 {/* Left Card: Core Cache */}
                 <div className="bg-white border border-slate-200 rounded-md shadow-sm w-full">
-                    <div className="px-5 py-4 border-b border-slate-100 flex items-center gap-2.5">
-                        <RefreshCcw size={18} className="text-slate-600" />
-                        <h3 className="text-[15px] font-bold text-slate-900">Core System Cache</h3>
+                    <div className="px-4 py-3 border-b border-slate-100 flex items-center gap-2">
+                        <RefreshCcw size={16} className="text-[#008060]" />
+                        <h3 className="text-[14px] font-bold text-slate-900">Core System Cache</h3>
                     </div>
-                    <div className="p-5 space-y-4">
+                    <div className="p-4 space-y-3">
                         <div>
-                            <label className="block text-[13px] font-bold text-slate-800 mb-1.5">
+                            <h4 className="text-[12.5px] font-bold text-slate-800 mb-0.5">
                                 Application Cache
-                            </label>
-                            <p className="text-[13px] text-slate-500">Clears general application cache, user sessions, and temporary files safely without affecting configurations.</p>
+                            </h4>
+                            <p className="text-[11.5px] text-slate-500 leading-relaxed">Clears general application cache, user sessions, and temporary files safely without affecting configurations.</p>
                         </div>
                         <div>
-                            <label className="block text-[13px] font-bold text-slate-800 mb-1.5">
+                            <h4 className="text-[12.5px] font-bold text-slate-800 mb-0.5">
                                 Configuration Cache
-                            </label>
-                            <p className="text-[13px] text-slate-500">Clears and rebuilds the system configuration cache. Required when you update environment variables or core settings.</p>
+                            </h4>
+                            <p className="text-[11.5px] text-slate-500 leading-relaxed">Clears and rebuilds the system configuration cache. Required when you update environment variables or core settings.</p>
                         </div>
-                        <div className="pt-2">
-                            <Button className="w-full h-[40px] bg-[#008060] hover:bg-[#006e52] text-white font-medium text-[14px]">
+                        <div className="pt-1">
+                            <Button className="w-full h-8.5 bg-[#008060] hover:bg-[#006e52] text-white text-[12.5px]">
                                 Clear Core Cache
                             </Button>
                         </div>
@@ -46,25 +46,25 @@ export default function CacheManagementList() {
 
                 {/* Right Card: Routing & Views */}
                 <div className="bg-white border border-slate-200 rounded-md shadow-sm w-full">
-                    <div className="px-5 py-4 border-b border-slate-100 flex items-center gap-2.5">
-                        <RefreshCcw size={18} className="text-slate-600" />
-                        <h3 className="text-[15px] font-bold text-slate-900">Routing & Views</h3>
+                    <div className="px-4 py-3 border-b border-slate-100 flex items-center gap-2">
+                        <RefreshCcw size={16} className="text-[#008060]" />
+                        <h3 className="text-[14px] font-bold text-slate-900">Routing & Views</h3>
                     </div>
-                    <div className="p-5 space-y-4">
+                    <div className="p-4 space-y-3">
                         <div>
-                            <label className="block text-[13px] font-bold text-slate-800 mb-1.5">
+                            <h4 className="text-[12.5px] font-bold text-slate-800 mb-0.5">
                                 Route Cache
-                            </label>
-                            <p className="text-[13px] text-slate-500">Clears and rebuilds the system routing cache. Essential if you are experiencing 404 errors on existing pages.</p>
+                            </h4>
+                            <p className="text-[11.5px] text-slate-500 leading-relaxed">Clears and rebuilds the system routing cache. Essential if you are experiencing 404 errors on existing pages.</p>
                         </div>
                         <div>
-                            <label className="block text-[13px] font-bold text-slate-800 mb-1.5">
+                            <h4 className="text-[12.5px] font-bold text-slate-800 mb-0.5">
                                 View Cache
-                            </label>
-                            <p className="text-[13px] text-slate-500">Clears compiled frontend view templates. Do this if your UI updates are not reflecting on the live system.</p>
+                            </h4>
+                            <p className="text-[11.5px] text-slate-500 leading-relaxed">Clears compiled frontend view templates. Do this if your UI updates are not reflecting on the live system.</p>
                         </div>
-                        <div className="pt-2">
-                            <Button className="w-full h-[40px] bg-[#008060] hover:bg-[#006e52] text-white font-medium text-[14px]">
+                        <div className="pt-1">
+                            <Button className="w-full h-8.5 bg-[#008060] hover:bg-[#006e52] text-white text-[12.5px]">
                                 Clear Routing & Views
                             </Button>
                         </div>
@@ -75,3 +75,4 @@ export default function CacheManagementList() {
         </div>
     );
 }
+

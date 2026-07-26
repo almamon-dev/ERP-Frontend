@@ -31,7 +31,7 @@ export default function TablePagination({
                     <select
                         value={perPage}
                         onChange={(e) => onPerPageChange(Number(e.target.value))}
-                        className="w-full h-[30px] px-2 text-[12px] border border-[#d1d1d1] rounded-[3px] focus:border-[#008060] focus:ring-1 focus:ring-[#008060] outline-none"
+                        className="w-full h-[30px] px-2 text-[12px] border border-[#d1d1d1] rounded-[3px] focus:border-[#d1d1d1] focus:ring-0 outline-none"
                     >
                         <option value={10}>10</option>
                         <option value={15}>15</option>

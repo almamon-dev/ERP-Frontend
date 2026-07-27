@@ -1,42 +1,80 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import {
-  Clock, Calendar as CalendarIcon, ArrowUpRight, ArrowDownRight,
-  CheckCircle2, FileText, Search, Bell, MapPin, Plus, X, FolderOpen, Edit2, User,
-  Building2, Briefcase, Mail, Phone, ShieldCheck, Award, ChevronRight
+  Clock, Calendar as CalendarIcon, ArrowUp, ArrowDown,
+  CheckCircle2, FileText, Search, Bell, Plus, X, Edit2, User,
+  Building2, Briefcase, CreditCard, Umbrella, FileSpreadsheet, Eye, ChevronRight
 } from 'lucide-react';
 import DatePicker from '@/components/ui/date-picker';
 
 export default function EmployeeDashboardPage() {
   const navigate = useNavigate();
-  const [selectedNoticeYear, setSelectedNoticeYear] = useState('2026');
+  const [selectedNoticeCategory, setSelectedNoticeCategory] = useState('All');
   const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
+  const [selectedNoticeModal, setSelectedNoticeModal] = useState<any | null>(null);
+
   const [applications, setApplications] = useState([
-    { id: 1, type: 'Casual Leave [CL]', dates: '28 Jul - 29 Jul, 2026', days: '2 Days', status: 'Pending', statusColor: 'bg-amber-50 text-amber-700 border-amber-200', dateApplied: '26 Jul, 2026' },
-    { id: 2, type: 'Sick Leave [SL]', dates: '10 Jun, 2026', days: '1 Day', status: 'Approved', statusColor: 'bg-emerald-50 text-emerald-700 border-emerald-200', dateApplied: '09 Jun, 2026' },
+    { id: 1, type: 'Casual Leave [CL]', dates: '28 Jul - 29 Jul, 2026', days: '2 Days', status: 'Pending', statusStyle: 'bg-amber-50 text-amber-700 border-amber-200', dateApplied: '26 Jul, 2026' },
+    { id: 2, type: 'Sick Leave [SL]', dates: '10 Jun, 2026', days: '1 Day', status: 'Approved', statusStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200', dateApplied: '09 Jun, 2026' },
+    { id: 3, type: 'Medical Expense Claim', dates: '25 May, 2026', days: 'TK 4,500', status: 'Approved', statusStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200', dateApplied: '24 May, 2026' },
+    { id: 4, type: 'IOU Requisition', dates: '14 Apr, 2026', days: 'TK 10,000', status: 'Completed', statusStyle: 'bg-blue-50 text-blue-700 border-blue-200', dateApplied: '12 Apr, 2026' },
   ]);
 
   const [policySearch, setPolicySearch] = useState('');
   const companyPolicies = [
-    { id: 1, title: 'Code of Conduct & Ethics Policy', category: 'General', date: '15 Jan, 2026', size: '1.2 MB' },
-    { id: 2, title: 'Attendance & Punctuality Policy', category: 'HR', date: '10 Jan, 2026', size: '850 KB' },
-    { id: 3, title: 'Remote Work & Flexible Hours Policy', category: 'Operations', date: '05 Jan, 2026', size: '1.5 MB' },
-    { id: 4, title: 'Information Security & Data Privacy', category: 'IT & Security', date: '20 Dec, 2025', size: '2.1 MB' },
+    { id: 1, title: 'Code of Conduct & Ethics Policy', category: 'General', date: '15 Jan, 2026', size: '1.2 MB', code: 'POL-2026-01' },
+    { id: 2, title: 'Attendance & Punctuality Policy', category: 'HR', date: '10 Jan, 2026', size: '850 KB', code: 'POL-2026-04' },
+    { id: 3, title: 'Remote Work & Flexible Hours Policy', category: 'Operations', date: '05 Jan, 2026', size: '1.5 MB', code: 'POL-2026-09' },
+    { id: 4, title: 'Information Security & Data Privacy', category: 'IT & Security', date: '20 Dec, 2025', size: '2.1 MB', code: 'POL-2025-18' },
   ];
 
-  const filteredPolicies = companyPolicies.filter(p => 
+  const filteredPolicies = companyPolicies.filter(p =>
     p.title.toLowerCase().includes(policySearch.toLowerCase()) ||
-    p.category.toLowerCase().includes(policySearch.toLowerCase())
+    p.category.toLowerCase().includes(policySearch.toLowerCase()) ||
+    p.code.toLowerCase().includes(policySearch.toLowerCase())
   );
 
   const noticesList = [
-    { id: 1, title: 'Advance Against Salary Feature Now Live', date: '15 Mar, 2026', category: 'Important', year: '2026', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    { id: 2, title: 'Betopia Helpdesk Module Released', date: '28 Feb, 2026', category: 'Event', year: '2026', badge: 'bg-blue-50 text-blue-700 border-blue-200' },
-    { id: 3, title: 'A Message from the Group CEO', date: '10 Feb, 2026', category: 'Notice', year: '2026', badge: 'bg-[#008060] text-white border-transparent' },
-    { id: 4, title: 'Q1 KPI & Goals Submission Deadline', date: '01 Feb, 2026', category: 'Urgent', year: '2026', badge: 'bg-rose-50 text-rose-700 border-rose-200' },
+    {
+      id: 1,
+      title: 'Advance Against Salary Feature Now Live',
+      date: '15 Mar, 2026',
+      category: 'Important',
+      badge: 'bg-[#008060]/10 text-[#008060] border-emerald-200',
+      content: 'Employees can now request advance against salary directly through the ESS portal under Financial Aid module with automatic manager approval workflow.'
+    },
+    {
+      id: 2,
+      title: 'Betopia Helpdesk & Ticket Portal Released',
+      date: '28 Feb, 2026',
+      category: 'Event',
+      badge: 'bg-blue-50 text-blue-700 border-blue-200',
+      content: 'The centralized internal IT & Admin helpdesk portal is live. Submit technical requests, asset maintenance, or admin support tickets seamlessly.'
+    },
+    {
+      id: 3,
+      title: 'Annual Performance Review & Q1 Goals Submission',
+      date: '10 Feb, 2026',
+      category: 'Notice',
+      badge: 'bg-slate-100 text-slate-700 border-slate-200',
+      content: 'All team members are requested to complete self-assessment and submit Q1 2026 Key Performance Indicators (KPIs) by the end of this week.'
+    },
+    {
+      id: 4,
+      title: 'Revised Health Insurance Policy Guidelines 2026',
+      date: '01 Feb, 2026',
+      category: 'Urgent',
+      badge: 'bg-rose-50 text-rose-700 border-rose-200',
+      content: 'Updated OPD and hospitalization coverage limits for employee dependents have been published. Please review the updated policy document in the portal.'
+    },
   ];
 
-  const filteredNotices = noticesList.filter(n => n.year === selectedNoticeYear);
+  const categories = ['All', 'Important', 'Notice', 'Urgent', 'Event'];
+
+  const filteredNotices = selectedNoticeCategory === 'All'
+    ? noticesList
+    : noticesList.filter(n => n.category === selectedNoticeCategory);
 
   const [newApp, setNewApp] = useState({
     leaveType: 'Casual Leave [CL]',
@@ -56,7 +94,7 @@ export default function EmployeeDashboardPage() {
         dates: `${newApp.startDate} - ${newApp.endDate}`,
         days: '1 Day',
         status: 'Pending',
-        statusColor: 'bg-amber-50 text-amber-700 border-amber-200',
+        statusStyle: 'bg-amber-50 text-amber-700 border-amber-200',
         dateApplied: '27 Jul, 2026',
       },
       ...applications,
@@ -65,423 +103,621 @@ export default function EmployeeDashboardPage() {
     setNewApp({ leaveType: 'Casual Leave [CL]', startDate: '', endDate: '', reason: '' });
   };
 
+  // Calendar Grid Data (July 2026)
   const calendarDays = [
-    { day: '', date: null, status: 'empty' },
-    { day: '', date: null, status: 'empty' },
-    { day: '', date: null, status: 'empty' },
-    { day: 1, date: '1', status: 'Present', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    { day: 2, date: '2', status: 'Present', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    { day: 3, date: '3', status: 'Absent', color: 'bg-rose-50 text-rose-700 border-rose-200' },
-    { day: 4, date: '4', status: 'Late', color: 'bg-amber-50 text-amber-700 border-amber-200' },
-    
-    { day: 5, date: '5', status: 'Offday', color: 'bg-slate-100 text-slate-500 border-slate-200' },
-    { day: 6, date: '6', status: 'Present', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    { day: 7, date: '7', status: 'Present', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    { day: 8, date: '8', status: 'Late', color: 'bg-amber-50 text-amber-700 border-amber-200' },
-    { day: 9, date: '9', status: 'Present', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    { day: 10, date: '10', status: 'Absent', color: 'bg-rose-50 text-rose-700 border-rose-200' },
-    { day: 11, date: '11', status: 'Late', color: 'bg-amber-50 text-amber-700 border-amber-200' },
+    { date: null, status: '' },
+    { date: null, status: '' },
+    { date: null, status: '' },
+    { date: '1', status: 'Present', type: 'present' },
+    { date: '2', status: 'Present', type: 'present' },
+    { date: '3', status: 'Absent', type: 'absent' },
+    { date: '4', status: 'Late', type: 'late' },
 
-    { day: 12, date: '12', status: 'Offday', color: 'bg-slate-100 text-slate-500 border-slate-200' },
-    { day: 13, date: '13', status: 'Late', color: 'bg-amber-50 text-amber-700 border-amber-200' },
-    { day: 14, date: '14', status: 'Late', color: 'bg-amber-50 text-amber-700 border-amber-200' },
-    { day: 15, date: '15', status: 'Present', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    { day: 16, date: '16', status: 'Present', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    { day: 17, date: '17', status: 'Absent', color: 'bg-rose-50 text-rose-700 border-rose-200' },
-    { day: 18, date: '18', status: 'Late', color: 'bg-amber-50 text-amber-700 border-amber-200' },
+    { date: '5', status: 'Offday', type: 'offday' },
+    { date: '6', status: 'Present', type: 'present' },
+    { date: '7', status: 'Present', type: 'present' },
+    { date: '8', status: 'Late', type: 'late' },
+    { date: '9', status: 'Present', type: 'present' },
+    { date: '10', status: 'Absent', type: 'absent' },
+    { date: '11', status: 'Late', type: 'late' },
 
-    { day: 19, date: '19', status: 'Offday', color: 'bg-slate-100 text-slate-500 border-slate-200' },
-    { day: 20, date: '20', status: 'Late', color: 'bg-amber-50 text-amber-700 border-amber-200' },
-    { day: 21, date: '21', status: 'Late', color: 'bg-amber-50 text-amber-700 border-amber-200' },
-    { day: 22, date: '22', status: 'Present', color: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-    { day: 23, date: '23', status: 'Late', color: 'bg-amber-50 text-amber-700 border-amber-200' },
-    { day: 24, date: '24', status: 'Absent', color: 'bg-rose-50 text-rose-700 border-rose-200' },
-    { day: 25, date: '25', status: 'Late', color: 'bg-amber-50 text-amber-700 border-amber-200' },
+    { date: '12', status: 'Offday', type: 'offday' },
+    { date: '13', status: 'Late', type: 'late' },
+    { date: '14', status: 'Late', type: 'late' },
+    { date: '15', status: 'Present', type: 'present' },
+    { date: '16', status: 'Present', type: 'present' },
+    { date: '17', status: 'Absent', type: 'absent' },
+    { date: '18', status: 'Late', type: 'late' },
 
-    { day: 26, date: '26', status: 'Offday', color: 'bg-slate-100 text-slate-500 border-slate-200' },
-    { day: 27, date: '27', status: 'Present', color: 'bg-[#008060] text-white font-extrabold shadow-2xs' },
-    { day: 28, date: '28', status: '', color: '' },
-    { day: 29, date: '29', status: '', color: '' },
-    { day: 30, date: '30', status: '', color: '' },
-    { day: 31, date: '31', status: '', color: '' },
+    { date: '19', status: 'Offday', type: 'offday' },
+    { date: '20', status: 'Late', type: 'late' },
+    { date: '21', status: 'Late', type: 'late' },
+    { date: '22', status: 'Present', type: 'present' },
+    { date: '23', status: 'Late', type: 'late' },
+    { date: '24', status: 'Absent', type: 'absent' },
+    { date: '25', status: 'Late', type: 'late' },
+
+    { date: '26', status: 'Offday', type: 'offday' },
+    { date: '27', status: 'Present', type: 'present' },
+    { date: '28', status: '' },
+    { date: '29', status: '' },
+    { date: '30', status: '' },
+    { date: '31', status: '' },
   ];
 
   const dailyLogs = [
-    { date: '26 Jul, 2026', hours: '9 hr 46 min', checkIn: '08:22 AM', checkOut: '06:08 PM', isLate: false, border: 'border-l-emerald-500' },
-    { date: '25 Jul, 2026', hours: '8 hr 37 min', checkIn: '09:32 AM', checkOut: '06:09 PM', isLate: true, border: 'border-l-amber-500' },
-    { date: '24 Jul, 2026', hours: '—', checkIn: '', checkOut: '', isAbsent: true, border: 'border-l-rose-400' },
-    { date: '23 Jul, 2026', hours: '7 hr 33 min', checkIn: '10:30 AM', checkOut: '06:03 PM', isLate: true, border: 'border-l-amber-500' },
-    { date: '22 Jul, 2026', hours: '9 hr 12 min', checkIn: '08:15 AM', checkOut: '05:27 PM', isLate: false, border: 'border-l-emerald-500' },
+    { date: '27 Jul, 2026', hours: '10 hr 1 min', checkIn: '08:14 AM', checkOut: '06:15 PM', active: true },
+    { date: '26 Jul, 2026', hours: '9 hr 46 min', checkIn: '08:22 AM', checkOut: '06:08 PM', active: false },
+    { date: '25 Jul, 2026', hours: '8 hr 37 min', checkIn: '09:32 AM', checkOut: '06:09 PM', active: false },
+    { date: '24 Jul, 2026', hours: '— — —', checkIn: 'Check In', checkOut: 'Check Out', active: false, empty: true },
   ];
 
   return (
-    <div className="max-w-[1520px] mx-auto p-4 bg-[#f8fafc] min-h-screen text-slate-800 space-y-4 font-sans pb-16 antialiased">
-      
-      {/* FLEX CONTAINER: LEFT SIDEBAR COMPACT (280px) + MAIN AREA EXPANDED */}
+    <div className="w-full max-w-full p-2.5 sm:p-3.5 bg-[#f8fafc] min-h-screen space-y-4 font-['Poppins',sans-serif] antialiased">
+
+      {/* TOP HEADER ACTION BAR */}
+      <div className="bg-white p-2.5 px-3.5 rounded-lg border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
+        <div className="flex items-center gap-3">
+          <div className="w-8.5 h-8.5 rounded-md bg-emerald-50 text-[#008060] flex items-center justify-center border border-emerald-200/80 shrink-0">
+            <Building2 size={17} />
+          </div>
+          <div>
+            <h1 className="font-semibold text-[15px] leading-[20px] text-[#1e293b]">Employee Self-Service Dashboard</h1>
+            <p className="font-normal text-[12.5px] leading-[18px] text-[#64748b]">Softvence Agency Alpha • Banasree, Dhaka</p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => navigate('/employee-portal/time-management')}
+            className="h-8 px-3 font-medium text-[12.5px] text-[#344054] bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded transition-colors flex items-center gap-1.5 cursor-pointer"
+          >
+            <Clock size={13.5} className="text-[#667085]" />
+            <span>Attendance Log</span>
+          </button>
+
+          <button
+            onClick={() => navigate('/employee-portal/about-me')}
+            className="h-8 px-3 font-medium text-[12.5px] text-[#344054] bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded transition-colors flex items-center gap-1.5 cursor-pointer"
+          >
+            <User size={13.5} className="text-[#667085]" />
+            <span>My Profile</span>
+          </button>
+
+          <button
+            onClick={() => setIsLeaveModalOpen(true)}
+            className="h-8 px-3.5 font-medium text-[12.5px] text-white bg-[#008060] hover:bg-[#006e52] rounded transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
+          >
+            <Plus size={14} strokeWidth={2.5} />
+            <span>Apply Leave</span>
+          </button>
+        </div>
+      </div>
+
+      {/* MAIN TWO-COLUMN CONTAINER: LEFT PROFILE SIDEBAR (260px) + MAIN DASHBOARD AREA */}
       <div className="flex flex-col lg:flex-row gap-4 items-start w-full">
-        
-        {/* ================= LEFT SIDEBAR: PROFILE CARD (w-full lg:w-[280px] shrink-0) ================= */}
-        <div className="w-full lg:w-[280px] shrink-0 bg-white p-4 rounded-xl border border-slate-200/90 shadow-2xs space-y-4">
-          
-          {/* PROFILE AVATAR & USER IDENTITY */}
+
+        {/* ================= LEFT PROFILE SIDEBAR (260px) ================= */}
+        <div className="w-full lg:w-[260px] shrink-0 bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-4">
+
+          {/* PROFILE CARD */}
           <div className="flex flex-col items-center text-center pb-3.5 border-b border-slate-100 relative">
-            <div className="relative w-20 h-20 rounded-full bg-slate-100 border-2 border-slate-200 flex items-center justify-center text-slate-500 font-bold mb-2 shadow-2xs">
-              <User size={40} className="text-slate-400 stroke-[1.5]" />
-              <button className="absolute bottom-0 right-0 w-6.5 h-6.5 rounded-full bg-[#008060] text-white flex items-center justify-center shadow-2xs cursor-pointer hover:bg-[#006e52]">
-                <Edit2 size={12} />
+            <div className="relative mb-2.5">
+              <div className="w-16 h-16 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 overflow-hidden shadow-2xs">
+                <User size={36} className="text-slate-400 stroke-[1.5]" />
+              </div>
+              <button
+                onClick={() => navigate('/employee-portal/about-me')}
+                className="absolute bottom-0 right-0 w-5.5 h-5.5 rounded-full bg-slate-800 text-white flex items-center justify-center cursor-pointer hover:bg-slate-900 border border-white"
+              >
+                <Edit2 size={10} />
               </button>
             </div>
-            <h2 className="text-[18px] font-bold text-slate-900 tracking-tight">Al Mamon</h2>
-            <span className="text-[13px] font-bold text-[#008060] mt-0.5">Jr. Laravel Developer</span>
-            <span className="text-[12px] font-semibold text-slate-400">Operations</span>
 
-            {/* SEE PROFILE BUTTON */}
-            <button 
+            {/* POPPINS 700 */}
+            <h2 className="font-bold text-[16px] leading-[18px] text-[#475467]">Al Mamon</h2>
+            {/* POPPINS 600 */}
+            <span className="font-semibold text-[14px] leading-[20px] text-[#008060] mt-0.5">Jr. Laravel Developer</span>
+            {/* POPPINS 400 */}
+            <span className="font-normal text-[14px] leading-[20px] text-[#667085]">Operations Dept • Full-Time</span>
+
+            <button
               onClick={() => navigate('/employee-portal/about-me')}
-              className="mt-3 w-full text-[12.5px] font-extrabold text-[#008060] bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 py-2 px-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer"
+              className="mt-3 w-full font-semibold text-[14px] leading-[20px] text-[#475467] bg-slate-50 hover:bg-slate-100 border border-slate-200 py-1.5 px-2.5 rounded-lg transition-colors flex items-center justify-center gap-1 cursor-pointer"
             >
-              <span>See Profile</span>
-              <ChevronRight size={15} className="stroke-[2.5]" />
+              <span>View Profile</span>
+              <ChevronRight size={14} />
             </button>
           </div>
 
-          {/* CORPORATE EMPLOYEE METRICS WITH TITLE CASE */}
-          <div className="space-y-2 text-[13px]">
-            
-            <div className="p-2.5 bg-slate-50/80 rounded-lg border border-slate-200/60 flex items-center justify-between">
-              <span className="font-bold text-slate-500 text-[12px]">Employee ID</span>
-              <span className="font-extrabold text-slate-900 text-[13.5px]">15202</span>
+          {/* MINIMAL METRICS (POPPINS 400) */}
+          <div className="space-y-1.5 font-normal text-[14px] leading-[20px]">
+            <div className="p-2 bg-slate-50/80 rounded-md border border-slate-200/60 flex items-center justify-between">
+              <span className="text-[#667085]">Employee ID</span>
+              <span className="font-bold text-[#475467] font-mono">15202</span>
             </div>
 
-            <div className="p-2.5 bg-slate-50/80 rounded-lg border border-slate-200/60 flex items-center justify-between">
-              <span className="font-bold text-slate-500 text-[12px]">Company</span>
-              <span className="font-extrabold text-slate-900 text-[13px] truncate max-w-[130px]" title="Softvence Agency Alpha">Softvence Agency</span>
+            <div className="p-2 bg-slate-50/80 rounded-md border border-slate-200/60 flex items-center justify-between">
+              <span className="text-[#667085]">Service Tenure</span>
+              <span className="font-semibold text-[#344054]">2y 1m 7d</span>
             </div>
 
-            <div className="p-2.5 bg-slate-50/80 rounded-lg border border-slate-200/60 flex items-center justify-between">
-              <span className="font-bold text-slate-500 text-[12px]">Service Length</span>
-              <span className="font-extrabold text-slate-900 text-[13px]">2y 1m 7d</span>
+            <div className="p-2 bg-slate-50/80 rounded-md border border-slate-200/60 flex items-center justify-between">
+              <span className="text-[#667085]">Mobile</span>
+              <span className="font-normal text-[#344054] font-mono text-[13px]">+8801768085606</span>
             </div>
 
-            <div className="p-2.5 bg-slate-50/80 rounded-lg border border-slate-200/60 flex items-center justify-between">
-              <span className="font-bold text-slate-500 text-[12px]">Mobile</span>
-              <span className="font-bold text-slate-800 text-[12.5px]">+8801768085606</span>
+            <div className="p-2 bg-slate-50/80 rounded-md border border-slate-200/60 flex items-center justify-between">
+              <span className="text-[#667085]">Email</span>
+              <span className="font-normal text-[#344054] truncate max-w-[110px]" title="al.mamun@softvence.com">al.mamun@...</span>
             </div>
-
-            <div className="p-2.5 bg-slate-50/80 rounded-lg border border-slate-200/60 flex items-center justify-between">
-              <span className="font-bold text-slate-500 text-[12px]">Email</span>
-              <span className="font-bold text-slate-800 text-[12px] truncate max-w-[120px]" title="al.mamun@softvence.com">al.mamun@...</span>
-            </div>
-
-            <div className="p-2.5 bg-slate-50/80 rounded-lg border border-slate-200/60 flex items-center justify-between">
-              <span className="font-bold text-slate-500 text-[12px]">Advance Salary</span>
-              <span className="font-extrabold text-[#008060] text-[13px]">All Ledger</span>
-            </div>
-
           </div>
 
-          {/* MY MANAGERS LIST */}
-          <div className="pt-3 border-t border-slate-100 space-y-2">
-            <span className="text-[11px] font-bold text-slate-400 block">Reporting Managers</span>
-            
-            <div className="space-y-2 text-[12.5px]">
-              <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200/60">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 font-bold flex items-center justify-center text-[11px] shrink-0 border border-emerald-200">
-                    MR
-                  </div>
-                  <div>
-                    <h4 className="text-[13px] font-bold text-slate-900 leading-snug">Md. Ridoy</h4>
-                    <p className="text-[11px] text-slate-500 font-medium">Supervisor</p>
-                  </div>
-                </div>
-                <span className="w-2 h-2 rounded-full bg-emerald-500" title="Active Supervisor" />
-              </div>
+          {/* QUICK SHORTCUTS */}
+          <div className="pt-3 border-t border-slate-100 space-y-1.5">
+            <span className="font-semibold text-[14px] leading-[20px] text-[#667085] uppercase tracking-wider block mb-1">Quick Tools</span>
+            <div className="grid grid-cols-2 gap-1.5 font-normal text-[14px] leading-[20px]">
+              <button
+                onClick={() => navigate('/employee-portal/expenses')}
+                className="p-2 text-left bg-slate-50 hover:bg-slate-100 border border-slate-200/70 rounded-md text-[#344054] transition-colors flex items-center gap-1.5 cursor-pointer"
+              >
+                <FileSpreadsheet size={14} className="text-[#667085] shrink-0" />
+                <span className="truncate">Expenses</span>
+              </button>
 
-              <div className="flex items-center justify-between p-2 rounded-lg bg-slate-50 border border-slate-200/60">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-blue-50 text-blue-700 font-bold flex items-center justify-center text-[11px] shrink-0 border border-blue-200">
-                    MK
-                  </div>
-                  <div>
-                    <h4 className="text-[13px] font-bold text-slate-900 leading-snug">Md. Kamruzzaman</h4>
-                    <p className="text-[11px] text-slate-500 font-medium">Line Manager</p>
-                  </div>
-                </div>
-                <span className="w-2 h-2 rounded-full bg-blue-500" title="Line Manager" />
-              </div>
+              <button
+                onClick={() => navigate('/employee-portal/iou')}
+                className="p-2 text-left bg-slate-50 hover:bg-slate-100 border border-slate-200/70 rounded-md text-[#344054] transition-colors flex items-center gap-1.5 cursor-pointer"
+              >
+                <CreditCard size={14} className="text-[#667085] shrink-0" />
+                <span className="truncate">IOU Req</span>
+              </button>
+
+              <button
+                onClick={() => navigate('/employee-portal/assets')}
+                className="p-2 text-left bg-slate-50 hover:bg-slate-100 border border-slate-200/70 rounded-md text-[#344054] transition-colors flex items-center gap-1.5 cursor-pointer"
+              >
+                <Briefcase size={14} className="text-[#667085] shrink-0" />
+                <span className="truncate">Assets</span>
+              </button>
+
+              <button
+                onClick={() => navigate('/employee-portal/todo')}
+                className="p-2 text-left bg-slate-50 hover:bg-slate-100 border border-slate-200/70 rounded-md text-[#344054] transition-colors flex items-center gap-1.5 cursor-pointer"
+              >
+                <CheckCircle2 size={14} className="text-[#667085] shrink-0" />
+                <span className="truncate">Tasks</span>
+              </button>
             </div>
           </div>
 
         </div>
 
-        {/* ================= RIGHT MAIN AREA: EXPANDED WIDE CONTENT (flex-1 min-w-0) ================= */}
+        {/* ================= RIGHT MAIN DASHBOARD AREA ================= */}
         <div className="flex-1 min-w-0 space-y-4 w-full">
-          
-          {/* TOP BANNER ROW */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-            
-            {/* Welcome & Working Period Info (7 Cols) */}
-            <div className="lg:col-span-7 bg-white p-5 rounded-xl border border-slate-200 shadow-2xs flex flex-col justify-between">
-              <div>
-                <h1 className="text-[19px] font-bold text-slate-900 tracking-tight flex items-center gap-2">
-                  Hello, <span className="text-[#008060] font-extrabold underline underline-offset-2">Al Mamon</span>! Welcome Back
-                </h1>
-                <p className="text-[13px] font-medium text-slate-500 mt-1">27 July, 2026 • Monday (Regular Roster Working Day)</p>
+
+          {/* TOP METRIC CARDS ROW */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 w-full">
+
+            {/* Card 1: Today Working Period */}
+            <div className="lg:col-span-5 bg-white p-3.5 px-4 rounded-lg border border-slate-200 shadow-2xs flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-full bg-emerald-50 text-[#008060] flex items-center justify-center shrink-0 border border-emerald-200/80">
+                <Clock size={20} className="stroke-[2]" />
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-emerald-50 text-[#008060] flex items-center justify-center border border-emerald-200/80 shrink-0 shadow-2xs">
-                    <Clock size={20} className="stroke-[2.2]" />
-                  </div>
-                  <div>
-                    <p className="text-[11.5px] font-bold text-slate-400">Today Working Hours</p>
-                    <h3 className="text-[16px] font-extrabold text-slate-900">9 hr 46 min</h3>
-                  </div>
+              <div className="flex-1 grid grid-cols-2 divide-x divide-slate-200 text-left">
+                <div className="pr-3">
+                  <span className="font-medium text-[12.5px] leading-[18px] text-[#667085] block truncate">Today Working Period</span>
+                  <span className="font-semibold text-[14px] leading-[20px] text-[#344054] mt-0.5 block truncate">10 hr 1 min</span>
                 </div>
 
-                <div className="pl-4 border-l border-slate-200">
-                  <p className="text-[11.5px] font-bold text-slate-400">Shift Schedule</p>
-                  <h3 className="text-[14.5px] font-bold text-slate-800 mt-0.5">08:00 AM – 05:00 PM</h3>
+                <div className="pl-3">
+                  <span className="font-medium text-[12.5px] leading-[18px] text-[#667085] block truncate">Morning 8:00AM to 5:00PM</span>
+                  <span className="font-semibold text-[14px] leading-[20px] text-[#344054] mt-0.5 block truncate">08:00 AM – 05:00 PM</span>
                 </div>
               </div>
             </div>
 
-            {/* Company & Employment Details (5 Cols) */}
-            <div className="lg:col-span-5 bg-white p-5 rounded-xl border border-slate-200 shadow-2xs flex flex-col justify-between">
-              <div>
-                <h2 className="text-[15px] font-bold text-slate-900 flex items-center gap-1.5">
-                  Softvence Agency Alpha <span className="text-slate-400 font-normal">[BD]</span>
-                </h2>
-                <p className="text-[12px] text-slate-500 mt-1 flex items-center gap-1">
-                  <MapPin size={13} className="text-slate-400 shrink-0" />
-                  14 Daisy Garden, Banasree Main Rd, Dhaka 1219
-                </p>
+            {/* Card 2: Length of Service */}
+            <div className="lg:col-span-7 bg-white p-3.5 px-4 rounded-lg border border-slate-200 shadow-2xs flex items-center gap-3.5">
+              <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-200/80">
+                <CalendarIcon size={20} className="stroke-[2]" />
               </div>
 
-              <div className="mt-4 pt-3 border-t border-slate-100 grid grid-cols-3 gap-2 text-left">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
-                    <CalendarIcon size={15} />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold text-slate-400">Service</p>
-                    <p className="text-[12.5px] font-bold text-slate-900 leading-tight">2y 1m 7d</p>
-                  </div>
+              <div className="flex-1 grid grid-cols-3 divide-x divide-slate-200 text-left">
+                <div className="pr-3">
+                  <span className="font-medium text-[12.5px] leading-[18px] text-[#667085] block truncate">Length of Service</span>
+                  <span className="font-semibold text-[14px] leading-[20px] text-[#344054] mt-0.5 block truncate">2 years 1 months</span>
                 </div>
 
-                <div className="border-l border-slate-100 pl-2.5">
-                  <p className="text-[11px] font-semibold text-slate-400">Joining</p>
-                  <p className="text-[12.5px] font-bold text-slate-900 leading-tight mt-0.5">20 Jun 2024</p>
+                <div className="px-3">
+                  <span className="font-medium text-[12.5px] leading-[18px] text-[#667085] block truncate">Joining Date</span>
+                  <span className="font-semibold text-[14px] leading-[20px] text-[#344054] mt-0.5 block truncate">20 Jun, 2024</span>
                 </div>
 
-                <div className="border-l border-slate-100 pl-2.5">
-                  <p className="text-[11px] font-semibold text-slate-400">Confirmed</p>
-                  <p className="text-[12.5px] font-bold text-slate-900 leading-tight mt-0.5">16 Sep 2024</p>
+                <div className="pl-3">
+                  <span className="font-medium text-[12.5px] leading-[18px] text-[#667085] block truncate">Confirmation Date</span>
+                  <span className="font-semibold text-[14px] leading-[20px] text-[#344054] mt-0.5 block truncate">16 Sep, 2024</span>
                 </div>
               </div>
             </div>
 
           </div>
 
-          {/* ATTENDANCE CALENDAR & DAILY TIMELINE LOG CARD */}
-          <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-2xs overflow-visible">
-            {/* Header & Stats Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-              <div className="flex items-center gap-3">
-                <h3 className="text-[15.5px] font-bold text-slate-900 leading-none shrink-0">Attendance Calendar</h3>
-                <DatePicker size="sm" variant="compact" format="monthYear" className="w-[140px]" placeholder="July 2026" />
+          {/* MIDDLE AREA: ATTENDANCE & PUNCH LOGS (LEFT 8 COLS) + MANAGERS & LEAVE BALANCE (RIGHT 4 COLS) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+
+            {/* ATTENDANCE CALENDAR & TIMELINE PUNCH LOGS */}
+            <div className="lg:col-span-7 xl:col-span-8 bg-white p-3.5 sm:p-4 rounded-lg border border-slate-200 shadow-2xs space-y-4">
+
+              {/* HEADER: CALENDAR TITLE & METRIC SUMMARY COUNTERS */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+                <div>
+                  <h2 className="font-bold text-[16px] leading-[20px] text-[#475467]">Attendance Calendar</h2>
+                  <div className="mt-1">
+                    <DatePicker size="sm" variant="compact" format="monthYear" className="w-[130px]" placeholder="July 2026" />
+                  </div>
+                </div>
+
+                {/* METRIC COUNTERS WITH VERTICAL COLOR BARS */}
+                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 font-normal text-[13px] sm:text-[14px]">
+
+                  <div className="flex items-center gap-1.5 border-l-3 border-slate-700 pl-2 whitespace-nowrap">
+                    <span className="font-bold text-[16px] sm:text-[18px] text-slate-800">27</span>
+                    <span className="text-[#64748b] text-[11px] sm:text-[12px] leading-tight">Payable Days</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 border-l-3 border-emerald-500 pl-2 whitespace-nowrap">
+                    <span className="font-bold text-[16px] sm:text-[18px] text-slate-800">9</span>
+                    <span className="text-[#64748b] text-[11px] sm:text-[12px] leading-tight">Present</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 border-l-3 border-amber-500 pl-2 whitespace-nowrap">
+                    <span className="font-bold text-[16px] sm:text-[18px] text-slate-800">10</span>
+                    <span className="text-[#64748b] text-[11px] sm:text-[12px] leading-tight">Late</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 border-l-3 border-purple-500 pl-2 whitespace-nowrap">
+                    <span className="font-bold text-[16px] sm:text-[18px] text-slate-800">0</span>
+                    <span className="text-[#64748b] text-[11px] sm:text-[12px] leading-tight">Movement</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 border-l-3 border-blue-500 pl-2 whitespace-nowrap">
+                    <span className="font-bold text-[16px] sm:text-[18px] text-slate-800">0</span>
+                    <span className="text-[#64748b] text-[11px] sm:text-[12px] leading-tight">Leave</span>
+                  </div>
+
+                  <div className="flex items-center gap-1.5 border-l-3 border-rose-500 pl-2 whitespace-nowrap">
+                    <span className="font-bold text-[16px] sm:text-[18px] text-slate-800">4</span>
+                    <span className="text-[#64748b] text-[11px] sm:text-[12px] leading-tight">Absent</span>
+                  </div>
+
+                </div>
               </div>
 
-              {/* Attendance Counts Pill List */}
-              <div className="flex flex-wrap items-center gap-3 text-[12px] font-bold">
-                <div className="flex items-center gap-1.5 pl-2 border-l-2 border-slate-400">
-                  <span className="text-slate-900 font-extrabold text-[13.5px]">26</span>
-                  <span className="text-slate-500 font-semibold text-[11.5px]">Payable</span>
+              {/* CALENDAR & PUNCH LOGS SPLIT */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5">
+
+                {/* Calendar Grid */}
+                <div className="lg:col-span-7 xl:col-span-8 border-b lg:border-b-0 lg:border-r border-slate-100 pb-3 lg:pb-0 pr-0 lg:pr-3">
+                  <div className="grid grid-cols-7 gap-1 text-center font-semibold text-[11px] sm:text-[11.5px] tracking-tight mb-2">
+                    <div className="py-1 px-0.5 bg-[#f0f4f8] text-[#0369a1] rounded-xs text-center"><span className="hidden 2xl:inline">Sunday</span><span className="2xl:hidden">Sun</span></div>
+                    <div className="py-1 px-0.5 bg-[#f0f4f8] text-[#0369a1] rounded-xs text-center"><span className="hidden 2xl:inline">Monday</span><span className="2xl:hidden">Mon</span></div>
+                    <div className="py-1 px-0.5 bg-[#f0f4f8] text-[#0369a1] rounded-xs text-center"><span className="hidden 2xl:inline">Tuesday</span><span className="2xl:hidden">Tue</span></div>
+                    <div className="py-1 px-0.5 bg-[#f0f4f8] text-[#0369a1] rounded-xs text-center"><span className="hidden 2xl:inline">Wednesday</span><span className="2xl:hidden">Wed</span></div>
+                    <div className="py-1 px-0.5 bg-[#f0f4f8] text-[#0369a1] rounded-xs text-center"><span className="hidden 2xl:inline">Thursday</span><span className="2xl:hidden">Thu</span></div>
+                    <div className="py-1 px-0.5 bg-[#f0f4f8] text-[#0369a1] rounded-xs text-center"><span className="hidden 2xl:inline">Friday</span><span className="2xl:hidden">Fri</span></div>
+                    <div className="py-1 px-0.5 bg-[#f0f4f8] text-[#0369a1] rounded-xs text-center"><span className="hidden 2xl:inline">Saturday</span><span className="2xl:hidden">Sat</span></div>
+                  </div>
+
+                  <div className="grid grid-cols-7 gap-1 text-center font-normal text-[13px] sm:text-[14px]">
+                    {calendarDays.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className="min-h-[52px] sm:min-h-[56px] p-0.5 sm:p-1 flex flex-col items-center justify-start rounded"
+                      >
+                        {item.date && (
+                          <>
+                            <span className="font-semibold text-[#334155] text-[13px] sm:text-[14px]">{item.date}</span>
+
+                            {item.type === 'present' && (
+                              <span className="mt-1 px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-medium bg-[#e6f4ea] text-[#137333] rounded-full whitespace-nowrap">
+                                Present
+                              </span>
+                            )}
+
+                            {item.type === 'late' && (
+                              <span className="mt-1 px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-medium bg-[#ffeedd] text-[#c05621] rounded-full whitespace-nowrap">
+                                Late
+                              </span>
+                            )}
+
+                            {item.type === 'absent' && (
+                              <span className="mt-1 px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-medium bg-[#fee2e2] text-[#b91c1c] rounded-full whitespace-nowrap">
+                                Absent
+                              </span>
+                            )}
+
+                            {item.type === 'offday' && (
+                              <span className="mt-1 px-1.5 sm:px-2 py-0.5 text-[10px] sm:text-[11px] font-medium bg-[#f1f5f9] text-[#64748b] rounded-full whitespace-nowrap">
+                                Offday
+                              </span>
+                            )}
+
+                            {!item.type && (
+                              <span className="mt-1 text-slate-200 font-bold text-[10px] leading-none">——</span>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5 pl-2 border-l-2 border-emerald-500">
-                  <span className="text-emerald-700 font-extrabold text-[13.5px]">8</span>
-                  <span className="text-slate-500 font-semibold text-[11.5px]">Present</span>
+
+                {/* Daily Punch Logs */}
+                <div className="lg:col-span-5 xl:col-span-4 space-y-2">
+                  {dailyLogs.map((log, index) => (
+                    <div
+                      key={index}
+                      className="p-2.5 px-3 bg-white rounded-lg border border-slate-200/80 shadow-2xs space-y-1.5"
+                    >
+                      {/* Top Row: Date + Optional Duration or Dash */}
+                      <div className="flex items-center gap-2">
+                        <span className="text-[13px] font-normal text-[#526074] whitespace-nowrap">{log.date}</span>
+                        {log.hours && log.hours !== '—' ? (
+                          <span className="px-2 py-0.5 bg-slate-100 text-slate-600 font-medium text-[11px] sm:text-[11.5px] rounded-full whitespace-nowrap">
+                            {log.hours}
+                          </span>
+                        ) : (
+                          <span className="text-slate-300 text-[13px]">——</span>
+                        )}
+                      </div>
+
+                      {/* Bottom Row: Check In & Check Out side-by-side with Arrows */}
+                      <div className="flex items-center gap-5 sm:gap-7 pt-0.5">
+                        {/* Check In */}
+                        <div className="flex items-start gap-1.5">
+                          <ArrowUp size={16} className="text-[#1e293b] shrink-0 mt-0.5 stroke-[2]" />
+                          <div>
+                            <div className="text-[#38bdf8] font-normal text-[12px] sm:text-[12.5px] leading-none whitespace-nowrap">Check In</div>
+                            <div className="text-[#1e293b] font-bold text-[13px] leading-tight mt-1 whitespace-nowrap">{log.checkIn}</div>
+                          </div>
+                        </div>
+
+                        {/* Check Out */}
+                        <div className="flex items-start gap-1.5">
+                          <ArrowDown size={16} className="text-[#1e293b] shrink-0 mt-0.5 stroke-[2]" />
+                          <div>
+                            <div className="text-[#fb923c] font-normal text-[12px] sm:text-[12.5px] leading-none whitespace-nowrap">Check Out</div>
+                            <div className="text-[#1e293b] font-bold text-[13px] leading-tight mt-1 whitespace-nowrap">{log.checkOut}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-                <div className="flex items-center gap-1.5 pl-2 border-l-2 border-amber-500">
-                  <span className="text-amber-700 font-extrabold text-[13.5px]">10</span>
-                  <span className="text-slate-500 font-semibold text-[11.5px]">Late</span>
+
+              </div>
+
+            </div>
+
+            {/* MY MANAGER & LEAVE BALANCE */}
+            <div className="lg:col-span-5 xl:col-span-4 space-y-4">
+
+              {/* MY MANAGER CARD */}
+              <div className="bg-white p-3.5 sm:p-4 rounded-lg border border-slate-200 shadow-2xs space-y-3.5">
+                <h3 className="font-semibold text-[15px] sm:text-[16px] leading-[22px] text-[#3b5998]">My Manager</h3>
+
+                <div className="space-y-3">
+
+                  {/* Manager 1 */}
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
+                      alt="Md. Ridoy"
+                      className="w-9 h-9 rounded-full object-cover shrink-0"
+                    />
+                    <div>
+                      <h4 className="font-semibold text-[13.5px] sm:text-[14px] leading-[19px] text-[#2d3748] whitespace-nowrap">Md. Ridoy</h4>
+                      <p className="font-normal text-[12.5px] sm:text-[13px] leading-[18px] text-[#718096] whitespace-nowrap">Supervisor</p>
+                    </div>
+                  </div>
+
+                  {/* Manager 2 */}
+                  <div className="flex items-center gap-3">
+                    <img
+                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80"
+                      alt="Md. Ridoy"
+                      className="w-9 h-9 rounded-full object-cover shrink-0"
+                    />
+                    <div>
+                      <h4 className="font-semibold text-[13.5px] sm:text-[14px] leading-[19px] text-[#2d3748] whitespace-nowrap">Md. Ridoy</h4>
+                      <p className="font-normal text-[12.5px] sm:text-[13px] leading-[18px] text-[#718096] whitespace-nowrap">Dotted Supervisor</p>
+                    </div>
+                  </div>
+
+                  {/* Manager 3 */}
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-full bg-[#eef2f7] text-[#6c7a91] flex items-center justify-center shrink-0">
+                      <User size={18} />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[13.5px] sm:text-[14px] leading-[19px] text-[#2d3748] whitespace-nowrap">Md. Kamruzzaman</h4>
+                      <p className="font-normal text-[12.5px] sm:text-[13px] leading-[18px] text-[#718096] whitespace-nowrap">Line Manager</p>
+                    </div>
+                  </div>
+
                 </div>
-                <div className="flex items-center gap-1.5 pl-2 border-l-2 border-purple-500">
-                  <span className="text-purple-700 font-extrabold text-[13.5px]">0</span>
-                  <span className="text-slate-500 font-semibold text-[11.5px]">Movement</span>
+              </div>
+
+              {/* LEAVE BALANCE CARD */}
+              <div className="bg-white p-3 sm:p-3.5 rounded-lg border border-slate-200 shadow-2xs space-y-2.5">
+                <div className="flex items-center justify-between gap-2 pb-0.5">
+                  <h3 className="font-semibold text-[15px] leading-[20px] text-[#475467] whitespace-nowrap">Leave Balance</h3>
+                  <button
+                    onClick={() => navigate('/employee-portal/leave-movement')}
+                    className="font-normal text-[12px] leading-[18px] text-[#667085] hover:text-[#344054] underline cursor-pointer whitespace-nowrap"
+                  >
+                    Show All(Active/Inactive)
+                  </button>
                 </div>
-                <div className="flex items-center gap-1.5 pl-2 border-l-2 border-blue-500">
-                  <span className="text-blue-700 font-extrabold text-[13.5px]">0</span>
-                  <span className="text-slate-500 font-semibold text-[11.5px]">Leave</span>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left font-normal text-[12.5px] sm:text-[13px] leading-[18px] border-collapse">
+                    <thead>
+                      <tr className="text-[#667085] font-normal border-b border-slate-100">
+                        <th className="pb-1.5 font-normal whitespace-nowrap text-left">Type</th>
+                        <th className="pb-1.5 font-normal text-right whitespace-nowrap px-2">Taken</th>
+                        <th className="pb-1.5 font-normal text-right whitespace-nowrap px-2">Balance</th>
+                        <th className="pb-1.5 font-normal text-right whitespace-nowrap pl-2">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100">
+                      <tr>
+                        <td className="py-1.5 text-[#344054] font-normal whitespace-nowrap">Casual Leave [CL]</td>
+                        <td className="py-1.5 text-right text-[#64748b] font-normal px-2">1</td>
+                        <td className="py-1.5 text-right text-[#344054] font-normal px-2">9</td>
+                        <td className="py-1.5 text-right font-normal text-[#344054] whitespace-nowrap pl-2">Active</td>
+                      </tr>
+
+                      <tr>
+                        <td className="py-1.5 text-[#344054] font-normal whitespace-nowrap">Sick Leave [SL]</td>
+                        <td className="py-1.5 text-right text-[#64748b] font-normal px-2">1</td>
+                        <td className="py-1.5 text-right text-[#344054] font-normal px-2">13</td>
+                        <td className="py-1.5 text-right font-normal text-[#344054] whitespace-nowrap pl-2">Active</td>
+                      </tr>
+
+                      <tr>
+                        <td className="py-1.5 text-[#344054] font-normal whitespace-nowrap">Earn Leave [EL]</td>
+                        <td className="py-1.5 text-right text-[#64748b] font-normal px-2">0</td>
+                        <td className="py-1.5 text-right text-[#344054] font-normal px-2">29</td>
+                        <td className="py-1.5 text-right font-normal text-[#344054] whitespace-nowrap pl-2">Active</td>
+                      </tr>
+
+                      <tr>
+                        <td className="py-1.5 text-[#344054] font-normal whitespace-nowrap">Leave Without Pay [LWP]</td>
+                        <td className="py-1.5 text-right text-[#64748b] font-normal px-2">0</td>
+                        <td className="py-1.5 text-right text-[#344054] font-normal px-2">365</td>
+                        <td className="py-1.5 text-right font-normal text-[#344054] whitespace-nowrap pl-2">Active</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
-                <div className="flex items-center gap-1.5 pl-2 border-l-2 border-rose-500">
-                  <span className="text-rose-700 font-extrabold text-[13.5px]">4</span>
-                  <span className="text-slate-500 font-semibold text-[11.5px]">Absent</span>
-                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* LOWER SECTION: COMPANY POLICIES, NOTICE BOARD & MY APPLICATIONS (3-COLUMN ROW) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+
+            {/* Column 1: Company Policies */}
+            <div className="lg:col-span-4 bg-white p-3.5 sm:p-4 rounded-lg border border-slate-200 shadow-2xs space-y-3">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                <h3 className="font-semibold text-[16px] leading-[22px] text-[#3b5998]">Company Policies & Guidelines</h3>
+                <span className="font-normal text-[12.5px] leading-[20px] text-[#667085]">{filteredPolicies.length} Docs</span>
+              </div>
+
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search policies..."
+                  value={policySearch}
+                  onChange={(e) => setPolicySearch(e.target.value)}
+                  className="w-full h-8 pl-8 pr-3 font-normal text-[13px] leading-[20px] bg-slate-50 border border-slate-200 rounded-md outline-none focus:bg-white focus:border-[#008060]"
+                />
+                <Search size={14} className="absolute left-2.5 top-2 text-[#667085]" />
+              </div>
+
+              <div className="space-y-1.5 max-h-[290px] min-h-[260px] overflow-y-auto pr-1 custom-scrollbar">
+                {filteredPolicies.map((policy) => (
+                  <div
+                    key={policy.id}
+                    className="p-2 px-2.5 bg-slate-50/70 hover:bg-slate-100/80 border border-slate-200/60 rounded-md flex items-center justify-between font-normal text-[13px] leading-[18px] transition-colors"
+                  >
+                    <div className="min-w-0 pr-2">
+                      <h4 className="font-normal text-[#344054] text-[13.5px] truncate">{policy.title}</h4>
+                      <p className="text-[11.5px] text-[#667085] mt-0.5">{policy.code} • {policy.category}</p>
+                    </div>
+                    <button className="font-medium text-[12.5px] text-[#008060] hover:underline cursor-pointer shrink-0">
+                      View
+                    </button>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Split Calendar Grid & Daily Check Logs */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 mt-4">
-              
-              {/* Calendar Days Grid (8 Cols) */}
-              <div className="lg:col-span-8 border-r border-slate-100 pr-3">
-                <div className="grid grid-cols-7 gap-1 text-center font-bold text-[12px] text-slate-600 mb-2.5">
-                  <div className="py-1 bg-slate-50 rounded">Sun</div>
-                  <div className="py-1 bg-slate-50 rounded">Mon</div>
-                  <div className="py-1 bg-slate-50 rounded">Tue</div>
-                  <div className="py-1 bg-slate-50 rounded">Wed</div>
-                  <div className="py-1 bg-slate-50 rounded">Thu</div>
-                  <div className="py-1 bg-slate-50 rounded">Fri</div>
-                  <div className="py-1 bg-slate-50 rounded">Sat</div>
+            {/* Column 2: Corporate Notice Board */}
+            <div className="lg:col-span-4 bg-white p-3.5 sm:p-4 rounded-lg border border-slate-200 shadow-2xs space-y-3 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                  <h3 className="font-semibold text-[16px] leading-[22px] text-[#3b5998]">Corporate Notice Board</h3>
+                  <span className="font-normal text-[12.5px] leading-[20px] text-[#667085]">{noticesList.length} Items</span>
                 </div>
 
-                <div className="grid grid-cols-7 gap-1 text-center">
-                  {calendarDays.map((item, idx) => (
-                    <div key={idx} className="min-h-[50px] p-1 flex flex-col items-center justify-start border border-slate-100 rounded hover:bg-slate-50/80 transition-colors">
-                      <span className="text-[12.5px] font-bold text-slate-800">{item.date}</span>
-                      {item.status && (
-                        <span className={`mt-0.5 text-[9.5px] px-1.5 py-0.2 rounded font-bold border leading-tight ${item.color}`}>
-                          {item.status}
-                        </span>
-                      )}
-                    </div>
+                <div className="flex items-center gap-1 font-normal text-[11.5px] overflow-x-auto pb-0.5 custom-scrollbar">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setSelectedNoticeCategory(cat)}
+                      className={`px-2 py-0.5 rounded font-normal transition-colors cursor-pointer whitespace-nowrap ${selectedNoticeCategory === cat
+                        ? 'bg-slate-800 text-white'
+                        : 'bg-slate-100 text-[#344054] hover:bg-slate-200'
+                        }`}
+                    >
+                      {cat}
+                    </button>
                   ))}
                 </div>
               </div>
 
-              {/* Timeline Check-In / Check-Out Log (4 Cols) - Scrollable */}
-              <div className="lg:col-span-4 space-y-2 pl-1 max-h-[360px] overflow-y-auto pr-1 custom-scrollbar">
-                <span className="text-[11px] font-bold text-slate-400 block mb-1">Recent Punch Logs</span>
-                {dailyLogs.map((log, index) => (
-                  <div 
-                    key={index}
-                    className={`p-2.5 bg-white border border-slate-200 rounded-lg border-l-4 ${log.border} shadow-2xs space-y-1 hover:border-slate-300 transition-colors`}
+              <div className="space-y-1.5 max-h-[290px] min-h-[260px] overflow-y-auto pr-1 custom-scrollbar">
+                {filteredNotices.map((notice) => (
+                  <div
+                    key={notice.id}
+                    onClick={() => setSelectedNoticeModal(notice)}
+                    className="p-2 px-2.5 bg-slate-50/70 hover:bg-slate-100/80 border border-slate-200/60 rounded-md flex items-center justify-between gap-2.5 transition-colors cursor-pointer"
                   >
-                    <div className="flex items-center justify-between text-[11.5px] text-slate-500">
-                      <span className="font-bold text-slate-900">{log.date}</span>
-                      <span className="px-1.5 py-0.2 bg-slate-100 text-slate-700 font-bold text-[10.5px] rounded">{log.hours}</span>
+                    <div className="min-w-0 space-y-0.5">
+                      <h4 className="font-normal text-[13.5px] leading-[19px] text-[#344054] truncate">{notice.title}</h4>
+                      <p className="text-[11.5px] text-[#667085]">{notice.date}</p>
                     </div>
-
-                    <div className="flex items-center justify-between text-[11.5px] pt-0.5">
-                      <div className="flex items-center gap-1 text-slate-600 font-medium">
-                        <ArrowUpRight size={13} className={log.isLate ? "text-amber-500 stroke-[2.5]" : "text-emerald-600 stroke-[2.5]"} />
-                        <span>In</span>
-                        <strong className="text-slate-900 ml-0.5">{log.checkIn}</strong>
-                      </div>
-                      <div className="flex items-center gap-1 text-slate-600 font-medium">
-                        <ArrowDownRight size={13} className="text-amber-600 stroke-[2.5]" />
-                        <span>Out</span>
-                        <strong className="text-slate-900 ml-0.5">{log.checkOut}</strong>
-                      </div>
+                    <div className="shrink-0">
+                      <span className={`inline-block font-normal px-1.5 py-0.2 rounded border text-[11px] whitespace-nowrap ${notice.badge}`}>{notice.category}</span>
                     </div>
                   </div>
                 ))}
               </div>
-
-            </div>
-          </div>
-
-          {/* BOTTOM GRID: COMPANY POLICY, LEAVE BALANCE, NOTICE BOARD */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-            
-            {/* Company Policy (4 Cols) */}
-            <div className="lg:col-span-4 bg-white p-4 rounded-xl border border-slate-200 shadow-2xs flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-[14px] font-bold text-slate-900">Company Policy</h3>
-                  <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
-                    {filteredPolicies.length} Docs
-                  </span>
-                </div>
-                
-                <div className="relative mb-3">
-                  <input 
-                    type="text" 
-                    placeholder="Search policy..." 
-                    value={policySearch}
-                    onChange={(e) => setPolicySearch(e.target.value)}
-                    className="w-full h-8 pl-8 pr-3 text-[12.5px] bg-slate-50 border border-slate-200 rounded outline-none focus:bg-white focus:border-[#008060] font-medium" 
-                  />
-                  <Search size={14} className="absolute left-2.5 top-2 text-slate-400" />
-                </div>
-
-                <div className="space-y-1.5 max-h-[200px] overflow-y-auto pr-1">
-                  {filteredPolicies.map((policy) => (
-                    <div 
-                      key={policy.id}
-                      className="p-2 bg-slate-50/70 hover:bg-slate-100/90 border border-slate-200/70 rounded flex items-center justify-between transition-colors group cursor-pointer"
-                    >
-                      <div className="flex items-center gap-2 min-w-0">
-                        <FileText size={14} className="text-[#008060] shrink-0" />
-                        <h4 className="text-[12.5px] font-bold text-slate-800 truncate group-hover:text-[#008060] transition-colors">
-                          {policy.title}
-                        </h4>
-                      </div>
-                      <span className="text-[11px] font-bold text-[#008060] underline shrink-0 ml-1">View</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
 
-            {/* Leave Balance Section (4 Cols) */}
-            <div className="lg:col-span-4 bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
-              <div className="flex items-center justify-between mb-2.5">
-                <h3 className="text-[14px] font-bold text-slate-900">Leave Balance</h3>
-                <button 
+            {/* Column 3: My Applications */}
+            <div className="lg:col-span-4 bg-white p-3.5 sm:p-4 rounded-lg border border-slate-200 shadow-2xs space-y-3 flex flex-col justify-between">
+              <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                <h3 className="font-semibold text-[16px] leading-[22px] text-[#3b5998]">My Applications</h3>
+                <button
                   onClick={() => setIsLeaveModalOpen(true)}
-                  className="flex items-center gap-1 text-[11.5px] font-bold text-[#008060] bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 px-2 py-0.5 rounded transition-colors cursor-pointer"
+                  className="font-medium text-[12.5px] leading-[20px] text-[#008060] hover:underline cursor-pointer flex items-center gap-1"
                 >
-                  <Plus size={12} strokeWidth={2.5} />
-                  <span>Apply</span>
+                  + Apply Now
                 </button>
               </div>
 
-              <table className="w-full text-left text-[12.5px]">
-                <thead>
-                  <tr className="border-b border-slate-200 text-[11px] font-bold text-slate-500">
-                    <th className="py-1.5 pb-2">Type</th>
-                    <th className="py-1.5 pb-2 text-center">Taken</th>
-                    <th className="py-1.5 pb-2 text-center">Balance</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 font-medium">
-                  <tr>
-                    <td className="py-2 text-slate-800 font-bold">Casual Leave [CL]</td>
-                    <td className="py-2 text-center text-slate-600">1</td>
-                    <td className="py-2 text-center font-bold text-slate-900">9</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 text-slate-800 font-bold">Sick Leave [SL]</td>
-                    <td className="py-2 text-center text-slate-600">1</td>
-                    <td className="py-2 text-center font-bold text-slate-900">13</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 text-slate-800 font-bold">Earn Leave [EL]</td>
-                    <td className="py-2 text-center text-slate-600">0</td>
-                    <td className="py-2 text-center font-bold text-slate-900">29</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            {/* Notice Board (4 Cols) */}
-            <div className="lg:col-span-4 bg-white p-4 rounded-xl border border-slate-200 shadow-2xs">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-[14px] font-bold text-slate-900">Notice Board</h3>
-                <span className="w-5.5 h-5.5 rounded-full bg-[#008060] text-white font-bold text-[11px] flex items-center justify-center">
-                  {noticesList.length}
-                </span>
-              </div>
-
-              <div className="space-y-2">
-                {noticesList.map((notice) => (
-                  <div key={notice.id} className="p-2 bg-slate-50 border border-slate-200/70 rounded">
-                    <h4 className="text-[12.5px] font-bold text-slate-900 leading-snug">{notice.title}</h4>
-                    <span className="text-[10.5px] text-slate-400 font-medium">{notice.date}</span>
+              <div className="space-y-1.5 max-h-[290px] min-h-[260px] overflow-y-auto pr-1 custom-scrollbar pt-0.5">
+                {applications.map((app) => (
+                  <div
+                    key={app.id}
+                    className="p-2 px-2.5 bg-slate-50/70 hover:bg-slate-100/80 border border-slate-200/60 rounded-md flex items-center justify-between gap-2.5 transition-colors"
+                  >
+                    <div className="min-w-0 space-y-0.5">
+                      <h4 className="font-normal text-[#344054] text-[13.5px] truncate">{app.type}</h4>
+                      <p className="text-[11.5px] text-[#667085]">{app.dates} • {app.days}</p>
+                    </div>
+                    <div className="shrink-0">
+                      <span className={`inline-block font-normal px-2 py-0.5 rounded border text-[11px] whitespace-nowrap ${app.statusStyle}`}>
+                        {app.status}
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -493,35 +729,27 @@ export default function EmployeeDashboardPage() {
 
       </div>
 
-      {/* LEAVE APPLICATION MODAL */}
-      {isLeaveModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl border border-slate-200 shadow-2xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-emerald-100 text-[#008060] flex items-center justify-center font-bold">
-                  <FileText size={18} />
-                </div>
-                <div>
-                  <h3 className="text-[15px] font-bold text-slate-900 leading-tight">Apply for Leave</h3>
-                  <p className="text-[11.5px] text-slate-500 font-medium">Submit a new leave application</p>
-                </div>
-              </div>
-              <button 
-                onClick={() => setIsLeaveModalOpen(false)} 
-                className="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+      {/* LEAVE MODAL */}
+      {isLeaveModalOpen && createPortal(
+        <div className="fixed inset-0 z-[9999] bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4 font-['Poppins',sans-serif]">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-2xl w-full max-w-[420px] overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div className="px-4 py-2.5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+              <h3 className="font-semibold text-[14.5px] leading-[18px] text-[#1e293b]">Apply for Leave</h3>
+              <button
+                onClick={() => setIsLeaveModalOpen(false)}
+                className="text-slate-400 hover:text-slate-600 cursor-pointer p-1 rounded hover:bg-slate-200/50 transition-colors"
               >
-                <X size={18} />
+                <X size={15} />
               </button>
             </div>
 
-            <form onSubmit={handleSubmitLeave} className="p-5 space-y-4 text-left">
+            <form onSubmit={handleSubmitLeave} className="p-4 space-y-2.5 text-left">
               <div>
-                <label className="block text-[12px] font-bold text-slate-700 mb-1">Leave Type</label>
-                <select 
+                <label className="block font-medium text-[12px] text-[#475467] mb-1">Leave Type</label>
+                <select
                   value={newApp.leaveType}
                   onChange={(e) => setNewApp({ ...newApp, leaveType: e.target.value })}
-                  className="w-full h-9 text-[12.5px] bg-slate-50 border border-slate-200 rounded-lg px-3 outline-none focus:bg-white focus:border-[#008060] font-medium text-slate-800"
+                  className="w-full h-8 bg-slate-50/70 border border-slate-200 rounded px-2.5 outline-none focus:bg-white focus:border-[#008060] font-normal text-[#344054] text-[12.5px]"
                 >
                   <option value="Casual Leave [CL]">Casual Leave [CL] (Bal: 9)</option>
                   <option value="Sick Leave [SL]">Sick Leave [SL] (Bal: 13)</option>
@@ -529,59 +757,97 @@ export default function EmployeeDashboardPage() {
                 </select>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-2.5">
                 <div>
-                  <label className="block text-[12px] font-bold text-slate-700 mb-1">Start Date</label>
-                  <input 
+                  <label className="block font-medium text-[12px] text-[#475467] mb-1">Start Date</label>
+                  <input
                     type="date"
                     required
                     value={newApp.startDate}
                     onChange={(e) => setNewApp({ ...newApp, startDate: e.target.value })}
-                    className="w-full h-9 text-[12px] bg-slate-50 border border-slate-200 rounded-lg px-3 outline-none focus:bg-white focus:border-[#008060] font-medium text-slate-800"
+                    className="w-full h-8 bg-slate-50/70 border border-slate-200 rounded px-2.5 outline-none focus:bg-white focus:border-[#008060] font-normal text-[#344054] text-[12.5px]"
                   />
                 </div>
                 <div>
-                  <label className="block text-[12px] font-bold text-slate-700 mb-1">End Date</label>
-                  <input 
+                  <label className="block font-medium text-[12px] text-[#475467] mb-1">End Date</label>
+                  <input
                     type="date"
                     required
                     value={newApp.endDate}
                     onChange={(e) => setNewApp({ ...newApp, endDate: e.target.value })}
-                    className="w-full h-9 text-[12px] bg-slate-50 border border-slate-200 rounded-lg px-3 outline-none focus:bg-white focus:border-[#008060] font-medium text-slate-800"
+                    className="w-full h-8 bg-slate-50/70 border border-slate-200 rounded px-2.5 outline-none focus:bg-white focus:border-[#008060] font-normal text-[#344054] text-[12.5px]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[12px] font-bold text-slate-700 mb-1">Reason / Purpose</label>
-                <textarea 
-                  rows={3}
-                  placeholder="Explain reason for leave request..."
+                <label className="block font-medium text-[12px] text-[#475467] mb-1">Reason / Purpose</label>
+                <textarea
+                  rows={2}
+                  placeholder="Provide brief explanation for leave request..."
                   value={newApp.reason}
                   onChange={(e) => setNewApp({ ...newApp, reason: e.target.value })}
-                  className="w-full p-2.5 text-[12px] bg-slate-50 border border-slate-200 rounded-lg outline-none focus:bg-white focus:border-[#008060] font-medium text-slate-800 resize-none"
+                  className="w-full p-2 bg-slate-50/70 border border-slate-200 rounded outline-none focus:bg-white focus:border-[#008060] font-normal text-[#344054] text-[12.5px] resize-none"
                 ></textarea>
               </div>
 
-              <div className="pt-2 flex items-center justify-end gap-2 border-t border-slate-100">
-                <button 
+              <div className="pt-2.5 flex items-center justify-end gap-2 border-t border-slate-100">
+                <button
                   type="button"
                   onClick={() => setIsLeaveModalOpen(false)}
-                  className="px-4 py-2 text-[12px] font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors cursor-pointer"
+                  className="px-3 py-1 font-medium text-[12px] text-[#344054] bg-slate-100 hover:bg-slate-200 rounded transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
-                <button 
+                <button
                   type="submit"
-                  className="px-4 py-2 text-[12px] font-bold text-white bg-[#008060] hover:bg-[#006e52] rounded-lg transition-colors shadow-sm flex items-center gap-1.5 cursor-pointer"
+                  className="px-3.5 py-1 font-medium text-[12px] text-white bg-[#008060] hover:bg-[#006e52] rounded transition-colors flex items-center gap-1 cursor-pointer"
                 >
-                  <CheckCircle2 size={15} />
+                  <CheckCircle2 size={13} />
                   <span>Submit Application</span>
                 </button>
               </div>
             </form>
           </div>
-        </div>
+        </div>,
+        document.body
+      )}
+
+      {/* NOTICE MODAL */}
+      {selectedNoticeModal && createPortal(
+        <div className="fixed inset-0 z-[9999] bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4 font-['Poppins',sans-serif]">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-2xl w-full max-w-[420px] overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div className="px-4 py-2.5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+              <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-slate-200/80 text-slate-700">
+                {selectedNoticeModal.category} Notice
+              </span>
+              <button
+                onClick={() => setSelectedNoticeModal(null)}
+                className="text-slate-400 hover:text-slate-600 cursor-pointer p-1 rounded hover:bg-slate-200/50 transition-colors"
+              >
+                <X size={15} />
+              </button>
+            </div>
+
+            <div className="p-4 space-y-2 text-left">
+              <h3 className="font-semibold text-[14.5px] leading-[19px] text-[#1e293b]">{selectedNoticeModal.title}</h3>
+              <div className="text-[11.5px] text-[#667085]">{selectedNoticeModal.date}</div>
+              <p className="font-normal text-[12.5px] leading-[19px] text-[#344054] bg-slate-50 p-2.5 rounded border border-slate-200/60">
+                {selectedNoticeModal.content}
+              </p>
+            </div>
+
+            <div className="px-4 py-2 bg-slate-50 border-t border-slate-100 flex justify-end">
+              <button
+                onClick={() => setSelectedNoticeModal(null)}
+                className="px-3.5 py-1 font-medium text-[12px] text-white bg-slate-800 hover:bg-slate-900 rounded cursor-pointer transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>,
+        document.body
       )}
 
     </div>

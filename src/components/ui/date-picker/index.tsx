@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 
+import { cn } from "@/lib/utils";
+
 export interface DatePickerProps {
   label?: string;
   value?: string;
@@ -104,7 +106,7 @@ export default function DatePicker({
       : 'bg-white border-[#d1d1d1] text-[#202223] hover:border-slate-400';
 
   return (
-    <div className={`flex flex-col gap-1 ${className}`}>
+    <div className="flex flex-col gap-1 w-full">
       {label && (
         <label className="text-[14px] font-bold text-[#202223]">
           {label}
@@ -115,13 +117,16 @@ export default function DatePicker({
         {/* --- INPUT TRIGGER FIELD --- */}
         <div
           onClick={() => !disabled && setIsOpen(!isOpen)}
-          className={`flex items-center justify-between w-full border rounded-[4px] cursor-pointer transition-colors shadow-2xs ${sizeClasses} ${variantClasses} ${isOpen ? 'ring-1 ring-[#008060] border-[#008060]' : ''
-            } ${disabled ? 'opacity-50 cursor-not-allowed bg-slate-50' : ''}`}
+          className={cn(
+            "flex h-[30px] w-full rounded-[4px] border bg-white px-3 py-1 text-[12px] font-medium text-[#202223] placeholder:text-[#6d7175] focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 shadow-none cursor-pointer transition-colors border-[#d1d1d1] items-center justify-between",
+            disabled && "opacity-50 cursor-not-allowed bg-slate-50",
+            className
+          )}
         >
           <span className={`truncate ${formattedSelectedValue ? 'font-medium text-[#202223]' : 'text-[#6d7175]'}`}>
             {formattedSelectedValue || placeholder}
           </span>
-          <CalendarIcon size={size === 'sm' ? 13 : 15} className="text-[#6d7175] shrink-0 ml-1.5" />
+          <CalendarIcon size={15} className="text-[#6d7175] shrink-0 ml-1.5" />
         </div>
 
         {/* --- CUSTOM POPOVER CALENDAR MATCHING SCREENSHOT --- */}

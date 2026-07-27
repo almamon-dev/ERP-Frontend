@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { 
+import {
   FileText, Upload, Info, Eye, Edit2, Trash2, CheckCircle2, Clock, X, Search, Calendar, Filter, User, Building, ShieldCheck, ArrowRightLeft, Footprints
 } from 'lucide-react';
 import Button from '@/components/ui/button';
@@ -8,6 +8,7 @@ import Input from '@/components/ui/input';
 import FormLabel from '@/components/ui/label';
 import Select from '@/components/ui/select';
 import DatePicker from '@/components/ui/date-picker';
+import Textarea from '@/components/ui/textarea';
 import Modal from '@/components/modals/modal';
 
 export default function LeaveAndMovementPage() {
@@ -30,6 +31,31 @@ export default function LeaveAndMovementPage() {
   const [fromDate, setFromDate] = useState('2026-07-28');
   const [toDate, setToDate] = useState('2026-07-29');
   const [reliever, setReliever] = useState('');
+  const [isRelieverOpen, setIsRelieverOpen] = useState(false);
+  const relieverRef = React.useRef<HTMLDivElement>(null);
+
+  const employeesList = [
+    { id: '1', name: 'Md Badsha Hossain', code: '16538 - 2026-01-01' },
+    { id: '2', name: 'Md. Badsha', code: '16934 - 2026-01-01' },
+    { id: '3', name: 'Al-Mamun Hossain', code: '10521 - 2026-01-01' },
+    { id: '4', name: 'Tanvir Ahmed', code: '10842 - 2026-01-01' },
+    { id: '5', name: 'Sabbir Rahman', code: '11293 - 2026-01-01' },
+  ];
+
+  const filteredEmployees = employeesList.filter(emp =>
+    emp.name.toLowerCase().includes(reliever.toLowerCase()) ||
+    emp.code.toLowerCase().includes(reliever.toLowerCase())
+  );
+
+  React.useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (relieverRef.current && !relieverRef.current.contains(e.target as Node)) {
+        setIsRelieverOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
   const [location, setLocation] = useState('Mohakhali');
   const [reason, setReason] = useState('');
   const [attachment, setAttachment] = useState<File | null>(null);
@@ -79,7 +105,7 @@ export default function LeaveAndMovementPage() {
       attachment: 'medical_report.pdf',
       appDate: '26,May 26 09:52:02 AM',
       status: 'Approved',
-      statusBadge: 'bg-emerald-50 text-emerald-700 border-emerald-300'
+      statusBadge: 'bg-[#f4fbf0] text-[#16a34a] border-[#a7f3d0]'
     },
     {
       id: 3,
@@ -92,7 +118,7 @@ export default function LeaveAndMovementPage() {
       attachment: null,
       appDate: '24,Jan 26 01:59:27 PM',
       status: 'Approved',
-      statusBadge: 'bg-emerald-50 text-emerald-700 border-emerald-300'
+      statusBadge: 'bg-[#f4fbf0] text-[#16a34a] border-[#a7f3d0]'
     }
   ]);
 
@@ -133,7 +159,7 @@ export default function LeaveAndMovementPage() {
       attachment: 'site_visit_log.pdf',
       appDate: '14,Jul 26 04:15:20 PM',
       status: 'Approved',
-      statusBadge: 'bg-emerald-50 text-emerald-700 border-emerald-300'
+      statusBadge: 'bg-[#f4fbf0] text-[#16a34a] border-[#a7f3d0]'
     }
   ]);
 
@@ -206,25 +232,25 @@ export default function LeaveAndMovementPage() {
   };
 
   return (
-    <div className="p-4 max-w-[1600px] mx-auto bg-[#f8f9fa] min-h-screen text-slate-800 space-y-4 font-sans antialiased pb-20">
-      
+    <div className="p-4 w-full max-w-none mx-auto bg-[#f8f9fa] min-h-screen text-slate-800 space-y-4 font-sans antialiased pb-20">
+
       {/* PAGE HEADER TITLE & DESCRIPTION */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
         <div>
-          <h1 className="text-[20px] font-bold text-slate-900 tracking-tight">
+          <h1 className="text-[17px] font-extrabold text-slate-900 tracking-tight leading-snug">
             {mainTab === 'leave' ? 'Leave Application' : 'Movement Application'}
           </h1>
-          <p className="text-[13px] font-medium text-slate-500 mt-0.5">
-            {mainTab === 'leave' 
-              ? 'Apply for casual, sick, or earn leaves and track leave balance allocations.' 
+          <p className="text-[12.5px] font-medium text-slate-500 mt-0.5">
+            {mainTab === 'leave'
+              ? 'Apply for casual, sick, or earn leaves and track leave balance allocations.'
               : 'Submit official or personal movement requisitions and track approval status.'}
           </p>
         </div>
 
         {mainTab === 'leave' && (
-          <Button 
+          <Button
             onClick={() => setIsBalanceModalOpen(true)}
-            className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-extrabold h-8 px-3.5 tracking-wide uppercase cursor-pointer shrink-0"
+            className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-[11px] font-bold h-7.5 px-3 tracking-wide cursor-pointer shrink-0 rounded-sm shadow-2xs"
           >
             Balance History
           </Button>
@@ -235,19 +261,19 @@ export default function LeaveAndMovementPage() {
       {mainTab === 'leave' && (
         <>
           {/* TOP SECTION: APPLY LEAVE FORM & LEAVE BALANCE TABLE */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-            
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+
             {/* LEFT CARD: APPLY LEAVE FORM */}
-            <div className="lg:col-span-7 bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-3">
+            <div className="lg:col-span-8 bg-white p-3.5 rounded-sm border border-slate-200 shadow-2xs space-y-3">
               <form onSubmit={handleApplyLeave} className="space-y-3">
-                
+
                 {/* ROW 1 */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   <div className="flex flex-col gap-1 w-full">
                     <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
                       <span className="text-rose-500 mr-0.5">*</span> Leave Type
                     </FormLabel>
-                    <Select 
+                    <Select
                       value={leaveType}
                       onChange={(e) => setLeaveType(e.target.value)}
                       options={[
@@ -263,7 +289,7 @@ export default function LeaveAndMovementPage() {
                     <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
                       <span className="text-rose-500 mr-0.5">*</span> Leave Consume Type
                     </FormLabel>
-                    <Select 
+                    <Select
                       value={consumeType}
                       onChange={(e) => setConsumeType(e.target.value)}
                       options={[
@@ -278,7 +304,7 @@ export default function LeaveAndMovementPage() {
                     <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
                       <span className="text-rose-500 mr-0.5">*</span> From Date
                     </FormLabel>
-                    <DatePicker 
+                    <DatePicker
                       value={fromDate}
                       onChange={(val) => setFromDate(val)}
                       className="w-full"
@@ -292,51 +318,92 @@ export default function LeaveAndMovementPage() {
                     <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
                       <span className="text-rose-500 mr-0.5">*</span> To Date
                     </FormLabel>
-                    <DatePicker 
+                    <DatePicker
                       value={toDate}
                       onChange={(val) => setToDate(val)}
                       className="w-full"
                     />
                   </div>
 
-                  <Input 
-                    label="Leave Reliever"
-                    placeholder="Search Min 2 char"
-                    value={reliever}
-                    onChange={(e) => setReliever(e.target.value)}
-                    className="h-[34px] text-[12px]"
-                  />
+                  <div className="flex flex-col gap-1 w-full relative" ref={relieverRef}>
+                    <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                      Leave Reliever
+                    </FormLabel>
+                    <div className="relative w-full">
+                      <Input
+                        placeholder="Search Min 2 char"
+                        value={reliever}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setReliever(val);
+                          setIsRelieverOpen(val.trim().length >= 2);
+                        }}
+                        className="text-[12px] pr-8"
+                      />
+                      <Search size={14} className="text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    </div>
 
-                  <Input 
-                    label="* Location"
-                    placeholder="Location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    className="h-[34px] text-[12px]"
-                  />
+                    {isRelieverOpen && reliever.trim().length >= 2 && (
+                      <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-slate-200 rounded-sm shadow-md z-[90] py-0.5 font-sans overflow-hidden">
+                        {filteredEmployees.length > 0 ? (
+                          filteredEmployees.map((emp) => (
+                            <div
+                              key={emp.id}
+                              onClick={() => {
+                                setReliever(`${emp.name} [${emp.code}]`);
+                                setIsRelieverOpen(false);
+                              }}
+                              className="px-3 py-1.5 hover:bg-[#f2f4f7] cursor-pointer text-[12px] text-slate-800 truncate transition-colors border-b border-slate-100 last:border-0"
+                            >
+                              {emp.name} [{emp.code}]
+                            </div>
+                          ))
+                        ) : (
+                          <div className="px-3 py-2 text-[11.5px] text-slate-400 text-center">No employee found</div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex flex-col gap-1 w-full">
+                    <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                      <span className="text-rose-500 mr-0.5">*</span> Location
+                    </FormLabel>
+                    <Input
+                      placeholder="Location"
+                      value={location}
+                      onChange={(e) => setLocation(e.target.value)}
+                      className="text-[12px]"
+                    />
+                  </div>
                 </div>
 
                 {/* ROW 3: REASON */}
-                <Input 
-                  label="* Reason"
-                  placeholder="Reason for leave"
-                  value={reason}
-                  onChange={(e) => setReason(e.target.value)}
-                  className="h-[34px] text-[12px]"
-                />
+                <div className="flex flex-col gap-1 w-full">
+                  <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <span className="text-rose-500 mr-0.5">*</span> Reason
+                  </FormLabel>
+                  <Textarea
+                    placeholder="Reason for leave"
+                    value={reason}
+                    onChange={(e) => setReason(e.target.value)}
+                    rows={2}
+                    className="text-[12px] min-h-[52px] resize-none"
+                  />
+                </div>
 
                 {/* ROW 4: UPLOAD ATTACHMENT */}
                 <div className="flex items-center gap-2 pt-0.5">
-                  <label className="flex items-center gap-1 px-2.5 py-1 border border-emerald-600 text-emerald-700 hover:bg-emerald-50 rounded text-[11.5px] font-bold cursor-pointer transition-colors shadow-2xs">
+                  <label className="flex items-center gap-1 px-2.5 py-1 border border-slate-300 text-slate-700 hover:bg-slate-50 rounded-sm text-[11.5px] font-bold cursor-pointer transition-colors shadow-2xs">
                     <Upload size={13} className="stroke-[2.5]" />
                     <span>Upload Attachment</span>
-                    <input 
-                      type="file" 
-                      className="hidden" 
-                      onChange={(e) => setAttachment(e.target.files ? e.target.files[0] : null)} 
+                    <input
+                      type="file"
+                      className="hidden"
+                      onChange={(e) => setAttachment(e.target.files ? e.target.files[0] : null)}
                     />
                   </label>
-                  <Info size={14} className="text-rose-500 cursor-pointer" title="Only PDF, PNG, JPG files up to 2MB allowed" />
+                  <Info size={14} className="text-slate-400 hover:text-slate-600 cursor-pointer" title="Only PDF, PNG, JPG files up to 2MB allowed" />
                   {attachment && <span className="text-[11px] text-slate-600 font-semibold truncate max-w-[180px]">{attachment.name}</span>}
                 </div>
 
@@ -344,9 +411,9 @@ export default function LeaveAndMovementPage() {
                 <div className="pt-1">
                   <Button
                     type="submit"
-                    className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-extrabold px-3.5 py-1.5 rounded transition-colors uppercase tracking-wider shadow-2xs h-8"
+                    className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-extrabold px-3.5 py-1.5 rounded-sm transition-colors  shadow-2xs h-7.5"
                   >
-                    APPLY {daysCount} DAY LEAVE
+                    Apply ({daysCount}) Day Leave
                   </Button>
                 </div>
 
@@ -354,54 +421,59 @@ export default function LeaveAndMovementPage() {
             </div>
 
             {/* RIGHT CARD: LEAVE BALANCE TABLE */}
-            <div className="lg:col-span-5 bg-white p-4 rounded-lg border border-slate-200 shadow-2xs flex flex-col justify-between">
-              <div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-left text-[12px] border-collapse">
-                    <thead>
-                      <tr className="border-b border-slate-200 text-slate-800 font-bold">
-                        <th className="py-2 px-1.5">Leave Type</th>
-                        <th className="py-2 px-1.5 text-center">Taken</th>
-                        <th className="py-2 px-1.5 text-center">Balance</th>
-                        <th className="py-2 px-1.5 text-center">Total</th>
-                        <th className="py-2 px-1.5 text-center">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-slate-100 font-medium text-slate-700">
-                      {balances.map((row, idx) => (
-                        <tr key={idx} className="hover:bg-slate-50/70 transition-colors">
-                          <td className="py-2 px-1.5 font-bold text-slate-800">{row.type}</td>
-                          <td className="py-2 px-1.5 text-center text-slate-600">{row.taken}</td>
-                          <td className="py-2 px-1.5 text-center font-bold text-slate-900">{row.balance}</td>
-                          <td className="py-2 px-1.5 text-center text-slate-500">{row.total}</td>
-                          <td className="py-2 px-1.5 text-center">
-                            <span className="px-1.5 py-0.2 text-[10px] font-extrabold bg-emerald-50 text-emerald-600 border border-emerald-200 rounded">
-                              {row.status}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            <div className="lg:col-span-4 bg-white p-3.5 rounded-sm border border-slate-200 shadow-2xs h-fit self-start space-y-2">
 
-              <div className="pt-2 text-right border-t border-slate-100 mt-2">
-                <button 
+              {/* HEADER WITH TITLE & SHOW ALL LINK */}
+              <div className="flex items-center justify-between pb-1 border-b border-slate-100">
+                <h3 className="text-[13.5px] font-bold text-slate-800 tracking-tight">Leave Balance</h3>
+                <button
                   onClick={() => setIsBalanceModalOpen(true)}
-                  className="text-[11px] font-bold text-emerald-700 hover:underline cursor-pointer"
+                  className="text-[11px] font-normal text-slate-600 hover:text-slate-900 underline cursor-pointer"
                 >
                   Show All(Active/Inactive)
                 </button>
               </div>
+
+              {/* TABLE */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-[12px] border-collapse border border-slate-200/70 rounded-xs overflow-hidden">
+                  <thead>
+                    <tr className="bg-[#f8f9fa] border-b border-slate-200/80 text-[12px] font-bold text-slate-800">
+                      <th className="py-1.5 px-2 font-bold border-r border-slate-200/60">Leave Type</th>
+                      <th className="py-1.5 px-2 text-center font-bold border-r border-slate-200/60">Taken</th>
+                      <th className="py-1.5 px-2 text-center font-bold border-r border-slate-200/60">Balance</th>
+                      <th className="py-1.5 px-2 text-center font-bold border-r border-slate-200/60">Total</th>
+                      <th className="py-1.5 px-2 text-center font-bold">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200/60 font-normal text-slate-700">
+                    {balances.map((row, idx) => (
+                      <tr key={idx} className="hover:bg-slate-50/60 transition-colors">
+                        <td className="py-2 px-2 font-medium text-slate-800 border-r border-slate-200/60">{row.type}</td>
+                        <td className="py-2 px-2 text-center text-slate-600 border-r border-slate-200/60">{row.taken}</td>
+                        <td className="py-2 px-2 text-center font-bold text-slate-900 border-r border-slate-200/60">{row.balance}</td>
+                        <td className="py-2 px-2 text-center text-slate-700 border-r border-slate-200/60">{row.total}</td>
+                        <td className="py-2 px-2 text-center">
+                          <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#16a34a] bg-[#f4fbf0] border border-[#a7f3d0] rounded-[3px]">
+                            {row.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
             </div>
 
           </div>
 
           {/* BOTTOM SECTION: LEAVE HISTORY CARD */}
-          <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-3">
-            
-            <h3 className="text-[14.5px] font-bold text-slate-900">Leave History</h3>
+          <div className="bg-white p-4 rounded-sm border border-slate-200 shadow-2xs space-y-3">
+
+            <div className="flex items-center justify-between pb-1 border-b border-slate-100">
+              <h3 className="text-[14px] font-bold text-slate-900 tracking-tight">Leave History</h3>
+            </div>
 
             {/* FILTER BAR */}
             <div className="flex flex-wrap items-end gap-3 pb-3 border-b border-slate-100">
@@ -409,7 +481,7 @@ export default function LeaveAndMovementPage() {
                 <FormLabel className="text-[11px] font-bold text-slate-600 !mb-0">
                   <span className="text-rose-500 mr-0.5">*</span> From Date
                 </FormLabel>
-                <DatePicker 
+                <DatePicker
                   value={filterFromDate}
                   onChange={(val) => setFilterFromDate(val)}
                   size="sm"
@@ -421,7 +493,7 @@ export default function LeaveAndMovementPage() {
                 <FormLabel className="text-[11px] font-bold text-slate-600 !mb-0">
                   <span className="text-rose-500 mr-0.5">*</span> To Date
                 </FormLabel>
-                <DatePicker 
+                <DatePicker
                   value={filterToDate}
                   onChange={(val) => setFilterToDate(val)}
                   size="sm"
@@ -429,13 +501,13 @@ export default function LeaveAndMovementPage() {
                 />
               </div>
 
-              <div className="flex flex-col gap-1 w-40">
+              <div className="flex flex-col gap-1 w-44">
                 <FormLabel className="text-[11px] font-bold text-slate-600 !mb-0">Leave Type</FormLabel>
                 <Select
                   value={filterLeaveType}
                   onChange={(e) => setFilterLeaveType(e.target.value)}
                   options={[
-                    { id: 'All', name: 'Leave Type' },
+                    { id: 'All', name: 'All Leave Types' },
                     { id: 'Casual Leave [CL]', name: 'Casual Leave [CL]' },
                     { id: 'Sick Leave [SL]', name: 'Sick Leave [SL]' },
                     { id: 'Earn Leave [EL]', name: 'Earn Leave [EL]' },
@@ -443,13 +515,13 @@ export default function LeaveAndMovementPage() {
                 />
               </div>
 
-              <div className="flex flex-col gap-1 w-40">
+              <div className="flex flex-col gap-1 w-36">
                 <FormLabel className="text-[11px] font-bold text-slate-600 !mb-0">Status</FormLabel>
                 <Select
                   value={filterStatus}
                   onChange={(e) => setFilterStatus(e.target.value)}
                   options={[
-                    { id: 'All', name: 'status' },
+                    { id: 'All', name: 'All Status' },
                     { id: 'Pending', name: 'Pending' },
                     { id: 'Approved', name: 'Approved' },
                     { id: 'Rejected', name: 'Rejected' },
@@ -457,7 +529,7 @@ export default function LeaveAndMovementPage() {
                 />
               </div>
 
-              <Button className="h-8 bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-extrabold px-3.5 rounded transition-colors uppercase tracking-wider">
+              <Button className="h-8 bg-[#008060] hover:bg-[#006e52] text-white text-[11px] font-extrabold px-4 rounded-sm transition-colors uppercase tracking-wider shadow-2xs cursor-pointer">
                 VIEW
               </Button>
             </div>
@@ -466,58 +538,58 @@ export default function LeaveAndMovementPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold">
-                    <th className="py-2 px-2.5 border-r border-slate-200 text-center w-10">SL</th>
-                    <th className="py-2 px-2.5 border-r border-slate-200">Leave Type</th>
-                    <th className="py-2 px-2.5 border-r border-slate-200">Leave Duration</th>
-                    <th className="py-2 px-2.5 border-r border-slate-200 text-center">Total Leave Days</th>
-                    <th className="py-2 px-2.5 border-r border-slate-200">Location</th>
-                    <th className="py-2 px-2.5 border-r border-slate-200">Leave Reliever</th>
-                    <th className="py-2 px-2.5 border-r border-slate-200 max-w-xs">Reason</th>
-                    <th className="py-2 px-2.5 border-r border-slate-200 text-center">Attachment</th>
-                    <th className="py-2 px-2.5 border-r border-slate-200">Application Date</th>
-                    <th className="py-2 px-2.5 border-r border-slate-200 text-center">Status</th>
-                    <th className="py-2 px-2.5 text-center">Leave Details</th>
+                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-800 font-bold">
+                    <th className="py-2.5 px-2.5 border-r border-slate-200 text-center w-10">SL</th>
+                    <th className="py-2.5 px-2.5 border-r border-slate-200">Leave Type</th>
+                    <th className="py-2.5 px-2.5 border-r border-slate-200">Leave Duration</th>
+                    <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Total Leave Days</th>
+                    <th className="py-2.5 px-2.5 border-r border-slate-200">Location</th>
+                    <th className="py-2.5 px-2.5 border-r border-slate-200">Leave Reliever</th>
+                    <th className="py-2.5 px-2.5 border-r border-slate-200 max-w-xs">Reason</th>
+                    <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Attachment</th>
+                    <th className="py-2.5 px-2.5 border-r border-slate-200">Application Date</th>
+                    <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Status</th>
+                    <th className="py-2.5 px-2.5 text-center">Leave Details</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
                   {leaveHistory.map((item, idx) => (
                     <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-900">{item.leaveType}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-600 whitespace-nowrap">{item.duration}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center font-bold text-slate-900">{item.totalDays}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-600">{item.location}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-500">{item.reliever || '—'}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-600 text-[11.5px] leading-snug">{item.reason}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
+                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
+                      <td className="py-2.5 px-2.5 border-r border-slate-200 font-bold text-slate-900">{item.leaveType}</td>
+                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-slate-600 whitespace-nowrap">{item.duration}</td>
+                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-center font-bold text-slate-900">{item.totalDays}</td>
+                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-slate-600">{item.location}</td>
+                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-slate-500">{item.reliever || '—'}</td>
+                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-slate-600 text-[11.5px] leading-snug">{item.reason}</td>
+                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-center">
                         {item.attachment ? (
-                          <span className="text-emerald-600 underline font-bold cursor-pointer">File</span>
+                          <span className="text-emerald-600 underline font-bold cursor-pointer hover:text-emerald-700">File</span>
                         ) : '—'}
                       </td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-500 whitespace-nowrap">{item.appDate}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
-                        <span className={`px-2 py-0.2 text-[10.5px] font-extrabold rounded border ${item.statusBadge}`}>
+                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-slate-500 whitespace-nowrap">{item.appDate}</td>
+                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-center">
+                        <span className={`inline-block px-2 py-0.5 text-[11px] font-medium rounded-[3px] border ${item.statusBadge}`}>
                           {item.status}
                         </span>
                       </td>
-                      <td className="py-2 px-2.5 text-center">
+                      <td className="py-2.5 px-2.5 text-center">
                         <div className="flex items-center justify-center gap-1.5">
-                          <button 
+                          <button
                             onClick={() => setSelectedViewLeave(item)}
-                            className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" 
+                            className="w-6.5 h-6.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
                             title="View Details"
                           >
                             <Eye size={13} />
                           </button>
                           {item.status === 'Pending' && (
                             <>
-                              <button className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" title="Edit">
+                              <button className="w-6.5 h-6.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer" title="Edit">
                                 <Edit2 size={13} />
                               </button>
-                              <button 
-                                onClick={() => handleDeleteRecord(item.id)} 
-                                className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" 
+                              <button
+                                onClick={() => handleDeleteRecord(item.id)}
+                                className="w-6.5 h-6.5 rounded-full bg-slate-100 hover:bg-slate-200 text-rose-600 hover:bg-rose-50 flex items-center justify-center transition-colors cursor-pointer"
                                 title="Delete"
                               >
                                 <Trash2 size={13} />
@@ -539,18 +611,18 @@ export default function LeaveAndMovementPage() {
       {/* ================= TAB 2: MOVEMENT APPLICATION (MATCHING USER SCREENSHOT) ================= */}
       {mainTab === 'movement' && (
         <div className="space-y-4">
-          
+
           {/* TOP CARD: APPLY MOVEMENT FORM */}
-          <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-2xs space-y-4">
-            <form onSubmit={handleApplyMovement} className="space-y-3.5">
-              
+          <div className="bg-white p-3.5 rounded-sm border border-slate-200 shadow-2xs space-y-3">
+            <form onSubmit={handleApplyMovement} className="space-y-3">
+
               {/* ROW 1: Movement Type, From Date, To Date */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                 <div className="flex flex-col gap-1 w-full">
-                  <FormLabel className="text-[12px] font-bold text-slate-700 !mb-0">
+                  <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
                     <span className="text-rose-500 mr-0.5">*</span> Movement Type
                   </FormLabel>
-                  <Select 
+                  <Select
                     value={movementType}
                     onChange={(e) => setMovementType(e.target.value)}
                     options={[
@@ -564,10 +636,10 @@ export default function LeaveAndMovementPage() {
                 </div>
 
                 <div className="flex flex-col gap-1 w-full">
-                  <FormLabel className="text-[12px] font-bold text-slate-700 !mb-0">
+                  <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
                     <span className="text-rose-500 mr-0.5">*</span> From Date
                   </FormLabel>
-                  <DatePicker 
+                  <DatePicker
                     value={mFromDate}
                     onChange={(val) => setMFromDate(val)}
                     className="w-full"
@@ -575,10 +647,10 @@ export default function LeaveAndMovementPage() {
                 </div>
 
                 <div className="flex flex-col gap-1 w-full">
-                  <FormLabel className="text-[12px] font-bold text-slate-700 !mb-0">
+                  <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
                     <span className="text-rose-500 mr-0.5">*</span> To Date
                   </FormLabel>
-                  <DatePicker 
+                  <DatePicker
                     value={mToDate}
                     onChange={(val) => setMToDate(val)}
                     className="w-full"
@@ -586,61 +658,81 @@ export default function LeaveAndMovementPage() {
                 </div>
               </div>
 
-              {/* ROW 2: Start Time, End Time, Location, Reason */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="grid grid-cols-2 gap-2">
-                  <Input 
-                    label="* Start Time"
+              {/* ROW 2: Start Time, End Time, Location */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <div className="flex flex-col gap-1 w-full">
+                  <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <span className="text-rose-500 mr-0.5">*</span> Start Time
+                  </FormLabel>
+                  <Input
                     type="time"
                     value={mStartTime}
                     onChange={(e) => setMStartTime(e.target.value)}
-                    className="h-[36px] text-[12.5px]"
-                  />
-                  <Input 
-                    label="* End Time"
-                    type="time"
-                    value={mEndTime}
-                    onChange={(e) => setMEndTime(e.target.value)}
-                    className="h-[36px] text-[12.5px]"
+                    className="text-[12px]"
                   />
                 </div>
 
-                <Input 
-                  label="* Location"
-                  placeholder="Location"
-                  value={mLocation}
-                  onChange={(e) => setMLocation(e.target.value)}
-                  className="h-[36px] text-[12.5px]"
-                />
+                <div className="flex flex-col gap-1 w-full">
+                  <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <span className="text-rose-500 mr-0.5">*</span> End Time
+                  </FormLabel>
+                  <Input
+                    type="time"
+                    value={mEndTime}
+                    onChange={(e) => setMEndTime(e.target.value)}
+                    className="text-[12px]"
+                  />
+                </div>
 
-                <Input 
-                  label="* Reason"
-                  placeholder="Reason"
+                <div className="flex flex-col gap-1 w-full">
+                  <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <span className="text-rose-500 mr-0.5">*</span> Location
+                  </FormLabel>
+                  <Input
+                    placeholder="Location"
+                    value={mLocation}
+                    onChange={(e) => setMLocation(e.target.value)}
+                    className="text-[12px]"
+                  />
+                </div>
+              </div>
+
+              {/* ROW 3: REASON */}
+              <div className="flex flex-col gap-1 w-full">
+                <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                  <span className="text-rose-500 mr-0.5">*</span> Reason
+                </FormLabel>
+                <Textarea
+                  placeholder="Reason for movement"
                   value={mReason}
                   onChange={(e) => setMReason(e.target.value)}
-                  className="h-[36px] text-[12.5px]"
+                  rows={2}
+                  className="text-[12px] min-h-[52px] resize-none"
                 />
               </div>
 
-              {/* ROW 3: UPLOAD ATTACHMENT & APPLY BUTTON */}
-              <div className="flex items-center gap-3 pt-1">
-                <label className="flex items-center gap-1.5 px-3 py-1.5 border border-emerald-600 text-emerald-700 hover:bg-emerald-50 rounded text-[12px] font-bold cursor-pointer transition-colors shadow-2xs">
-                  <Upload size={14} className="stroke-[2.5]" />
+              {/* ROW 4: UPLOAD ATTACHMENT */}
+              <div className="flex items-center gap-2 pt-0.5">
+                <label className="flex items-center gap-1 px-2.5 py-1 border border-slate-300 text-slate-700 hover:bg-slate-50 rounded-sm text-[11.5px] font-bold cursor-pointer transition-colors shadow-2xs">
+                  <Upload size={13} className="stroke-[2.5]" />
                   <span>Upload Attachment</span>
-                  <input 
-                    type="file" 
-                    className="hidden" 
-                    onChange={(e) => setMAttachment(e.target.files ? e.target.files[0] : null)} 
+                  <input
+                    type="file"
+                    className="hidden"
+                    onChange={(e) => setMAttachment(e.target.files ? e.target.files[0] : null)}
                   />
                 </label>
+                <Info size={14} className="text-slate-400 hover:text-slate-600 cursor-pointer" title="Only PDF, PNG, JPG files up to 2MB allowed" />
+                {mAttachment && <span className="text-[11px] text-slate-600 font-semibold truncate max-w-[180px]">{mAttachment.name}</span>}
+              </div>
 
-                <Info size={16} className="text-rose-500 cursor-pointer" title="Only PDF, PNG, JPG files up to 2MB allowed" />
-
+              {/* ROW 5: APPLY BUTTON */}
+              <div className="pt-1">
                 <Button
                   type="submit"
-                  className="bg-[#008060] hover:bg-[#006e52] text-white text-[12px] font-extrabold px-5 h-8.5 rounded transition-colors uppercase tracking-wider shadow-2xs"
+                  className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-extrabold px-3.5 py-1.5 rounded-sm transition-colors shadow-2xs h-7.5"
                 >
-                  APPLY
+                  Apply Movement
                 </Button>
               </div>
 
@@ -649,14 +741,14 @@ export default function LeaveAndMovementPage() {
 
           {/* BOTTOM CARD: MOVEMENT LIST */}
           <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-2xs space-y-4">
-            
+
             {/* Header with Title & Search */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <h3 className="text-[15px] font-bold text-slate-900">Movement List</h3>
-              
+
               <div className="relative w-full sm:w-64">
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   placeholder="Search"
                   value={mSearchQuery}
                   onChange={(e) => setMSearchQuery(e.target.value)}
@@ -670,7 +762,7 @@ export default function LeaveAndMovementPage() {
             <div className="flex flex-wrap items-end gap-3 pb-3 border-b border-slate-100">
               <div className="flex flex-col gap-1">
                 <FormLabel className="text-[11px] font-bold text-slate-600 !mb-0">From Date</FormLabel>
-                <DatePicker 
+                <DatePicker
                   value={mFilterFromDate}
                   onChange={(val) => setMFilterFromDate(val)}
                   size="sm"
@@ -680,7 +772,7 @@ export default function LeaveAndMovementPage() {
 
               <div className="flex flex-col gap-1">
                 <FormLabel className="text-[11px] font-bold text-slate-600 !mb-0">To Date</FormLabel>
-                <DatePicker 
+                <DatePicker
                   value={mFilterToDate}
                   onChange={(val) => setMFilterToDate(val)}
                   size="sm"
@@ -688,7 +780,7 @@ export default function LeaveAndMovementPage() {
                 />
               </div>
 
-              <Button className="h-8 bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-extrabold px-4 rounded transition-colors uppercase tracking-wider">
+              <Button className="h-8 bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-extrabold px-4 rounded transition-colors ">
                 VIEW
               </Button>
             </div>
@@ -727,15 +819,15 @@ export default function LeaveAndMovementPage() {
                         </td>
                         <td className="py-2.5 px-3 border-r border-slate-200 text-slate-500 whitespace-nowrap">{item.appDate}</td>
                         <td className="py-2.5 px-3 border-r border-slate-200 text-center">
-                          <span className={`px-2 py-0.2 text-[10.5px] font-extrabold rounded border ${item.statusBadge}`}>
+                          <span className={`inline-block px-2 py-0.5 text-[11px] font-medium rounded-[3px] border ${item.statusBadge}`}>
                             {item.status}
                           </span>
                         </td>
                         <td className="py-2.5 px-3 text-center">
                           <div className="flex items-center justify-center gap-1.5">
-                            <button 
+                            <button
                               onClick={() => setSelectedViewLeave(item)}
-                              className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" 
+                              className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
                               title="View Details"
                             >
                               <Eye size={13} />
@@ -745,9 +837,9 @@ export default function LeaveAndMovementPage() {
                                 <button className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" title="Edit">
                                   <Edit2 size={13} />
                                 </button>
-                                <button 
-                                  onClick={() => handleDeleteMovementRecord(item.id)} 
-                                  className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" 
+                                <button
+                                  onClick={() => handleDeleteMovementRecord(item.id)}
+                                  className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
                                   title="Delete"
                                 >
                                   <Trash2 size={13} />
@@ -785,8 +877,8 @@ export default function LeaveAndMovementPage() {
         size="2xl"
         className="max-w-[1200px]"
         footer={
-          <Button 
-            onClick={() => setIsBalanceModalOpen(false)} 
+          <Button
+            onClick={() => setIsBalanceModalOpen(false)}
             className="bg-[#008060] hover:bg-[#006e52] text-white text-[12px] h-8 px-4 font-bold"
           >
             Close Window
@@ -794,7 +886,7 @@ export default function LeaveAndMovementPage() {
         }
       >
         <div className="space-y-4 text-left">
-          
+
           {/* Summary Cards */}
           <div className="grid grid-cols-3 gap-3 text-center">
             <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-md">
@@ -851,10 +943,10 @@ export default function LeaveAndMovementPage() {
           onClose={() => setSelectedViewLeave(null)}
           title="Application Details & Approval History"
           description={`Record #${selectedViewLeave.id}`}
-          size="lg"
+          size="2xl"
           footer={
-            <Button 
-              onClick={() => setSelectedViewLeave(null)} 
+            <Button
+              onClick={() => setSelectedViewLeave(null)}
               className="bg-[#008060] hover:bg-[#006e52] text-white text-[12px] h-8 px-4 font-bold"
             >
               Close
@@ -862,7 +954,7 @@ export default function LeaveAndMovementPage() {
           }
         >
           <div className="space-y-5 text-left">
-            
+
             {/* EMPLOYEE INFO BANNER */}
             <div className="p-3 bg-slate-50 border border-slate-200/80 rounded-lg flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -926,7 +1018,7 @@ export default function LeaveAndMovementPage() {
               </h4>
 
               <div className="space-y-2.5 text-[12px] relative pl-4 border-l-2 border-slate-200">
-                
+
                 {/* Step 1 */}
                 <div className="relative">
                   <span className="absolute -left-[21px] top-0.5 w-2.5 h-2.5 rounded-full bg-emerald-600 ring-4 ring-emerald-50"></span>

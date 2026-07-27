@@ -12,7 +12,7 @@ export default function KpiBonusPage() {
   const [searchParams] = useSearchParams();
   const tabParam = searchParams.get('tab');
 
-  // Main Sub-Tab: 'summary' (KPI & Bonus Summary) vs 'operations' (Operations Project History Table) vs 'campaign'
+  // 3 Essential Employee Tabs: 'summary' (KPI & Bonus Summary) vs 'operations' (Operations Project History) vs 'campaign' (Campaign & Sales Commission)
   const [mainPageTab, setMainPageTab] = useState<'summary' | 'operations' | 'campaign'>(
     tabParam === 'campaign' ? 'campaign' : tabParam === 'operations' ? 'operations' : 'summary'
   );
@@ -28,12 +28,8 @@ export default function KpiBonusPage() {
     }
   }, [tabParam]);
 
-  // Hierarchy Role View Mode: 'myRecord' | 'teamView' | 'managerView'
-  const [viewRoleMode, setViewRoleMode] = useState<string>('myRecord');
-
   const [selectedYear, setSelectedYear] = useState('2026');
   const [selectedQuarter, setSelectedQuarter] = useState('Q1 (Jul - Sep)');
-  const [selectedEmployeeFilter, setSelectedEmployeeFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
   
@@ -44,7 +40,7 @@ export default function KpiBonusPage() {
   // Campaign Sub-Tab: 'products' | 'clients' | 'commissions'
   const [campaignTab, setCampaignTab] = useState<'products' | 'clients' | 'commissions'>('products');
 
-  // MULTI-USER KPI & BONUS LEDGER DATA FOR ALL ROLES WITH ASSIGNED PROJECTS & PROJECT VALUES
+  // LOGGED-IN EMPLOYEE (AL MAMON) KPI & BONUS LEDGER DATA FOR ESS
   const allEmployeesBonusLedgerData = [
     {
       id: 1,
@@ -54,117 +50,82 @@ export default function KpiBonusPage() {
       team: 'Pixel Pioneers',
       assignProject: 'ERP Portal Customization',
       projectValue: '$ 5,500.00',
-      salesCount: 7,
       projectManager: 'Sarah Jenkins',
       teamLeader: 'Tanvir Ahmed',
-      period: 'Q1 (Jul - Sep) 2026',
-      targetPeriod: '$ 3,300',
-      totalSales: '$ 1,724',
-      unpaid: '$ 2,560',
-      elBonus: '৳ 0',
-      currentBonus: '৳ 0',
-      preCarry: '৳ 883',
-      newCarry: '৳ 0',
-      totalCarry: '৳ 7,437',
-      bonusAmount: '৳ 2,484',
-      status: 'Approved',
-      statusBadge: 'px-2 py-0.5 text-[10.5px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-300 rounded-full'
+      quarterlyTargets: {
+        'Q1 (Jul - Sep)': { target: '$ 3,300', sales: '$ 1,724', unpaid: '$ 2,560', bonus: '৳ 2,484', salesCount: 7, elBonus: '৳ 0', currentBonus: '৳ 0', preCarry: '৳ 883', newCarry: '৳ 0', totalCarry: '৳ 7,437', status: 'Approved' },
+        'Q2 (Oct - Dec)': { target: '$ 3,600', sales: '$ 3,100', unpaid: '$ 1,400', bonus: '৳ 3,150', salesCount: 10, elBonus: '৳ 1,000', currentBonus: '৳ 1,000', preCarry: '৳ 500', newCarry: '৳ 0', totalCarry: '৳ 6,200', status: 'Approved' },
+        'Q3 (Jan - Mar)': { target: '$ 4,000', sales: '$ 4,100', unpaid: '$ 800', bonus: '৳ 4,200', salesCount: 14, elBonus: '৳ 2,500', currentBonus: '৳ 2,500', preCarry: '৳ 200', newCarry: '৳ 0', totalCarry: '৳ 5,100', status: 'Calculated' },
+        'Q4 (Apr - Jun)': { target: '$ 4,200', sales: '$ 4,600', unpaid: '$ 300', bonus: '৳ 4,900', salesCount: 16, elBonus: '৳ 3,200', currentBonus: '৳ 3,200', preCarry: '৳ 0', newCarry: '৳ 0', totalCarry: '৳ 4,500', status: 'In Progress' },
+      }
     },
     {
       id: 2,
-      employee: 'Tanvir Ahmed',
-      empId: '14105',
-      role: 'Team Leader',
+      employee: 'Al Mamon',
+      empId: '15202',
+      role: 'Operation Man',
       team: 'Pixel Pioneers',
       assignProject: 'CRM Sync & Pipeline v2',
       projectValue: '$ 8,200.00',
-      salesCount: 12,
       projectManager: 'Sarah Jenkins',
       teamLeader: 'Tanvir Ahmed',
-      period: 'Q1 (Jul - Sep) 2026',
-      targetPeriod: '$ 5,000',
-      totalSales: '$ 4,800',
-      unpaid: '$ 1,200',
-      elBonus: '৳ 4,500',
-      currentBonus: '৳ 4,500',
-      preCarry: '৳ 1,200',
-      newCarry: '৳ 0',
-      totalCarry: '৳ 5,700',
-      bonusAmount: '৳ 5,700',
-      status: 'Confirmed',
-      statusBadge: 'px-2 py-0.5 text-[10.5px] font-bold bg-blue-50 text-blue-600 border border-blue-300 rounded-full'
+      quarterlyTargets: {
+        'Q1 (Jul - Sep)': { target: '$ 5,000', sales: '$ 4,800', unpaid: '$ 1,200', bonus: '৳ 5,700', salesCount: 12, elBonus: '৳ 4,500', currentBonus: '৳ 4,500', preCarry: '৳ 1,200', newCarry: '৳ 0', totalCarry: '৳ 5,700', status: 'Confirmed' },
+        'Q2 (Oct - Dec)': { target: '$ 5,500', sales: '$ 5,800', unpaid: '$ 800', bonus: '৳ 6,200', salesCount: 15, elBonus: '৳ 5,000', currentBonus: '৳ 5,000', preCarry: '৳ 800', newCarry: '৳ 0', totalCarry: '৳ 5,800', status: 'Approved' },
+        'Q3 (Jan - Mar)': { target: '$ 6,000', sales: '$ 6,400', unpaid: '$ 500', bonus: '৳ 7,100', salesCount: 18, elBonus: '৳ 6,000', currentBonus: '৳ 6,000', preCarry: '৳ 500', newCarry: '৳ 0', totalCarry: '৳ 6,500', status: 'Calculated' },
+        'Q4 (Apr - Jun)': { target: '$ 6,500', sales: '$ 6,200', unpaid: '$ 900', bonus: '৳ 6,800', salesCount: 16, elBonus: '৳ 5,500', currentBonus: '৳ 5,500', preCarry: '৳ 200', newCarry: '৳ 0', totalCarry: '৳ 5,700', status: 'In Progress' },
+      }
     },
     {
       id: 3,
-      employee: 'Sarah Jenkins',
-      empId: '12001',
-      role: 'Project Manager',
-      team: 'Operations Management',
+      employee: 'Al Mamon',
+      empId: '15202',
+      role: 'Operation Man',
+      team: 'Pixel Pioneers',
       assignProject: 'Enterprise Multi-Tenant Rollout',
-      projectValue: '$ 25,000.00',
-      salesCount: 28,
+      projectValue: '$ 12,500.00',
       projectManager: 'Sarah Jenkins',
-      teamLeader: 'Self',
-      period: 'Q1 (Jul - Sep) 2026',
-      targetPeriod: '$ 12,000',
-      totalSales: '$ 14,500',
-      unpaid: '$ 3,100',
-      elBonus: '৳ 12,000',
-      currentBonus: '৳ 12,000',
-      preCarry: '৳ 3,400',
-      newCarry: '৳ 0',
-      totalCarry: '৳ 15,400',
-      bonusAmount: '৳ 15,400',
-      status: 'Approved',
-      statusBadge: 'px-2 py-0.5 text-[10.5px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-300 rounded-full'
+      teamLeader: 'Tanvir Ahmed',
+      quarterlyTargets: {
+        'Q1 (Jul - Sep)': { target: '$ 12,000', sales: '$ 14,500', unpaid: '$ 3,100', bonus: '৳ 15,400', salesCount: 28, elBonus: '৳ 12,000', currentBonus: '৳ 12,000', preCarry: '৳ 3,400', newCarry: '৳ 0', totalCarry: '৳ 15,400', status: 'Approved' },
+        'Q2 (Oct - Dec)': { target: '$ 14,000', sales: '$ 16,200', unpaid: '$ 2,500', bonus: '৳ 18,000', salesCount: 32, elBonus: '৳ 14,000', currentBonus: '৳ 14,000', preCarry: '৳ 2,500', newCarry: '৳ 0', totalCarry: '৳ 16,500', status: 'Approved' },
+        'Q3 (Jan - Mar)': { target: '$ 15,000', sales: '$ 15,800', unpaid: '$ 1,800', bonus: '৳ 17,200', salesCount: 30, elBonus: '৳ 13,500', currentBonus: '৳ 13,500', preCarry: '৳ 1,800', newCarry: '৳ 0', totalCarry: '৳ 15,300', status: 'Calculated' },
+        'Q4 (Apr - Jun)': { target: '$ 16,000', sales: '$ 17,500', unpaid: '$ 1,200', bonus: '৳ 19,100', salesCount: 35, elBonus: '৳ 15,000', currentBonus: '৳ 15,000', preCarry: '৳ 1,200', newCarry: '৳ 0', totalCarry: '৳ 16,200', status: 'In Progress' },
+      }
     },
     {
       id: 4,
-      employee: 'Rafiqul Islam',
-      empId: '15309',
+      employee: 'Al Mamon',
+      empId: '15202',
       role: 'Operation Man',
-      team: 'Alpha Operatives',
+      team: 'Pixel Pioneers',
       assignProject: 'Mobile App API Gateway',
       projectValue: '$ 4,800.00',
-      salesCount: 5,
       projectManager: 'Sarah Jenkins',
-      teamLeader: 'Monir Hossain',
-      period: 'Q1 (Jul - Sep) 2026',
-      targetPeriod: '$ 3,300',
-      totalSales: '$ 2,900',
-      unpaid: '$ 950',
-      elBonus: '৳ 1,200',
-      currentBonus: '৳ 1,200',
-      preCarry: '৳ 450',
-      newCarry: '৳ 0',
-      totalCarry: '৳ 1,650',
-      bonusAmount: '৳ 1,650',
-      status: 'In Progress',
-      statusBadge: 'px-2 py-0.5 text-[10.5px] font-bold bg-amber-50 text-amber-600 border border-amber-300 rounded-full'
+      teamLeader: 'Tanvir Ahmed',
+      quarterlyTargets: {
+        'Q1 (Jul - Sep)': { target: '$ 3,300', sales: '$ 2,900', unpaid: '$ 950', bonus: '৳ 1,650', salesCount: 5, elBonus: '৳ 1,200', currentBonus: '৳ 1,200', preCarry: '৳ 450', newCarry: '৳ 0', totalCarry: '৳ 1,650', status: 'In Progress' },
+        'Q2 (Oct - Dec)': { target: '$ 3,500', sales: '$ 3,400', unpaid: '$ 600', bonus: '৳ 2,100', salesCount: 8, elBonus: '৳ 1,600', currentBonus: '৳ 1,600', preCarry: '৳ 200', newCarry: '৳ 0', totalCarry: '৳ 1,800', status: 'Approved' },
+        'Q3 (Jan - Mar)': { target: '$ 3,800', sales: '$ 3,900', unpaid: '$ 400', bonus: '৳ 2,800', salesCount: 11, elBonus: '৳ 2,200', currentBonus: '৳ 2,200', preCarry: '৳ 100', newCarry: '৳ 0', totalCarry: '৳ 2,300', status: 'Calculated' },
+        'Q4 (Apr - Jun)': { target: '$ 4,000', sales: '$ 4,100', unpaid: '$ 300', bonus: '৳ 3,200', salesCount: 13, elBonus: '৳ 2,600', currentBonus: '৳ 2,600', preCarry: '৳ 0', newCarry: '৳ 0', totalCarry: '৳ 2,600', status: 'In Progress' },
+      }
     },
     {
       id: 5,
-      employee: 'Mahmud Hassan',
-      empId: '15412',
+      employee: 'Al Mamon',
+      empId: '15202',
       role: 'Operation Man',
       team: 'Pixel Pioneers',
       assignProject: 'Inventory Warehouse Sync',
       projectValue: '$ 6,000.00',
-      salesCount: 9,
       projectManager: 'Sarah Jenkins',
       teamLeader: 'Tanvir Ahmed',
-      period: 'Q1 (Jul - Sep) 2026',
-      targetPeriod: '$ 3,300',
-      totalSales: '$ 3,450',
-      unpaid: '$ 600',
-      elBonus: '৳ 2,800',
-      currentBonus: '৳ 2,800',
-      preCarry: '৳ 0',
-      newCarry: '৳ 0',
-      totalCarry: '৳ 2,800',
-      bonusAmount: '৳ 2,800',
-      status: 'Paid',
-      statusBadge: 'px-2 py-0.5 text-[10.5px] font-bold bg-purple-50 text-purple-600 border border-purple-300 rounded-full'
+      quarterlyTargets: {
+        'Q1 (Jul - Sep)': { target: '$ 3,300', sales: '$ 3,450', unpaid: '$ 600', bonus: '৳ 2,800', salesCount: 9, elBonus: '৳ 2,800', currentBonus: '৳ 2,800', preCarry: '৳ 0', newCarry: '৳ 0', totalCarry: '৳ 2,800', status: 'Paid' },
+        'Q2 (Oct - Dec)': { target: '$ 3,600', sales: '$ 3,800', unpaid: '$ 400', bonus: '৳ 3,200', salesCount: 11, elBonus: '৳ 3,000', currentBonus: '৳ 3,000', preCarry: '৳ 0', newCarry: '৳ 0', totalCarry: '৳ 3,000', status: 'Approved' },
+        'Q3 (Jan - Mar)': { target: '$ 4,000', sales: '$ 4,200', unpaid: '$ 300', bonus: '৳ 3,900', salesCount: 13, elBonus: '৳ 3,600', currentBonus: '৳ 3,600', preCarry: '৳ 0', newCarry: '৳ 0', totalCarry: '৳ 3,600', status: 'Calculated' },
+        'Q4 (Apr - Jun)': { target: '$ 4,200', sales: '$ 4,500', unpaid: '$ 200', bonus: '৳ 4,400', salesCount: 15, elBonus: '৳ 4,100', currentBonus: '৳ 4,100', preCarry: '৳ 0', newCarry: '৳ 0', totalCarry: '৳ 4,100', status: 'In Progress' },
+      }
     }
   ];
 
@@ -306,270 +267,281 @@ export default function KpiBonusPage() {
     { id: 2, date: '05 May, 2026', orderId: 'FO992BAA1092', client: 'studiomax', product: 'Custom Module Development Pack', amount: '$ 124.00', rate: '10%', commission: '৳ 184.00', status: 'Approved' },
   ];
 
-  // Filter ledgers based on Role View mode and search filters
-  const displayedLedgerData = allEmployeesBonusLedgerData.filter(row => {
-    if (viewRoleMode === 'myRecord' && row.employee !== 'Al Mamon') return false;
-    if (viewRoleMode === 'teamView' && row.team !== 'Pixel Pioneers') return false;
-    if (selectedEmployeeFilter !== 'All' && row.employee !== selectedEmployeeFilter) return false;
+  // Dynamic Quarter Filter Logic: Map quarter-wise target values for each employee row
+  const qCode = selectedQuarter.includes('All') ? 'Q1-Q4' : selectedQuarter.split(' ')[0]; // e.g. 'Q1'
+
+  const availableQuarters = [
+    'Q1 (Jul - Sep)',
+    'Q2 (Oct - Dec)',
+    'Q3 (Jan - Mar)',
+    'Q4 (Apr - Jun)'
+  ];
+
+  const rawFilteredLedger = allEmployeesBonusLedgerData.filter(row => {
     if (searchQuery && !row.employee.toLowerCase().includes(searchQuery.toLowerCase()) && !row.empId.includes(searchQuery) && !row.assignProject.toLowerCase().includes(searchQuery.toLowerCase())) return false;
     return true;
   });
 
-  const toggleSelectRow = (id: number) => {
-    if (selectedRows.includes(id)) {
-      setSelectedRows(selectedRows.filter(rId => rId !== id));
+  const displayedLedgerData = rawFilteredLedger.flatMap(row => {
+    if (selectedQuarter === 'All Quarters (Q1 - Q4)') {
+      return availableQuarters.map(qKey => {
+        const qData = row.quarterlyTargets[qKey as keyof typeof row.quarterlyTargets];
+        return {
+          ...row,
+          id: `${row.id}-${qKey}`,
+          qCode: qKey.split(' ')[0],
+          period: `${qKey} ${selectedYear}`,
+          targetPeriod: qData.target,
+          totalSales: qData.sales,
+          unpaid: qData.unpaid,
+          bonusAmount: qData.bonus,
+          salesCount: qData.salesCount,
+          elBonus: qData.elBonus,
+          currentBonus: qData.currentBonus,
+          preCarry: qData.preCarry,
+          newCarry: qData.newCarry,
+          totalCarry: qData.totalCarry,
+          status: qData.status
+        };
+      });
     } else {
-      setSelectedRows([...selectedRows, id]);
+      const qData = row.quarterlyTargets[selectedQuarter as keyof typeof row.quarterlyTargets] || row.quarterlyTargets['Q1 (Jul - Sep)'];
+      return [{
+        ...row,
+        qCode,
+        period: `${selectedQuarter} ${selectedYear}`,
+        targetPeriod: qData.target,
+        totalSales: qData.sales,
+        unpaid: qData.unpaid,
+        bonusAmount: qData.bonus,
+        salesCount: qData.salesCount,
+        elBonus: qData.elBonus,
+        currentBonus: qData.currentBonus,
+        preCarry: qData.preCarry,
+        newCarry: qData.newCarry,
+        totalCarry: qData.totalCarry,
+        status: qData.status
+      }];
     }
-  };
+  });
+
+  // Calculate summary stat cards for Al Mamon (logged in user) or active record
+  const currentAlMamonData = selectedQuarter === 'All Quarters (Q1 - Q4)' ? {
+    targetPeriod: `$ ${displayedLedgerData.reduce((acc, item) => acc + (parseFloat(item.targetPeriod.replace(/[^0-9.]/g, '')) || 0), 0).toLocaleString()}`,
+    totalSales: `$ ${displayedLedgerData.reduce((acc, item) => acc + (parseFloat(item.totalSales.replace(/[^0-9.]/g, '')) || 0), 0).toLocaleString()}`,
+    unpaid: `$ ${displayedLedgerData.reduce((acc, item) => acc + (parseFloat(item.unpaid.replace(/[^0-9.]/g, '')) || 0), 0).toLocaleString()}`,
+    bonusAmount: `৳ ${displayedLedgerData.reduce((acc, item) => acc + (parseFloat(item.bonusAmount.replace(/[^0-9.]/g, '')) || 0), 0).toLocaleString()}`,
+    totalCarry: `৳ ${displayedLedgerData.reduce((acc, item) => acc + (parseFloat(item.totalCarry.replace(/[^0-9.]/g, '')) || 0), 0).toLocaleString()}`,
+    elBonus: `৳ ${displayedLedgerData.reduce((acc, item) => acc + (parseFloat(item.elBonus.replace(/[^0-9.]/g, '')) || 0), 0).toLocaleString()}`,
+    currentBonus: `৳ ${displayedLedgerData.reduce((acc, item) => acc + (parseFloat(item.currentBonus.replace(/[^0-9.]/g, '')) || 0), 0).toLocaleString()}`,
+    newCarry: '৳ 0',
+  } : (displayedLedgerData.find(d => d.empId === '15202') || displayedLedgerData[0] || {});
+
+  const filteredOperationsLines = operationsHistoryLines.filter(row => {
+    if (searchQuery && !row.empName.toLowerCase().includes(searchQuery.toLowerCase()) && !row.name.toLowerCase().includes(searchQuery.toLowerCase()) && !row.company.toLowerCase().includes(searchQuery.toLowerCase()) && !row.customer.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+    return true;
+  });
 
   return (
-    <div className="p-4 max-w-[1600px] mx-auto bg-[#f8f9fa] min-h-screen text-slate-800 space-y-4 font-sans antialiased pb-20">
+    <div className="p-2.5 w-full max-w-none mx-auto bg-[#f8f9fa] min-h-screen text-slate-800 space-y-2.5 font-sans antialiased pb-12">
       
       {/* PAGE HEADER TITLE & TOP MAIN TAB NAVIGATION */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-1 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1 border-b border-slate-200">
         <div>
-          <h1 className="text-[20px] font-bold text-slate-900 tracking-tight">
-            KPI & Bonus Dashboard
+          <h1 className="text-[15px] font-extrabold text-slate-900 tracking-tight leading-snug">
+            {mainPageTab === 'summary' ? 'KPI & Bonus Dashboard' : mainPageTab === 'operations' ? 'Operations Project History' : 'Campaign & Sales Commission'}
           </h1>
-          <p className="text-[13px] font-medium text-slate-500 mt-0.5">
+          <p className="text-[11px] font-medium text-slate-500">
             Operations projects, order history, team bonuses, carry and penalty records.
           </p>
         </div>
 
-        {/* TOP TAB SWITCHER: SUMMARY LEDGER VS OPERATIONS HISTORY VS CAMPAIGN */}
-        <div className="flex items-center gap-1 bg-slate-200/80 p-1 rounded-lg border border-slate-300/70 self-start md:self-auto flex-wrap">
+        {/* TOP TAB SWITCHER: KPI & BONUS SUMMARY VS OPERATIONS PROJECT HISTORY VS CAMPAIGN & COMMISSION */}
+        <div className="flex items-center gap-0.5 bg-[#f1f5f9] p-0.5 rounded-sm border border-slate-200 self-start sm:self-auto flex-wrap">
           <button 
             onClick={() => setMainPageTab('summary')}
-            className={`px-3 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-1.5 ${
+            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-xs transition-all cursor-pointer flex items-center gap-1 ${
               mainPageTab === 'summary'
-                ? 'bg-white text-slate-900 shadow-2xs'
+                ? 'bg-white text-slate-900 shadow-2xs border border-slate-200'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <Award size={14} className={mainPageTab === 'summary' ? 'text-[#008060]' : 'text-slate-400'} />
+            <Award size={12} className={mainPageTab === 'summary' ? 'text-[#008060]' : 'text-slate-400'} />
             <span>KPI & Bonus Summary</span>
           </button>
 
           <button 
             onClick={() => setMainPageTab('operations')}
-            className={`px-3 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-1.5 ${
+            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-xs transition-all cursor-pointer flex items-center gap-1 ${
               mainPageTab === 'operations'
-                ? 'bg-white text-slate-900 shadow-2xs'
+                ? 'bg-white text-slate-900 shadow-2xs border border-slate-200'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <ListChecks size={14} className={mainPageTab === 'operations' ? 'text-[#008060]' : 'text-slate-400'} />
+            <ListChecks size={12} className={mainPageTab === 'operations' ? 'text-[#008060]' : 'text-slate-400'} />
             <span>Operations Project History</span>
           </button>
 
           <button 
             onClick={() => setMainPageTab('campaign')}
-            className={`px-3 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-1.5 ${
+            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-xs transition-all cursor-pointer flex items-center gap-1 ${
               mainPageTab === 'campaign'
-                ? 'bg-white text-slate-900 shadow-2xs'
+                ? 'bg-white text-slate-900 shadow-2xs border border-slate-200'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            <Target size={14} className={mainPageTab === 'campaign' ? 'text-[#008060]' : 'text-slate-400'} />
-            <span>Campaign & Commission</span>
+            <Target size={12} className={mainPageTab === 'campaign' ? 'text-[#008060]' : 'text-slate-400'} />
+            <span>Campaign & Sales Commission</span>
           </button>
         </div>
       </div>
 
-      {/* ================= VIEW 1: MAIN KPI & BONUS SUMMARY ================= */}
-      {mainPageTab === 'summary' && (
-        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-4">
-          
-          {/* HEADER USER BANNER & ROLE HIERARCHY SWITCHER + FILTERS */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 pb-3 border-b border-slate-100">
-            
-            {/* Left: Avatar & Role Switcher */}
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-emerald-700 text-white font-extrabold flex items-center justify-center text-[12px] shrink-0">
-                AM
-              </div>
-              <div className="space-y-0.5">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-[14px] font-bold text-slate-900 leading-tight">Al Mamon</h2>
-                  <span className="bg-emerald-50 text-[#008060] px-2 py-0.2 rounded text-[10.5px] font-bold border border-emerald-200">
-                    OPERATION MAN
-                  </span>
-                </div>
-                
-                {/* Role View Switcher */}
-                <div className="flex items-center gap-1.5 pt-0.5">
-                  <span className="text-[11px] font-bold text-slate-500">View Mode:</span>
-                  <select 
-                    value={viewRoleMode}
-                    onChange={(e) => setViewRoleMode(e.target.value)}
-                    className="h-6 px-2 bg-slate-100 border border-slate-200 rounded text-[11px] font-extrabold text-slate-800 outline-none cursor-pointer focus:border-[#008060]"
-                  >
-                    <option value="myRecord">My ESS Record (Al Mamon)</option>
-                    <option value="teamView">Team Leader View (Pixel Pioneers Team)</option>
-                    <option value="managerView">Operation Manager View (Full Department)</option>
-                  </select>
-                </div>
-              </div>
+      {/* GLOBAL USER BANNER */}
+      <div className="bg-white px-3 py-2 rounded-md border border-slate-200 shadow-2xs flex flex-col lg:flex-row lg:items-center justify-between gap-2">
+        
+        {/* Left: Avatar & Employee Info */}
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-full bg-emerald-700 text-white font-extrabold flex items-center justify-center text-[11px] shrink-0 shadow-2xs">
+            AM
+          </div>
+          <div className="space-y-0">
+            <div className="flex items-center gap-1.5">
+              <h2 className="text-[13px] font-bold text-slate-900 leading-tight">Al Mamon</h2>
+              <span className="bg-emerald-50 text-[#008060] px-1.5 py-0.1 rounded text-[10px] font-bold border border-emerald-200">
+                OPERATION MAN
+              </span>
             </div>
+            <p className="text-[10.5px] font-semibold text-slate-500">Employee Self Service Performance Portal</p>
+          </div>
+        </div>
 
-            {/* Right: Year, Quarter & Employee Filters */}
-            <div className="flex flex-wrap items-center gap-3">
-              
-              {/* Employee Filter (Shown in Team/Manager Mode) */}
-              {viewRoleMode !== 'myRecord' && (
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[12px] font-bold text-slate-600 shrink-0">Employee:</span>
-                  <div className="w-36">
-                    <Select 
-                      value={selectedEmployeeFilter}
-                      onChange={(e) => setSelectedEmployeeFilter(e.target.value)}
-                      showSearch={false}
-                      options={[
-                        { id: 'All', name: 'All Employees' },
-                        { id: 'Al Mamon', name: 'Al Mamon (Op Man)' },
-                        { id: 'Tanvir Ahmed', name: 'Tanvir Ahmed (TL)' },
-                        { id: 'Sarah Jenkins', name: 'Sarah Jenkins (PM)' },
-                        { id: 'Rafiqul Islam', name: 'Rafiqul Islam (Op Man)' },
-                        { id: 'Mahmud Hassan', name: 'Mahmud Hassan (Op Man)' },
-                      ]}
-                    />
-                  </div>
-                </div>
-              )}
-
-              <div className="flex items-center gap-1.5">
-                <span className="text-[12px] font-bold text-slate-600 shrink-0">Year:</span>
-                <div className="w-24">
-                  <Select 
-                    value={selectedYear}
-                    onChange={(e) => setSelectedYear(e.target.value)}
-                    showSearch={false}
-                    options={[
-                      { id: '2026', name: '2026' },
-                      { id: '2025', name: '2025' }
-                    ]}
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center gap-1.5">
-                <span className="text-[12px] font-bold text-slate-600 shrink-0">Quarter:</span>
-                <div className="w-36 sm:w-40">
-                  <Select 
-                    value={selectedQuarter}
-                    onChange={(e) => setSelectedQuarter(e.target.value)}
-                    showSearch={false}
-                    options={[
-                      { id: 'Q1 (Jul - Sep)', name: 'Q1 (Jul - Sep)' },
-                      { id: 'Q2 (Oct - Dec)', name: 'Q2 (Oct - Dec)' },
-                      { id: 'Q3 (Jan - Mar)', name: 'Q3 (Jan - Mar)' },
-                      { id: 'Q4 (Apr - Jun)', name: 'Q4 (Apr - Jun)' }
-                    ]}
-                  />
-                </div>
-              </div>
-
-              <Button 
-                className="bg-[#008060] hover:bg-[#006e52] text-white text-[12px] font-extrabold h-8 px-3.5 tracking-wide cursor-pointer flex items-center gap-1 shrink-0"
-              >
-                <RefreshCw size={13} />
-                <span>Apply</span>
-              </Button>
-
+        {/* Right: Year, Quarter & Apply Button */}
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-1">
+            <span className="text-[11.5px] font-bold text-slate-600 shrink-0">Year:</span>
+            <div className="w-20">
+              <Select 
+                value={selectedYear}
+                onChange={(e) => setSelectedYear(e.target.value)}
+                showSearch={false}
+                options={[
+                  { id: '2026', name: '2026' },
+                  { id: '2025', name: '2025' }
+                ]}
+              />
             </div>
-
           </div>
 
-          {/* 8 MINIMAL STAT METRIC CARDS */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-1">
-            <div className="bg-white p-3 rounded-lg border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[85px]">
-              <span className="text-[10.5px] font-bold text-slate-500 tracking-wider">TARGET (PERIOD $)</span>
-              <h2 className="text-[19px] font-extrabold text-slate-900 leading-none">
-                {viewRoleMode === 'myRecord' ? '$ 3,300' : '$ 27,100'}
-              </h2>
+          <div className="flex items-center gap-1">
+            <span className="text-[11.5px] font-bold text-slate-600 shrink-0">Quarter:</span>
+            <div className="w-40">
+              <Select 
+                value={selectedQuarter}
+                onChange={(e) => setSelectedQuarter(e.target.value)}
+                showSearch={false}
+                options={[
+                  { id: 'All Quarters (Q1 - Q4)', name: 'All Quarters (Q1 - Q4)' },
+                  { id: 'Q1 (Jul - Sep)', name: 'Q1 (Jul - Sep)' },
+                  { id: 'Q2 (Oct - Dec)', name: 'Q2 (Oct - Dec)' },
+                  { id: 'Q3 (Jan - Mar)', name: 'Q3 (Jan - Mar)' },
+                  { id: 'Q4 (Apr - Jun)', name: 'Q4 (Apr - Jun)' }
+                ]}
+              />
+            </div>
+          </div>
+
+          <Button 
+            className="bg-[#008060] hover:bg-[#006e52] text-white text-[11px] font-extrabold h-7 px-2.5 tracking-wide cursor-pointer flex items-center gap-1 shrink-0"
+          >
+            <RefreshCw size={12} />
+            <span>Apply</span>
+          </Button>
+
+        </div>
+
+      </div>
+
+      {/* ================= VIEW 1: KPI & BONUS SUMMARY ================= */}
+      {mainPageTab === 'summary' && (
+        <div className="bg-white p-3 rounded-md border border-slate-200 shadow-2xs space-y-2.5">
+          
+          {/* 8 MINIMAL DYNAMIC STAT METRIC CARDS */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2">
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider flex items-center gap-1">
+                <span>TARGET ($)</span>
+                <span className="text-[8.5px] bg-[#008060] text-white px-1 py-0 rounded font-black">{qCode}</span>
+              </span>
+              <h2 className="text-[14.5px] font-extrabold text-slate-900 leading-none">{currentAlMamonData.targetPeriod || '$ 3,300'}</h2>
             </div>
 
-            <div className="bg-white p-3 rounded-lg border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[85px]">
-              <span className="text-[10.5px] font-bold text-slate-500 tracking-wider">TOTAL SALES ($)</span>
-              <h2 className="text-[19px] font-extrabold text-emerald-700 leading-none">
-                {viewRoleMode === 'myRecord' ? '$ 1,724' : '$ 26,874'}
-              </h2>
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">SALES ($)</span>
+              <h2 className="text-[14.5px] font-extrabold text-emerald-700 leading-none">{currentAlMamonData.totalSales || '$ 1,724'}</h2>
             </div>
 
-            <div className="bg-white p-3 rounded-lg border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[85px]">
-              <span className="text-[10.5px] font-bold text-slate-500 tracking-wider">UNPAID ($)</span>
-              <h2 className="text-[19px] font-extrabold text-rose-600 leading-none">
-                {viewRoleMode === 'myRecord' ? '$ 2,560' : '$ 8,310'}
-              </h2>
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">UNPAID ($)</span>
+              <h2 className="text-[14.5px] font-extrabold text-rose-600 leading-none">{currentAlMamonData.unpaid || '$ 2,560'}</h2>
             </div>
 
-            <div className="bg-white p-3 rounded-lg border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[85px]">
-              <span className="text-[10.5px] font-bold text-slate-500 tracking-wider">EL. BONUS (৳)</span>
-              <h2 className="text-[19px] font-extrabold text-slate-900 leading-none">
-                {viewRoleMode === 'myRecord' ? '৳ 0' : '৳ 22,500'}
-              </h2>
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">EL. BONUS</span>
+              <h2 className="text-[14.5px] font-extrabold text-slate-900 leading-none">{currentAlMamonData.elBonus || '৳ 0'}</h2>
             </div>
 
-            <div className="bg-white p-3 rounded-lg border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[85px]">
-              <div>
-                <span className="text-[10.5px] font-bold text-slate-500 tracking-wider block">CURRENT BONUS (৳)</span>
-                <span className="text-[9px] font-semibold text-slate-400">Pre-carry: ৳ 883</span>
-              </div>
-              <h2 className="text-[19px] font-extrabold text-slate-900 leading-none">
-                {viewRoleMode === 'myRecord' ? '৳ 0' : '৳ 22,500'}
-              </h2>
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">CUR. BONUS</span>
+              <h2 className="text-[14.5px] font-extrabold text-slate-900 leading-none">{currentAlMamonData.currentBonus || '৳ 0'}</h2>
             </div>
 
-            <div className="bg-white p-3 rounded-lg border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[85px]">
-              <span className="text-[10.5px] font-bold text-slate-500 tracking-wider">NEW CARRY (৳)</span>
-              <h2 className="text-[19px] font-extrabold text-orange-600 leading-none">৳ 0</h2>
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">NEW CARRY</span>
+              <h2 className="text-[14.5px] font-extrabold text-orange-600 leading-none">{currentAlMamonData.newCarry || '৳ 0'}</h2>
             </div>
 
-            <div className="bg-white p-3 rounded-lg border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[85px]">
-              <span className="text-[10.5px] font-bold text-slate-500 tracking-wider">TOTAL CARRY (৳)</span>
-              <h2 className="text-[19px] font-extrabold text-indigo-700 leading-none">
-                {viewRoleMode === 'myRecord' ? '৳ 7,437' : '৳ 32,987'}
-              </h2>
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">TOT. CARRY</span>
+              <h2 className="text-[14.5px] font-extrabold text-indigo-700 leading-none">{currentAlMamonData.totalCarry || '৳ 7,437'}</h2>
             </div>
 
-            <div className="bg-white p-3 rounded-lg border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[85px]">
-              <span className="text-[10.5px] font-bold text-slate-500 tracking-wider">BONUS AMOUNT (৳)</span>
-              <h2 className="text-[19px] font-extrabold text-[#008060] leading-none">
-                {viewRoleMode === 'myRecord' ? '৳ 2,484' : '৳ 28,334'}
-              </h2>
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">BONUS AMT</span>
+              <h2 className="text-[14.5px] font-extrabold text-[#008060] leading-none">{currentAlMamonData.bonusAmount || '৳ 2,484'}</h2>
             </div>
           </div>
 
           {/* CONDITIONAL CONTENT: SUMMARY TABLE VS DETAILED RECORD PAGE */}
           {!selectedRowDetail ? (
             /* MAIN MULTI-USER KPI & BONUS SUMMARY TABLE WITH ASSIGNED PROJECTS & VALUES */
-            <div className="space-y-3 pt-2">
+            <div className="space-y-2.5 pt-1.5">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <h3 className="text-[14px] font-bold text-slate-900">
-                  {viewRoleMode === 'myRecord' ? 'KPI & Bonus Summary Ledger' : viewRoleMode === 'teamView' ? 'Pixel Pioneers Team Bonus Ledger' : 'Department Bonus Approval Ledger'}
-                </h3>
+                <div className="flex items-center gap-2">
+                  <h3 className="text-[14px] font-bold text-slate-900">KPI & Bonus Summary Ledger</h3>
+                  <span className="px-2 py-0.5 text-[10px] font-extrabold bg-[#008060]/10 text-[#008060] rounded border border-[#008060]/20 flex items-center gap-1">
+                    <Target size={11} />
+                    <span>Quarter Wise Target Ledger</span>
+                  </span>
+                </div>
                 
-                {/* Search Bar for Team/Manager View */}
-                {viewRoleMode !== 'myRecord' && (
-                  <div className="relative w-full sm:w-64">
-                    <input 
-                      type="text"
-                      placeholder="Search employee, ID or project..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full h-7 px-2.5 pr-7 text-[11.5px] border border-slate-200 rounded outline-none focus:border-[#008060] bg-slate-50 focus:bg-white"
-                    />
-                    <Search size={13} className="absolute right-2 top-1.5 text-slate-400 pointer-events-none" />
-                  </div>
-                )}
+                {/* Search Bar */}
+                <div className="relative w-full sm:w-60">
+                  <input 
+                    type="text"
+                    placeholder="Search project or ID..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full h-7 px-2.5 pr-7 text-[11px] border border-slate-200 rounded outline-none focus:border-[#008060] bg-slate-50 focus:bg-white"
+                  />
+                  <Search size={13} className="absolute right-2 top-1.5 text-slate-400 pointer-events-none" />
+                </div>
               </div>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+              <div className="border border-slate-200 rounded overflow-hidden">
+                <table className="w-full text-left text-[11px] border-collapse">
                   <thead>
-                    <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold">
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-center w-8">
+                    <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold text-[10.5px]">
+                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-center w-6">
                         <input 
                           type="checkbox"
                           checked={selectedRows.length === displayedLedgerData.length && displayedLedgerData.length > 0}
@@ -577,32 +549,32 @@ export default function KpiBonusPage() {
                           className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                         />
                       </th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 whitespace-nowrap">Employee</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 whitespace-nowrap">Role</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 whitespace-nowrap">Assign Project</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-right whitespace-nowrap">Project Value ($)</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-center whitespace-nowrap">Sales Count</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 whitespace-nowrap">Team</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 whitespace-nowrap">Period</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-right">Target ($)</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-right">Total Sales ($)</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-right">Unpaid ($)</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-right">El. Bonus (৳)</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-right">Current Bonus (৳)</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-right">Pre. Carry (৳)</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-right">New Carry (৳)</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-right">Total Carry (৳)</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-right">Bonus Amount (৳)</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-center">Status</th>
-                      <th className="py-2.5 px-3 text-center">Action</th>
+                      <th className="py-1.5 px-1 border-r border-slate-200 text-center w-6">SL</th>
+                      <th className="py-1.5 px-1.5 border-r border-slate-200">Employee</th>
+                      <th className="py-1.5 px-1.5 border-r border-slate-200">Role</th>
+                      <th className="py-1.5 px-1.5 border-r border-slate-200">Assign Project</th>
+                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right">Value ($)</th>
+                      <th className="py-1.5 px-1 border-r border-slate-200 text-center">Sales</th>
+                      <th className="py-1.5 px-1.5 border-r border-slate-200">Period</th>
+                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right bg-emerald-50/60">
+                        <div className="flex items-center justify-end gap-1 text-[#008060] font-black">
+                          <span>Target ($)</span>
+                          <span className="bg-[#008060] text-white px-1 py-0 rounded text-[8.5px] font-bold">{qCode}</span>
+                        </div>
+                      </th>
+                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right">Total Sales ($)</th>
+                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right">Unpaid ($)</th>
+                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right">Carry (৳)</th>
+                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right">Bonus (৳)</th>
+                      <th className="py-1.5 px-1 border-r border-slate-200 text-center">Status</th>
+                      <th className="py-1.5 px-1 text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
                     {displayedLedgerData.length > 0 ? (
                       displayedLedgerData.map((row, idx) => (
                         <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
-                          <td className="py-2 px-3 border-r border-slate-200 text-center">
+                          <td className="py-1 px-1.5 border-r border-slate-200 text-center">
                             <input 
                               type="checkbox"
                               checked={selectedRows.includes(row.id)}
@@ -610,61 +582,69 @@ export default function KpiBonusPage() {
                               className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                             />
                           </td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-900 whitespace-nowrap">
+                          <td className="py-1 px-1 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
+                          <td className="py-1 px-1.5 border-r border-slate-200 font-bold text-slate-900">
                             <div>
                               <span>{row.employee}</span>
-                              <span className="text-[10px] text-slate-400 font-medium block">ID: {row.empId}</span>
+                              <span className="text-[9px] text-slate-400 font-normal block">ID: {row.empId}</span>
                             </div>
                           </td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-slate-700 font-semibold whitespace-nowrap">{row.role}</td>
+                          <td className="py-1 px-1.5 border-r border-slate-200 text-slate-700 font-semibold">{row.role}</td>
                           
                           {/* ASSIGN PROJECT COLUMN */}
-                          <td className="py-2 px-3 border-r border-slate-200 font-bold text-[#008060] whitespace-nowrap flex items-center gap-1.5 mt-1">
-                            <Briefcase size={12} className="text-[#008060] shrink-0" />
-                            <span>{row.assignProject}</span>
+                          <td className="py-1 px-1.5 border-r border-slate-200 font-bold text-[#008060]">
+                            <div className="flex items-center gap-1">
+                              <Briefcase size={11} className="text-[#008060] shrink-0" />
+                              <span>{row.assignProject}</span>
+                            </div>
                           </td>
 
                           {/* PROJECT VALUE COLUMN */}
-                          <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-slate-900 whitespace-nowrap">
+                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-extrabold text-slate-900">
                             {row.projectValue}
                           </td>
 
                           {/* SALES COUNT COLUMN */}
-                          <td className="py-2 px-3 border-r border-slate-200 text-center font-extrabold text-indigo-700">
+                          <td className="py-1 px-1 border-r border-slate-200 text-center font-extrabold text-indigo-700">
                             {row.salesCount}
                           </td>
 
-                          <td className="py-2 px-3 border-r border-slate-200 text-slate-600 whitespace-nowrap">{row.team}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-slate-600 whitespace-nowrap">{row.period}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-slate-800">{row.targetPeriod}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-emerald-700">{row.totalSales}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-rose-600">{row.unpaid}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-slate-700">{row.elBonus}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-slate-700">{row.currentBonus}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-purple-700">{row.preCarry}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-orange-600">{row.newCarry}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-indigo-700">{row.totalCarry}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-[#008060]">{row.bonusAmount}</td>
-                          <td className="py-2 px-3 border-r border-slate-200 text-center">
-                            <span className={row.statusBadge}>{row.status}</span>
+                          <td className="py-1 px-1.5 border-r border-slate-200 text-slate-600">{row.period}</td>
+                          
+                          {/* QUARTER WISE TARGET VALUE COLUMN WITH BADGE */}
+                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-black bg-emerald-50/40">
+                            <div className="flex items-center justify-end gap-1">
+                              <span className="text-slate-900 font-black">{row.targetPeriod}</span>
+                              <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-100/70 px-0.5 py-0 rounded border border-emerald-200/80">{row.qCode}</span>
+                            </div>
                           </td>
-                          <td className="py-2 px-3 text-center">
+
+                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-bold text-emerald-700">{row.totalSales}</td>
+                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-bold text-rose-600">{row.unpaid}</td>
+                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-extrabold text-indigo-700">{row.totalCarry}</td>
+                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-extrabold text-[#008060]">{row.bonusAmount}</td>
+                          <td className="py-1 px-1 border-r border-slate-200 text-center">
+                            <span className={`px-1 py-0.2 text-[9.5px] font-bold rounded-full border ${
+                              row.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                              row.status === 'Calculated' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                              'bg-amber-50 text-amber-700 border-amber-200'
+                            }`}>
+                              {row.status}
+                            </span>
+                          </td>
+                          <td className="py-1 px-1 text-center">
                             <button 
                               onClick={() => setSelectedRowDetail(row)}
-                              className="px-2.5 py-1 bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-extrabold rounded transition-colors cursor-pointer flex items-center gap-1 mx-auto shadow-2xs"
+                              className="px-1.5 py-0.5 text-[10px] font-bold bg-[#008060] text-white rounded hover:bg-[#006e52] cursor-pointer"
                             >
-                              <Eye size={12} />
-                              <span>View</span>
+                              View
                             </button>
                           </td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={20} className="py-8 text-center text-slate-400 font-medium">
-                          No employee ledgers found matching your search.
-                        </td>
+                        <td colSpan={15} className="py-3 text-center text-slate-400 font-semibold">No record found</td>
                       </tr>
                     )}
                   </tbody>
@@ -1020,56 +1000,64 @@ export default function KpiBonusPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 text-slate-700 font-medium whitespace-nowrap">
-                {operationsHistoryLines.map((row) => (
-                  <tr key={row.sn} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-center">
-                      <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                {filteredOperationsLines.length > 0 ? (
+                  filteredOperationsLines.map((row) => (
+                    <tr key={row.sn} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
+                        <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                      </td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-[#008060]">{row.name}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-800">{row.date}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-500 text-[10.5px]">{row.createdOn}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 font-mono text-slate-600">{row.assignEmpId}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-900">{row.assignEmpName}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 font-mono text-slate-600">{row.empId}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-900">{row.empName}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-800 font-semibold">{row.company}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
+                        <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-300 rounded-full">
+                          {row.orderStatus}
+                        </span>
+                      </td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-right font-extrabold text-[#008060]">{row.salesBonus}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
+                        <a href="#" onClick={(e) => e.preventDefault()} className="text-[#008060] hover:underline flex items-center justify-center gap-1 font-bold">
+                          <span>Link</span>
+                          <ExternalLink size={10} />
+                        </a>
+                      </td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 font-mono text-slate-700">{row.orderNumber}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-800">{row.customer}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-700">{row.bonusProfileName}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-700 font-semibold">{row.serviceLine}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-600">{row.assignedTeam}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-right font-bold text-slate-900">{row.totalAmount}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-right font-bold text-slate-900">{row.monetaryValue}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.paymentDate}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.paymentDue}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.currency}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-500">{row.reversion}</td>
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
+                        <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full border ${
+                          row.kpiStatus === 'Approved'
+                            ? 'bg-emerald-50 text-emerald-600 border-emerald-300'
+                            : row.kpiStatus === 'Verified'
+                            ? 'bg-blue-50 text-blue-600 border-blue-300'
+                            : 'bg-amber-50 text-amber-600 border-amber-300'
+                        }`}>
+                          {row.kpiStatus}
+                        </span>
+                      </td>
+                      <td className="py-2 px-2.5 text-right font-extrabold text-[#008060]">{row.bonusPayout}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={25} className="py-8 text-center text-slate-400 font-medium">
+                      No project history records found matching your view mode and filter criteria.
                     </td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-[#008060]">{row.name}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-800">{row.date}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-slate-500 text-[10.5px]">{row.createdOn}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 font-mono text-slate-600">{row.assignEmpId}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-900">{row.assignEmpName}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 font-mono text-slate-600">{row.empId}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-900">{row.empName}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-slate-800 font-semibold">{row.company}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-center">
-                      <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-300 rounded-full">
-                        {row.orderStatus}
-                      </span>
-                    </td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-right font-extrabold text-[#008060]">{row.salesBonus}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-center">
-                      <a href="#" onClick={(e) => e.preventDefault()} className="text-[#008060] hover:underline flex items-center justify-center gap-1 font-bold">
-                        <span>Link</span>
-                        <ExternalLink size={10} />
-                      </a>
-                    </td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 font-mono text-slate-700">{row.orderNumber}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-800">{row.customer}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-slate-700">{row.bonusProfileName}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-slate-700 font-semibold">{row.serviceLine}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-slate-600">{row.assignedTeam}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-right font-bold text-slate-900">{row.totalAmount}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-right font-bold text-slate-900">{row.monetaryValue}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.paymentDate}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.paymentDue}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.currency}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-500">{row.reversion}</td>
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-center">
-                      <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full border ${
-                        row.kpiStatus === 'Approved'
-                          ? 'bg-emerald-50 text-emerald-600 border-emerald-300'
-                          : row.kpiStatus === 'Verified'
-                          ? 'bg-blue-50 text-blue-600 border-blue-300'
-                          : 'bg-amber-50 text-amber-600 border-amber-300'
-                      }`}>
-                        {row.kpiStatus}
-                      </span>
-                    </td>
-                    <td className="py-2 px-2.5 text-right font-extrabold text-[#008060]">{row.bonusPayout}</td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>
@@ -1079,66 +1067,75 @@ export default function KpiBonusPage() {
 
       {/* ================= VIEW 3: CAMPAIGN & SALES COMMISSION ================= */}
       {mainPageTab === 'campaign' && (
-        <div className="space-y-4 animate-in fade-in duration-150">
+        <div className="space-y-2.5 animate-in fade-in duration-150">
           
-          {/* 3 TOP CAMPAIGN METRIC CARDS MATCHING REFERENCE SCREENSHOT 100% */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {/* 3 PREMIUM STAT METRIC CARDS */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
             
             {/* CARD 1: Total Sales Count */}
-            <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs flex flex-col justify-between h-[105px]">
-              <div>
-                <span className="text-[12px] font-bold text-slate-600 block">Total Sales Count</span>
-                <h2 className="text-[26px] font-black text-slate-900 leading-tight mt-1">28</h2>
+            <div className="bg-white p-2.5 rounded-md border border-slate-200/90 shadow-2xs flex items-center justify-between hover:border-emerald-300 transition-all h-[64px]">
+              <div className="space-y-0.5">
+                <span className="text-[9.5px] font-extrabold text-slate-500 uppercase tracking-wider block">Total Sales Count</span>
+                <h2 className="text-[17px] font-black text-slate-900 leading-none">28</h2>
+                <button 
+                  onClick={() => setCampaignTab('commissions')}
+                  className="text-[10px] font-bold text-[#008060] hover:underline cursor-pointer flex items-center gap-1"
+                >
+                  <span>View commission records →</span>
+                </button>
               </div>
-              <button 
-                onClick={() => setCampaignTab('commissions')}
-                className="text-[11px] font-bold text-slate-500 hover:text-[#008060] transition-colors cursor-pointer text-left flex items-center gap-1"
-              >
-                <span>View commission records</span>
-              </button>
+              <div className="w-7 h-7 rounded bg-emerald-50 text-[#008060] flex items-center justify-center shrink-0 border border-emerald-200/60 shadow-2xs">
+                <ShoppingBag size={14} />
+              </div>
             </div>
 
             {/* CARD 2: Total Sales Amount */}
-            <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs flex flex-col justify-between h-[105px]">
-              <div>
-                <span className="text-[12px] font-bold text-slate-600 block">Total Sales Amount</span>
-                <h2 className="text-[26px] font-black text-slate-900 leading-tight mt-1">$ 2,174.00</h2>
+            <div className="bg-white p-2.5 rounded-md border border-slate-200/90 shadow-2xs flex items-center justify-between hover:border-blue-300 transition-all h-[64px]">
+              <div className="space-y-0.5">
+                <span className="text-[9.5px] font-extrabold text-slate-500 uppercase tracking-wider block">Total Sales Amount</span>
+                <h2 className="text-[17px] font-black text-slate-900 leading-none">$ 2,174.00</h2>
+                <button 
+                  onClick={() => setCampaignTab('commissions')}
+                  className="text-[10px] font-bold text-[#008060] hover:underline cursor-pointer flex items-center gap-1"
+                >
+                  <span>View commission records →</span>
+                </button>
               </div>
-              <button 
-                onClick={() => setCampaignTab('commissions')}
-                className="text-[11px] font-bold text-slate-500 hover:text-[#008060] transition-colors cursor-pointer text-left flex items-center gap-1"
-              >
-                <span>View commission records</span>
-              </button>
+              <div className="w-7 h-7 rounded bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-200/60 shadow-2xs">
+                <DollarSign size={14} />
+              </div>
             </div>
 
-            {/* CARD 3: Commission */}
-            <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs flex flex-col justify-between h-[105px]">
-              <div>
-                <span className="text-[12px] font-bold text-slate-600 block">Commission</span>
-                <h2 className="text-[26px] font-black text-slate-900 leading-tight mt-1">৳ 2,934.00</h2>
+            {/* CARD 3: Commission Earned */}
+            <div className="bg-white p-2.5 rounded-md border border-slate-200/90 shadow-2xs flex items-center justify-between hover:border-purple-300 transition-all h-[64px]">
+              <div className="space-y-0.5">
+                <span className="text-[9.5px] font-extrabold text-slate-500 uppercase tracking-wider block">Commission Earned</span>
+                <h2 className="text-[17px] font-black text-[#008060] leading-none">৳ 2,934.00</h2>
+                <button 
+                  onClick={() => setCampaignTab('commissions')}
+                  className="text-[10px] font-bold text-[#008060] hover:underline cursor-pointer flex items-center gap-1"
+                >
+                  <span>View commission records →</span>
+                </button>
               </div>
-              <button 
-                onClick={() => setCampaignTab('commissions')}
-                className="text-[11px] font-bold text-slate-500 hover:text-[#008060] transition-colors cursor-pointer text-left flex items-center gap-1"
-              >
-                <span>View commission records</span>
-              </button>
+              <div className="w-7 h-7 rounded bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 border border-purple-200/60 shadow-2xs">
+                <Award size={14} />
+              </div>
             </div>
 
           </div>
 
           {/* MAIN CAMPAIGN DATA CARD WITH SUB-TABS */}
-          <div className="bg-white rounded-lg border border-slate-200 shadow-2xs overflow-hidden">
+          <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-4">
             
-            {/* Sub-Tab Header */}
-            <div className="flex items-center gap-2 border-b border-slate-200 px-4 pt-3 bg-slate-50/60">
+            {/* Modern Sub-Tab Pill Header */}
+            <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
               <button 
                 onClick={() => setCampaignTab('products')}
-                className={`px-4 py-2 text-[12.5px] font-extrabold rounded-t-lg transition-colors cursor-pointer flex items-center gap-1.5 ${
+                className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-2 ${
                   campaignTab === 'products'
-                    ? 'bg-white border-t-2 border-[#008060] text-[#008060] shadow-2xs'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-[#008060] text-white shadow-2xs'
+                    : 'bg-slate-100/80 hover:bg-slate-200/80 text-slate-700 border border-slate-200'
                 }`}
               >
                 <ShoppingBag size={14} />
@@ -1147,10 +1144,10 @@ export default function KpiBonusPage() {
 
               <button 
                 onClick={() => setCampaignTab('clients')}
-                className={`px-4 py-2 text-[12.5px] font-extrabold rounded-t-lg transition-colors cursor-pointer flex items-center gap-1.5 ${
+                className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-2 ${
                   campaignTab === 'clients'
-                    ? 'bg-white border-t-2 border-[#008060] text-[#008060] shadow-2xs'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-[#008060] text-white shadow-2xs'
+                    : 'bg-slate-100/80 hover:bg-slate-200/80 text-slate-700 border border-slate-200'
                 }`}
               >
                 <Users size={14} />
@@ -1159,10 +1156,10 @@ export default function KpiBonusPage() {
 
               <button 
                 onClick={() => setCampaignTab('commissions')}
-                className={`px-4 py-2 text-[12.5px] font-extrabold rounded-t-lg transition-colors cursor-pointer flex items-center gap-1.5 ${
+                className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-2 ${
                   campaignTab === 'commissions'
-                    ? 'bg-white border-t-2 border-[#008060] text-[#008060] shadow-2xs'
-                    : 'text-slate-500 hover:text-slate-800'
+                    ? 'bg-[#008060] text-white shadow-2xs'
+                    : 'bg-slate-100/80 hover:bg-slate-200/80 text-slate-700 border border-slate-200'
                 }`}
               >
                 <DollarSign size={14} />
@@ -1171,20 +1168,25 @@ export default function KpiBonusPage() {
             </div>
 
             {/* SUB-TAB CONTENT TABLES */}
-            <div className="p-4">
+            <div>
               
               {/* 1. TOP PRODUCTS TABLE */}
               {campaignTab === 'products' && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-[14px] font-bold text-slate-900">Top Sales Products Breakdown</h3>
-                    <span className="text-[11px] font-medium text-slate-500">Sorted by sales performance</span>
+                    <div>
+                      <h3 className="text-[14px] font-bold text-slate-900">Top Sales Products Breakdown</h3>
+                      <p className="text-[11.5px] font-medium text-slate-500">Products sorted by total units sold and generated sales bonus.</p>
+                    </div>
+                    <span className="text-[11px] font-bold text-[#008060] bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                      3 Active Products
+                    </span>
                   </div>
 
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+                  <div className="overflow-x-auto rounded border border-slate-200">
+                    <table className="w-full text-left text-[12px] border-collapse">
                       <thead>
-                        <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold">
+                        <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
                           <th className="py-2.5 px-3 border-r border-slate-200 text-center w-8">
                             <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
                           </th>
@@ -1198,16 +1200,16 @@ export default function KpiBonusPage() {
                       </thead>
                       <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
                         {topProductsData.map((item, idx) => (
-                          <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
+                          <tr key={item.id} className="hover:bg-slate-50/90 transition-colors">
                             <td className="py-2 px-3 border-r border-slate-200 text-center">
                               <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
                             </td>
                             <td className="py-2 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
                             <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-900">{item.name}</td>
                             <td className="py-2 px-3 border-r border-slate-200 text-slate-600">{item.category}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-center font-extrabold text-[#008060]">{item.salesCount}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-slate-800">{item.totalAmount}</td>
-                            <td className="py-2 px-3 text-right font-extrabold text-emerald-700">{item.commission}</td>
+                            <td className="py-2 px-3 border-r border-slate-200 text-center font-black text-[#008060]">{item.salesCount}</td>
+                            <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-slate-900">{item.totalAmount}</td>
+                            <td className="py-2 px-3 text-right font-black text-emerald-700">{item.commission}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -1220,14 +1222,19 @@ export default function KpiBonusPage() {
               {campaignTab === 'clients' && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-[14px] font-bold text-slate-900">Top Revenue Clients Breakdown</h3>
-                    <span className="text-[11px] font-medium text-slate-500">Sorted by total purchase volume</span>
+                    <div>
+                      <h3 className="text-[14px] font-bold text-slate-900">Top Revenue Clients Breakdown</h3>
+                      <p className="text-[11.5px] font-medium text-slate-500">Clients sorted by overall order volume and contributed revenue.</p>
+                    </div>
+                    <span className="text-[11px] font-bold text-[#008060] bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                      4 Key Clients
+                    </span>
                   </div>
 
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+                  <div className="overflow-x-auto rounded border border-slate-200">
+                    <table className="w-full text-left text-[12px] border-collapse">
                       <thead>
-                        <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold">
+                        <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
                           <th className="py-2.5 px-3 border-r border-slate-200 text-center w-8">
                             <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
                           </th>
@@ -1241,16 +1248,16 @@ export default function KpiBonusPage() {
                       </thead>
                       <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
                         {topClientsData.map((item, idx) => (
-                          <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
+                          <tr key={item.id} className="hover:bg-slate-50/90 transition-colors">
                             <td className="py-2 px-3 border-r border-slate-200 text-center">
                               <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
                             </td>
                             <td className="py-2 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
                             <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-900">{item.name}</td>
                             <td className="py-2 px-3 border-r border-slate-200 text-slate-600">{item.company}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-center font-extrabold text-[#008060]">{item.ordersCount}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-slate-800">{item.salesAmount}</td>
-                            <td className="py-2 px-3 text-right font-extrabold text-emerald-700">{item.commission}</td>
+                            <td className="py-2 px-3 border-r border-slate-200 text-center font-black text-[#008060]">{item.ordersCount}</td>
+                            <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-slate-900">{item.salesAmount}</td>
+                            <td className="py-2 px-3 text-right font-black text-emerald-700">{item.commission}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -1263,14 +1270,19 @@ export default function KpiBonusPage() {
               {campaignTab === 'commissions' && (
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-[14px] font-bold text-slate-900">Commission Ledger Records</h3>
-                    <span className="text-[11px] font-medium text-slate-500">Individual earned commission breakdown</span>
+                    <div>
+                      <h3 className="text-[14px] font-bold text-slate-900">Commission Ledger Records</h3>
+                      <p className="text-[11.5px] font-medium text-slate-500">Individual line item sales commission history.</p>
+                    </div>
+                    <span className="text-[11px] font-bold text-[#008060] bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
+                      2 Approved Payouts
+                    </span>
                   </div>
 
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+                  <div className="overflow-x-auto rounded border border-slate-200">
+                    <table className="w-full text-left text-[12px] border-collapse">
                       <thead>
-                        <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold">
+                        <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
                           <th className="py-2.5 px-3 border-r border-slate-200 text-center w-8">
                             <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
                           </th>
@@ -1287,7 +1299,7 @@ export default function KpiBonusPage() {
                       </thead>
                       <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
                         {commissionRecordsData.map((item, idx) => (
-                          <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
+                          <tr key={item.id} className="hover:bg-slate-50/90 transition-colors">
                             <td className="py-2 px-3 border-r border-slate-200 text-center">
                               <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
                             </td>
@@ -1296,9 +1308,9 @@ export default function KpiBonusPage() {
                             <td className="py-2 px-3 border-r border-slate-200 font-mono text-[11px] text-slate-700">{item.orderId}</td>
                             <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-900">{item.client}</td>
                             <td className="py-2 px-3 border-r border-slate-200 text-slate-600">{item.product}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-slate-800">{item.amount}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-center text-slate-600">{item.rate}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-[#008060]">{item.commission}</td>
+                            <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-slate-900">{item.amount}</td>
+                            <td className="py-2 px-3 border-r border-slate-200 text-center font-bold text-slate-600">{item.rate}</td>
+                            <td className="py-2 px-3 border-r border-slate-200 text-right font-black text-[#008060]">{item.commission}</td>
                             <td className="py-2 px-3 text-center">
                               <span className="px-2 py-0.5 text-[10.5px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-300 rounded-full">
                                 {item.status}

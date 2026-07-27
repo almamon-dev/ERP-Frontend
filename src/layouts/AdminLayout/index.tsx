@@ -61,11 +61,11 @@ export default function AdminLayout() {
             {/* 9-DOTS APP LAUNCHER BUTTON */}
             <button
               onClick={() => setIsModuleModalOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-50 text-[#008060] hover:bg-[#008060] hover:text-white font-bold text-[12.5px] transition-all cursor-pointer shadow-2xs border border-emerald-200"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-slate-100/90 hover:bg-slate-200/80 text-slate-700 font-medium text-[12.5px] transition-colors cursor-pointer border border-slate-200/80"
               title="Open Module App Selector"
             >
-              <LayoutGrid size={18} />
-              <span className="font-extrabold tracking-tight">Dashboard</span>
+              <LayoutGrid size={16} className="text-slate-600 shrink-0" />
+              <span className="font-semibold text-slate-700 tracking-tight">Modules</span>
             </button>
 
             {/* Current Page Title */}

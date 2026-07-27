@@ -192,7 +192,6 @@ export default function ModulesSelectorPage() {
             </div>
           ))}
         </div>
-
       </div>
 
       {/* MINIMAL FOOTER SECTION (FIXED AT BOTTOM) */}

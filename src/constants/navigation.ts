@@ -10,7 +10,7 @@ import {
     Languages, Cloud, MessageSquare, Link, Workflow, ListTree, Zap, TrendingUp,
     ListPlus, TextCursorInput, FileCode, MapPin, FolderOpen, UploadCloud, Image, Printer,
     Bot, TerminalSquare, Gauge, Cpu, Type, Wrench, ListOrdered, Timer, Terminal, Server,
-    AlertTriangle, LineChart, ShieldAlert, UserCheck, Award
+    AlertTriangle, LineChart, ShieldAlert, UserCheck, Award, Footprints, LayoutGrid
 } from 'lucide-react';
 
 export const navigationMap: Record<string, any[]> = {
@@ -441,25 +441,12 @@ export const navigationMap: Record<string, any[]> = {
         }
     ],
     'employee-portal': [
-        {
-            category: 'Personal Portal',
-            group: 'Employee Self Service',
-            icon: UserCheck,
-            items: [
-                { name: 'Dashboard', path: '/employee-portal/dashboard', icon: LayoutDashboard },
-                { name: 'About Me', path: '/employee-portal/about-me', icon: UserCircle },
-                { name: 'Time Management', path: '/employee-portal/time-management', icon: Clock },
-                { name: 'Leave And Movement', path: '/employee-portal/leave-movement', icon: Calendar },
-                { name: 'IOU', path: '/employee-portal/iou', icon: CreditCard },
-                { name: 'Loan & Financial Aid', path: '/employee-portal/financial-aid', icon: DollarSign },
-                { name: 'Asset', path: '/employee-portal/assets', icon: HardDrive },
-                { name: 'Expense', path: '/employee-portal/expenses', icon: Receipt },
-                { name: 'Contact Book', path: '/employee-portal/contact-book', icon: Phone },
-                { name: 'Separation', path: '/employee-portal/separation', icon: FileCheck },
-                { name: 'PaySlip', path: '/employee-portal/payslip', icon: FileText },
-                { name: 'Supervisor', path: '/employee-portal/supervisor', icon: Users },
-                { name: 'Salary Certificate', path: '/employee-portal/salary-certificate', icon: Award },
-            ]
-        }
+        { name: 'Dashboard', path: '/employee-portal/dashboard', icon: LayoutDashboard },
+        { name: 'Leave', path: '/employee-portal/leave-movement?tab=leave', icon: Calendar },
+        { name: 'Movement', path: '/employee-portal/leave-movement?tab=movement', icon: Footprints },
+        { name: 'Attendances', path: '/employee-portal/time-management?tab=adjust', icon: Clock },
+        { name: 'Shift', path: '/employee-portal/time-management?tab=shift', icon: RotateCcw },
+        { name: 'Advance Salary', path: '/employee-portal/iou?tab=application', icon: CreditCard },
+        { name: 'About Me', path: '/employee-portal/about-me', icon: UserCircle },
     ],
 };

@@ -15,6 +15,9 @@ import SeparationPage from './Separation/pages';
 import PaySlipPage from './PaySlip/pages';
 import SupervisorPage from './Supervisor/pages';
 import SalaryCertificatePage from './SalaryCertificate/pages';
+import TodoListPage from './Todo/pages';
+import CalendarMeetingsPage from './Calendar/pages';
+import KpiBonusPage from './KpiBonus/pages';
 
 export const employeeSelfServiceRoutes: RouteObject[] = [
   {
@@ -38,6 +41,9 @@ export const employeeSelfServiceRoutes: RouteObject[] = [
       { path: 'payslip', element: <PaySlipPage /> },
       { path: 'supervisor', element: <SupervisorPage /> },
       { path: 'salary-certificate', element: <SalaryCertificatePage /> },
+      { path: 'todo', element: <TodoListPage /> },
+      { path: 'calendar', element: <CalendarMeetingsPage /> },
+      { path: 'kpi-bonus', element: <KpiBonusPage /> },
     ]
   }
 ];

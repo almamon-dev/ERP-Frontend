@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Segoe UI"', 'SegoeUI', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+        sans: ['"Inter"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -8,12 +8,18 @@ interface SidebarProps {
 }
 
 const NavGroup = ({ item, location, isOpen }: { item: any; location: any; isOpen: boolean }) => {
-    const isActiveGroup = item.items.some((subItem: any) =>
-        location.pathname === subItem.path ||
-        (subItem.path !== '/' && location.pathname.startsWith(subItem.path))
-    );
+    const isActiveGroup = item.items.some((subItem: any) => {
+        const basePath = subItem.path.split('?')[0];
+        return location.pathname === basePath || (basePath !== '/' && location.pathname.startsWith(basePath));
+    });
 
-    const [isExpanded, setIsExpanded] = useState(false);
+    const [isExpanded, setIsExpanded] = useState(isActiveGroup);
+
+    React.useEffect(() => {
+        if (isActiveGroup) {
+            setIsExpanded(true);
+        }
+    }, [isActiveGroup, location.pathname, location.search]);
 
     return (
         <div className="mb-0.5">
@@ -41,26 +47,30 @@ const NavGroup = ({ item, location, isOpen }: { item: any; location: any; isOpen
                     <ChevronRight
                         size={16}
                         strokeWidth={1.5}
-                        className={`text-slate-400 transition-transform duration-200 shrink-0 ${isExpanded ? 'rotate-90' : ''}`}
+                        className={`text-[#008060] transition-transform duration-200 shrink-0 ${isExpanded ? 'rotate-90' : ''}`}
                     />
                 )}
             </button>
 
             {isOpen && isExpanded && (
                 <div className="pl-[34px] pr-3 space-y-1 mb-1.5 mt-0.5">
-                    {item.items.map((subItem: any) => {
-                        const isActive = location.pathname === subItem.path || (subItem.path !== '/' && location.pathname.startsWith(subItem.path));
+                    {item.items.map((subItem: any, idx: number) => {
+                        const currentUrl = location.pathname + location.search;
+                        const basePath = subItem.path.split('?')[0];
+                        const isActive = currentUrl === subItem.path || 
+                            (location.pathname === basePath && !location.search && idx === 0);
+
                         return (
                             <Link
                                 key={subItem.name}
                                 to={subItem.path}
                                 className={`flex items-center justify-between py-1.5 rounded-md text-[13px] font-medium transition-colors group ${isActive
-                                        ? 'text-blue-600 font-semibold'
+                                        ? 'text-[#008060] font-bold'
                                         : 'text-slate-500 hover:text-slate-900'
                                     }`}
                             >
                                 <div className="flex items-center gap-3 whitespace-nowrap">
-                                    <span className={`w-1 h-1 rounded-full shrink-0 ${isActive ? 'bg-blue-600' : 'bg-slate-300 group-hover:bg-slate-400'}`} />
+                                    <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${isActive ? 'bg-[#008060]' : 'bg-slate-300 group-hover:bg-slate-400'}`} />
                                     {subItem.name}
                                 </div>
                             </Link>

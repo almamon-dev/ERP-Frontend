@@ -1,14 +1,17 @@
+import React from 'react';
+import { RouteObject } from 'react-router-dom';
+import AdminLayout from '@/layouts/AdminLayout';
 import { salesReportsRoutes } from './SalesReports';
 import { purchaseReportsRoutes } from './PurchaseReports';
 import { inventoryReportsRoutes } from './InventoryReports';
 import { accountingReportsRoutes } from './AccountingReports';
 import { hrReportsRoutes } from './HrReports';
 import { dashboardAnalyticsRoutes } from './DashboardAnalytics';
-import { RouteObject } from 'react-router-dom';
 
 export const reportsRoutes: RouteObject[] = [
     {
         path: 'reports',
+        element: React.createElement(AdminLayout),
         children: [
             ...salesReportsRoutes,
             ...purchaseReportsRoutes,

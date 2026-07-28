@@ -1,35 +1,44 @@
 import React from 'react';
-import { RouterProvider, createBrowserRouter, Navigate } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { authRoutes } from './modules/Auth';
+import { dashboardRoutes } from './modules/Dashboard/routes';
 import { administrationRoutes } from './modules/Administration';
 import { crmRoutes } from './modules/CRM';
 import { hrRoutes } from './modules/HR';
+import { salesRoutes } from './modules/Sales';
+import { purchaseRoutes } from './modules/Purchase';
+import { inventoryRoutes } from './modules/Inventory';
+import { accountingRoutes } from './modules/Accounting';
+import { reportsRoutes } from './modules/Reports';
+import { aIRoutes } from './modules/AI';
 import { employeeSelfServiceRoutes } from './modules/EmployeeSelfService';
 import { supportRoutes } from './modules/Support/routes';
 import ModulesSelectorPage from './modules/Dashboard/pages/ModulesSelectorPage';
-
-import AdminLayout from './layouts/AdminLayout';
+import RoleBasedRedirect from './components/auth/RoleBasedRedirect';
+import { AuthProvider } from './contexts/AuthContext';
 
 const router = createBrowserRouter([
   {
+    // Root "/" → redirect based on role
     path: '/',
-    element: <Navigate to="/web/login" replace />,
+    element: <RoleBasedRedirect />,
   },
   ...authRoutes,
+  ...dashboardRoutes,
   ...administrationRoutes,
   ...crmRoutes,
   ...hrRoutes,
+  ...salesRoutes,
+  ...purchaseRoutes,
+  ...inventoryRoutes,
+  ...accountingRoutes,
+  ...reportsRoutes,
+  ...aIRoutes,
   ...employeeSelfServiceRoutes,
   ...supportRoutes,
   {
     path: '/admin/modules',
     element: <ModulesSelectorPage />,
-  },
-  {
-    element: <AdminLayout />,
-    children: [
-      // Other admin routes with sidebar will go here
-    ]
   },
   {
     path: '*',
@@ -42,5 +51,10 @@ const router = createBrowserRouter([
 ]);
 
 export default function App() {
-  return <RouterProvider router={router} />;
+  return (
+    // AuthProvider wraps everything so any component can call useAuth()
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }

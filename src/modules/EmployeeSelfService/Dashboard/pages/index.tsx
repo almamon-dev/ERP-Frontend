@@ -4,12 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import {
   Clock, Calendar as CalendarIcon, ArrowUp, ArrowDown,
   CheckCircle2, FileText, Search, Bell, Plus, X, Edit2, User,
-  Building2, Briefcase, CreditCard, Umbrella, FileSpreadsheet, Eye, ChevronRight
+  Building2, Briefcase, CreditCard, Umbrella, FileSpreadsheet, Eye, ChevronRight,
+  Users, Target, ShieldCheck, AlertCircle, CheckCheck, XCircle
 } from 'lucide-react';
 import DatePicker from '@/components/ui/date-picker';
+import { useAuth } from '@/contexts/AuthContext';
+import { ROLES } from '@/constants/roles';
 
 export default function EmployeeDashboardPage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const isSupervisor = user?.role === ROLES.SUPERVISOR || user?.role === ROLES.TEAM_LEADER;
+  const isTeamLeader = user?.role === ROLES.TEAM_LEADER;
   const [selectedNoticeCategory, setSelectedNoticeCategory] = useState('All');
   const [isLeaveModalOpen, setIsLeaveModalOpen] = useState(false);
   const [selectedNoticeModal, setSelectedNoticeModal] = useState<any | null>(null);
@@ -724,6 +730,148 @@ export default function EmployeeDashboardPage() {
             </div>
 
           </div>
+
+          {/* ===== SUPERVISOR / TEAM LEADER SECTION ===== */}
+          {isSupervisor && (
+            <div className="space-y-4">
+
+              {/* Section Header */}
+              <div className="flex items-center gap-2.5 pt-1">
+                <div className="w-1 h-5 rounded-full bg-[#008060]" />
+                <h2 className="font-bold text-[15px] text-slate-900">
+                  {isTeamLeader ? 'Team Leader Panel' : 'Supervisor Panel'}
+                </h2>
+                <span className="px-2 py-0.5 text-[10.5px] font-bold bg-[#008060]/10 text-[#008060] rounded border border-[#008060]/20">
+                  {isTeamLeader ? 'TEAM LEADER' : 'SUPERVISOR'}
+                </span>
+              </div>
+
+              {/* PENDING APPROVALS TABLE */}
+              <div className="bg-white rounded-lg border border-slate-200 shadow-2xs overflow-hidden">
+                <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Users size={15} className="text-[#008060]" />
+                    <h3 className="font-semibold text-[14px] text-slate-800">Team Pending Approvals</h3>
+                    <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-700 text-[10px] font-bold flex items-center justify-center">3</span>
+                  </div>
+                  <button
+                    onClick={() => navigate('/employee-portal/supervisor')}
+                    className="text-[12px] font-semibold text-[#008060] hover:underline flex items-center gap-1 cursor-pointer"
+                  >
+                    View All <ChevronRight size={13} />
+                  </button>
+                </div>
+
+                <div className="divide-y divide-slate-100">
+                  {[
+                    { id: 1, name: 'Md. Tanvir Hossain', empId: '15208', type: 'Casual Leave [CL]', dates: '29 Jul - 30 Jul, 2026', days: '2 Days', applied: '27 Jul, 2026', status: 'Pending' },
+                    { id: 2, name: 'Farhana Yasmin', empId: '15214', type: 'Movement (Official)', dates: '28 Jul, 2026', days: '1 Day', applied: '26 Jul, 2026', status: 'Pending' },
+                    { id: 3, name: 'Kazi Rakib', empId: '15230', type: 'Sick Leave [SL]', dates: '30 Jul, 2026', days: '1 Day', applied: '27 Jul, 2026', status: 'Pending' },
+                  ].map((req) => (
+                    <div key={req.id} className="flex items-center justify-between gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[11px] shrink-0">
+                          {req.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[13px] font-semibold text-slate-800 truncate">{req.name}</span>
+                            <span className="text-[10.5px] text-slate-400 font-mono shrink-0">#{req.empId}</span>
+                          </div>
+                          <span className="text-[11.5px] text-slate-500">{req.type} • {req.dates} ({req.days})</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1.5 shrink-0">
+                        <button className="h-7 px-2.5 text-[11px] font-bold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 rounded flex items-center gap-1 cursor-pointer transition-colors">
+                          <CheckCheck size={12} /> Approve
+                        </button>
+                        <button className="h-7 px-2.5 text-[11px] font-bold bg-rose-50 text-rose-600 hover:bg-rose-100 border border-rose-200 rounded flex items-center gap-1 cursor-pointer transition-colors">
+                          <XCircle size={12} /> Reject
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* TEAM LEADER ONLY: KPI OVERVIEW */}
+              {isTeamLeader && (
+                <div className="bg-white rounded-lg border border-slate-200 shadow-2xs overflow-hidden">
+                  <div className="px-4 py-3 border-b border-slate-100 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Target size={15} className="text-[#008060]" />
+                      <h3 className="font-semibold text-[14px] text-slate-800">Team KPI Overview</h3>
+                    </div>
+                    <button
+                      onClick={() => navigate('/employee-portal/kpi-bonus')}
+                      className="text-[12px] font-semibold text-[#008060] hover:underline flex items-center gap-1 cursor-pointer"
+                    >
+                      View Details <ChevronRight size={13} />
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-0 divide-x divide-y divide-slate-100">
+                    {[
+                      { label: 'Team Members', value: '5', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
+                      { label: 'On Target', value: '3', icon: CheckCircle2, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+                      { label: 'Below Target', value: '1', icon: AlertCircle, color: 'text-amber-600', bg: 'bg-amber-50' },
+                      { label: 'Avg Achievement', value: '82%', icon: Target, color: 'text-[#008060]', bg: 'bg-emerald-50' },
+                    ].map((stat) => {
+                      const Icon = stat.icon;
+                      return (
+                        <div key={stat.label} className="p-3.5 flex items-center gap-2.5">
+                          <div className={`w-8 h-8 rounded-lg ${stat.bg} flex items-center justify-center shrink-0`}>
+                            <Icon size={15} className={stat.color} />
+                          </div>
+                          <div>
+                            <div className="text-[18px] font-extrabold text-slate-900 leading-none">{stat.value}</div>
+                            <div className="text-[11px] text-slate-500 mt-0.5">{stat.label}</div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Team member rows */}
+                  <div className="border-t border-slate-100">
+                    {[
+                      { name: 'Md. Tanvir Hossain', role: 'Frontend Dev', target: '$ 3,300', achieved: '$ 2,900', pct: 88, status: 'On Track' },
+                      { name: 'Farhana Yasmin', role: 'UI/UX Designer', target: '$ 2,500', achieved: '$ 1,800', pct: 72, status: 'Below' },
+                      { name: 'Kazi Rakib', role: 'QA Engineer', target: '$ 2,000', achieved: '$ 2,100', pct: 105, status: 'Exceeded' },
+                    ].map((m, i) => (
+                      <div key={i} className="flex items-center gap-3 px-4 py-2.5 border-b border-slate-100 last:border-b-0 hover:bg-slate-50 transition-colors">
+                        <div className="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-[11px] shrink-0">
+                          {m.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[13px] font-semibold text-slate-800">{m.name}</span>
+                            <span className={`text-[10.5px] font-bold px-1.5 py-0.5 rounded ${
+                              m.status === 'Exceeded' ? 'bg-blue-50 text-blue-700' :
+                              m.status === 'On Track' ? 'bg-emerald-50 text-emerald-700' :
+                              'bg-amber-50 text-amber-700'
+                            }`}>{m.status}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="flex-1 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                              <div
+                                className={`h-full rounded-full ${
+                                  m.pct >= 100 ? 'bg-blue-500' : m.pct >= 80 ? 'bg-emerald-500' : 'bg-amber-500'
+                                }`}
+                                style={{ width: `${Math.min(m.pct, 100)}%` }}
+                              />
+                            </div>
+                            <span className="text-[11px] font-bold text-slate-600 shrink-0">{m.pct}%</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            </div>
+          )}
 
         </div>
 

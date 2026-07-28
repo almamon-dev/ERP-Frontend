@@ -1,3 +1,6 @@
+import React from 'react';
+import { RouteObject } from 'react-router-dom';
+import AdminLayout from '@/layouts/AdminLayout';
 import { productsRoutes } from './Products';
 import { categoriesRoutes } from './Categories';
 import { brandsRoutes } from './Brands';
@@ -6,11 +9,11 @@ import { warehousesRoutes } from './Warehouses';
 import { stockRoutes } from './Stock';
 import { stockTransferRoutes } from './StockTransfer';
 import { stockAdjustmentRoutes } from './StockAdjustment';
-import { RouteObject } from 'react-router-dom';
 
 export const inventoryRoutes: RouteObject[] = [
     {
         path: 'inventory',
+        element: React.createElement(AdminLayout),
         children: [
             ...productsRoutes,
             ...categoriesRoutes,

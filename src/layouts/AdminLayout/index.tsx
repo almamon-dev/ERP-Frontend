@@ -1,42 +1,45 @@
 import React, { useState } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import { Bell, Search, Calendar, LayoutGrid } from 'lucide-react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Bell, Search, Calendar, LayoutGrid, LogOut } from 'lucide-react';
 import Sidebar from './Sidebar';
 import ModuleSelectorModal from '@/components/modals/module-selector-modal';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function AdminLayout() {
   const location = useLocation();
-  const isEmployeePortal = location.pathname.startsWith('/employee-portal');
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
-  // Sidebar defaults to false if in Employee Portal, true otherwise
-  const [isSidebarOpen, setIsSidebarOpen] = useState(!isEmployeePortal);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isModuleModalOpen, setIsModuleModalOpen] = useState(false);
 
   // Derive title
   const getPageTitle = () => {
     const search = location.search;
-    if (search.includes('tab=leave')) return 'Leave Application';
-    if (search.includes('tab=movement')) return 'Movement Application';
-    if (search.includes('tab=adjust')) return 'Attendance Adjust';
-    if (search.includes('tab=shift')) return 'Shift Change';
-    if (search.includes('tab=application')) return 'Advance Salary (IOU)';
-    if (location.pathname.includes('about-me')) return 'About Me';
-    return 'Employee Portal';
+    if (location.pathname.includes('/hr')) return 'Human Resources';
+    if (location.pathname.includes('/crm')) return 'CRM & Sales Pipeline';
+    if (location.pathname.includes('/sales')) return 'Sales Management';
+    if (location.pathname.includes('/purchase')) return 'Procurement & Purchase';
+    if (location.pathname.includes('/inventory')) return 'Inventory & Stock';
+    if (location.pathname.includes('/accounting')) return 'Accounting & Finance';
+    if (location.pathname.includes('/administration')) return 'System Administration';
+    if (location.pathname.includes('/reports')) return 'Analytics & Reports';
+    return 'ERP Dashboard';
   };
 
   return (
     <div className="flex h-screen bg-[#f8fafc] overflow-hidden font-sans">
       
-      {/* Sidebar Overlay (Only rendered if sidebar is active) */}
-      {!isEmployeePortal && isSidebarOpen && (
+      {/* Sidebar Overlay (Mobile) */}
+      {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-slate-900/50 z-20 lg:hidden"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
-      {/* Render Sidebar only for non-Employee Portal pages or if sidebar enabled */}
-      {!isEmployeePortal && <Sidebar isOpen={isSidebarOpen} />}
+      {/* Main Admin Sidebar */}
+      <Sidebar isOpen={isSidebarOpen} />
 
       {/* Main Content Wrapper */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
@@ -46,17 +49,15 @@ export default function AdminLayout() {
           
           <div className="flex items-center gap-3 sm:gap-4">
             
-            {/* Toggle Sidebar Button (Only if not employee portal) */}
-            {!isEmployeePortal && (
-              <button
-                className="text-slate-600 hover:text-[#008060] transition-colors p-1.5 rounded-lg hover:bg-slate-100 cursor-pointer"
-                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 6h16M4 12h10M4 18h16" />
-                </svg>
-              </button>
-            )}
+            {/* Toggle Sidebar Button */}
+            <button
+              className="text-slate-600 hover:text-[#008060] transition-colors p-1.5 rounded-lg hover:bg-slate-100 cursor-pointer"
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 6h16M4 12h10M4 18h16" />
+              </svg>
+            </button>
 
             {/* 9-DOTS APP LAUNCHER BUTTON */}
             <button
@@ -64,7 +65,7 @@ export default function AdminLayout() {
               className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-slate-100/90 hover:bg-slate-200/80 text-slate-700 font-medium text-[12.5px] transition-colors cursor-pointer border border-slate-200/80"
               title="Open Module App Selector"
             >
-              <LayoutGrid size={16} className="text-slate-600 shrink-0" />
+              <LayoutGrid size={16} className="text-[#008060] shrink-0" />
               <span className="font-semibold text-slate-700 tracking-tight">Modules</span>
             </button>
 
@@ -80,7 +81,7 @@ export default function AdminLayout() {
               <Search size={15} className="text-slate-400 mr-2 shrink-0" />
               <input
                 type="text"
-                placeholder="Search anything..."
+                placeholder="Search system..."
                 className="bg-transparent border-none outline-none text-[12.5px] w-full text-slate-700 placeholder-slate-400 font-medium"
               />
             </div>
@@ -102,13 +103,29 @@ export default function AdminLayout() {
             {/* User Profile Badge */}
             <div className="flex items-center gap-2.5 cursor-pointer">
               <div className="w-8 h-8 rounded-full bg-[#008060] text-white flex items-center justify-center font-bold text-[12px] shadow-2xs">
-                AM
+                {user?.initials || 'AM'}
               </div>
               <div className="hidden sm:flex flex-col text-left">
-                <span className="text-[12.5px] font-bold text-slate-900 leading-tight">Al Mamon</span>
-                <span className="text-[10.5px] font-semibold text-slate-400">Jr. Laravel Developer</span>
+                <span className="text-[12.5px] font-bold text-slate-900 leading-tight">
+                  {user?.name || 'Al Mamon'}
+                </span>
+                <span className="text-[10.5px] font-semibold text-[#008060]">
+                  {user?.roleLabel || 'Administrator'}
+                </span>
               </div>
             </div>
+
+            {/* Logout Button */}
+            <button
+              onClick={() => {
+                logout();
+                navigate('/web/login');
+              }}
+              className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer ml-1"
+              title="Sign Out"
+            >
+              <LogOut size={17} />
+            </button>
           </div>
 
         </header>

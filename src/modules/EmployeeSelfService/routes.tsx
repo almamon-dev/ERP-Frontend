@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteObject, Navigate } from 'react-router-dom';
-import AdminLayout from '@/layouts/AdminLayout';
+import EssLayout from '@/layouts/EssLayout';
 
 import DashboardPage from './Dashboard/pages';
 import AboutMePage from './AboutMe/pages';
@@ -22,7 +22,7 @@ import KpiBonusPage from './KpiBonus/pages';
 export const employeeSelfServiceRoutes: RouteObject[] = [
   {
     path: 'employee-portal',
-    element: <AdminLayout />,
+    element: <EssLayout />,
     children: [
       {
         index: true,

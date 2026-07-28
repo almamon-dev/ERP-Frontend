@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { 
-  Award, RefreshCw, User, Edit3, DollarSign, RotateCcw, Layers, 
+import {
+  Award, RefreshCw, User, Edit3, DollarSign, RotateCcw, Layers,
   HelpCircle, ChevronRight, ArrowLeft, Settings, ShieldAlert, Eye,
   ShoppingBag, Users, Target, CheckCircle2, Search, Filter, ShieldCheck, Briefcase, ExternalLink, ListChecks
 } from 'lucide-react';
@@ -32,7 +32,7 @@ export default function KpiBonusPage() {
   const [selectedQuarter, setSelectedQuarter] = useState('Q1 (Jul - Sep)');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedRows, setSelectedRows] = useState<number[]>([]);
-  
+
   // Detailed Record Page View Toggle
   const [selectedRowDetail, setSelectedRowDetail] = useState<any | null>(null);
   const [activeTab, setActiveTab] = useState<'kpiLines' | 'penaltyRecord'>('kpiLines');
@@ -344,7 +344,7 @@ export default function KpiBonusPage() {
 
   return (
     <div className="p-2.5 w-full max-w-none mx-auto bg-[#f8f9fa] min-h-screen text-slate-800 space-y-2.5 font-sans antialiased pb-12">
-      
+
       {/* PAGE HEADER TITLE & TOP MAIN TAB NAVIGATION */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1 border-b border-slate-200">
         <div>
@@ -357,38 +357,35 @@ export default function KpiBonusPage() {
         </div>
 
         {/* TOP TAB SWITCHER: KPI & BONUS SUMMARY VS OPERATIONS PROJECT HISTORY VS CAMPAIGN & COMMISSION */}
-        <div className="flex items-center gap-0.5 bg-[#f1f5f9] p-0.5 rounded-sm border border-slate-200 self-start sm:self-auto flex-wrap">
-          <button 
+        <div className="flex items-center gap-0.5 bg-[#f1f5f9] p-0.5 rounded-[2.5px] border border-slate-200 self-start sm:self-auto flex-wrap">
+          <button
             onClick={() => setMainPageTab('summary')}
-            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-xs transition-all cursor-pointer flex items-center gap-1 ${
-              mainPageTab === 'summary'
+            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-[2.5px] transition-all cursor-pointer flex items-center gap-1 ${mainPageTab === 'summary'
                 ? 'bg-white text-slate-900 shadow-2xs border border-slate-200'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             <Award size={12} className={mainPageTab === 'summary' ? 'text-[#008060]' : 'text-slate-400'} />
             <span>KPI & Bonus Summary</span>
           </button>
 
-          <button 
+          <button
             onClick={() => setMainPageTab('operations')}
-            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-xs transition-all cursor-pointer flex items-center gap-1 ${
-              mainPageTab === 'operations'
+            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-xs transition-all cursor-pointer flex items-center gap-1 ${mainPageTab === 'operations'
                 ? 'bg-white text-slate-900 shadow-2xs border border-slate-200'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             <ListChecks size={12} className={mainPageTab === 'operations' ? 'text-[#008060]' : 'text-slate-400'} />
             <span>Operations Project History</span>
           </button>
 
-          <button 
+          <button
             onClick={() => setMainPageTab('campaign')}
-            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-xs transition-all cursor-pointer flex items-center gap-1 ${
-              mainPageTab === 'campaign'
+            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-xs transition-all cursor-pointer flex items-center gap-1 ${mainPageTab === 'campaign'
                 ? 'bg-white text-slate-900 shadow-2xs border border-slate-200'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
             <Target size={12} className={mainPageTab === 'campaign' ? 'text-[#008060]' : 'text-slate-400'} />
             <span>Campaign & Sales Commission</span>
@@ -398,7 +395,7 @@ export default function KpiBonusPage() {
 
       {/* GLOBAL USER BANNER */}
       <div className="bg-white px-3 py-2 rounded-md border border-slate-200 shadow-2xs flex flex-col lg:flex-row lg:items-center justify-between gap-2">
-        
+
         {/* Left: Avatar & Employee Info */}
         <div className="flex items-center gap-2.5">
           <div className="w-7 h-7 rounded-full bg-emerald-700 text-white font-extrabold flex items-center justify-center text-[11px] shrink-0 shadow-2xs">
@@ -420,7 +417,7 @@ export default function KpiBonusPage() {
           <div className="flex items-center gap-1">
             <span className="text-[11.5px] font-bold text-slate-600 shrink-0">Year:</span>
             <div className="w-20">
-              <Select 
+              <Select
                 value={selectedYear}
                 onChange={(e) => setSelectedYear(e.target.value)}
                 showSearch={false}
@@ -435,7 +432,7 @@ export default function KpiBonusPage() {
           <div className="flex items-center gap-1">
             <span className="text-[11.5px] font-bold text-slate-600 shrink-0">Quarter:</span>
             <div className="w-40">
-              <Select 
+              <Select
                 value={selectedQuarter}
                 onChange={(e) => setSelectedQuarter(e.target.value)}
                 showSearch={false}
@@ -450,7 +447,7 @@ export default function KpiBonusPage() {
             </div>
           </div>
 
-          <Button 
+          <Button
             className="bg-[#008060] hover:bg-[#006e52] text-white text-[11px] font-extrabold h-7 px-2.5 tracking-wide cursor-pointer flex items-center gap-1 shrink-0"
           >
             <RefreshCw size={12} />
@@ -464,7 +461,7 @@ export default function KpiBonusPage() {
       {/* ================= VIEW 1: KPI & BONUS SUMMARY ================= */}
       {mainPageTab === 'summary' && (
         <div className="bg-white p-3 rounded-md border border-slate-200 shadow-2xs space-y-2.5">
-          
+
           {/* 8 MINIMAL DYNAMIC STAT METRIC CARDS */}
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2">
             <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
@@ -523,10 +520,10 @@ export default function KpiBonusPage() {
                     <span>Quarter Wise Target Ledger</span>
                   </span>
                 </div>
-                
+
                 {/* Search Bar */}
                 <div className="relative w-full sm:w-60">
-                  <input 
+                  <input
                     type="text"
                     placeholder="Search project or ID..."
                     value={searchQuery}
@@ -542,7 +539,7 @@ export default function KpiBonusPage() {
                   <thead>
                     <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold text-[10.5px]">
                       <th className="py-1.5 px-1.5 border-r border-slate-200 text-center w-6">
-                        <input 
+                        <input
                           type="checkbox"
                           checked={selectedRows.length === displayedLedgerData.length && displayedLedgerData.length > 0}
                           onChange={() => setSelectedRows(selectedRows.length === displayedLedgerData.length ? [] : displayedLedgerData.map(d => d.id))}
@@ -575,7 +572,7 @@ export default function KpiBonusPage() {
                       displayedLedgerData.map((row, idx) => (
                         <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
                           <td className="py-1 px-1.5 border-r border-slate-200 text-center">
-                            <input 
+                            <input
                               type="checkbox"
                               checked={selectedRows.includes(row.id)}
                               onChange={() => toggleSelectRow(row.id)}
@@ -590,7 +587,7 @@ export default function KpiBonusPage() {
                             </div>
                           </td>
                           <td className="py-1 px-1.5 border-r border-slate-200 text-slate-700 font-semibold">{row.role}</td>
-                          
+
                           {/* ASSIGN PROJECT COLUMN */}
                           <td className="py-1 px-1.5 border-r border-slate-200 font-bold text-[#008060]">
                             <div className="flex items-center gap-1">
@@ -610,7 +607,7 @@ export default function KpiBonusPage() {
                           </td>
 
                           <td className="py-1 px-1.5 border-r border-slate-200 text-slate-600">{row.period}</td>
-                          
+
                           {/* QUARTER WISE TARGET VALUE COLUMN WITH BADGE */}
                           <td className="py-1 px-1.5 border-r border-slate-200 text-right font-black bg-emerald-50/40">
                             <div className="flex items-center justify-end gap-1">
@@ -624,16 +621,15 @@ export default function KpiBonusPage() {
                           <td className="py-1 px-1.5 border-r border-slate-200 text-right font-extrabold text-indigo-700">{row.totalCarry}</td>
                           <td className="py-1 px-1.5 border-r border-slate-200 text-right font-extrabold text-[#008060]">{row.bonusAmount}</td>
                           <td className="py-1 px-1 border-r border-slate-200 text-center">
-                            <span className={`px-1 py-0.2 text-[9.5px] font-bold rounded-full border ${
-                              row.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                              row.status === 'Calculated' ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                              'bg-amber-50 text-amber-700 border-amber-200'
-                            }`}>
+                            <span className={`px-1 py-0.2 text-[9.5px] font-bold rounded-full border ${row.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                                row.status === 'Calculated' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                                  'bg-amber-50 text-amber-700 border-amber-200'
+                              }`}>
                               {row.status}
                             </span>
                           </td>
                           <td className="py-1 px-1 text-center">
-                            <button 
+                            <button
                               onClick={() => setSelectedRowDetail(row)}
                               className="px-1.5 py-0.5 text-[10px] font-bold bg-[#008060] text-white rounded hover:bg-[#006e52] cursor-pointer"
                             >
@@ -655,7 +651,7 @@ export default function KpiBonusPage() {
             /* DETAILED RECORD PAGE VIEW */
             <div className="space-y-4 animate-in fade-in duration-150 pt-2">
               <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                <button 
+                <button
                   onClick={() => setSelectedRowDetail(null)}
                   className="px-3 py-1 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-[12px] font-bold rounded shadow-2xs transition-colors cursor-pointer flex items-center gap-1.5"
                 >
@@ -724,7 +720,7 @@ export default function KpiBonusPage() {
               <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                   <h3 className="text-[14px] font-bold text-slate-900">Assigned Project & Performance Breakdown</h3>
-                  <button 
+                  <button
                     onClick={() => setActiveTab('penaltyRecord')}
                     className="px-2.5 py-0.5 bg-amber-50 text-amber-700 hover:bg-amber-100 text-[11px] font-bold rounded border border-amber-200 transition-colors cursor-pointer flex items-center gap-1"
                   >
@@ -820,24 +816,22 @@ export default function KpiBonusPage() {
               {/* BOTTOM TABBED SECTION WITH PROJECT DETAILS */}
               <div className="bg-white rounded-lg border border-slate-200 shadow-2xs overflow-hidden">
                 <div className="flex items-center gap-2 border-b border-slate-200 px-3 pt-2.5 bg-slate-50/50">
-                  <button 
+                  <button
                     onClick={() => setActiveTab('kpiLines')}
-                    className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-t transition-colors cursor-pointer ${
-                      activeTab === 'kpiLines'
+                    className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-t transition-colors cursor-pointer ${activeTab === 'kpiLines'
                         ? 'bg-white border-t-2 border-[#008060] text-[#008060] shadow-2xs'
                         : 'text-slate-500 hover:text-slate-800'
-                    }`}
+                      }`}
                   >
                     KPI Lines
                   </button>
 
-                  <button 
+                  <button
                     onClick={() => setActiveTab('penaltyRecord')}
-                    className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-t transition-colors cursor-pointer ${
-                      activeTab === 'penaltyRecord'
+                    className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-t transition-colors cursor-pointer ${activeTab === 'penaltyRecord'
                         ? 'bg-white border-t-2 border-[#008060] text-[#008060] shadow-2xs'
                         : 'text-slate-500 hover:text-slate-800'
-                    }`}
+                      }`}
                   >
                     Penalty Records
                   </button>
@@ -882,11 +876,10 @@ export default function KpiBonusPage() {
                               </td>
                               <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-[#008060]">{line.salesBonus}</td>
                               <td className="py-2 px-3 border-r border-slate-200 text-center">
-                                <span className={`px-2 py-0.5 text-[10.5px] font-bold rounded-full border ${
-                                  line.kpiStatus === 'Approved'
+                                <span className={`px-2 py-0.5 text-[10.5px] font-bold rounded-full border ${line.kpiStatus === 'Approved'
                                     ? 'bg-emerald-50 text-emerald-600 border-emerald-300'
                                     : 'bg-amber-50 text-amber-600 border-amber-300'
-                                }`}>
+                                  }`}>
                                   {line.kpiStatus}
                                 </span>
                               </td>
@@ -942,7 +935,7 @@ export default function KpiBonusPage() {
       {/* ================= VIEW 2: OPERATIONS PROJECT HISTORY (EXACT SCREENSHOT TABLE) ================= */}
       {mainPageTab === 'operations' && (
         <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-4 animate-in fade-in duration-150">
-          
+
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-slate-100">
             <div>
               <h2 className="text-[16px] font-bold text-slate-900">Operations Project & Order History</h2>
@@ -953,7 +946,7 @@ export default function KpiBonusPage() {
 
             <div className="flex items-center gap-2">
               <div className="relative w-64">
-                <input 
+                <input
                   type="text"
                   placeholder="Search order no, customer, company..."
                   value={searchQuery}
@@ -1038,13 +1031,12 @@ export default function KpiBonusPage() {
                       <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.currency}</td>
                       <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-500">{row.reversion}</td>
                       <td className="py-2 px-2.5 border-r border-slate-200 text-center">
-                        <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full border ${
-                          row.kpiStatus === 'Approved'
+                        <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full border ${row.kpiStatus === 'Approved'
                             ? 'bg-emerald-50 text-emerald-600 border-emerald-300'
                             : row.kpiStatus === 'Verified'
-                            ? 'bg-blue-50 text-blue-600 border-blue-300'
-                            : 'bg-amber-50 text-amber-600 border-amber-300'
-                        }`}>
+                              ? 'bg-blue-50 text-blue-600 border-blue-300'
+                              : 'bg-amber-50 text-amber-600 border-amber-300'
+                          }`}>
                           {row.kpiStatus}
                         </span>
                       </td>
@@ -1068,16 +1060,16 @@ export default function KpiBonusPage() {
       {/* ================= VIEW 3: CAMPAIGN & SALES COMMISSION ================= */}
       {mainPageTab === 'campaign' && (
         <div className="space-y-2.5 animate-in fade-in duration-150">
-          
+
           {/* 3 PREMIUM STAT METRIC CARDS */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-            
+
             {/* CARD 1: Total Sales Count */}
             <div className="bg-white p-2.5 rounded-md border border-slate-200/90 shadow-2xs flex items-center justify-between hover:border-emerald-300 transition-all h-[64px]">
               <div className="space-y-0.5">
                 <span className="text-[9.5px] font-extrabold text-slate-500 uppercase tracking-wider block">Total Sales Count</span>
                 <h2 className="text-[17px] font-black text-slate-900 leading-none">28</h2>
-                <button 
+                <button
                   onClick={() => setCampaignTab('commissions')}
                   className="text-[10px] font-bold text-[#008060] hover:underline cursor-pointer flex items-center gap-1"
                 >
@@ -1094,7 +1086,7 @@ export default function KpiBonusPage() {
               <div className="space-y-0.5">
                 <span className="text-[9.5px] font-extrabold text-slate-500 uppercase tracking-wider block">Total Sales Amount</span>
                 <h2 className="text-[17px] font-black text-slate-900 leading-none">$ 2,174.00</h2>
-                <button 
+                <button
                   onClick={() => setCampaignTab('commissions')}
                   className="text-[10px] font-bold text-[#008060] hover:underline cursor-pointer flex items-center gap-1"
                 >
@@ -1111,7 +1103,7 @@ export default function KpiBonusPage() {
               <div className="space-y-0.5">
                 <span className="text-[9.5px] font-extrabold text-slate-500 uppercase tracking-wider block">Commission Earned</span>
                 <h2 className="text-[17px] font-black text-[#008060] leading-none">৳ 2,934.00</h2>
-                <button 
+                <button
                   onClick={() => setCampaignTab('commissions')}
                   className="text-[10px] font-bold text-[#008060] hover:underline cursor-pointer flex items-center gap-1"
                 >
@@ -1127,40 +1119,37 @@ export default function KpiBonusPage() {
 
           {/* MAIN CAMPAIGN DATA CARD WITH SUB-TABS */}
           <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-4">
-            
+
             {/* Modern Sub-Tab Pill Header */}
             <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-              <button 
+              <button
                 onClick={() => setCampaignTab('products')}
-                className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-2 ${
-                  campaignTab === 'products'
+                className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-2 ${campaignTab === 'products'
                     ? 'bg-[#008060] text-white shadow-2xs'
                     : 'bg-slate-100/80 hover:bg-slate-200/80 text-slate-700 border border-slate-200'
-                }`}
+                  }`}
               >
                 <ShoppingBag size={14} />
                 <span>Top Products</span>
               </button>
 
-              <button 
+              <button
                 onClick={() => setCampaignTab('clients')}
-                className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-2 ${
-                  campaignTab === 'clients'
+                className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-2 ${campaignTab === 'clients'
                     ? 'bg-[#008060] text-white shadow-2xs'
                     : 'bg-slate-100/80 hover:bg-slate-200/80 text-slate-700 border border-slate-200'
-                }`}
+                  }`}
               >
                 <Users size={14} />
                 <span>Top Clients</span>
               </button>
 
-              <button 
+              <button
                 onClick={() => setCampaignTab('commissions')}
-                className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-2 ${
-                  campaignTab === 'commissions'
+                className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-md transition-all cursor-pointer flex items-center gap-2 ${campaignTab === 'commissions'
                     ? 'bg-[#008060] text-white shadow-2xs'
                     : 'bg-slate-100/80 hover:bg-slate-200/80 text-slate-700 border border-slate-200'
-                }`}
+                  }`}
               >
                 <DollarSign size={14} />
                 <span>Commission Records</span>
@@ -1169,7 +1158,7 @@ export default function KpiBonusPage() {
 
             {/* SUB-TAB CONTENT TABLES */}
             <div>
-              
+
               {/* 1. TOP PRODUCTS TABLE */}
               {campaignTab === 'products' && (
                 <div className="space-y-3">

@@ -1,6 +1,29 @@
 import React, { useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { Bell, Search, Calendar, LayoutGrid, LogOut, User, Sparkles } from 'lucide-react';
+import {
+  LayoutDashboard,
+  Calendar,
+  ArrowLeftRight,
+  CreditCard,
+  Receipt,
+  HardDrive,
+  CheckSquare,
+  FileCheck,
+  BarChart2,
+  Settings,
+  HelpCircle,
+  Search,
+  Bell,
+  Mail,
+  User,
+  LogOut,
+  LayoutGrid,
+  Menu,
+  X,
+  Hexagon,
+  ChevronRight,
+  Phone
+} from 'lucide-react';
 import ModuleSelectorModal from '@/components/modals/module-selector-modal';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -9,163 +32,324 @@ export default function EssLayout() {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
   const [isModuleModalOpen, setIsModuleModalOpen] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
-  // Derive active ESS page title
-  const getPageTitle = () => {
-    const search = location.search;
-    if (search.includes('tab=leave')) return 'Leave Application';
-    if (search.includes('tab=movement')) return 'Movement Application';
-    if (search.includes('tab=adjust')) return 'Attendance Adjust';
-    if (search.includes('tab=shift')) return 'Shift Change';
-    if (search.includes('tab=application')) return 'Advance Salary (IOU)';
-    if (location.pathname.includes('about-me')) return 'About Me';
-    if (location.pathname.includes('time-management')) return 'Time Management';
-    if (location.pathname.includes('leave-movement')) return 'Leave & Movement';
-    if (location.pathname.includes('iou')) return 'IOU & Advance Salary';
-    if (location.pathname.includes('financial-aid')) return 'Financial Aid';
-    if (location.pathname.includes('assets')) return 'My Assets';
-    if (location.pathname.includes('expenses')) return 'Expense Claims';
-    if (location.pathname.includes('kpi-bonus')) return 'KPI & Bonus';
-    if (location.pathname.includes('supervisor')) return 'Supervisor Panel';
-    if (location.pathname.includes('payslip')) return 'PaySlip';
-    if (location.pathname.includes('todo')) return 'My Tasks';
-    return 'Employee Self Service';
-  };
-
-  const navTabs = [
-    { name: 'Dashboard', path: '/employee-portal/dashboard' },
-    { name: 'Time Mgmt', path: '/employee-portal/time-management' },
-    { name: 'Leave & Movement', path: '/employee-portal/leave-movement' },
-    { name: 'IOU', path: '/employee-portal/iou' },
-    { name: 'KPI & Bonus', path: '/employee-portal/kpi-bonus' },
-    { name: 'My Profile', path: '/employee-portal/about-me' },
+  // Navigation Items matching exact design
+  const mainNavItems = [
+    { name: 'Dashboard', path: '/employee-portal/dashboard', icon: LayoutDashboard },
+    { name: 'Attendance', path: '/employee-portal/time-management', icon: Calendar },
+    { name: 'Leave & Movement', path: '/employee-portal/leave-movement', icon: ArrowLeftRight },
+    { name: 'Payroll', path: '/employee-portal/payslip', icon: CreditCard },
+    { name: 'Expenses', path: '/employee-portal/expenses', icon: Receipt },
+    { name: 'Assets', path: '/employee-portal/assets', icon: HardDrive },
+    { name: 'Tasks', path: '/employee-portal/todo', icon: CheckSquare },
+    { name: 'IOU & Requisition', path: '/employee-portal/iou', icon: FileCheck },
+    { name: 'Reports', path: '/employee-portal/kpi-bonus', icon: BarChart2 },
   ];
 
+  const adminSettingsItems = [
+    { name: 'Settings', path: '/administration/settings/general', icon: Settings },
+    { name: 'Support', path: '/employee-portal/contact-book', icon: HelpCircle },
+  ];
+
+  const isItemActive = (itemPath: string) => {
+    const currentPath = location.pathname;
+    const basePath = itemPath.split('?')[0];
+    if (basePath === '/employee-portal/dashboard') {
+      return currentPath === '/employee-portal/dashboard' || currentPath === '/employee-portal';
+    }
+    return currentPath === basePath || (basePath !== '/' && currentPath.startsWith(basePath));
+  };
+
   return (
-    <div className="flex flex-col h-screen bg-[#f8fafc] overflow-hidden font-sans">
+    <div className="flex h-screen bg-[#F8FAFC] overflow-hidden font-sans text-slate-800 antialiased">
+      {/* MOBILE OVERLAY */}
+      {isMobileSidebarOpen && (
+        <div
+          onClick={() => setIsMobileSidebarOpen(false)}
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 lg:hidden transition-opacity"
+        />
+      )}
 
-      {/* TOP ESS HEADER BAR */}
-      <header className="h-16 bg-white border-b border-slate-200/80 flex items-center justify-between px-4 sm:px-6 z-10 shrink-0 shadow-2xs">
-        
-        {/* Left Side: App Launcher, Title & Top Nav Tabs */}
-        <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-          
-          {/* 9-DOTS APP LAUNCHER BUTTON */}
-          <button
-            onClick={() => setIsModuleModalOpen(true)}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-slate-100/90 hover:bg-slate-200/80 text-slate-700 font-medium text-[12.5px] transition-colors cursor-pointer border border-slate-200/80 shrink-0"
-            title="Open Module App Selector"
-          >
-            <LayoutGrid size={16} className="text-[#008060] shrink-0" />
-            <span className="font-semibold text-slate-800 tracking-tight hidden sm:inline">Modules</span>
-          </button>
+      {/* LEFT SIDEBAR */}
+      <aside
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-[270px] bg-white border-r border-slate-200/90 flex flex-col justify-between transform transition-transform duration-200 ease-in-out shrink-0 ${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+          }`}
+      >
+        {/* BRAND & LOGO HEADER */}
+        <div>
+          <div className="h-16 px-5 flex items-center justify-between border-b border-slate-100">
+            <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/employee-portal/dashboard')}>
+              <div className="w-9 h-9 rounded-[4px]bg-gradient-to-tr from-[#3730A3] via-[#4338CA] to-[#4F46E5] text-white flex items-center justify-center shadow-md shadow-indigo-500/20">
+                <Hexagon size={22} className="fill-white/20 stroke-[2.2]" />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-extrabold text-[15px] leading-tight text-slate-900 tracking-tight">
+                  ESS PORTAL
+                </span>
+                <span className="text-[10.5px] font-medium text-slate-400 leading-tight tracking-wide">
+                  Employee Self Service
+                </span>
+              </div>
+            </div>
 
-          {/* Portal Badge & Page Title */}
-          <div className="flex items-center gap-2 border-l border-slate-200 pl-3">
-            <span className="bg-[#008060]/10 text-[#008060] px-2 py-0.5 rounded text-[11px] font-extrabold uppercase tracking-wide hidden md:inline-block">
-              ESS Portal
-            </span>
-            <h1 className="text-[15px] sm:text-[16px] font-bold text-[#0B1E43] tracking-tight truncate">
-              {getPageTitle()}
-            </h1>
+            {/* Mobile Close Button */}
+            <button
+              onClick={() => setIsMobileSidebarOpen(false)}
+              className="lg:hidden p-1.5 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100"
+            >
+              <X size={18} />
+            </button>
           </div>
 
-          {/* Quick Header Nav Links */}
-          <nav className="hidden xl:flex items-center gap-1 pl-4 border-l border-slate-200">
-            {navTabs.map((tab) => {
-              const isActive = location.pathname === tab.path.split('?')[0];
+          {/* SIDEBAR NAVIGATION ITEMS */}
+          <nav className="p-3 space-y-1 overflow-y-auto max-h-[calc(100vh-340px)] custom-scrollbar">
+            {mainNavItems.map((item) => {
+              const active = isItemActive(item.path);
+              const Icon = item.icon;
               return (
                 <button
-                  key={tab.name}
-                  onClick={() => navigate(tab.path)}
-                  className={`px-2.5 py-1 rounded text-[12px] font-semibold transition-colors cursor-pointer ${
-                    isActive
-                      ? 'bg-slate-100 text-[#008060]'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                  }`}
+                  key={item.name}
+                  onClick={() => {
+                    navigate(item.path);
+                    setIsMobileSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-[8px]font-semibold text-[13.5px] transition-all duration-150 group cursor-pointer ${active
+                    ? 'bg-[#3730A3] text-white shadow-md shadow-indigo-500/20'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                    }`}
                 >
-                  {tab.name}
+                  <Icon
+                    size={18}
+                    className={`shrink-0 transition-colors ${active ? 'text-white' : 'text-slate-400 group-hover:text-slate-600'
+                      }`}
+                  />
+                  <span className="truncate">{item.name}</span>
+                </button>
+              );
+            })}
+
+            {/* ADMIN & SETTINGS SECTION HEADER */}
+            <div className="pt-4 pb-1.5 px-3">
+              <span className="text-[11px] font-bold tracking-wider text-slate-400 uppercase">
+                ADMIN & SETTINGS
+              </span>
+            </div>
+
+            {adminSettingsItems.map((item) => {
+              const active = isItemActive(item.path);
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.name}
+                  onClick={() => {
+                    navigate(item.path);
+                    setIsMobileSidebarOpen(false);
+                  }}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md font-semibold text-[13.5px] transition-all duration-150 group cursor-pointer ${active
+                    ? 'bg-[#3730A3] text-white shadow-md shadow-indigo-500/20'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                    }`}
+                >
+                  <Icon
+                    size={18}
+                    className={`shrink-0 transition-colors ${active ? 'text-white' : 'text-slate-400 group-hover:text-slate-600'
+                      }`}
+                  />
+                  <span className="truncate">{item.name}</span>
                 </button>
               );
             })}
           </nav>
-
         </div>
 
-        {/* Right Side: Search, Notifications & User Profile */}
-        <div className="flex items-center gap-3 sm:gap-4 shrink-0">
-          
-          {/* Top Search Bar */}
-          <div className="hidden lg:flex items-center bg-slate-50 px-3 py-1.5 rounded-full w-[220px] border border-slate-200 focus-within:border-[#008060] focus-within:bg-white transition-colors">
-            <Search size={14} className="text-slate-400 mr-2 shrink-0" />
-            <input
-              type="text"
-              placeholder="Search ESS..."
-              className="bg-transparent border-none outline-none text-[12px] w-full text-slate-700 placeholder-slate-400 font-medium"
-            />
+        {/* BOTTOM USER PROFILE CARD IN SIDEBAR */}
+        <div className="p-3 border-t border-slate-100 bg-white">
+          <div className="p-3 bg-slate-50/90 rounded-lg border border-slate-200/80 space-y-2.5">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <img
+                  src={user?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"}
+                  alt={user?.name || "Al Mamon"}
+                  className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-2xs"
+                  onError={(e: any) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80";
+                  }}
+                />
+                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white" />
+              </div>
+              <div className="flex flex-col min-w-0">
+                <span className="font-bold text-[13.5px] leading-tight text-slate-900 truncate">
+                  {user?.name || 'Al Mamon'}
+                </span>
+                <span className="text-[11px] font-semibold text-indigo-600 leading-tight truncate mt-0.5">
+                  {user?.designation || 'Laravel Developer'}
+                </span>
+              </div>
+            </div>
+
+            {/* EMPLOYEE INFO MINIMAL GRID */}
+            <div className="pt-2 border-t border-slate-200/60 space-y-1 text-[11px] font-medium text-slate-500">
+              <div className="flex items-center justify-between text-slate-600">
+                <span>Department</span>
+                <span className="font-bold text-slate-800">{user?.department || 'Operations'}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Employee ID</span>
+                <span className="font-semibold text-slate-700 font-mono">15202</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Email</span>
+                <span className="font-medium text-slate-600 truncate max-w-[120px]" title={user?.email || 'al.mamon@example.com'}>
+                  {user?.email || 'al.mamon@example.com'}
+                </span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Mobile</span>
+                <span className="font-medium text-slate-600 font-mono">+8801768085606</span>
+              </div>
+            </div>
+
+            {/* VIEW PROFILE BUTTON */}
+            <button
+              onClick={() => {
+                navigate('/employee-portal/about-me');
+                setIsMobileSidebarOpen(false);
+              }}
+              className="w-full py-1.5 px-3 bg-white hover:bg-slate-100 text-slate-700 text-[11.5px] font-bold rounded-[3px] border border-slate-200/80 flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs transition-colors"
+            >
+              <User size={13} className="text-slate-500" />
+              <span>View Full Profile</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      {/* MAIN CONTAINER */}
+      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+        {/* TOP HEADER BAR */}
+        <header className="h-16 bg-white border-b border-slate-200/90 flex items-center justify-between px-4 sm:px-6 shrink-0 z-10 shadow-2xs">
+          {/* LEFT: MOBILE TOGGLE & GLOBAL SEARCH BAR */}
+          <div className="flex items-center gap-3 flex-1 max-w-xl">
+            <button
+              onClick={() => setIsMobileSidebarOpen(true)}
+              className="lg:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+              title="Open Menu"
+            >
+              <Menu size={20} />
+            </button>
+
+            {/* GLOBAL SEARCH */}
+            <div className="relative w-full max-w-md hidden sm:block">
+              <div className="flex items-center bg-slate-50 hover:bg-slate-100/80 focus-within:bg-white border border-slate-200 focus-within:border-indigo-500 rounded-[3px]px-3 py-1.5 transition-all">
+                <Search size={15} className="text-slate-400 mr-2 shrink-0" />
+                <input
+                  type="text"
+                  placeholder="Search for anything..."
+                  className="bg-transparent border-none outline-none text-[12.5px] w-full text-slate-800 placeholder-slate-400 font-medium"
+                />
+                <kbd className="hidden md:inline-flex items-center gap-1 bg-white border border-slate-200 rounded px-1.5 py-0.5 text-[10px] font-mono font-semibold text-slate-400 shrink-0">
+                  Ctrl + K
+                </kbd>
+              </div>
+            </div>
           </div>
 
-          {/* Notification & Calendar Action Icons */}
-          <div className="flex items-center gap-2 text-slate-500 border-r border-slate-200 pr-3">
-            <button className="p-1.5 rounded-full hover:bg-slate-100 text-slate-600 transition-colors relative cursor-pointer" title="Notifications">
-              <Bell size={18} />
-              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-white" />
+          {/* RIGHT: ACTION ICONS & USER PROFILE */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* MODULE SELECTOR (9-DOTS) */}
+            <button
+              onClick={() => setIsModuleModalOpen(true)}
+              className="p-2 rounded-[3px]text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
+              title="Switch Module"
+            >
+              <LayoutGrid size={18} />
             </button>
-            <button 
+
+            {/* CALENDAR */}
+            <button
               onClick={() => navigate('/employee-portal/calendar')}
-              className="p-1.5 rounded-full hover:bg-slate-100 text-slate-600 transition-colors cursor-pointer" 
-              title="Calendar & Meetings"
+              className="p-2 rounded-[3px]text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer hidden sm:flex"
+              title="Calendar"
             >
               <Calendar size={18} />
             </button>
-          </div>
 
-          {/* User Profile Badge (Connected to AuthContext) */}
-          <div 
-            onClick={() => navigate('/employee-portal/about-me')}
-            className="flex items-center gap-2.5 cursor-pointer hover:opacity-90 transition-opacity"
-            title="View Profile"
-          >
-            <div className="w-8 h-8 rounded-full bg-[#008060] text-white flex items-center justify-center font-bold text-[12px] shadow-2xs">
-              {user?.initials || 'AM'}
-            </div>
-            <div className="hidden sm:flex flex-col text-left">
-              <span className="text-[12.5px] font-bold text-slate-900 leading-tight">
-                {user?.name || 'Al Mamon'}
+            {/* NOTIFICATIONS */}
+            <button
+              className="p-2 rounded-[3px]text-slate-600 hover:bg-slate-100 transition-colors relative cursor-pointer"
+              title="Notifications"
+            >
+              <Bell size={18} />
+              <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-rose-500 text-white font-extrabold text-[9px] flex items-center justify-center ring-2 ring-white">
+                5
               </span>
-              <span className="text-[10.5px] font-semibold text-[#008060]">
-                {user?.roleLabel || 'Employee'}
+            </button>
+
+            {/* MESSAGES */}
+            <button
+              className="p-2 rounded-[3px]text-slate-600 hover:bg-slate-100 transition-colors relative cursor-pointer hidden sm:flex"
+              title="Messages"
+            >
+              <Mail size={18} />
+              <span className="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-rose-500 text-white font-extrabold text-[9px] flex items-center justify-center ring-2 ring-white">
+                5
               </span>
+            </button>
+
+            {/* USER PROFILE DROPDOWN BADGE */}
+            <div className="flex items-center gap-3 pl-2 border-l border-slate-200">
+              <div
+                onClick={() => navigate('/employee-portal/about-me')}
+                className="flex items-center gap-2.5 cursor-pointer hover:opacity-90 transition-opacity"
+              >
+                <img
+                  src={user?.avatar || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80"}
+                  alt={user?.name || "Al Mamon"}
+                  className="w-8 h-8 rounded-full object-cover border border-slate-200 shadow-2xs"
+                  onError={(e: any) => {
+                    e.target.onerror = null;
+                    e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80";
+                  }}
+                />
+                <div className="hidden md:flex flex-col text-left">
+                  <span className="text-[12.5px] font-bold text-slate-900 leading-tight">
+                    {user?.name || 'Al Mamon'}
+                  </span>
+                  <span className="text-[10.5px] font-medium text-slate-500">
+                    {user?.designation || 'Laravel Developer'}
+                  </span>
+                </div>
+              </div>
+
+              {/* LOGOUT BUTTON */}
+              <button
+                onClick={() => {
+                  logout();
+                  navigate('/web/login');
+                }}
+                className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-[3px]transition-colors cursor-pointer"
+                title="Sign Out"
+              >
+                <LogOut size={17} />
+              </button>
             </div>
           </div>
+        </header>
 
-          {/* Logout Button */}
-          <button
-            onClick={() => {
-              logout();
-              navigate('/web/login');
-            }}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer ml-1"
-            title="Sign Out"
-          >
-            <LogOut size={17} />
-          </button>
+        {/* MAIN SCROLLABLE CONTENT AREA */}
+        <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#F8FAFC]">
+          <Outlet />
+        </main>
+      </div>
 
-        </div>
-
-      </header>
-
-      {/* MAIN SCROLLABLE CONTENT */}
-      <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#f8fafc] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-        <Outlet />
-      </main>
-
-      {/* 9-DOTS MODULE APP SELECTOR MODAL */}
-      <ModuleSelectorModal 
-        isOpen={isModuleModalOpen} 
-        onClose={() => setIsModuleModalOpen(false)} 
+      {/* 9-DOTS MODULE SELECTOR MODAL */}
+      <ModuleSelectorModal
+        isOpen={isModuleModalOpen}
+        onClose={() => setIsModuleModalOpen(false)}
       />
-
     </div>
   );
 }
+

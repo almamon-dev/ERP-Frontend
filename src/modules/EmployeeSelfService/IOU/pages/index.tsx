@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
-  CreditCard, Plus, Eye, Edit2, Trash2, CheckCircle2, Clock, Upload, Info, Search, RotateCcw, CheckCircle, XCircle, FileText
+  FileCheck, Plus, Eye, Edit2, Trash2, Upload, Info, Search, CheckCircle, XCircle, FileText
 } from 'lucide-react';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
@@ -37,7 +37,7 @@ export default function IOUPage() {
       attachment: 'receipt_dinner.pdf',
       appDate: '15,Jul 26 10:21 AM',
       status: 'Approved',
-      statusBadge: 'bg-emerald-50 text-emerald-700 border-emerald-300'
+      statusBadge: 'bg-emerald-50 text-emerald-700 border-emerald-200'
     },
     {
       id: 2,
@@ -48,7 +48,7 @@ export default function IOUPage() {
       attachment: null,
       appDate: '24,Jul 26 02:45 PM',
       status: 'Pending',
-      statusBadge: 'bg-amber-50 text-amber-700 border-amber-300'
+      statusBadge: 'bg-amber-50 text-amber-700 border-amber-200'
     }
   ]);
 
@@ -66,7 +66,7 @@ export default function IOUPage() {
       attachment: 'travel_invoice.pdf',
       appDate: '26,Jul 26 09:15 AM',
       status: 'Pending',
-      statusBadge: 'bg-amber-50 text-amber-700 border-amber-300'
+      statusBadge: 'bg-amber-50 text-amber-700 border-amber-200'
     },
     {
       id: 102,
@@ -80,7 +80,7 @@ export default function IOUPage() {
       attachment: null,
       appDate: '20,Jul 26 01:20 PM',
       status: 'Approved',
-      statusBadge: 'bg-emerald-50 text-emerald-700 border-emerald-300'
+      statusBadge: 'bg-emerald-50 text-emerald-700 border-emerald-200'
     },
     {
       id: 103,
@@ -94,7 +94,7 @@ export default function IOUPage() {
       attachment: null,
       appDate: '18,Jul 26 11:10 AM',
       status: 'Rejected',
-      statusBadge: 'bg-rose-50 text-rose-700 border-rose-300'
+      statusBadge: 'bg-rose-50 text-rose-700 border-rose-200'
     }
   ]);
 
@@ -117,7 +117,7 @@ export default function IOUPage() {
       attachment: attachment ? attachment.name : null,
       appDate: new Date().toLocaleString(),
       status: 'Pending',
-      statusBadge: 'bg-amber-50 text-amber-700 border-amber-300'
+      statusBadge: 'bg-amber-50 text-amber-700 border-amber-200'
     };
 
     setIouList([newEntry, ...iouList]);
@@ -134,22 +134,23 @@ export default function IOUPage() {
   };
 
   const handleApproveSupervisor = (id: number) => {
-    setSupervisorList(prev => prev.map(item => item.id === id ? { ...item, status: 'Approved', statusBadge: 'bg-emerald-50 text-emerald-700 border-emerald-300' } : item));
+    setSupervisorList(prev => prev.map(item => item.id === id ? { ...item, status: 'Approved', statusBadge: 'bg-emerald-50 text-emerald-700 border-emerald-200' } : item));
   };
 
   const handleRejectSupervisor = (id: number) => {
-    setSupervisorList(prev => prev.map(item => item.id === id ? { ...item, status: 'Rejected', statusBadge: 'bg-rose-50 text-rose-700 border-rose-300' } : item));
+    setSupervisorList(prev => prev.map(item => item.id === id ? { ...item, status: 'Rejected', statusBadge: 'bg-rose-50 text-rose-700 border-rose-200' } : item));
   };
 
   return (
-    <div className="p-4 max-w-[1600px] mx-auto bg-[#f8f9fa] min-h-screen text-slate-800 space-y-4 font-sans antialiased pb-20">
+    <div className="p-4 md:p-6 max-w-full mx-auto bg-[#f8f9fa] min-h-screen text-slate-800 space-y-5 font-sans antialiased pb-20">
       
       {/* PAGE HEADER TITLE & DESCRIPTION */}
-      <div className="pb-1">
-        <h1 className="text-[20px] font-bold text-slate-900 tracking-tight">
+      <div>
+        <h1 className="text-[19px] font-semibold text-slate-800 flex items-center gap-2">
+          <FileCheck size={20} className="text-[#008060]" />
           {activeTab === 'application' ? 'IOU Application' : 'IOU Supervisor Report'}
         </h1>
-        <p className="text-[13px] font-medium text-slate-500 mt-0.5">
+        <p className="text-[12.5px] text-slate-500 mt-0.5 font-normal">
           {activeTab === 'application' 
             ? 'Apply for temporary cash advances for official expenses and track settlements.' 
             : 'Review, verify, and approve team member IOU cash advance requisitions.'}
@@ -161,7 +162,7 @@ export default function IOUPage() {
         <div className="space-y-4">
           
           {/* TOP CARD: APPLY IOU REQUISITION FORM */}
-          <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-2xs space-y-4">
+          <div className="bg-white p-4 rounded-md border border-slate-200/80 shadow-2xs space-y-4">
             <form onSubmit={handleApplyIOU} className="space-y-3.5">
               
               {/* ROW 1: Ref No, Requested Amount, Settlement Target Date */}
@@ -170,20 +171,20 @@ export default function IOUPage() {
                   label="IOU Reference No."
                   value={refNo}
                   readOnly
-                  className="h-[36px] text-[12.5px] bg-slate-50 text-slate-700 font-bold"
+                  className="h-8 text-[12px] bg-slate-50 text-slate-700 font-mono font-medium"
                 />
 
                 <Input 
-                  label="* Requested Amount (৳)"
+                  label="Requested Amount (৳)"
                   type="number"
                   placeholder="Enter amount (e.g. 10000)"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="h-[36px] text-[12.5px]"
+                  className="h-8 text-[12px]"
                 />
 
                 <DatePicker 
-                  label="* Settlement Target Date"
+                  label="Settlement Target Date"
                   value={settleDate}
                   onChange={(val) => setSettleDate(val)}
                   className="w-full"
@@ -192,18 +193,18 @@ export default function IOUPage() {
 
               {/* ROW 2: Purpose / Reason */}
               <Input 
-                label="* Purpose of Advance"
+                label="Purpose of Advance"
                 placeholder="Specify official purpose (e.g. Client entertainment, Urgent site deployment)"
                 value={purpose}
                 onChange={(e) => setPurpose(e.target.value)}
-                className="h-[36px] text-[12.5px]"
+                className="h-8 text-[12px]"
               />
 
               {/* ROW 3: UPLOAD ATTACHMENT & APPLY BUTTON */}
               <div className="flex items-center gap-3 pt-1">
-                <label className="flex items-center gap-1.5 px-3 py-1.5 border border-emerald-600 text-emerald-700 hover:bg-emerald-50 rounded text-[12px] font-bold cursor-pointer transition-colors shadow-2xs">
-                  <Upload size={14} className="stroke-[2.5]" />
-                  <span>Upload Supporting Doc</span>
+                <label className="flex items-center gap-1.5 px-3 py-1 border border-slate-200 text-slate-700 hover:bg-slate-50 rounded-xs text-[12px] font-medium cursor-pointer transition-colors">
+                  <Upload size={13} className="text-[#008060]" />
+                  <span>Attach Document</span>
                   <input 
                     type="file" 
                     className="hidden" 
@@ -211,14 +212,13 @@ export default function IOUPage() {
                   />
                 </label>
 
-                <Info size={16} className="text-rose-500 cursor-pointer" title="Only PDF, PNG, JPG files up to 2MB allowed" />
-                {attachment && <span className="text-[11.5px] text-slate-600 font-semibold truncate max-w-[180px]">{attachment.name}</span>}
+                {attachment && <span className="text-[11.5px] text-slate-600 font-medium truncate max-w-[180px]">{attachment.name}</span>}
 
                 <Button
                   type="submit"
-                  className="bg-[#008060] hover:bg-[#006e52] text-white text-[12px] font-extrabold px-5 h-8.5 rounded transition-colors uppercase tracking-wider shadow-2xs cursor-pointer"
+                  className="bg-[#008060] hover:bg-[#006e52] text-white text-[12px] font-medium px-4 h-8 rounded-xs cursor-pointer ml-auto"
                 >
-                  APPLY IOU REQUISITION
+                  Submit IOU Requisition
                 </Button>
               </div>
 
@@ -226,11 +226,11 @@ export default function IOUPage() {
           </div>
 
           {/* BOTTOM CARD: IOU REQUISITION LIST TABLE */}
-          <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-2xs space-y-4">
+          <div className="bg-white p-4 rounded-md border border-slate-200/80 shadow-2xs space-y-4">
             
             {/* Header with Title & Search */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-              <h3 className="text-[15px] font-bold text-slate-900">IOU Requisition List</h3>
+              <h3 className="text-[13.5px] font-semibold text-slate-800">IOU Requisitions List</h3>
               
               <div className="relative w-full sm:w-64">
                 <input 
@@ -238,7 +238,7 @@ export default function IOUPage() {
                   placeholder="Search ref no or purpose..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-8 px-3 pr-8 text-[12px] border border-slate-300 rounded outline-none focus:border-emerald-600 font-medium"
+                  className="w-full h-8 px-3 pr-8 text-[12px] border border-slate-200 rounded-xs outline-none focus:border-[#008060] font-medium"
                 />
                 <Search size={14} className="absolute right-2.5 top-2 text-slate-400 pointer-events-none" />
               </div>
@@ -247,27 +247,27 @@ export default function IOUPage() {
             {/* Filter Bar */}
             <div className="flex flex-wrap items-end gap-3 pb-3 border-b border-slate-100">
               <div className="flex flex-col gap-1">
-                <FormLabel className="text-[11px] font-bold text-slate-600 !mb-0">From Date</FormLabel>
+                <FormLabel className="text-[11.5px] font-medium text-slate-600 !mb-0">From Date</FormLabel>
                 <DatePicker 
                   value={filterFromDate}
                   onChange={(val) => setFilterFromDate(val)}
                   size="sm"
-                  className="w-40"
+                  className="w-36"
                 />
               </div>
 
               <div className="flex flex-col gap-1">
-                <FormLabel className="text-[11px] font-bold text-slate-600 !mb-0">To Date</FormLabel>
+                <FormLabel className="text-[11.5px] font-medium text-slate-600 !mb-0">To Date</FormLabel>
                 <DatePicker 
                   value={filterToDate}
                   onChange={(val) => setFilterToDate(val)}
                   size="sm"
-                  className="w-40"
+                  className="w-36"
                 />
               </div>
 
               <div className="flex flex-col gap-1 w-36">
-                <FormLabel className="text-[11px] font-bold text-slate-600 !mb-0">Status</FormLabel>
+                <FormLabel className="text-[11.5px] font-medium text-slate-600 !mb-0">Status</FormLabel>
                 <Select
                   value={filterStatus}
                   onChange={(e) => setFilterStatus(e.target.value)}
@@ -280,66 +280,66 @@ export default function IOUPage() {
                 />
               </div>
 
-              <Button className="h-8 bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-extrabold px-4 rounded transition-colors uppercase tracking-wider">
-                VIEW
+              <Button className="h-8 bg-slate-800 hover:bg-slate-900 text-white text-[12px] font-medium px-3.5 rounded-xs">
+                Filter Results
               </Button>
             </div>
 
             {/* Data Table */}
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+              <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold">
-                    <th className="py-2.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200">IOU Reference</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200 text-right">Requested Amount</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200 max-w-xs">Purpose</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200">Target Settlement</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200 text-center">Attachment</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200">Application Date</th>
-                    <th className="py-2.5 px-3 border-r border-slate-200 text-center">Status</th>
-                    <th className="py-2.5 px-3 text-center">Actions</th>
+                  <tr className="bg-slate-100 border-b border-slate-200 text-slate-800 font-semibold">
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100">IOU Reference</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100">Requested Amount</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 max-w-xs">Purpose</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100">Target Settlement</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center">Attachment</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100">Application Date</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center">Status</th>
+                    <th className="py-1.5 px-2.5 text-center">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+                <tbody className="divide-y divide-slate-100 text-slate-700 font-medium leading-[18px]">
                   {iouList.map((item, idx) => (
-                    <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-2.5 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                      <td className="py-2.5 px-3 border-r border-slate-200 font-bold text-slate-900">{item.refNo}</td>
-                      <td className="py-2.5 px-3 border-r border-slate-200 text-right font-extrabold text-slate-900">{item.amount}</td>
-                      <td className="py-2.5 px-3 border-r border-slate-200 text-slate-700 text-[11.5px] leading-snug">{item.purpose}</td>
-                      <td className="py-2.5 px-3 border-r border-slate-200 text-slate-600 font-semibold whitespace-nowrap">{item.settleDate}</td>
-                      <td className="py-2.5 px-3 border-r border-slate-200 text-center">
+                    <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-500 font-medium">{idx + 1}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 font-mono text-slate-700">{item.refNo}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 font-semibold text-slate-800">{item.amount}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-700 leading-snug">{item.purpose}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-700 whitespace-nowrap">{item.settleDate}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
                         {item.attachment ? (
-                          <span className="text-emerald-600 underline font-bold cursor-pointer">File</span>
+                          <span className="text-[#008060] underline font-medium cursor-pointer hover:text-emerald-800">Attached</span>
                         ) : '—'}
                       </td>
-                      <td className="py-2.5 px-3 border-r border-slate-200 text-slate-500 whitespace-nowrap">{item.appDate}</td>
-                      <td className="py-2.5 px-3 border-r border-slate-200 text-center">
-                        <span className={`px-2 py-0.2 text-[10.5px] font-extrabold rounded border ${item.statusBadge}`}>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-700 whitespace-nowrap">{item.appDate}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
+                        <span className={`inline-block px-2 py-0.5 text-[11px] font-medium rounded-[3px] border ${item.statusBadge}`}>
                           {item.status}
                         </span>
                       </td>
-                      <td className="py-2.5 px-3 text-center">
+                      <td className="py-1.5 px-2.5 text-center">
                         <div className="flex items-center justify-center gap-1.5">
                           <button 
                             onClick={() => setSelectedViewItem(item)}
-                            className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" 
+                            className="p-1 text-slate-500 hover:text-emerald-700 rounded hover:bg-slate-100 cursor-pointer" 
                             title="View Details"
                           >
-                            <Eye size={13} />
+                            <Eye size={14} />
                           </button>
                           {item.status === 'Pending' && (
                             <>
-                              <button className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" title="Edit">
-                                <Edit2 size={13} />
+                              <button className="p-1 text-slate-500 hover:text-blue-700 rounded hover:bg-slate-100 cursor-pointer" title="Edit">
+                                <Edit2 size={14} />
                               </button>
                               <button 
                                 onClick={() => handleDeleteRecord(item.id)} 
-                                className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" 
+                                className="p-1 text-slate-500 hover:text-rose-700 rounded hover:bg-slate-100 cursor-pointer" 
                                 title="Delete"
                               >
-                                <Trash2 size={13} />
+                                <Trash2 size={14} />
                               </button>
                             </>
                           )}
@@ -358,17 +358,17 @@ export default function IOUPage() {
 
       {/* ================= TAB 2: SUPERVISOR REPORT ================= */}
       {activeTab === 'supervisor-report' && (
-        <div className="bg-white p-5 rounded-lg border border-slate-200 shadow-2xs space-y-4">
+        <div className="bg-white p-4 rounded-md border border-slate-200/80 shadow-2xs space-y-4">
           
           {/* Header with Title & Search */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <h3 className="text-[15px] font-bold text-slate-900">Team IOU Requisitions Report</h3>
+            <h3 className="text-[13.5px] font-semibold text-slate-800">Team IOU Requisitions Report</h3>
             
             <div className="relative w-full sm:w-64">
               <input 
                 type="text" 
                 placeholder="Search employee or ref..."
-                className="w-full h-8 px-3 pr-8 text-[12px] border border-slate-300 rounded outline-none focus:border-emerald-600 font-medium"
+                className="w-full h-8 px-3 pr-8 text-[12px] border border-slate-200 rounded-xs outline-none focus:border-[#008060] font-medium"
               />
               <Search size={14} className="absolute right-2.5 top-2 text-slate-400 pointer-events-none" />
             </div>
@@ -376,54 +376,54 @@ export default function IOUPage() {
 
           {/* Data Table */}
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+            <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold">
-                  <th className="py-2.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
-                  <th className="py-2.5 px-3 border-r border-slate-200">Employee Details</th>
-                  <th className="py-2.5 px-3 border-r border-slate-200">IOU Ref</th>
-                  <th className="py-2.5 px-3 border-r border-slate-200 text-right">Amount</th>
-                  <th className="py-2.5 px-3 border-r border-slate-200 max-w-xs">Purpose</th>
-                  <th className="py-2.5 px-3 border-r border-slate-200">Settlement Target</th>
-                  <th className="py-2.5 px-3 border-r border-slate-200">Application Date</th>
-                  <th className="py-2.5 px-3 border-r border-slate-200 text-center">Status</th>
-                  <th className="py-2.5 px-3 text-center">Actions</th>
+                <tr className="bg-slate-100 border-b border-slate-200 text-slate-800 font-semibold">
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100">Employee Details</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100">IOU Ref</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100">Amount</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 max-w-xs">Purpose</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100">Settlement Target</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100">Application Date</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center">Status</th>
+                  <th className="py-1.5 px-2.5 text-center">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+              <tbody className="divide-y divide-slate-100 text-slate-700 font-medium leading-[18px]">
                 {supervisorList.map((item, idx) => (
-                  <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-2.5 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                    <td className="py-2.5 px-3 border-r border-slate-200">
+                  <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-500 font-medium">{idx + 1}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100">
                       <div>
-                        <span className="font-bold text-slate-900 text-[13px] block">{item.empName}</span>
-                        <span className="text-[11px] text-slate-500 font-medium">ID: {item.empId} • {item.designation}</span>
+                        <span className="font-semibold text-slate-800 text-[12.5px] block">{item.empName}</span>
+                        <span className="text-[11px] text-slate-500 font-normal">ID: {item.empId} • {item.designation}</span>
                       </div>
                     </td>
-                    <td className="py-2.5 px-3 border-r border-slate-200 font-bold text-slate-800">{item.refNo}</td>
-                    <td className="py-2.5 px-3 border-r border-slate-200 text-right font-extrabold text-slate-900">{item.amount}</td>
-                    <td className="py-2.5 px-3 border-r border-slate-200 text-slate-700 text-[11.5px] leading-snug">{item.purpose}</td>
-                    <td className="py-2.5 px-3 border-r border-slate-200 text-slate-600 font-semibold whitespace-nowrap">{item.settleDate}</td>
-                    <td className="py-2.5 px-3 border-r border-slate-200 text-slate-500 whitespace-nowrap">{item.appDate}</td>
-                    <td className="py-2.5 px-3 border-r border-slate-200 text-center">
-                      <span className={`px-2 py-0.2 text-[10.5px] font-extrabold rounded border ${item.statusBadge}`}>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 font-mono text-slate-700">{item.refNo}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 font-semibold text-slate-800">{item.amount}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-700 leading-snug">{item.purpose}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-700 whitespace-nowrap">{item.settleDate}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-700 whitespace-nowrap">{item.appDate}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
+                      <span className={`inline-block px-2 py-0.5 text-[11px] font-medium rounded-[3px] border ${item.statusBadge}`}>
                         {item.status}
                       </span>
                     </td>
-                    <td className="py-2.5 px-3 text-center">
+                    <td className="py-1.5 px-2.5 text-center">
                       <div className="flex items-center justify-center gap-1.5">
                         {item.status === 'Pending' ? (
                           <>
                             <button 
                               onClick={() => handleApproveSupervisor(item.id)}
-                              className="px-2.5 py-1 text-[11px] font-bold bg-[#008060] hover:bg-[#006e52] text-white rounded flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
+                              className="px-2 py-0.5 text-[11px] font-medium bg-[#008060] hover:bg-[#006e52] text-white rounded-xs flex items-center gap-1 cursor-pointer transition-colors"
                               title="Approve"
                             >
                               <CheckCircle size={12} /> Approve
                             </button>
                             <button 
                               onClick={() => handleRejectSupervisor(item.id)}
-                              className="px-2.5 py-1 text-[11px] font-bold bg-rose-600 hover:bg-rose-700 text-white rounded flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
+                              className="px-2.5 py-0.5 text-[11px] font-medium bg-rose-600 hover:bg-rose-700 text-white rounded-xs flex items-center gap-1 cursor-pointer transition-colors"
                               title="Reject"
                             >
                               <XCircle size={12} /> Reject
@@ -432,10 +432,10 @@ export default function IOUPage() {
                         ) : (
                           <button 
                             onClick={() => setSelectedViewItem(item)}
-                            className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" 
+                            className="p-1 text-slate-500 hover:text-emerald-700 rounded hover:bg-slate-100 cursor-pointer" 
                             title="View Details"
                           >
-                            <Eye size={13} />
+                            <Eye size={14} />
                           </button>
                         )}
                       </div>
@@ -460,31 +460,31 @@ export default function IOUPage() {
           footer={
             <Button 
               onClick={() => setSelectedViewItem(null)} 
-              className="bg-[#008060] hover:bg-[#006e52] text-white text-[12px] h-8 px-4 font-bold"
+              className="bg-[#008060] hover:bg-[#006e52] text-white text-[12px] h-8 px-4 font-medium"
             >
               Close Window
             </Button>
           }
         >
-          <div className="space-y-4 text-left">
-            <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-between">
+          <div className="space-y-3 text-left">
+            <div className="p-3 bg-slate-50 border border-slate-200 rounded flex items-center justify-between">
               <div>
-                <h4 className="font-bold text-slate-900 text-[13px]">Ref: {selectedViewItem.refNo}</h4>
-                <p className="text-[11.5px] text-slate-500">Requested Amount: <strong className="text-slate-900">{selectedViewItem.amount}</strong></p>
+                <h4 className="font-semibold text-slate-800 text-[13px]">Ref: {selectedViewItem.refNo}</h4>
+                <p className="text-[11.5px] text-slate-500">Requested Amount: <strong className="text-slate-800">{selectedViewItem.amount}</strong></p>
               </div>
-              <span className={`px-2 py-0.5 text-[10.5px] font-extrabold rounded border ${selectedViewItem.statusBadge}`}>
+              <span className={`inline-block px-2 py-0.5 text-[11px] font-medium rounded-[3px] border ${selectedViewItem.statusBadge}`}>
                 {selectedViewItem.status}
               </span>
             </div>
 
-            <div className="space-y-2 text-[12.5px]">
+            <div className="space-y-2 text-[12px]">
               <div>
-                <span className="text-[11px] font-bold text-slate-400 uppercase">Target Settlement Date</span>
+                <span className="text-[11px] font-semibold text-slate-500 uppercase">Target Settlement Date</span>
                 <p className="font-semibold text-slate-800">{selectedViewItem.settleDate}</p>
               </div>
 
               <div>
-                <span className="text-[11px] font-bold text-slate-400 uppercase">Purpose of Advance</span>
+                <span className="text-[11px] font-semibold text-slate-500 uppercase">Purpose of Advance</span>
                 <p className="font-medium text-slate-700 mt-0.5">{selectedViewItem.purpose}</p>
               </div>
             </div>

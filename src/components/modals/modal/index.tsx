@@ -68,15 +68,15 @@ export default function Modal({
       {/* Modal Content Wrapper */}
       <div 
         className={cn(
-          "relative bg-white rounded-md shadow-2xl w-full flex flex-col overflow-hidden transform transition-all animate-in fade-in zoom-in-95 duration-200",
+          "relative bg-white rounded-md shadow-2xl w-full flex flex-col overflow-visible transform transition-all animate-in fade-in zoom-in-95 duration-200",
           sizeClasses[size],
-          size === 'full' ? 'max-h-full' : 'max-h-[90vh]',
+          size === 'full' ? 'max-h-full overflow-y-auto' : 'max-h-[90vh]',
           className
         )}
       >
         {/* Header */}
         {(title || showCloseButton) && (
-          <div className="flex items-start justify-between px-6 py-4 border-b border-slate-100 shrink-0">
+          <div className="flex items-start justify-between px-6 py-4 border-b border-slate-100 shrink-0 rounded-t-md bg-white">
             <div>
               {title && <h3 className="text-[17px] font-bold text-slate-900">{title}</h3>}
               {description && <p className="text-[13px] text-slate-500 mt-1">{description}</p>}
@@ -95,7 +95,7 @@ export default function Modal({
         )}
         
         {/* Body */}
-        <div className="p-6 overflow-y-auto flex-1 custom-scrollbar">
+        <div className="p-6 overflow-visible flex-1">
           {children}
         </div>
 

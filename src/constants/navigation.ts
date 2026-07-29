@@ -444,7 +444,7 @@ export const navigationMap: Record<string, any[]> = {
         { name: 'Dashboard', path: '/employee-portal/dashboard', icon: LayoutDashboard },
         { name: 'Leave', path: '/employee-portal/leave-movement?tab=leave', icon: Calendar },
         { name: 'Movement', path: '/employee-portal/leave-movement?tab=movement', icon: Footprints },
-        { name: 'Attendances', path: '/employee-portal/time-management?tab=adjust', icon: Clock },
+        { name: 'Attendances', path: '/employee-portal/time-management?tab=my-attendance', icon: Clock },
         { name: 'Shift', path: '/employee-portal/time-management?tab=shift', icon: RotateCcw },
         { name: 'Advance Salary', path: '/employee-portal/iou?tab=application', icon: CreditCard },
         { name: 'About Me', path: '/employee-portal/about-me', icon: UserCircle },

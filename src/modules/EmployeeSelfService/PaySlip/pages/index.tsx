@@ -1,74 +1,162 @@
 import React, { useState } from 'react';
-import { Plus, Edit, Trash2, RotateCcw, Save, Download, FileText } from 'lucide-react';
+import { Download, RotateCcw, FileText, CheckCircle2, Clock } from 'lucide-react';
 import DataTable, { Column } from '@/components/tables/data-table';
 import Button from '@/components/ui/button';
-import Input from '@/components/ui/input';
-import Switch from '@/components/ui/switch';
-import Modal from '@/components/modals/modal';
-import FormLabel from '@/components/ui/label';
 
 export default function MonthlyPaySlipsPage() {
-    const [data, setData] = useState<any[]>([
+    const [data] = useState<any[]>([
         {
-                "id": 1,
-                "month": "June 2026",
-                "basic": "$3,500",
-                "allowance": "$1,800",
-                "netPay": "$4,850",
-                "status": "Generated",
-                "createdAt": "2026-06-30"
+            "id": 1,
+            "slipNo": "PS-2026-06",
+            "month": "June 2026",
+            "workingDays": "22 Days",
+            "basic": "$3,500",
+            "allowance": "+$1,800",
+            "deduction": "-$450",
+            "netPay": "$4,850",
+            "paymentMethod": "Bank Transfer (City Bank)",
+            "disbursedDate": "2026-06-30",
+            "status": "Disbursed"
         },
         {
-                "id": 2,
-                "month": "May 2026",
-                "basic": "$3,500",
-                "allowance": "$1,800",
-                "netPay": "$4,850",
-                "status": "Generated",
-                "createdAt": "2026-05-31"
+            "id": 2,
+            "slipNo": "PS-2026-05",
+            "month": "May 2026",
+            "workingDays": "21 Days",
+            "basic": "$3,500",
+            "allowance": "+$1,800",
+            "deduction": "-$450",
+            "netPay": "$4,850",
+            "paymentMethod": "Bank Transfer (City Bank)",
+            "disbursedDate": "2026-05-31",
+            "status": "Disbursed"
+        },
+        {
+            "id": 3,
+            "slipNo": "PS-2026-04",
+            "month": "April 2026",
+            "workingDays": "22 Days",
+            "basic": "$3,500",
+            "allowance": "+$1,650",
+            "deduction": "-$420",
+            "netPay": "$4,730",
+            "paymentMethod": "Bank Transfer (City Bank)",
+            "disbursedDate": "2026-04-30",
+            "status": "Disbursed"
+        },
+        {
+            "id": 4,
+            "slipNo": "PS-2026-03",
+            "month": "March 2026",
+            "workingDays": "23 Days",
+            "basic": "$3,500",
+            "allowance": "+$1,650",
+            "deduction": "-$420",
+            "netPay": "$4,730",
+            "paymentMethod": "Bank Transfer (City Bank)",
+            "disbursedDate": "2026-03-31",
+            "status": "Disbursed"
+        },
+        {
+            "id": 5,
+            "slipNo": "PS-2026-02",
+            "month": "February 2026",
+            "workingDays": "20 Days",
+            "basic": "$3,500",
+            "allowance": "+$1,500",
+            "deduction": "-$400",
+            "netPay": "$4,600",
+            "paymentMethod": "Bank Transfer (City Bank)",
+            "disbursedDate": "2026-02-28",
+            "status": "Disbursed"
+        },
+        {
+            "id": 6,
+            "slipNo": "PS-2026-01",
+            "month": "January 2026",
+            "workingDays": "22 Days",
+            "basic": "$3,500",
+            "allowance": "+$1,500",
+            "deduction": "-$400",
+            "netPay": "$4,600",
+            "paymentMethod": "Bank Transfer (City Bank)",
+            "disbursedDate": "2026-01-31",
+            "status": "Disbursed"
         }
-]);
+    ]);
     const [statusFilter, setStatusFilter] = useState('All');
-    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-    const [editItem, setEditItem] = useState<any>(null);
 
-    const handleDelete = (id: number) => {
-        if (confirm('Are you sure you want to delete this record?')) {
-            setData(prev => prev.filter(c => c.id !== id));
-        }
-    };
-
-    const handleBulkDelete = (ids: number[]) => {
-        if (confirm(`Are you sure you want to delete ${ids.length} records?`)) {
-            setData(prev => prev.filter(c => !ids.includes(c.id)));
-        }
+    const handleDownload = (item: any) => {
+        alert(`Downloading PaySlip PDF for ${item.month} (${item.slipNo})`);
     };
 
     const columns: Column[] = [
-        { id: 'id', label: 'ID', render: (item) => <span className="text-slate-400 font-mono text-[12px]">#{item.id}</span> },
-        { id: 'month', label: 'Pay Month', render: (item: any) => <span className="font-bold text-slate-800 text-[13px]">{item.month}</span> },
-        { id: 'basic', label: 'Basic Pay', render: (item: any) => <span className="font-bold text-slate-800 text-[13px]">{item.basic}</span> },
-        { id: 'allowance', label: 'Allowances', render: (item: any) => <span className="font-bold text-slate-800 text-[13px]">{item.allowance}</span> },
-        { id: 'netPay', label: 'Net Disbursed', render: (item: any) => <span className="font-bold text-slate-800 text-[13px]">{item.netPay}</span> },
+        { 
+            id: 'slipNo', 
+            label: 'Slip No', 
+            render: (item) => <span className="text-slate-700 font-mono font-semibold text-[12px]">{item.slipNo}</span> 
+        },
+        { 
+            id: 'month', 
+            label: 'Pay Month', 
+            render: (item: any) => <span className="font-semibold text-slate-800 text-[12.5px]">{item.month}</span> 
+        },
+        { 
+            id: 'workingDays', 
+            label: 'Working Days', 
+            render: (item: any) => <span className="text-slate-600 text-[12px]">{item.workingDays}</span> 
+        },
+        { 
+            id: 'basic', 
+            label: 'Basic Pay', 
+            render: (item: any) => <span className="text-slate-700 font-medium text-[12.5px]">{item.basic}</span> 
+        },
+        { 
+            id: 'allowance', 
+            label: 'Allowances', 
+            render: (item: any) => <span className="text-emerald-700 font-medium text-[12.5px]">{item.allowance}</span> 
+        },
+        { 
+            id: 'deduction', 
+            label: 'Deductions', 
+            render: (item: any) => <span className="text-rose-600 font-medium text-[12.5px]">{item.deduction}</span> 
+        },
+        { 
+            id: 'netPay', 
+            label: 'Net Payable', 
+            render: (item: any) => <span className="font-bold text-slate-900 text-[13px]">{item.netPay}</span> 
+        },
+        { 
+            id: 'paymentMethod', 
+            label: 'Payment Method', 
+            render: (item: any) => <span className="text-slate-600 text-[11.5px]">{item.paymentMethod}</span> 
+        },
+        { 
+            id: 'disbursedDate', 
+            label: 'Disbursed Date',
+            render: (item: any) => <span className="text-slate-500 text-[11.5px]">{item.disbursedDate}</span>
+        },
         {
             id: 'status',
             label: 'Status',
             render: (item) => (
-                <span className={`px-2 py-0.5 text-[11.5px] font-bold rounded-full ${item.status === 'Active' || item.status === 'Approved' || item.status === 'Present' || item.status === 'Generated' || item.status === 'Issued' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
-                    {item.status || 'Active'}
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-semibold rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    <CheckCircle2 size={11} />
+                    {item.status}
                 </span>
             )
         },
-        { id: 'createdAt', label: 'Created At' },
     ];
 
     const renderActions = (item: any) => (
         <div className="flex items-center justify-center gap-1">
-            <button onClick={() => setEditItem(item)} className="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-colors" title="Edit">
-                <Edit size={14} strokeWidth={1.5} />
-            </button>
-            <button onClick={() => handleDelete(item.id)} className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors" title="Delete">
-                <Trash2 size={14} strokeWidth={1.5} />
+            <button 
+                onClick={() => handleDownload(item)} 
+                className="px-2 py-1 bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 rounded transition-colors flex items-center gap-1 text-[11.5px] font-semibold cursor-pointer border border-slate-200 hover:border-emerald-200" 
+                title="Download Pay Slip PDF"
+            >
+                <Download size={13} strokeWidth={1.75} />
+                <span>PDF</span>
             </button>
         </div>
     );
@@ -81,16 +169,15 @@ export default function MonthlyPaySlipsPage() {
     const renderFilters = (
         <div className="flex flex-wrap items-center gap-4">
             <div className="w-full sm:w-[200px]">
-                <label className="block text-[12px] font-bold text-slate-700 mb-1">Status</label>
+                <label className="block text-[12px] font-semibold text-slate-700 mb-1">Status</label>
                 <select 
                     value={statusFilter} 
                     onChange={(e) => setStatusFilter(e.target.value)}
-                    className="w-full h-[32px] px-2 bg-white border border-[#d1d1d1] rounded-[3px] text-[12px] text-[#202223] outline-none focus:border-[#d1d1d1] focus:ring-0 transition-colors"
+                    className="w-full h-[32px] px-2 bg-white border border-[#d1d1d1] rounded-[3px] text-[12px] text-[#202223] outline-none focus:border-[#008060] focus:ring-0 transition-colors"
                 >
                     <option value="All">All Statuses</option>
-                    <option value="Active">Active</option>
-                    <option value="Approved">Approved</option>
-                    <option value="Pending">Pending</option>
+                    <option value="Disbursed">Disbursed</option>
+                    <option value="Generated">Generated</option>
                 </select>
             </div>
             <div className="mt-5">
@@ -104,106 +191,24 @@ export default function MonthlyPaySlipsPage() {
             </div>
         </div>
     );
-    
-    const FormContent = ({ isEdit = false }: { isEdit?: boolean }) => (
-        <div className="space-y-3">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2.5">
-                <FormLabel className="!mb-0 sm:w-32 text-[12.5px] font-semibold text-slate-700 shrink-0">Pay Month</FormLabel>
-                <span className="text-[12.5px] text-slate-400 hidden sm:inline">:</span>
-                <div className="flex-1">
-                    <Input defaultValue={isEdit ? editItem?.month : ''} placeholder="e.g. June 2026" className="h-8 text-[12.5px]" />
-                </div>
-            </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2.5">
-                <FormLabel className="!mb-0 sm:w-32 text-[12.5px] font-semibold text-slate-700 shrink-0">Basic Pay</FormLabel>
-                <span className="text-[12.5px] text-slate-400 hidden sm:inline">:</span>
-                <div className="flex-1">
-                    <Input defaultValue={isEdit ? editItem?.basic : ''} placeholder="e.g. $3,500" className="h-8 text-[12.5px]" />
-                </div>
-            </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2.5">
-                <FormLabel className="!mb-0 sm:w-32 text-[12.5px] font-semibold text-slate-700 shrink-0">Allowances</FormLabel>
-                <span className="text-[12.5px] text-slate-400 hidden sm:inline">:</span>
-                <div className="flex-1">
-                    <Input defaultValue={isEdit ? editItem?.allowance : ''} placeholder="e.g. $1,800" className="h-8 text-[12.5px]" />
-                </div>
-            </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2.5">
-                <FormLabel className="!mb-0 sm:w-32 text-[12.5px] font-semibold text-slate-700 shrink-0">Net Disbursed</FormLabel>
-                <span className="text-[12.5px] text-slate-400 hidden sm:inline">:</span>
-                <div className="flex-1">
-                    <Input defaultValue={isEdit ? editItem?.netPay : ''} placeholder="e.g. $4,850" className="h-8 text-[12.5px]" />
-                </div>
-            </div>
-            <div className="p-2.5 px-3 bg-slate-50 border border-slate-200/70 rounded-md flex items-center justify-between mt-1">
-                <div>
-                    <h4 className="text-[12.5px] font-bold text-slate-800">Active Status</h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5 font-medium">Enable or disable this entry</p>
-                </div>
-                <Switch defaultChecked={isEdit ? editItem?.status === 'Active' : true} />
-            </div>
-        </div>
-    );
 
     return (
-        <div className="p-4 md:p-6 max-w-full mx-auto bg-[#f8f9fa] min-h-screen pb-20">
+        <div className="p-4 md:p-6 max-w-full mx-auto bg-[#f8f9fa] min-h-screen pb-20 font-sans">
             <div className="flex justify-between items-center mb-5">
                 <div>
                     <h1 className="text-[20px] font-bold text-slate-900">Monthly PaySlips</h1>
-                    <p className="text-[13px] font-medium text-[#008060] mt-0.5">View and download itemized monthly salary slips, tax breakdown, and deductions.</p>
+                    <p className="text-[13px] font-medium text-slate-500 mt-0.5">View and download official itemized monthly salary slips, tax breakdown, and deductions.</p>
                 </div>
-                <Button 
-                    onClick={() => setIsCreateModalOpen(true)} 
-                    className="flex items-center gap-1.5 bg-[#008060] hover:bg-[#006e52] text-white text-[13px] h-9 px-4 font-bold"
-                >
-                    <Plus size={15} />
-                    New Request / Entry
-                </Button>
             </div>
 
             <DataTable 
                 data={filteredData} 
                 columns={columns}
-                searchPlaceholder="Search payslips..."
+                searchPlaceholder="Search payslips by month, ref no..."
                 actions={renderActions}
-                onDeleteSelected={handleBulkDelete}
                 filterContent={renderFilters}
                 compact
             />
-
-            <Modal
-                isOpen={isCreateModalOpen}
-                onClose={() => setIsCreateModalOpen(false)}
-                title="Create New Requisition / Request"
-                size="lg"
-                footer={
-                    <>
-                        <Button variant="outline" onClick={() => setIsCreateModalOpen(false)} className="h-8.5 text-[12.5px]">Cancel</Button>
-                        <Button className="bg-[#008060] hover:bg-[#006e52] text-white gap-1.5 flex items-center text-[12.5px] h-8.5 px-3.5 font-bold">
-                            <Save size={13} /> Submit Request
-                        </Button>
-                    </>
-                }
-            >
-                <FormContent />
-            </Modal>
-            
-            <Modal
-                isOpen={!!editItem}
-                onClose={() => setEditItem(null)}
-                title="Edit Requisition Details"
-                size="lg"
-                footer={
-                    <>
-                        <Button variant="outline" onClick={() => setEditItem(null)} className="h-8.5 text-[12.5px]">Cancel</Button>
-                        <Button className="bg-[#008060] hover:bg-[#006e52] text-white gap-1.5 flex items-center text-[12.5px] h-8.5 px-3.5 font-bold">
-                            <Save size={13} /> Save Changes
-                        </Button>
-                    </>
-                }
-            >
-                {editItem && <FormContent isEdit />}
-            </Modal>
         </div>
     );
 }

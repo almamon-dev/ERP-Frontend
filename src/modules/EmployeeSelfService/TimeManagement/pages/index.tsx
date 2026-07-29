@@ -80,7 +80,7 @@ export default function TimeManagementPage() {
   // Navigation Sub-Tabs from URL query parameter
   const [searchParams, setSearchParams] = useSearchParams();
   const tabParam = searchParams.get('tab') || 'my-attendance';
-  const validTabs = ['my-attendance', 'adjust', 'offday-swap', 'weekend-swap', 'shift-swap', 'overtime', 'reports', 'history'];
+  const validTabs = ['my-attendance', 'offday-swap', 'weekend-swap', 'shift-swap', 'overtime', 'reports', 'history'];
   const activeTab = validTabs.includes(tabParam) ? tabParam : 'my-attendance';
 
   const setTab = (t: string) => {
@@ -313,19 +313,19 @@ export default function TimeManagementPage() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'Present':
-        return <span className="inline-block px-2 py-0.5 text-[11px] font-medium bg-[#f4fbf0] text-[#16a34a] border border-[#a7f3d0] rounded-xs">Present</span>;
+        return <span className="inline-block px-1.5 py-0 text-[10px] font-medium bg-[#e6f4ea] text-[#137333] border border-[#ceead6] rounded-xs">Present</span>;
       case 'Absent':
-        return <span className="inline-block px-2 py-0.5 text-[11px] font-medium bg-rose-50 text-rose-600 border border-rose-200 rounded-xs">Absent</span>;
+        return <span className="inline-block px-1.5 py-0 text-[10px] font-medium bg-[#fce8e6] text-[#c5221f] border border-[#fad2cf] rounded-xs">Absent</span>;
       case 'Late':
-        return <span className="inline-block px-2 py-0.5 text-[11px] font-medium bg-amber-50 text-amber-600 border border-amber-200 rounded-xs">Late</span>;
+        return <span className="inline-block px-1.5 py-0 text-[10px] font-medium bg-[#fef7e0] text-[#b06000] border border-[#feefc3] rounded-xs">Late</span>;
       case 'Offday':
-        return <span className="inline-block px-2 py-0.5 text-[11px] font-medium bg-slate-100 text-slate-600 border border-slate-200 rounded-xs">Offday</span>;
+        return <span className="inline-block px-1.5 py-0 text-[10px] font-medium bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded-xs">Offday</span>;
       case 'Pending':
-        return <span className="inline-block px-2 py-0.5 text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-300 rounded-xs">Pending</span>;
+        return <span className="inline-block px-1.5 py-0 text-[10px] font-medium bg-[#fef7e0] text-[#b06000] border border-[#feefc3] rounded-xs">Pending</span>;
       case 'Approved':
-        return <span className="inline-block px-2 py-0.5 text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-300 rounded-xs">Approved</span>;
+        return <span className="inline-block px-1.5 py-0 text-[10px] font-medium bg-[#e6f4ea] text-[#137333] border border-[#ceead6] rounded-xs">Approved</span>;
       default:
-        return <span className="inline-block px-2 py-0.5 text-[11px] font-medium bg-slate-50 text-slate-500 border border-slate-200 rounded-xs">{status}</span>;
+        return <span className="inline-block px-1.5 py-0 text-[10px] font-medium bg-slate-50 text-slate-500 border border-slate-200 rounded-xs">{status}</span>;
     }
   };
 
@@ -334,10 +334,7 @@ export default function TimeManagementPage() {
       title: 'My Attendance',
       desc: 'View your daily punch logs, total working hours, attendance status, and monthly summaries.'
     },
-    'adjust': {
-      title: 'Attendance Adjustment',
-      desc: 'Request manual punch-ins, punch-outs, and attendance regularizations.'
-    },
+
     'offday-swap': {
       title: 'Off Day Swap (Comp Off)',
       desc: 'Swap worked offdays or weekends for compensatory leave allocations.'
@@ -351,17 +348,17 @@ export default function TimeManagementPage() {
       desc: 'Request roster shift modifications and work calendar changes.'
     },
     'overtime': {
-      title: 'Overtime Tracking & Claims',
-      desc: 'Track extra working hours, overtime rates, and submit OT reimbursement requisitions.'
+      title: 'Overtime Requisition',
+      desc: 'Submit overtime claims and view approved OT hour allocations.'
     },
     'reports': {
-      title: 'Attendance Reports',
-      desc: 'Generate, view, and export monthly attendance summary reports and PDF statements.'
+      title: 'Attendance Statement & Reports',
+      desc: 'Generate monthly attendance statements and downloadable audit summaries.'
     },
     'history': {
-      title: 'Attendance History',
-      desc: 'View historical log of all past attendance requisitions, approvals, and supervisor audit trail.'
-    }
+      title: 'Attendance Audit History',
+      desc: 'Track complete history of regularization requests, supervisor remarks, and approvals.'
+    },
   };
 
   const currentMeta = tabTitles[activeTab] || tabTitles['my-attendance'];
@@ -405,8 +402,8 @@ export default function TimeManagementPage() {
 
       {/* ================= SUB-TAB 1: MY ATTENDANCE ================= */}
       {activeTab === 'my-attendance' && (
-        <div className="bg-white p-4 rounded-sm border border-slate-200 shadow-2xs space-y-3.5">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-100">
+        <div className="bg-white rounded-sm border border-slate-200 shadow-2xs overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2.5 px-3 border-b border-slate-200 bg-white">
             <h2 className="text-[14px] font-bold text-slate-900 leading-tight">Daily Punch & Log Records (July 2026)</h2>
             <div className="flex items-center gap-2">
               <DatePicker value={adjustFromDate} onChange={(val) => setAdjustFromDate(val)} size="sm" className="w-36" />
@@ -416,127 +413,42 @@ export default function TimeManagementPage() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+            <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
               <thead>
-                <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-10">SL</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 whitespace-nowrap">Date</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">In Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Out Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Total Working Hours</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Overtime</th>
-                  <th className="py-2 px-2.5 text-center">Status</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
-                {adjustData.map((row, idx) => (
-                  <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 font-bold text-slate-800 whitespace-nowrap">{row.date}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.inTime}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.outTime}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-bold text-slate-800 whitespace-nowrap">{row.totalHours}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-indigo-600 font-bold">{row.otHours}</td>
-                    <td className="py-1.5 px-2.5 text-center">{getStatusBadge(row.actual)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-
-      {/* ================= SUB-TAB 2: ATTENDANCE ADJUSTMENT ================= */}
-      {activeTab === 'adjust' && (
-        <div className="bg-white p-3.5 rounded-sm border border-slate-200 shadow-2xs space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-100">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-emerald-700 text-white font-extrabold flex items-center justify-center text-[12px]">
-                AM
-              </div>
-              <div>
-                <h2 className="text-[13.5px] font-bold text-slate-900 leading-tight">Al Mamon</h2>
-                <p className="text-[11.5px] font-medium text-slate-500">Jr. Laravel Developer</p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-2">
-              <div className="flex items-center gap-1.5">
-                <DatePicker value={adjustFromDate} onChange={(val) => setAdjustFromDate(val)} size="sm" className="w-36" />
-                <span className="text-slate-400 font-bold text-[12px]">-</span>
-                <DatePicker value={adjustToDate} onChange={(val) => setAdjustToDate(val)} size="sm" className="w-36" />
-              </div>
-
-              <Button
-                onClick={() => {
-                  if (selectedAdjustIds.length > 0) {
-                    handleDirectBulkAdjust();
-                  } else {
-                    setReqDate(adjustFromDate);
-                    setIsAttendanceModalOpen(true);
-                  }
-                }}
-                className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-7.5 px-3 py-1 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center gap-1.5"
-              >
-                <Plus size={14} />
-                <span>
-                  {selectedAdjustIds.length > 0
-                    ? `Apply Bulk Adjustment (${selectedAdjustIds.length})`
-                    : 'Request Adjustment'}
-                </span>
-              </Button>
-            </div>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
-              <thead>
-                <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-8">
-                    <input
-                      type="checkbox"
-                      checked={selectedAdjustIds.length === adjustData.length && adjustData.length > 0}
-                      onChange={toggleSelectAllAdjust}
-                      className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
-                    />
+                <tr className="bg-[#fafafa] border-b border-slate-100 text-slate-600 font-medium text-[12px]">
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">
+                    <input type="checkbox" className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
                   </th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-10">SL</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 whitespace-nowrap">Attendance Date</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">In Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Out Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Manual In-Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Manual Out-Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Total Working Hours</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Actual Attendance</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Request Attendance</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Adjusted Against Date</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Reason</th>
-                  <th className="py-2 px-2.5 text-center">Approval Status</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 whitespace-nowrap">Attendance Date</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">In Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Out Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Manual In-Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Manual Out-Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Total Working Hours</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Actual Attendance</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Request Attendance</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Reason</th>
+                  <th className="py-1.5 px-2.5 text-center whitespace-nowrap">Approval Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
-                {adjustData.map((row, idx) => (
-                  <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">
-                      <input
-                        type="checkbox"
-                        checked={selectedAdjustIds.includes(row.id)}
-                        onChange={() => toggleSelectAdjust(row.id)}
-                        className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
-                      />
+              <tbody className="divide-y divide-[#e5e7eb] text-slate-600 font-normal text-[12px] leading-[18px]">
+                {displayRows.map((row, idx) => (
+                  <tr key={row.id} className="hover:bg-[#f9fafb] transition-colors border-b border-slate-100">
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
+                      <input type="checkbox" className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
                     </td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 font-bold text-slate-800 whitespace-nowrap">{row.date}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.inTime}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.outTime}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-400">{row.manualIn}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-400">{row.manualOut}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-bold text-slate-800 whitespace-nowrap">{row.totalHours}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">{getStatusBadge(row.actual)}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-400">{row.reqAttendance}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-600 font-semibold">{row.againstDate}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-400 font-semibold">{row.reason}</td>
-                    <td className="py-1.5 px-2.5 text-center">{getStatusBadge(row.status)}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{idx + 1}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.date}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.inTime !== '—' ? row.inTime : '-'}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.outTime !== '—' ? row.outTime : '-'}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{row.manualIn !== '—' ? row.manualIn : '-'}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{row.manualOut !== '—' ? row.manualOut : '-'}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-500 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.totalHours || ''}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">{getStatusBadge(row.actual)}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{row.reqAttendance !== '—' ? row.reqAttendance : '-'}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{row.reason || 'N/A'}</td>
+                    <td className="py-1.5 px-2.5 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.status !== '—' ? getStatusBadge(row.status) : ''}</td>
                   </tr>
                 ))}
               </tbody>
@@ -547,8 +459,8 @@ export default function TimeManagementPage() {
 
       {/* ================= SUB-TAB 3: OFF DAY SWAP (COMP OFF) ================= */}
       {activeTab === 'offday-swap' && (
-        <div className="bg-white p-3.5 rounded-sm border border-slate-200 shadow-2xs space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-100">
+        <div className="bg-white rounded-sm border border-slate-200 shadow-2xs overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2.5 px-3 border-b border-slate-200 bg-white">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-indigo-700 text-white font-extrabold flex items-center justify-center text-[12px]">
                 AM
@@ -574,7 +486,7 @@ export default function TimeManagementPage() {
                   }
                   setIsOffdaySwapModalOpen(true);
                 }}
-                className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-7.5 px-3 py-1 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center gap-1.5"
+                className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-8 px-3 py-1 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center gap-1.5"
               >
                 <Plus size={14} />
                 <span>
@@ -587,52 +499,52 @@ export default function TimeManagementPage() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+            <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
               <thead>
-                <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-8">
+                <tr className="bg-[#fafafa] border-b border-slate-100 text-slate-600 font-medium text-[12px]">
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">
                     <input
                       type="checkbox"
                       checked={selectedOffdaySwapIds.length === adjustData.length && adjustData.length > 0}
                       onChange={toggleSelectAllOffdaySwap}
-                      className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                      className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                     />
                   </th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-10">SL</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 whitespace-nowrap">Worked Offday / Attendance Date</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">In Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Out Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Total Working Hours</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Attendance Status</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Requested Swap Leave Date</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Reason</th>
-                  <th className="py-2 px-2.5 text-center">Approval Status</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 whitespace-nowrap">Worked Offday / Attendance Date</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">In Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Out Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Total Working Hours</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Attendance Status</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Requested Swap Leave Date</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Reason</th>
+                  <th className="py-1.5 px-2.5 text-center whitespace-nowrap">Approval Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
-                {adjustData.map((row, idx) => {
+              <tbody className="divide-y divide-[#e5e7eb] text-slate-600 font-normal text-[12px] leading-[18px]">
+                {displayRows.map((row, idx) => {
                   const swapRecord = offdaySwapList.find(s => s.workedDate.includes(row.date.split(' ')[0]));
                   return (
-                    <tr key={row.id} className={`hover:bg-slate-50/80 transition-colors ${row.actual === 'Offday' ? 'bg-indigo-50/30' : ''}`}>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">
+                    <tr key={row.id} className={`hover:bg-[#f9fafb] transition-colors border-b border-slate-100 ${row.actual === 'Offday' ? 'bg-indigo-50/20' : ''}`}>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
                         <input
                           type="checkbox"
                           checked={selectedOffdaySwapIds.includes(row.id)}
                           onChange={() => toggleSelectOffdaySwap(row.id)}
-                          className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                          className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                         />
                       </td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 font-bold text-slate-800 whitespace-nowrap">{row.date}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.inTime}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.outTime}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-bold text-slate-800 whitespace-nowrap">{row.totalHours}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">{getStatusBadge(row.actual)}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-bold text-indigo-700">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{idx + 1}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.date}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.inTime !== '—' ? row.inTime : '-'}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.outTime !== '—' ? row.outTime : '-'}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-500 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.totalHours || ''}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">{getStatusBadge(row.actual)}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center font-medium text-indigo-600">
                         {swapRecord ? swapRecord.targetDate : '—'}
                       </td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">
-                        {swapRecord ? swapRecord.reason : '—'}
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">
+                        {swapRecord ? swapRecord.reason : 'N/A'}
                       </td>
                       <td className="py-1.5 px-2.5 text-center">
                         {getStatusBadge(swapRecord ? swapRecord.status : '—')}
@@ -648,8 +560,8 @@ export default function TimeManagementPage() {
 
       {/* ================= SUB-TAB 4: WEEKEND SWAP ================= */}
       {activeTab === 'weekend-swap' && (
-        <div className="bg-white p-3.5 rounded-sm border border-slate-200 shadow-2xs space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-100">
+        <div className="bg-white rounded-sm border border-slate-200 shadow-2xs overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2.5 px-3 border-b border-slate-200 bg-white">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-emerald-700 text-white font-extrabold flex items-center justify-center text-[12px]">
                 AM
@@ -669,7 +581,7 @@ export default function TimeManagementPage() {
 
               <Button
                 onClick={() => alert('Weekend Swap Modal Opened!')}
-                className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-7.5 px-3 py-1 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center gap-1.5"
+                className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-8 px-3 py-1 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center gap-1.5"
               >
                 <Plus size={14} />
                 <span>
@@ -682,56 +594,56 @@ export default function TimeManagementPage() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+            <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
               <thead>
-                <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-8">
+                <tr className="bg-[#fafafa] border-b border-slate-100 text-slate-600 font-medium text-[12px]">
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">
                     <input
                       type="checkbox"
                       checked={selectedWeekendSwapIds.length === adjustData.length && adjustData.length > 0}
                       onChange={toggleSelectAllWeekendSwap}
-                      className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                      className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                     />
                   </th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-10">SL</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 whitespace-nowrap">Original Duty Date</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">In Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Out Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Working Hours</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Requested Duty Date</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Swapped Teammate</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Reason</th>
-                  <th className="py-2 px-2.5 text-center">Approval Status</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 whitespace-nowrap">Original Duty Date</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">In Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Out Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Working Hours</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Requested Duty Date</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Swapped Teammate</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Reason</th>
+                  <th className="py-1.5 px-2.5 text-center whitespace-nowrap">Approval Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
-                {adjustData.map((row, idx) => {
+              <tbody className="divide-y divide-[#e5e7eb] text-slate-600 font-normal text-[12px] leading-[18px]">
+                {displayRows.map((row, idx) => {
                   const swapItem = weekendSwapList.find(w => w.originalDutyDate.includes(row.date.split(' ')[0]));
                   return (
-                    <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">
+                    <tr key={row.id} className="hover:bg-[#f9fafb] transition-colors border-b border-slate-100">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
                         <input
                           type="checkbox"
                           checked={selectedWeekendSwapIds.includes(row.id)}
                           onChange={() => toggleSelectWeekendSwap(row.id)}
-                          className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                          className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                         />
                       </td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 font-bold text-slate-800 whitespace-nowrap">{row.date}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.inTime}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.outTime}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-bold text-slate-800 whitespace-nowrap">{row.totalHours}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-bold text-emerald-700">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{idx + 1}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.date}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.inTime !== '—' ? row.inTime : '-'}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.outTime !== '—' ? row.outTime : '-'}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-500 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.totalHours || ''}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center font-medium text-emerald-700">
                         {swapItem ? swapItem.requestedDutyDate : '—'}
                       </td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-800 font-semibold">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">
                         {swapItem ? swapItem.swappedWith : '—'}
                       </td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">
-                        {swapItem ? swapItem.reason : '—'}
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">
+                        {swapItem ? swapItem.reason : 'N/A'}
                       </td>
-                      <td className="py-1.5 px-2.5 text-center">
+                      <td className="py-2 px-2.5 text-center">
                         {getStatusBadge(swapItem ? swapItem.status : '—')}
                       </td>
                     </tr>
@@ -745,8 +657,8 @@ export default function TimeManagementPage() {
 
       {/* ================= SUB-TAB 5: SHIFT SWAP ================= */}
       {activeTab === 'shift-swap' && (
-        <div className="bg-white p-3.5 rounded-sm border border-slate-200 shadow-2xs space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-100">
+        <div className="bg-white rounded-sm border border-slate-200 shadow-2xs overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2.5 px-3 border-b border-slate-200 bg-white">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-[#4F46E5] text-white font-extrabold flex items-center justify-center text-[12px]">
                 AM
@@ -766,7 +678,7 @@ export default function TimeManagementPage() {
 
               <Button
                 onClick={() => setIsShiftModalOpen(true)}
-                className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-7.5 px-3 py-1 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center gap-1.5"
+                className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-8 px-3 py-1 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center gap-1.5"
               >
                 <Plus size={14} />
                 <span>
@@ -779,48 +691,48 @@ export default function TimeManagementPage() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+            <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
               <thead>
-                <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-8">
+                <tr className="bg-[#fafafa] border-b border-slate-100 text-slate-600 font-medium text-[12px]">
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">
                     <input
                       type="checkbox"
                       checked={selectedShiftIds.length === adjustData.length && adjustData.length > 0}
                       onChange={toggleSelectAllShift}
-                      className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                      className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                     />
                   </th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-10">SL</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 whitespace-nowrap">Attendance Date</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">In Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Out Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Current Shift</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Requested Shift</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Reason</th>
-                  <th className="py-2 px-2.5 text-center">Approval Status</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 whitespace-nowrap">Attendance Date</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">In Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Out Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Current Shift</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Requested Shift</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Reason</th>
+                  <th className="py-1.5 px-2.5 text-center whitespace-nowrap">Approval Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
-                {adjustData.map((row, idx) => (
-                  <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">
+              <tbody className="divide-y divide-[#e5e7eb] text-slate-600 font-normal text-[12px] leading-[18px]">
+                {displayRows.map((row, idx) => (
+                  <tr key={row.id} className="hover:bg-[#f9fafb] transition-colors border-b border-slate-100">
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
                       <input
                         type="checkbox"
                         checked={selectedShiftIds.includes(row.id)}
                         onChange={() => toggleSelectShift(row.id)}
-                        className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                        className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                       />
                     </td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 font-bold text-slate-800 whitespace-nowrap">{row.date}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.inTime}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.outTime}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-600 font-medium">{row.calendarName}</td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-bold text-indigo-700">
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{idx + 1}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.date}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.inTime !== '—' ? row.inTime : '-'}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.outTime !== '—' ? row.outTime : '-'}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.calendarName}</td>
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center font-medium text-indigo-600">
                       {row.id === 1 ? 'Evening 2:00PM to 11:00PM' : '—'}
                     </td>
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">
-                      {row.id === 1 ? 'Client site emergency support' : '—'}
+                    <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">
+                      {row.id === 1 ? 'Client site emergency support' : 'N/A'}
                     </td>
                     <td className="py-1.5 px-2.5 text-center">
                       {getStatusBadge(row.id === 1 ? 'Approved' : '—')}
@@ -835,8 +747,8 @@ export default function TimeManagementPage() {
 
       {/* ================= SUB-TAB 6: OVERTIME ================= */}
       {activeTab === 'overtime' && (
-        <div className="bg-white p-3.5 rounded-sm border border-slate-200 shadow-2xs space-y-3">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2.5 border-b border-slate-100">
+        <div className="bg-white rounded-sm border border-slate-200 shadow-2xs overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2.5 px-3 border-b border-slate-200 bg-white">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-blue-700 text-white font-extrabold flex items-center justify-center text-[12px]">
                 AM
@@ -856,7 +768,7 @@ export default function TimeManagementPage() {
 
               <Button
                 onClick={() => setIsOvertimeModalOpen(true)}
-                className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-7.5 px-3 py-1 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center gap-1.5"
+                className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-8 px-3 py-1 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center gap-1.5"
               >
                 <Plus size={14} />
                 <span>
@@ -869,56 +781,56 @@ export default function TimeManagementPage() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+            <table className="w-full text-left text-[12px] border-collapse">
               <thead>
-                <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-8">
+                <tr className="bg-[#fafafa] border-b border-slate-100 text-slate-700 font-medium text-[12px]">
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">
                     <input
                       type="checkbox"
                       checked={selectedOvertimeIds.length === adjustData.length && adjustData.length > 0}
                       onChange={toggleSelectAllOvertime}
-                      className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                      className="w-4 h-4 rounded-xs border-slate-600 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                     />
                   </th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-10">SL</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 whitespace-nowrap">OT Attendance Date</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">In Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Out Time</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Extra Hours</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Rate Multiplier</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Calculated Amount</th>
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center">Reason</th>
-                  <th className="py-2 px-2.5 text-center">Approval Status</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 whitespace-nowrap">OT Attendance Date</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">In Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Out Time</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Extra Hours</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Rate Multiplier</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Calculated Amount</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Reason</th>
+                  <th className="py-1.5 px-2.5 text-center whitespace-nowrap">Approval Status</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
-                {adjustData.map((row, idx) => {
+              <tbody className="divide-y divide-[#e5e7eb] text-slate-600 font-normal text-[12px] leading-[18px]">
+                {displayRows.map((row, idx) => {
                   const otRecord = overtimeList.find(o => o.date.includes(row.date.split(' ')[0]));
                   return (
-                    <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">
+                    <tr key={row.id} className="hover:bg-[#f9fafb] transition-colors border-b border-slate-100">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
                         <input
                           type="checkbox"
                           checked={selectedOvertimeIds.includes(row.id)}
                           onChange={() => toggleSelectOvertime(row.id)}
-                          className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                          className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                         />
                       </td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 font-bold text-slate-800 whitespace-nowrap">{row.date}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.inTime}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-700 font-semibold">{row.outTime}</td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-extrabold text-indigo-600">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{idx + 1}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.date}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.inTime !== '—' ? row.inTime : '-'}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.outTime !== '—' ? row.outTime : '-'}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center font-medium text-indigo-600">
                         {otRecord ? otRecord.hours : row.otHours}
                       </td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-semibold text-slate-700">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center font-normal text-slate-600">
                         {otRecord ? otRecord.rateMultiplier : row.actual === 'Offday' ? '2.0x (Holiday)' : '1.5x (Weekday)'}
                       </td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-bold text-emerald-700">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center font-medium text-emerald-700">
                         {otRecord ? otRecord.totalAmount : row.otHours !== '0 hr' ? 'BDT 1,000' : '—'}
                       </td>
-                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">
-                        {otRecord ? otRecord.reason : '—'}
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">
+                        {otRecord ? otRecord.reason : 'N/A'}
                       </td>
                       <td className="py-1.5 px-2.5 text-center">
                         {getStatusBadge(otRecord ? otRecord.status : row.otHours !== '0 hr' ? 'Approved' : '—')}
@@ -934,8 +846,8 @@ export default function TimeManagementPage() {
 
       {/* ================= SUB-TAB 7: ATTENDANCE REPORTS ================= */}
       {activeTab === 'reports' && (
-        <div className="bg-white p-4 rounded-sm border border-slate-200 shadow-2xs space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+        <div className="bg-white rounded-sm border border-slate-200 shadow-2xs overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2.5 px-3 border-b border-slate-200 bg-white">
             <div>
               <h2 className="text-[14px] font-bold text-slate-900 leading-tight">Monthly Attendance Report Statement</h2>
               <p className="text-[11.5px] text-slate-500 font-medium mt-0.5">Generate printable PDF or Excel attendance summary reports.</p>
@@ -952,86 +864,96 @@ export default function TimeManagementPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-3 p-3 bg-slate-50/90 border border-slate-200/80 rounded-xs text-[12px]">
-            <div>
-              <span className="text-slate-500 block font-medium">Employee Name:</span>
-              <span className="font-bold text-slate-900">Al Mamon (ID: 15202)</span>
+          <div className="p-3.5 space-y-3.5">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3 p-3 bg-slate-50/90 border border-slate-200/80 rounded-xs text-[12px]">
+              <div>
+                <span className="text-slate-500 block font-medium">Employee Name:</span>
+                <span className="font-bold text-slate-900">Al Mamon (ID: 15202)</span>
+              </div>
+              <div>
+                <span className="text-slate-500 block font-medium">Department:</span>
+                <span className="font-bold text-slate-900">Software Engineering / Operations</span>
+              </div>
+              <div>
+                <span className="text-slate-500 block font-medium">Report Period:</span>
+                <span className="font-bold text-indigo-700">01 July 2026 - 31 July 2026</span>
+              </div>
+              <div>
+                <span className="text-slate-500 block font-medium">Total Attendance Score:</span>
+                <span className="font-extrabold text-emerald-700">96.4% Good</span>
+              </div>
             </div>
-            <div>
-              <span className="text-slate-500 block font-medium">Department:</span>
-              <span className="font-bold text-slate-900">Software Engineering / Operations</span>
-            </div>
-            <div>
-              <span className="text-slate-500 block font-medium">Report Period:</span>
-              <span className="font-bold text-indigo-700">01 July 2026 - 31 July 2026</span>
-            </div>
-            <div>
-              <span className="text-slate-500 block font-medium">Total Attendance Score:</span>
-              <span className="font-extrabold text-emerald-700">96.4% Good</span>
-            </div>
-          </div>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
-              <thead>
-                <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
-                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-10">SL</th>
-                  <th className="py-2 px-3 border-r border-slate-200">Date</th>
-                  <th className="py-2 px-3 border-r border-slate-200 text-center">In Time</th>
-                  <th className="py-2 px-3 border-r border-slate-200 text-center">Out Time</th>
-                  <th className="py-2 px-3 border-r border-slate-200 text-center">Working Hours</th>
-                  <th className="py-2 px-3 border-r border-slate-200 text-center">Status</th>
-                  <th className="py-2 px-3 text-center">Regularization Status</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
-                {adjustData.slice(0, 15).map((row, idx) => (
-                  <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
-                    <td className="py-2 px-2.5 border-r border-slate-200 text-center font-semibold text-slate-500">{idx + 1}</td>
-                    <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-900">{row.date}</td>
-                    <td className="py-2 px-3 border-r border-slate-200 text-center font-semibold text-slate-700">{row.inTime}</td>
-                    <td className="py-2 px-3 border-r border-slate-200 text-center font-semibold text-slate-700">{row.outTime}</td>
-                    <td className="py-2 px-3 border-r border-slate-200 text-center font-bold text-slate-800">{row.totalHours}</td>
-                    <td className="py-2 px-3 border-r border-slate-200 text-center">{getStatusBadge(row.actual)}</td>
-                    <td className="py-2 px-3 text-center">{getStatusBadge(row.status)}</td>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
+                <thead>
+                  <tr className="bg-[#fafafa] border-b border-slate-100 text-slate-600 font-medium text-[12px]">
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 whitespace-nowrap">Attendance Date</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">In Time</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Out Time</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Working Hours</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center whitespace-nowrap">Status</th>
+                    <th className="py-1.5 px-2.5 text-center whitespace-nowrap">Regularization Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-[#e5e7eb] text-slate-600 font-normal text-[12px] leading-[18px]">
+                  {displayRows.slice(0, 15).map((row, idx) => (
+                    <tr key={row.id} className="hover:bg-[#f9fafb] transition-colors border-b border-slate-100">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{idx + 1}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.date}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.inTime !== '—' ? row.inTime : '-'}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-600 font-normal text-[12px] leading-[18px]">{row.outTime !== '—' ? row.outTime : '-'}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-500 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.totalHours || ''}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">{getStatusBadge(row.actual)}</td>
+                      <td className="py-1.5 px-2.5 text-center">{row.status !== '—' ? getStatusBadge(row.status) : ''}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}
 
       {/* ================= SUB-TAB 8: ATTENDANCE HISTORY ================= */}
       {activeTab === 'history' && (
-        <div className="bg-white p-4 rounded-sm border border-slate-200 shadow-2xs space-y-4">
-          <div className="pb-2 border-b border-slate-100">
-            <h2 className="text-[14px] font-bold text-slate-900 leading-tight">Attendance Requisition Audit History</h2>
-            <p className="text-[11.5px] text-slate-500 font-medium mt-0.5">Audit log of all past attendance requisitions, approvals, and supervisor remarks.</p>
-          </div>
-
-          <div className="space-y-3">
+        <div className="space-y-4 py-1">
+          <div className="relative pl-6 space-y-3.5 before:absolute before:left-[9px] before:top-2.5 before:bottom-2.5 before:w-[1.5px] before:bg-slate-200">
             {[
-              { id: 1, type: 'Attendance Adjustment', date: '04 Jul, 2026', requestedIn: '08:00 AM', requestedOut: '05:00 PM', reason: 'Fingerprint Machine Error', status: 'Approved', approver: 'Md Badsha Hossain (Supervisor)', appDate: '05 Jul, 2026 10:15 AM' },
-              { id: 2, type: 'Off Day Swap (Comp Off)', date: '05 Jul, 2026', requestedIn: '08:15 AM', requestedOut: '06:13 PM', reason: 'Worked on Offday for client deployment', status: 'Approved', approver: 'Md Badsha Hossain (Supervisor)', appDate: '06 Jul, 2026 11:30 AM' },
-              { id: 3, type: 'Shift Change Request', date: '01 Jul, 2026', requestedIn: '02:00 PM', requestedOut: '11:00 PM', reason: 'Emergency night deployment roster', status: 'Approved', approver: 'HR Operations Manager', appDate: '01 Jul, 2026 09:00 AM' },
+              { id: 1, type: 'Leave Application (Casual Leave)', date: '08 Jul, 2026', requestedIn: 'Full Day', requestedOut: '1 Day', reason: 'Personal Family Emergency', status: 'Approved', approver: 'Md Badsha Hossain (Supervisor)', appDate: '08 Jul, 2026 09:15 AM', color: 'bg-emerald-500' },
+              { id: 2, type: 'Attendance Adjustment', date: '04 Jul, 2026', requestedIn: '08:00 AM', requestedOut: '05:00 PM', reason: 'Fingerprint Machine Error', status: 'Approved', approver: 'Md Badsha Hossain (Supervisor)', appDate: '05 Jul, 2026 10:15 AM', color: 'bg-emerald-500' },
+              { id: 3, type: 'Off Day Swap (Comp Off)', date: '05 Jul, 2026', requestedIn: '08:15 AM', requestedOut: '06:13 PM', reason: 'Worked on Offday for client deployment', status: 'Approved', approver: 'Md Badsha Hossain (Supervisor)', appDate: '06 Jul, 2026 11:30 AM', color: 'bg-emerald-500' },
+              { id: 4, type: 'Shift Change Request', date: '01 Jul, 2026', requestedIn: '02:00 PM', requestedOut: '11:00 PM', reason: 'Emergency night deployment roster', status: 'Approved', approver: 'HR Operations Manager', appDate: '01 Jul, 2026 09:00 AM', color: 'bg-emerald-500' },
+              { id: 5, type: 'Overtime Claim Request', date: '28 Jun, 2026', requestedIn: '06:00 PM', requestedOut: '09:00 PM', reason: 'System Migration Deployment', status: 'Pending', approver: 'Pending Supervisor Approval', appDate: '28 Jun, 2026 09:30 PM', color: 'bg-amber-500' },
+              { id: 6, type: 'Weekend Duty Swap', date: '20 Jun, 2026', requestedIn: '09:00 AM', requestedOut: '06:00 PM', reason: 'Personal Emergency on Weekend', status: 'Rejected', approver: 'HR Operations Manager', appDate: '21 Jun, 2026 10:00 AM', color: 'bg-rose-500' },
             ].map((log) => (
-              <div key={log.id} className="p-3.5 bg-slate-50/80 border border-slate-200 rounded-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-[12px]">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-slate-900 text-[13px]">{log.type}</span>
-                    {getStatusBadge(log.status)}
+              <div key={log.id} className="relative group">
+                {/* Connected Timeline Dot */}
+                <span className={`absolute -left-[21px] top-2 w-3 h-3 rounded-full ${log.color} ring-4 ring-white shadow-2xs z-10`} />
+
+                <div className="p-3 bg-white hover:bg-slate-50/80 border border-slate-200 rounded-sm transition-colors space-y-1.5 shadow-2xs font-sans">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                    <div className="flex items-center gap-2">
+                      <span className="font-bold text-slate-900 text-[13px] tracking-tight">{log.type}</span>
+                      {getStatusBadge(log.status)}
+                    </div>
+                    <span className="text-[11px] text-slate-400 font-normal">{log.appDate}</span>
                   </div>
-                  <p className="text-slate-600 font-medium">
-                    Requested Date: <strong className="text-slate-800">{log.date}</strong> | In: <strong className="text-slate-800">{log.requestedIn}</strong> - Out: <strong className="text-slate-800">{log.requestedOut}</strong>
-                  </p>
-                  <p className="text-slate-500 font-medium">
+
+                  <div className="text-[12px] text-slate-600 font-medium flex flex-wrap gap-x-4 gap-y-1">
+                    <span>Requested Date: <strong className="text-slate-800 font-semibold">{log.date}</strong></span>
+                    <span>In/Duration: <strong className="text-slate-800 font-semibold">{log.requestedIn}</strong></span>
+                    <span>Out/Days: <strong className="text-slate-800 font-semibold">{log.requestedOut}</strong></span>
+                  </div>
+
+                  <p className="text-[11.5px] text-slate-600 font-normal">
                     Reason: <span className="italic text-slate-700">"{log.reason}"</span>
                   </p>
-                </div>
-                <div className="text-left sm:text-right text-[11.5px] text-slate-500 font-medium shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-200">
-                  <span className="block font-bold text-slate-700">Approved by {log.approver}</span>
-                  <span className="block text-slate-400 mt-0.5">{log.appDate}</span>
+
+                  <div className="pt-1.5 border-t border-slate-100 flex items-center justify-between text-[11px]">
+                    <span className="font-medium text-slate-500">Approved / Processed by: <span className="font-semibold text-slate-700">{log.approver}</span></span>
+                  </div>
                 </div>
               </div>
             ))}
@@ -1041,125 +963,7 @@ export default function TimeManagementPage() {
 
       {/* ================= MODALS ================= */}
 
-      {/* 1. ATTENDANCE ADJUSTMENT MODAL */}
-      <Modal
-        isOpen={isAttendanceModalOpen}
-        onClose={() => setIsAttendanceModalOpen(false)}
-        title="Attendance Regularization Request"
-        description="Request manual punch-ins, punch-outs, or offday adjustments"
-        size="md"
-        footer={
-          <>
-            <Button variant="outline" onClick={() => setIsAttendanceModalOpen(false)} className="h-7.5 text-[11.5px] font-bold">
-              Cancel
-            </Button>
-            <Button
-              onClick={handleSubmitAttendanceAdjust}
-              className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] h-7.5 px-3.5 font-bold"
-            >
-              Submit Request
-            </Button>
-          </>
-        }
-      >
-        <form onSubmit={handleSubmitAttendanceAdjust} className="space-y-3 text-left">
-          <div className="flex flex-col gap-1 w-full">
-            <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
-              <span className="text-rose-500 mr-0.5">*</span> Attendance Date (যেই দিনের হাজিরা)
-            </FormLabel>
-            <DatePicker
-              value={reqDate}
-              onChange={(val) => setReqDate(val)}
-              className="w-full"
-            />
-          </div>
 
-          <div className="flex flex-col gap-1 w-full">
-            <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
-              Adjusted Against Date / Worked Offday (কোন ছুটির দিনের বিপরীতে)
-            </FormLabel>
-            <Select
-              value={reqAgainstDate}
-              onChange={(e) => setReqAgainstDate(e.target.value)}
-              options={[
-                { id: 'N/A (Direct Regularization)', name: 'N/A - Direct Punch Regularization' },
-                { id: '05 Jul, 2026 (Offday Worked - 9h 58m)', name: '05 Jul, 2026 (Offday Worked - 9h 58m)' },
-                { id: '12 Jul, 2026 (Offday Worked - 8h 45m)', name: '12 Jul, 2026 (Offday Worked - 8h 45m)' },
-                { id: '19 Jul, 2026 (Offday Worked - 9h 10m)', name: '19 Jul, 2026 (Offday Worked - 9h 10m)' },
-                { id: '26 Jul, 2026 (Offday Worked - 9h 30m)', name: '26 Jul, 2026 (Offday Worked - 9h 30m)' },
-              ]}
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-2.5">
-            <div className="flex flex-col gap-1 w-full">
-              <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
-                <span className="text-rose-500 mr-0.5">*</span> Manual In-Time
-              </FormLabel>
-              <Input
-                type="time"
-                value={manualInTime}
-                onChange={(e) => setManualInTime(e.target.value)}
-                className="text-[12px]"
-              />
-            </div>
-
-            <div className="flex flex-col gap-1 w-full">
-              <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
-                <span className="text-rose-500 mr-0.5">*</span> Manual Out-Time
-              </FormLabel>
-              <Input
-                type="time"
-                value={manualOutTime}
-                onChange={(e) => setManualOutTime(e.target.value)}
-                className="text-[12px]"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-1 w-full">
-            <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
-              <span className="text-rose-500 mr-0.5">*</span> Requested Attendance Type
-            </FormLabel>
-            <Select
-              value={reqAttendanceType}
-              onChange={(e) => setReqAttendanceType(e.target.value)}
-              options={[
-                { id: 'Present', name: 'Present' },
-                { id: 'Half Day', name: 'Half Day' },
-                { id: 'On Duty', name: 'On Duty' },
-              ]}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1 w-full">
-            <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
-              <span className="text-rose-500 mr-0.5">*</span> Reason for Adjustment
-            </FormLabel>
-
-            <div className="flex flex-wrap items-center gap-1 mb-1">
-              {['Fingerprint Machine Error', 'Traffic Delay', 'Official Client Duty', 'Worked on Offday'].map((chip) => (
-                <button
-                  key={chip}
-                  type="button"
-                  onClick={() => setReqReason(chip)}
-                  className="px-2 py-0.5 text-[10.5px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-sm border border-slate-200 transition-colors cursor-pointer"
-                >
-                  + {chip}
-                </button>
-              ))}
-            </div>
-
-            <Textarea
-              placeholder="Specify reason (or click quick options above)"
-              value={reqReason}
-              onChange={(e) => setReqReason(e.target.value)}
-              rows={2}
-              className="text-[12px] min-h-[52px] resize-none"
-            />
-          </div>
-        </form>
-      </Modal>
 
       {/* 2. OFFDAY SWAP MODAL */}
       <Modal

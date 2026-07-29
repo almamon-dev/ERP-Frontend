@@ -270,7 +270,7 @@ export default function LeaveAndMovementPage() {
                 {/* ROW 1 */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   <div className="flex flex-col gap-1 w-full">
-                    <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <FormLabel className="text-[12px] font-semibold text-slate-700 !mb-0">
                       <span className="text-rose-500 mr-0.5">*</span> Leave Type
                     </FormLabel>
                     <Select
@@ -286,7 +286,7 @@ export default function LeaveAndMovementPage() {
                   </div>
 
                   <div className="flex flex-col gap-1 w-full">
-                    <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <FormLabel className="text-[12px] font-semibold text-slate-700 !mb-0">
                       <span className="text-rose-500 mr-0.5">*</span> Leave Consume Type
                     </FormLabel>
                     <Select
@@ -301,7 +301,7 @@ export default function LeaveAndMovementPage() {
                   </div>
 
                   <div className="flex flex-col gap-1 w-full">
-                    <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <FormLabel className="text-[12px] font-semibold text-slate-700 !mb-0">
                       <span className="text-rose-500 mr-0.5">*</span> From Date
                     </FormLabel>
                     <DatePicker
@@ -315,7 +315,7 @@ export default function LeaveAndMovementPage() {
                 {/* ROW 2 */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   <div className="flex flex-col gap-1 w-full">
-                    <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <FormLabel className="text-[12px] font-semibold text-slate-700 !mb-0">
                       <span className="text-rose-500 mr-0.5">*</span> To Date
                     </FormLabel>
                     <DatePicker
@@ -326,7 +326,7 @@ export default function LeaveAndMovementPage() {
                   </div>
 
                   <div className="flex flex-col gap-1 w-full relative" ref={relieverRef}>
-                    <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <FormLabel className="text-[12px] font-semibold text-slate-700 !mb-0">
                       Leave Reliever
                     </FormLabel>
                     <div className="relative w-full">
@@ -366,7 +366,7 @@ export default function LeaveAndMovementPage() {
                   </div>
 
                   <div className="flex flex-col gap-1 w-full">
-                    <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <FormLabel className="text-[12px] font-semibold text-slate-700 !mb-0">
                       <span className="text-rose-500 mr-0.5">*</span> Location
                     </FormLabel>
                     <Input
@@ -380,7 +380,7 @@ export default function LeaveAndMovementPage() {
 
                 {/* ROW 3: REASON */}
                 <div className="flex flex-col gap-1 w-full">
-                  <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                  <FormLabel className="text-[12px] font-semibold text-slate-700 !mb-0">
                     <span className="text-rose-500 mr-0.5">*</span> Reason
                   </FormLabel>
                   <Textarea
@@ -436,24 +436,24 @@ export default function LeaveAndMovementPage() {
 
               {/* TABLE */}
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-[12px] border-collapse border border-slate-200/70 rounded-xs overflow-hidden">
+                <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
                   <thead>
-                    <tr className="bg-[#f8f9fa] border-b border-slate-200/80 text-[12px] font-bold text-slate-800">
-                      <th className="py-1.5 px-2 font-bold border-r border-slate-200/60">Leave Type</th>
-                      <th className="py-1.5 px-2 text-center font-bold border-r border-slate-200/60">Taken</th>
-                      <th className="py-1.5 px-2 text-center font-bold border-r border-slate-200/60">Balance</th>
-                      <th className="py-1.5 px-2 text-center font-bold border-r border-slate-200/60">Total</th>
-                      <th className="py-1.5 px-2 text-center font-bold">Status</th>
+                    <tr className="bg-[#fafafa] border-b border-slate-100 text-[12px] font-medium text-slate-600">
+                      <th className="py-1.5 px-2.5 font-medium border-r border-slate-100">Leave Type</th>
+                      <th className="py-1.5 px-2.5 text-center font-medium border-r border-slate-100">Taken</th>
+                      <th className="py-1.5 px-2.5 text-center font-medium border-r border-slate-100">Balance</th>
+                      <th className="py-1.5 px-2.5 text-center font-medium border-r border-slate-100">Total</th>
+                      <th className="py-1.5 px-2.5 text-center font-medium">Status</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-200/60 font-normal text-slate-700">
+                  <tbody className="divide-y divide-slate-100 text-slate-600 font-normal text-[12px] leading-[18px]">
                     {balances.map((row, idx) => (
                       <tr key={idx} className="hover:bg-slate-50/60 transition-colors">
-                        <td className="py-2 px-2 font-medium text-slate-800 border-r border-slate-200/60">{row.type}</td>
-                        <td className="py-2 px-2 text-center text-slate-600 border-r border-slate-200/60">{row.taken}</td>
-                        <td className="py-2 px-2 text-center font-bold text-slate-900 border-r border-slate-200/60">{row.balance}</td>
-                        <td className="py-2 px-2 text-center text-slate-700 border-r border-slate-200/60">{row.total}</td>
-                        <td className="py-2 px-2 text-center">
+                        <td className="py-1.5 px-2.5 font-medium text-slate-800 border-r border-slate-100">{row.type}</td>
+                        <td className="py-1.5 px-2.5 text-center text-slate-600 border-r border-slate-100">{row.taken}</td>
+                        <td className="py-1.5 px-2.5 text-center font-bold text-slate-900 border-r border-slate-100">{row.balance}</td>
+                        <td className="py-1.5 px-2.5 text-center text-slate-600 border-r border-slate-100">{row.total}</td>
+                        <td className="py-1.5 px-2.5 text-center">
                           <span className="inline-block px-2 py-0.5 text-[11px] font-medium text-[#16a34a] bg-[#f4fbf0] border border-[#a7f3d0] rounded-[3px]">
                             {row.status}
                           </span>
@@ -536,60 +536,60 @@ export default function LeaveAndMovementPage() {
 
             {/* DATA TABLE */}
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+              <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-800 font-bold">
-                    <th className="py-2.5 px-2.5 border-r border-slate-200 text-center w-10">SL</th>
-                    <th className="py-2.5 px-2.5 border-r border-slate-200">Leave Type</th>
-                    <th className="py-2.5 px-2.5 border-r border-slate-200">Leave Duration</th>
-                    <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Total Leave Days</th>
-                    <th className="py-2.5 px-2.5 border-r border-slate-200">Location</th>
-                    <th className="py-2.5 px-2.5 border-r border-slate-200">Leave Reliever</th>
-                    <th className="py-2.5 px-2.5 border-r border-slate-200 max-w-xs">Reason</th>
-                    <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Attachment</th>
-                    <th className="py-2.5 px-2.5 border-r border-slate-200">Application Date</th>
-                    <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Status</th>
-                    <th className="py-2.5 px-2.5 text-center">Leave Details</th>
+                  <tr className="bg-[#fafafa] border-b border-slate-100 text-slate-600 font-medium text-[12px]">
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100">Leave Type</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100">Leave Duration</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center">Total Leave Days</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100">Location</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100">Leave Reliever</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 max-w-xs">Reason</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center">Attachment</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100">Application Date</th>
+                    <th className="py-1.5 px-2.5 border-r border-slate-100 text-center">Status</th>
+                    <th className="py-1.5 px-2.5 text-center">Leave Details</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+                <tbody className="divide-y divide-slate-100 text-slate-600 font-normal text-[12px] leading-[18px]">
                   {leaveHistory.map((item, idx) => (
                     <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                      <td className="py-2.5 px-2.5 border-r border-slate-200 font-bold text-slate-900">{item.leaveType}</td>
-                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-slate-600 whitespace-nowrap">{item.duration}</td>
-                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-center font-bold text-slate-900">{item.totalDays}</td>
-                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-slate-600">{item.location}</td>
-                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-slate-500">{item.reliever || '—'}</td>
-                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-slate-600 text-[11.5px] leading-snug">{item.reason}</td>
-                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-center">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{idx + 1}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 font-bold text-slate-900 leading-[18px]">{item.leaveType}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 whitespace-nowrap leading-[18px]">{item.duration}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center font-bold text-slate-900 leading-[18px]">{item.totalDays}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 leading-[18px]">{item.location}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-500 leading-[18px]">{item.reliever || '—'}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 text-[11.5px] leading-snug">{item.reason}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center leading-[18px]">
                         {item.attachment ? (
                           <span className="text-emerald-600 underline font-bold cursor-pointer hover:text-emerald-700">File</span>
                         ) : '—'}
                       </td>
-                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-slate-500 whitespace-nowrap">{item.appDate}</td>
-                      <td className="py-2.5 px-2.5 border-r border-slate-200 text-center">
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-500 whitespace-nowrap leading-[18px]">{item.appDate}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
                         <span className={`inline-block px-2 py-0.5 text-[11px] font-medium rounded-[3px] border ${item.statusBadge}`}>
                           {item.status}
                         </span>
                       </td>
-                      <td className="py-2.5 px-2.5 text-center">
+                      <td className="py-1.5 px-2.5 text-center">
                         <div className="flex items-center justify-center gap-1.5">
                           <button
                             onClick={() => setSelectedViewLeave(item)}
-                            className="w-6.5 h-6.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
+                            className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer"
                             title="View Details"
                           >
                             <Eye size={13} />
                           </button>
                           {item.status === 'Pending' && (
                             <>
-                              <button className="w-6.5 h-6.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer" title="Edit">
+                              <button className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors cursor-pointer" title="Edit">
                                 <Edit2 size={13} />
                               </button>
                               <button
                                 onClick={() => handleDeleteRecord(item.id)}
-                                className="w-6.5 h-6.5 rounded-full bg-slate-100 hover:bg-slate-200 text-rose-600 hover:bg-rose-50 flex items-center justify-center transition-colors cursor-pointer"
+                                className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-rose-600 hover:bg-rose-50 flex items-center justify-center transition-colors cursor-pointer"
                                 title="Delete"
                               >
                                 <Trash2 size={13} />
@@ -788,58 +788,58 @@ export default function LeaveAndMovementPage() {
             {/* Data Table */}
             {movementList.length > 0 ? (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+                <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
                   <thead>
-                    <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold">
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200">Movement Type</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200">Duration</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200">Time Interval</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200">Location</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 max-w-xs">Reason</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-center">Attachment</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200">Application Date</th>
-                      <th className="py-2.5 px-3 border-r border-slate-200 text-center">Status</th>
-                      <th className="py-2.5 px-3 text-center">Actions</th>
+                    <tr className="bg-[#fafafa] border-b border-slate-100 text-slate-600 font-medium text-[12px]">
+                      <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                      <th className="py-1.5 px-2.5 border-r border-slate-100">Movement Type</th>
+                      <th className="py-1.5 px-2.5 border-r border-slate-100">Duration</th>
+                      <th className="py-1.5 px-2.5 border-r border-slate-100">Time Interval</th>
+                      <th className="py-1.5 px-2.5 border-r border-slate-100">Location</th>
+                      <th className="py-1.5 px-2.5 border-r border-slate-100 max-w-xs">Reason</th>
+                      <th className="py-1.5 px-2.5 border-r border-slate-100 text-center">Attachment</th>
+                      <th className="py-1.5 px-2.5 border-r border-slate-100">Application Date</th>
+                      <th className="py-1.5 px-2.5 border-r border-slate-100 text-center">Status</th>
+                      <th className="py-1.5 px-2.5 text-center">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+                  <tbody className="divide-y divide-slate-100 text-slate-600 font-normal text-[12px] leading-[18px]">
                     {movementList.map((item, idx) => (
                       <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
-                        <td className="py-2.5 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                        <td className="py-2.5 px-3 border-r border-slate-200 font-bold text-slate-900">{item.movementType}</td>
-                        <td className="py-2.5 px-3 border-r border-slate-200 text-slate-600 whitespace-nowrap">{item.duration}</td>
-                        <td className="py-2.5 px-3 border-r border-slate-200 text-slate-700 font-semibold whitespace-nowrap">{item.times}</td>
-                        <td className="py-2.5 px-3 border-r border-slate-200 text-slate-600">{item.location}</td>
-                        <td className="py-2.5 px-3 border-r border-slate-200 text-slate-600 text-[11.5px] leading-snug">{item.reason}</td>
-                        <td className="py-2.5 px-3 border-r border-slate-200 text-center">
+                        <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal leading-[18px]">{idx + 1}</td>
+                        <td className="py-1.5 px-2.5 border-r border-slate-100 font-bold text-slate-900 leading-[18px]">{item.movementType}</td>
+                        <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 whitespace-nowrap leading-[18px]">{item.duration}</td>
+                        <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-700 font-semibold whitespace-nowrap leading-[18px]">{item.times}</td>
+                        <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 leading-[18px]">{item.location}</td>
+                        <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 text-[11.5px] leading-snug">{item.reason}</td>
+                        <td className="py-1.5 px-2.5 border-r border-slate-100 text-center leading-[18px]">
                           {item.attachment ? (
                             <span className="text-emerald-600 underline font-bold cursor-pointer">File</span>
                           ) : '—'}
                         </td>
-                        <td className="py-2.5 px-3 border-r border-slate-200 text-slate-500 whitespace-nowrap">{item.appDate}</td>
-                        <td className="py-2.5 px-3 border-r border-slate-200 text-center">
+                        <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-500 whitespace-nowrap leading-[18px]">{item.appDate}</td>
+                        <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
                           <span className={`inline-block px-2 py-0.5 text-[11px] font-medium rounded-[3px] border ${item.statusBadge}`}>
                             {item.status}
                           </span>
                         </td>
-                        <td className="py-2.5 px-3 text-center">
+                        <td className="py-1.5 px-2.5 text-center">
                           <div className="flex items-center justify-center gap-1.5">
                             <button
                               onClick={() => setSelectedViewLeave(item)}
-                              className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
+                              className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
                               title="View Details"
                             >
                               <Eye size={13} />
                             </button>
                             {item.status === 'Pending' && (
                               <>
-                                <button className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" title="Edit">
+                                <button className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer" title="Edit">
                                   <Edit2 size={13} />
                                 </button>
                                 <button
                                   onClick={() => handleDeleteMovementRecord(item.id)}
-                                  className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
+                                  className="w-6 h-6 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-colors shadow-2xs cursor-pointer"
                                   title="Delete"
                                 >
                                   <Trash2 size={13} />

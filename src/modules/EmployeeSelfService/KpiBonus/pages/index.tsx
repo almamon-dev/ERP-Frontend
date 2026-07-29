@@ -345,52 +345,19 @@ export default function KpiBonusPage() {
   return (
     <div className="p-2.5 w-full max-w-none mx-auto bg-[#f8f9fa] min-h-screen text-slate-800 space-y-2.5 font-sans antialiased pb-12">
 
-      {/* PAGE HEADER TITLE & TOP MAIN TAB NAVIGATION */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1 border-b border-slate-200">
-        <div>
-          <h1 className="text-[20px] font-bold text-slate-900 tracking-tight">
-            {mainPageTab === 'summary' ? 'KPI & Bonus Dashboard' : mainPageTab === 'operations' ? 'Operations Project History' : 'Campaign & Sales Commission'}
-          </h1>
-          <p className="text-[13px] font-medium text-slate-500 mt-0.5">
-            Operations projects, order history, team bonuses, carry and penalty records.
-          </p>
-        </div>
-
-        {/* TOP TAB SWITCHER: KPI & BONUS SUMMARY VS OPERATIONS PROJECT HISTORY VS CAMPAIGN & COMMISSION */}
-        <div className="flex items-center gap-0.5 bg-[#f1f5f9] p-0.5 rounded-[2.5px] border border-slate-200 self-start sm:self-auto flex-wrap">
-          <button
-            onClick={() => setMainPageTab('summary')}
-            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-[2.5px] transition-all cursor-pointer flex items-center gap-1 ${mainPageTab === 'summary'
-                ? 'bg-white text-slate-900 shadow-2xs border border-slate-200'
-                : 'text-slate-600 hover:text-slate-900'
-              }`}
-          >
-            <Award size={12} className={mainPageTab === 'summary' ? 'text-[#008060]' : 'text-slate-400'} />
-            <span>KPI & Bonus Summary</span>
-          </button>
-
-          <button
-            onClick={() => setMainPageTab('operations')}
-            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-xs transition-all cursor-pointer flex items-center gap-1 ${mainPageTab === 'operations'
-                ? 'bg-white text-slate-900 shadow-2xs border border-slate-200'
-                : 'text-slate-600 hover:text-slate-900'
-              }`}
-          >
-            <ListChecks size={12} className={mainPageTab === 'operations' ? 'text-[#008060]' : 'text-slate-400'} />
-            <span>Operations Project History</span>
-          </button>
-
-          <button
-            onClick={() => setMainPageTab('campaign')}
-            className={`px-2.5 py-0.5 text-[11px] font-bold rounded-xs transition-all cursor-pointer flex items-center gap-1 ${mainPageTab === 'campaign'
-                ? 'bg-white text-slate-900 shadow-2xs border border-slate-200'
-                : 'text-slate-600 hover:text-slate-900'
-              }`}
-          >
-            <Target size={12} className={mainPageTab === 'campaign' ? 'text-[#008060]' : 'text-slate-400'} />
-            <span>Campaign & Sales Commission</span>
-          </button>
-        </div>
+      {/* PAGE HEADER TITLE */}
+      <div className="pb-1 border-b border-slate-200">
+        <h1 className="text-[19px] font-semibold text-slate-800 tracking-tight flex items-center gap-2">
+          <Award size={20} className="text-[#008060]" />
+          {mainPageTab === 'summary' ? 'KPI & Bonus Summary' : mainPageTab === 'operations' ? 'Operations Project History' : 'Campaign & Sales Commission'}
+        </h1>
+        <p className="text-[12.5px] text-slate-500 mt-0.5 font-normal">
+          {mainPageTab === 'summary' 
+            ? 'Track quarter-wise sales targets, unpaid amounts, carry overs, and earned bonus ledgers.'
+            : mainPageTab === 'operations'
+            ? 'View assigned operational projects, contract values, and order execution history.'
+            : 'Monitor product-wise campaigns, top client stats, and sales commissions.'}
+        </p>
       </div>
 
       {/* GLOBAL USER BANNER */}
@@ -534,104 +501,104 @@ export default function KpiBonusPage() {
                 </div>
               </div>
 
-              <div className="border border-slate-200 rounded overflow-hidden">
-                <table className="w-full text-left text-[11px] border-collapse">
+              <div className="border border-slate-200/80 rounded-sm overflow-hidden">
+                <table className="w-full text-left text-[12px] border-collapse">
                   <thead>
-                    <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold text-[10.5px]">
-                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-center w-6">
+                    <tr className="bg-slate-100 border-b border-slate-200 text-slate-800 font-semibold">
+                      <th className="py-1.5 px-2 border-r border-slate-200 text-center w-6">
                         <input
                           type="checkbox"
                           checked={selectedRows.length === displayedLedgerData.length && displayedLedgerData.length > 0}
                           onChange={() => setSelectedRows(selectedRows.length === displayedLedgerData.length ? [] : displayedLedgerData.map(d => d.id))}
-                          className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                          className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer"
                         />
                       </th>
-                      <th className="py-1.5 px-1 border-r border-slate-200 text-center w-6">SL</th>
-                      <th className="py-1.5 px-1.5 border-r border-slate-200">Employee</th>
-                      <th className="py-1.5 px-1.5 border-r border-slate-200">Role</th>
-                      <th className="py-1.5 px-1.5 border-r border-slate-200">Assign Project</th>
-                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right">Value ($)</th>
-                      <th className="py-1.5 px-1 border-r border-slate-200 text-center">Sales</th>
-                      <th className="py-1.5 px-1.5 border-r border-slate-200">Period</th>
-                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right bg-emerald-50/60">
-                        <div className="flex items-center justify-end gap-1 text-[#008060] font-black">
+                      <th className="py-1.5 px-2 border-r border-slate-200 text-center w-6">SL</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200">Employee</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200">Role</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200">Assign Project</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">Value ($)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200 text-center">Sales</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200">Period</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">
+                        <div className="flex items-center justify-end gap-1 text-slate-800 font-semibold">
                           <span>Target ($)</span>
-                          <span className="bg-[#008060] text-white px-1 py-0 rounded text-[8.5px] font-bold">{qCode}</span>
+                          <span className="bg-[#008060] text-white px-1 py-0 rounded text-[9px] font-medium">{qCode}</span>
                         </div>
                       </th>
-                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right">Total Sales ($)</th>
-                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right">Unpaid ($)</th>
-                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right">Carry (৳)</th>
-                      <th className="py-1.5 px-1.5 border-r border-slate-200 text-right">Bonus (৳)</th>
-                      <th className="py-1.5 px-1 border-r border-slate-200 text-center">Status</th>
-                      <th className="py-1.5 px-1 text-center">Action</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">Total Sales ($)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">Unpaid ($)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">Carry (৳)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">Bonus (৳)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-200 text-center">Status</th>
+                      <th className="py-1.5 px-2 text-center">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+                  <tbody className="divide-y divide-slate-100 text-slate-700 font-medium leading-[18px]">
                     {displayedLedgerData.length > 0 ? (
                       displayedLedgerData.map((row, idx) => (
-                        <tr key={row.id} className="hover:bg-slate-50/80 transition-colors">
-                          <td className="py-1 px-1.5 border-r border-slate-200 text-center">
+                        <tr key={row.id} className="hover:bg-slate-50/70 transition-colors">
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-center">
                             <input
                               type="checkbox"
                               checked={selectedRows.includes(row.id)}
                               onChange={() => toggleSelectRow(row.id)}
-                              className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                              className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer"
                             />
                           </td>
-                          <td className="py-1 px-1 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                          <td className="py-1 px-1.5 border-r border-slate-200 font-bold text-slate-900">
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-center text-slate-500 font-medium">{idx + 1}</td>
+                          <td className="py-1.5 px-2 border-r border-slate-200 font-semibold text-slate-800">
                             <div>
                               <span>{row.employee}</span>
-                              <span className="text-[9px] text-slate-400 font-normal block">ID: {row.empId}</span>
+                              <span className="text-[10px] text-slate-400 font-normal block">ID: {row.empId}</span>
                             </div>
                           </td>
-                          <td className="py-1 px-1.5 border-r border-slate-200 text-slate-700 font-semibold">{row.role}</td>
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-slate-700">{row.role}</td>
 
                           {/* ASSIGN PROJECT COLUMN */}
-                          <td className="py-1 px-1.5 border-r border-slate-200 font-bold text-[#008060]">
+                          <td className="py-1.5 px-2 border-r border-slate-200 font-medium text-[#008060]">
                             <div className="flex items-center gap-1">
-                              <Briefcase size={11} className="text-[#008060] shrink-0" />
+                              <Briefcase size={12} className="text-[#008060] shrink-0" />
                               <span>{row.assignProject}</span>
                             </div>
                           </td>
 
                           {/* PROJECT VALUE COLUMN */}
-                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-extrabold text-slate-900">
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold text-slate-800">
                             {row.projectValue}
                           </td>
 
                           {/* SALES COUNT COLUMN */}
-                          <td className="py-1 px-1 border-r border-slate-200 text-center font-extrabold text-indigo-700">
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-center font-semibold text-indigo-700">
                             {row.salesCount}
                           </td>
 
-                          <td className="py-1 px-1.5 border-r border-slate-200 text-slate-600">{row.period}</td>
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-slate-600">{row.period}</td>
 
                           {/* QUARTER WISE TARGET VALUE COLUMN WITH BADGE */}
-                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-black bg-emerald-50/40">
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold">
                             <div className="flex items-center justify-end gap-1">
-                              <span className="text-slate-900 font-black">{row.targetPeriod}</span>
-                              <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-100/70 px-0.5 py-0 rounded border border-emerald-200/80">{row.qCode}</span>
+                              <span className="text-slate-800">{row.targetPeriod}</span>
+                              <span className="text-[9px] font-medium text-emerald-700 bg-emerald-50 px-1 py-0 rounded border border-emerald-200">{row.qCode}</span>
                             </div>
                           </td>
 
-                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-bold text-emerald-700">{row.totalSales}</td>
-                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-bold text-rose-600">{row.unpaid}</td>
-                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-extrabold text-indigo-700">{row.totalCarry}</td>
-                          <td className="py-1 px-1.5 border-r border-slate-200 text-right font-extrabold text-[#008060]">{row.bonusAmount}</td>
-                          <td className="py-1 px-1 border-r border-slate-200 text-center">
-                            <span className={`px-1 py-0.2 text-[9.5px] font-bold rounded-full border ${row.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold text-emerald-700">{row.totalSales}</td>
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold text-rose-600">{row.unpaid}</td>
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold text-indigo-700">{row.totalCarry}</td>
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold text-[#008060]">{row.bonusAmount}</td>
+                          <td className="py-1.5 px-2 border-r border-slate-200 text-center">
+                            <span className={`inline-block px-2 py-0.5 text-[11px] font-medium rounded border ${row.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
                                 row.status === 'Calculated' ? 'bg-blue-50 text-blue-700 border-blue-200' :
                                   'bg-amber-50 text-amber-700 border-amber-200'
                               }`}>
                               {row.status}
                             </span>
                           </td>
-                          <td className="py-1 px-1 text-center">
+                          <td className="py-1.5 px-2 text-center">
                             <button
                               onClick={() => setSelectedRowDetail(row)}
-                              className="px-1.5 py-0.5 text-[10px] font-bold bg-[#008060] text-white rounded hover:bg-[#006e52] cursor-pointer"
+                              className="px-2 py-0.5 text-[11px] font-medium bg-[#008060] text-white rounded hover:bg-[#006e52] cursor-pointer transition-colors"
                             >
                               View
                             </button>
@@ -640,7 +607,7 @@ export default function KpiBonusPage() {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={15} className="py-3 text-center text-slate-400 font-semibold">No record found</td>
+                        <td colSpan={15} className="py-4 text-center text-slate-400 font-medium">No record found</td>
                       </tr>
                     )}
                   </tbody>
@@ -959,88 +926,88 @@ export default function KpiBonusPage() {
           </div>
 
           {/* 21-COLUMN FULL OPERATIONS PROJECT HISTORY TABLE MATCHING USER REFERENCE SCREENSHOT 100% */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-[11px] border border-slate-200 border-collapse">
+          <div className="overflow-x-auto border border-slate-200/80 rounded-sm">
+            <table className="w-full text-left text-[12px] border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold whitespace-nowrap">
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-center w-8">
-                    <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                <tr className="bg-slate-100 border-b border-slate-200 text-slate-800 font-semibold whitespace-nowrap">
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-center w-8">
+                    <input type="checkbox" className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer" />
                   </th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Name</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Date</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Created on</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Assign Employee ID</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Assign Employee</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Employee ID</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Employee Name</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Company</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Order Status</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-right">Sales Bonus</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Order Link</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Order Number</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Customer</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Bonus Profile Name</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Service Line</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200">Assigned Team</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-right">Total Amount</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-right">Monetary Value</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Payment Date</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Payment Due</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Currency</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">Reversion</th>
-                  <th className="py-2.5 px-2.5 border-r border-slate-200 text-center">KPI Status</th>
-                  <th className="py-2.5 px-2.5 text-right">Bonus Payout</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Name</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Date</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Created on</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Assign Employee ID</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Assign Employee</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Employee ID</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Employee Name</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Company</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-center">Order Status</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-right">Sales Bonus</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-center">Order Link</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Order Number</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Customer</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Bonus Profile Name</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Service Line</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200">Assigned Team</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-right">Total Amount</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-right">Monetary Value</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-center">Payment Date</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-center">Payment Due</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-center">Currency</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-center">Reversion</th>
+                  <th className="py-1.5 px-2.5 border-r border-slate-200 text-center">KPI Status</th>
+                  <th className="py-1.5 px-2.5 text-right">Bonus Payout</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 text-slate-700 font-medium whitespace-nowrap">
+              <tbody className="divide-y divide-slate-100 text-slate-700 font-medium whitespace-nowrap leading-[18px]">
                 {filteredOperationsLines.length > 0 ? (
                   filteredOperationsLines.map((row) => (
-                    <tr key={row.sn} className="hover:bg-slate-50/80 transition-colors">
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
-                        <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                    <tr key={row.sn} className="hover:bg-slate-50/70 transition-colors">
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">
+                        <input type="checkbox" className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer" />
                       </td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-[#008060]">{row.name}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-800">{row.date}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-500 text-[10.5px]">{row.createdOn}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 font-mono text-slate-600">{row.assignEmpId}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-900">{row.assignEmpName}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 font-mono text-slate-600">{row.empId}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-900">{row.empName}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-800 font-semibold">{row.company}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
-                        <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-300 rounded-full">
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 font-medium text-[#008060]">{row.name}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-slate-800">{row.date}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-slate-500 text-[11px]">{row.createdOn}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 font-mono text-slate-600">{row.assignEmpId}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 font-semibold text-slate-800">{row.assignEmpName}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 font-mono text-slate-600">{row.empId}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 font-semibold text-slate-800">{row.empName}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-slate-800">{row.company}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">
+                        <span className="inline-block px-2 py-0.5 text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 rounded">
                           {row.orderStatus}
                         </span>
                       </td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-right font-extrabold text-[#008060]">{row.salesBonus}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
-                        <a href="#" onClick={(e) => e.preventDefault()} className="text-[#008060] hover:underline flex items-center justify-center gap-1 font-bold">
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-right font-semibold text-[#008060]">{row.salesBonus}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">
+                        <a href="#" onClick={(e) => e.preventDefault()} className="text-[#008060] hover:underline flex items-center justify-center gap-1 font-medium">
                           <span>Link</span>
-                          <ExternalLink size={10} />
+                          <ExternalLink size={11} />
                         </a>
                       </td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 font-mono text-slate-700">{row.orderNumber}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 font-bold text-slate-800">{row.customer}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-700">{row.bonusProfileName}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-700 font-semibold">{row.serviceLine}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-slate-600">{row.assignedTeam}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-right font-bold text-slate-900">{row.totalAmount}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-right font-bold text-slate-900">{row.monetaryValue}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.paymentDate}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.paymentDue}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.currency}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center text-slate-500">{row.reversion}</td>
-                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
-                        <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full border ${row.kpiStatus === 'Approved'
-                            ? 'bg-emerald-50 text-emerald-600 border-emerald-300'
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 font-mono text-slate-700">{row.orderNumber}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 font-medium text-slate-800">{row.customer}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-slate-700">{row.bonusProfileName}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-slate-700">{row.serviceLine}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-slate-600">{row.assignedTeam}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-right font-semibold text-slate-800">{row.totalAmount}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-right font-semibold text-slate-800">{row.monetaryValue}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.paymentDate}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.paymentDue}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-600">{row.currency}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center text-slate-500">{row.reversion}</td>
+                      <td className="py-1.5 px-2.5 border-r border-slate-200 text-center">
+                        <span className={`inline-block px-2 py-0.5 text-[11px] font-medium rounded border ${row.kpiStatus === 'Approved'
+                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
                             : row.kpiStatus === 'Verified'
-                              ? 'bg-blue-50 text-blue-600 border-blue-300'
-                              : 'bg-amber-50 text-amber-600 border-amber-300'
+                              ? 'bg-blue-50 text-blue-700 border-blue-200'
+                              : 'bg-amber-50 text-amber-700 border-amber-200'
                           }`}>
                           {row.kpiStatus}
                         </span>
                       </td>
-                      <td className="py-2 px-2.5 text-right font-extrabold text-[#008060]">{row.bonusPayout}</td>
+                      <td className="py-1.5 px-2.5 text-right font-semibold text-[#008060]">{row.bonusPayout}</td>
                     </tr>
                   ))
                 ) : (
@@ -1172,33 +1139,33 @@ export default function KpiBonusPage() {
                     </span>
                   </div>
 
-                  <div className="overflow-x-auto rounded border border-slate-200">
+                  <div className="overflow-x-auto border border-slate-200/80 rounded-sm">
                     <table className="w-full text-left text-[12px] border-collapse">
                       <thead>
-                        <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-center w-8">
-                            <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                        <tr className="bg-slate-100 border-b border-slate-200 text-slate-800 font-semibold">
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-center w-8">
+                            <input type="checkbox" className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer" />
                           </th>
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200">Product Name</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200">Category</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-center">Sales Count</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-right">Total Amount ($)</th>
-                          <th className="py-2.5 px-3 text-right">Commission (৳)</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200">Product Name</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200">Category</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-center">Sales Count</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-right">Total Amount ($)</th>
+                          <th className="py-1.5 px-3 text-right">Commission (৳)</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+                      <tbody className="divide-y divide-slate-100 text-slate-700 font-medium leading-[18px]">
                         {topProductsData.map((item, idx) => (
-                          <tr key={item.id} className="hover:bg-slate-50/90 transition-colors">
-                            <td className="py-2 px-3 border-r border-slate-200 text-center">
-                              <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                          <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-center">
+                              <input type="checkbox" className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer" />
                             </td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-900">{item.name}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-slate-600">{item.category}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-center font-black text-[#008060]">{item.salesCount}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-slate-900">{item.totalAmount}</td>
-                            <td className="py-2 px-3 text-right font-black text-emerald-700">{item.commission}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-center text-slate-500 font-medium">{idx + 1}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 font-semibold text-slate-800">{item.name}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-slate-600">{item.category}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-center font-semibold text-[#008060]">{item.salesCount}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-right font-semibold text-slate-800">{item.totalAmount}</td>
+                            <td className="py-1.5 px-3 text-right font-semibold text-emerald-700">{item.commission}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -1220,33 +1187,33 @@ export default function KpiBonusPage() {
                     </span>
                   </div>
 
-                  <div className="overflow-x-auto rounded border border-slate-200">
+                  <div className="overflow-x-auto border border-slate-200/80 rounded-sm">
                     <table className="w-full text-left text-[12px] border-collapse">
                       <thead>
-                        <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-center w-8">
-                            <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                        <tr className="bg-slate-100 border-b border-slate-200 text-slate-800 font-semibold">
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-center w-8">
+                            <input type="checkbox" className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer" />
                           </th>
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200">Client Name</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200">Company / Organization</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-center">Total Orders</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-right">Sales Amount ($)</th>
-                          <th className="py-2.5 px-3 text-right">Commission (৳)</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200">Client Name</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200">Company / Organization</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-center">Total Orders</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-right">Sales Amount ($)</th>
+                          <th className="py-1.5 px-3 text-right">Commission (৳)</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+                      <tbody className="divide-y divide-slate-100 text-slate-700 font-medium leading-[18px]">
                         {topClientsData.map((item, idx) => (
-                          <tr key={item.id} className="hover:bg-slate-50/90 transition-colors">
-                            <td className="py-2 px-3 border-r border-slate-200 text-center">
-                              <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                          <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-center">
+                              <input type="checkbox" className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer" />
                             </td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-900">{item.name}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-slate-600">{item.company}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-center font-black text-[#008060]">{item.ordersCount}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-slate-900">{item.salesAmount}</td>
-                            <td className="py-2 px-3 text-right font-black text-emerald-700">{item.commission}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-center text-slate-500 font-medium">{idx + 1}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 font-semibold text-slate-800">{item.name}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-slate-600">{item.company}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-center font-semibold text-[#008060]">{item.ordersCount}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-right font-semibold text-slate-800">{item.salesAmount}</td>
+                            <td className="py-1.5 px-3 text-right font-semibold text-emerald-700">{item.commission}</td>
                           </tr>
                         ))}
                       </tbody>
@@ -1268,40 +1235,40 @@ export default function KpiBonusPage() {
                     </span>
                   </div>
 
-                  <div className="overflow-x-auto rounded border border-slate-200">
+                  <div className="overflow-x-auto border border-slate-200/80 rounded-sm">
                     <table className="w-full text-left text-[12px] border-collapse">
                       <thead>
-                        <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-center w-8">
-                            <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                        <tr className="bg-slate-100 border-b border-slate-200 text-slate-800 font-semibold">
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-center w-8">
+                            <input type="checkbox" className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer" />
                           </th>
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200">Date</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200">Order ID</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200">Client</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200">Product</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-right">Sale Amount</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-center">Rate</th>
-                          <th className="py-2.5 px-3 border-r border-slate-200 text-right">Commission</th>
-                          <th className="py-2.5 px-3 text-center">Status</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200">Date</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200">Order ID</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200">Client</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200">Product</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-right">Sale Amount</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-center">Rate</th>
+                          <th className="py-1.5 px-3 border-r border-slate-200 text-right">Commission</th>
+                          <th className="py-1.5 px-3 text-center">Status</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+                      <tbody className="divide-y divide-slate-100 text-slate-700 font-medium leading-[18px]">
                         {commissionRecordsData.map((item, idx) => (
-                          <tr key={item.id} className="hover:bg-slate-50/90 transition-colors">
-                            <td className="py-2 px-3 border-r border-slate-200 text-center">
-                              <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                          <tr key={item.id} className="hover:bg-slate-50/70 transition-colors">
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-center">
+                              <input type="checkbox" className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer" />
                             </td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 font-semibold text-slate-700">{item.date}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 font-mono text-[11px] text-slate-700">{item.orderId}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-900">{item.client}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-slate-600">{item.product}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-slate-900">{item.amount}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-center font-bold text-slate-600">{item.rate}</td>
-                            <td className="py-2 px-3 border-r border-slate-200 text-right font-black text-[#008060]">{item.commission}</td>
-                            <td className="py-2 px-3 text-center">
-                              <span className="px-2 py-0.5 text-[10.5px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-300 rounded-full">
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-center text-slate-500 font-medium">{idx + 1}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 font-medium text-slate-700">{item.date}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 font-mono text-[11px] text-slate-700">{item.orderId}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 font-semibold text-slate-800">{item.client}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-slate-600">{item.product}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-right font-semibold text-slate-800">{item.amount}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-center font-medium text-slate-600">{item.rate}</td>
+                            <td className="py-1.5 px-3 border-r border-slate-200 text-right font-semibold text-[#008060]">{item.commission}</td>
+                            <td className="py-1.5 px-3 text-center">
+                              <span className="inline-block px-2 py-0.5 text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 rounded">
                                 {item.status}
                               </span>
                             </td>

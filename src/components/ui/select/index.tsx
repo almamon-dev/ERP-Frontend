@@ -140,7 +140,7 @@ export default function Select({
                             leaveTo="opacity-0 scale-95"
                         >
                             <Listbox.Options className={cn(
-                                "absolute z-[100] max-h-64 w-full overflow-hidden rounded-[3px] bg-white text-[12px] shadow-[0_4px_12px_rgba(0,0,0,0.08),0_0_1px_rgba(0,0,0,0.1)] border border-[#ebebeb] outline-none focus:outline-none focus:ring-0 focus-visible:outline-none flex flex-col",
+                                "absolute z-[500] max-h-56 w-full overflow-hidden rounded-[3px] bg-white text-[12px] shadow-[0_4px_12px_rgba(0,0,0,0.12),0_0_1px_rgba(0,0,0,0.15)] border border-[#ebebeb] outline-none focus:outline-none focus:ring-0 focus-visible:outline-none flex flex-col",
                                 direction === "up" ? "bottom-full mb-1" : "mt-1"
                             )}>
                                 {/* Search Input Container */}

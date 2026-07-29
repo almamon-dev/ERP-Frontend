@@ -24,6 +24,8 @@ export interface DataTableProps<T = any> {
     actions?: (item: T) => React.ReactNode;
     filterContent?: React.ReactNode;
     compact?: boolean;
+    dateValue?: string;
+    onDateChange?: (date: string) => void;
 }
 
 export default function DataTable<T extends Record<string, any>>({ 
@@ -34,26 +36,43 @@ export default function DataTable<T extends Record<string, any>>({
     keyExtractor = (item: any) => item.id,
     actions,
     filterContent,
-    compact = false
+    compact = false,
+    dateValue: propDateValue,
+    onDateChange: propOnDateChange
 }: DataTableProps<T>) {
     const [search, setSearch] = useState('');
+    const [dateFilter, setDateFilter] = useState(propDateValue || '');
     const [showFilters, setShowFilters] = useState(false);
     const [selectedIds, setSelectedIds] = useState<(number | string)[]>([]);
     const [visibleColumns, setVisibleColumns] = useState<string[]>(columns.map(c => c.id));
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
 
-    // Reset to page 1 when search changes
+    // Reset to page 1 when search or date changes
     useEffect(() => {
         setCurrentPage(1);
-    }, [search]);
+    }, [search, dateFilter]);
 
-    // Apply Search Filtering
+    const handleDateChange = (val: string) => {
+        setDateFilter(val);
+        if (propOnDateChange) propOnDateChange(val);
+    };
+
+    // Apply Search & Date Filtering
     const filteredData = data.filter(item => {
-        if (!search) return true;
-        return Object.values(item).some(val => 
-            String(val).toLowerCase().includes(search.toLowerCase())
-        );
+        if (search) {
+            const matchesSearch = Object.values(item).some(val => 
+                String(val).toLowerCase().includes(search.toLowerCase())
+            );
+            if (!matchesSearch) return false;
+        }
+        if (dateFilter) {
+            const matchesDate = Object.values(item).some(val => 
+                String(val).includes(dateFilter)
+            );
+            if (!matchesDate) return false;
+        }
+        return true;
     });
 
     // Pagination Logic
@@ -100,8 +119,8 @@ export default function DataTable<T extends Record<string, any>>({
                     />
                     <div className="flex items-center gap-1.5">
                         <TableFilter 
-                            onFilterClick={() => setShowFilters(!showFilters)} 
-                            onResetClick={() => {}} 
+                            dateValue={dateFilter}
+                            onDateChange={handleDateChange}
                         />
                         
                         <div className="w-[1px] h-4 bg-[#ebebeb] mx-1"></div>

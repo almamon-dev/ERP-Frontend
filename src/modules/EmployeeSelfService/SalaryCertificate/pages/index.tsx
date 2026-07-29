@@ -59,14 +59,33 @@ export default function SalaryCertificateRequestsPage() {
         { id: 'createdAt', label: 'Created At' },
     ];
 
+    const handleDownload = (item: any) => {
+        alert(`Downloading Salary Certificate for ${item.purpose}`);
+    };
+
     const renderActions = (item: any) => (
         <div className="flex items-center justify-center gap-1">
-            <button onClick={() => setEditItem(item)} className="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-colors" title="Edit">
-                <Edit size={14} strokeWidth={1.5} />
-            </button>
-            <button onClick={() => handleDelete(item.id)} className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors" title="Delete">
-                <Trash2 size={14} strokeWidth={1.5} />
-            </button>
+            {item.status === 'Issued' ? (
+                <button 
+                    onClick={() => handleDownload(item)} 
+                    className="p-1.5 text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 rounded-md transition-colors flex items-center gap-1 text-[11.5px] font-semibold cursor-pointer" 
+                    title="Download Salary Certificate PDF"
+                >
+                    <Download size={14} strokeWidth={1.5} />
+                    <span>PDF</span>
+                </button>
+            ) : item.status === 'Pending' ? (
+                <>
+                    <button onClick={() => setEditItem(item)} className="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-colors cursor-pointer" title="Edit Request">
+                        <Edit size={14} strokeWidth={1.5} />
+                    </button>
+                    <button onClick={() => handleDelete(item.id)} className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors cursor-pointer" title="Cancel Request">
+                        <Trash2 size={14} strokeWidth={1.5} />
+                    </button>
+                </>
+            ) : (
+                <span className="text-[11.5px] text-slate-400 font-medium">—</span>
+            )}
         </div>
     );
 

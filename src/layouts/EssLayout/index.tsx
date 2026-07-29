@@ -34,13 +34,27 @@ export default function EssLayout() {
   const { user, logout } = useAuth();
   const [isModuleModalOpen, setIsModuleModalOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  const [isAttendanceExpanded, setIsAttendanceExpanded] = useState(() => {
-    return location.pathname.startsWith('/employee-portal/time-management');
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>(() => {
+    return {
+      'Attendance': location.pathname.startsWith('/employee-portal/time-management'),
+      'Expenses': location.pathname.startsWith('/employee-portal/expenses'),
+      'KPI & Bonus Dashboard': location.pathname.startsWith('/employee-portal/kpi-bonus'),
+    };
   });
+
+  const toggleExpand = (name: string) => {
+    setExpandedItems(prev => ({ ...prev, [name]: !prev[name] }));
+  };
 
   React.useEffect(() => {
     if (location.pathname.startsWith('/employee-portal/time-management')) {
-      setIsAttendanceExpanded(true);
+      setExpandedItems(prev => ({ ...prev, Attendance: true }));
+    }
+    if (location.pathname.startsWith('/employee-portal/expenses')) {
+      setExpandedItems(prev => ({ ...prev, Expenses: true }));
+    }
+    if (location.pathname.startsWith('/employee-portal/kpi-bonus')) {
+      setExpandedItems(prev => ({ ...prev, 'KPI & Bonus Dashboard': true }));
     }
   }, [location.pathname]);
 
@@ -53,7 +67,6 @@ export default function EssLayout() {
       icon: Calendar,
       subItems: [
         { name: 'My Attendance', tab: 'my-attendance', path: '/employee-portal/time-management?tab=my-attendance' },
-        { name: 'Attendance Adjustment', tab: 'adjust', path: '/employee-portal/time-management?tab=adjust' },
         { name: 'Off Day Swap (Comp Off)', tab: 'offday-swap', path: '/employee-portal/time-management?tab=offday-swap' },
         { name: 'Weekend Swap', tab: 'weekend-swap', path: '/employee-portal/time-management?tab=weekend-swap' },
         { name: 'Shift Swap', tab: 'shift-swap', path: '/employee-portal/time-management?tab=shift-swap' },
@@ -64,11 +77,31 @@ export default function EssLayout() {
     },
     { name: 'Leave & Movement', path: '/employee-portal/leave-movement', icon: ArrowLeftRight },
     { name: 'Payroll', path: '/employee-portal/payslip', icon: CreditCard },
-    { name: 'Expenses', path: '/employee-portal/expenses', icon: Receipt },
+    {
+      name: 'Expenses',
+      path: '/employee-portal/expenses',
+      icon: Receipt,
+      subItems: [
+        { name: 'Dashboard', tab: 'dashboard', path: '/employee-portal/expenses?tab=dashboard' },
+        { name: 'Requisitions', tab: 'requisitions', path: '/employee-portal/expenses?tab=requisitions' },
+        { name: 'My Claims', tab: 'claims', path: '/employee-portal/expenses?tab=claims' },
+        { name: 'Receipts & Attachments', tab: 'receipts', path: '/employee-portal/expenses?tab=receipts' },
+        { name: 'Reports', tab: 'reports', path: '/employee-portal/expenses?tab=reports' },
+      ]
+    },
     { name: 'Assets', path: '/employee-portal/assets', icon: HardDrive },
     { name: 'Tasks', path: '/employee-portal/todo', icon: CheckSquare },
     { name: 'IOU & Requisition', path: '/employee-portal/iou', icon: FileCheck },
-    { name: 'Reports', path: '/employee-portal/kpi-bonus', icon: BarChart2 },
+    {
+      name: 'KPI & Bonus Dashboard',
+      path: '/employee-portal/kpi-bonus',
+      icon: BarChart2,
+      subItems: [
+        { name: 'KPI & Bonus Summary', tab: 'summary', path: '/employee-portal/kpi-bonus?tab=summary' },
+        { name: 'Operations Project History', tab: 'operations', path: '/employee-portal/kpi-bonus?tab=operations' },
+        { name: 'Campaign & Sales Commission', tab: 'campaign', path: '/employee-portal/kpi-bonus?tab=campaign' },
+      ]
+    },
   ];
 
   const adminSettingsItems = [
@@ -138,7 +171,7 @@ export default function EssLayout() {
                   <button
                     onClick={() => {
                       if (hasSubItems) {
-                        setIsAttendanceExpanded(!isAttendanceExpanded);
+                        toggleExpand(item.name);
                         if (!location.pathname.startsWith(item.path)) {
                           navigate(item.subItems[0].path);
                         }
@@ -147,36 +180,39 @@ export default function EssLayout() {
                         setIsMobileSidebarOpen(false);
                       }
                     }}
-                    className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md font-semibold text-[13.5px] transition-colors duration-75 group cursor-pointer ${active
-                      ? 'bg-[#4F46E5] text-white shadow-md shadow-indigo-500/20'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                    className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-[4px] font-medium text-[13.5px] transition-all duration-75 group cursor-pointer ${active
+                      ? 'bg-[#EAF5EF] text-[#0D6E4F] font-semibold'
+                      : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
                       }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <Icon
-                        size={18}
-                        className={`shrink-0 transition-colors ${active ? 'text-white' : 'text-slate-400 group-hover:text-slate-600'
+                        size={19}
+                        strokeWidth={1.75}
+                        className={`shrink-0 transition-colors ${active ? 'text-[#0D6E4F]' : 'text-slate-400 group-hover:text-slate-600'
                           }`}
                       />
                       <span className="truncate">{item.name}</span>
                     </div>
                     {hasSubItems && (
                       <span className="shrink-0 ml-1">
-                        {isAttendanceExpanded ? (
-                          <ChevronDown size={15} className={active ? 'text-white' : 'text-slate-400'} />
+                        {expandedItems[item.name] ? (
+                          <ChevronDown size={15} strokeWidth={2} className={active ? 'text-[#0D6E4F]' : 'text-slate-400 group-hover:text-slate-600'} />
                         ) : (
-                          <ChevronRight size={15} className={active ? 'text-white' : 'text-slate-400'} />
+                          <ChevronRight size={15} strokeWidth={2} className={active ? 'text-[#0D6E4F]' : 'text-slate-400 group-hover:text-slate-600'} />
                         )}
                       </span>
                     )}
                   </button>
 
-                  {hasSubItems && isAttendanceExpanded && (
-                    <div className="pl-4 space-y-0.5 my-1">
+                  {hasSubItems && expandedItems[item.name] && (
+                    <div className="ml-5 pl-2 space-y-0.5 my-1">
                       {item.subItems.map((sub) => {
                         const searchTab = new URLSearchParams(location.search).get('tab');
-                        const isSubActive = location.pathname.startsWith('/employee-portal/time-management') &&
-                          (searchTab === sub.tab || (!searchTab && sub.tab === 'my-attendance'));
+                        const defaultTab = item.subItems[0].tab;
+                        const currentTab = searchTab === 'my-claims' ? 'claims' : searchTab;
+                        const isSubActive = location.pathname.startsWith(item.path) &&
+                          (currentTab === sub.tab || (!currentTab && sub.tab === defaultTab));
 
                         return (
                           <button
@@ -185,12 +221,15 @@ export default function EssLayout() {
                               navigate(sub.path);
                               setIsMobileSidebarOpen(false);
                             }}
-                            className={`w-full flex items-center justify-between px-3 py-1.5 rounded-md text-[12px] transition-colors duration-75 cursor-pointer ${isSubActive
-                              ? 'bg-indigo-50 text-[#4F46E5] font-bold border border-indigo-100/80 shadow-2xs'
-                              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'
+                            className={`w-full flex items-center justify-between px-2 py-1.5 text-[12.5px] transition-colors duration-75 cursor-pointer group ${isSubActive
+                              ? 'text-[#0D6E4F] font-semibold'
+                              : 'text-slate-500 hover:text-slate-800 font-normal'
                               }`}
                           >
-                            <span className="truncate">{sub.name}</span>
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${isSubActive ? 'bg-[#0D6E4F]' : 'bg-slate-300 group-hover:bg-slate-400'}`} />
+                              <span className="truncate">{sub.name}</span>
+                            </div>
                           </button>
                         );
                       })}
@@ -217,14 +256,15 @@ export default function EssLayout() {
                     navigate(item.path);
                     setIsMobileSidebarOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md font-semibold text-[13.5px] transition-all duration-150 group cursor-pointer ${active
-                    ? 'bg-[#4F46E5] text-white shadow-md shadow-indigo-500/20'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-[13.5px] transition-all duration-150 group cursor-pointer ${active
+                    ? 'bg-[#EAF5EF] text-[#0D6E4F] font-semibold'
+                    : 'text-slate-700 hover:text-slate-900 hover:bg-slate-50'
                     }`}
                 >
                   <Icon
-                    size={18}
-                    className={`shrink-0 transition-colors ${active ? 'text-white' : 'text-slate-400 group-hover:text-slate-600'
+                    size={19}
+                    strokeWidth={1.75}
+                    className={`shrink-0 transition-colors ${active ? 'text-[#0D6E4F]' : 'text-slate-400 group-hover:text-slate-600'
                       }`}
                   />
                   <span className="truncate">{item.name}</span>

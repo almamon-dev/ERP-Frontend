@@ -22,6 +22,7 @@ import {
   X,
   Hexagon,
   ChevronRight,
+  ChevronDown,
   Phone
 } from 'lucide-react';
 import ModuleSelectorModal from '@/components/modals/module-selector-modal';
@@ -33,11 +34,34 @@ export default function EssLayout() {
   const { user, logout } = useAuth();
   const [isModuleModalOpen, setIsModuleModalOpen] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [isAttendanceExpanded, setIsAttendanceExpanded] = useState(() => {
+    return location.pathname.startsWith('/employee-portal/time-management');
+  });
+
+  React.useEffect(() => {
+    if (location.pathname.startsWith('/employee-portal/time-management')) {
+      setIsAttendanceExpanded(true);
+    }
+  }, [location.pathname]);
 
   // Navigation Items matching exact design
   const mainNavItems = [
     { name: 'Dashboard', path: '/employee-portal/dashboard', icon: LayoutDashboard },
-    { name: 'Attendance', path: '/employee-portal/time-management', icon: Calendar },
+    {
+      name: 'Attendance',
+      path: '/employee-portal/time-management',
+      icon: Calendar,
+      subItems: [
+        { name: 'My Attendance', tab: 'my-attendance', path: '/employee-portal/time-management?tab=my-attendance' },
+        { name: 'Attendance Adjustment', tab: 'adjust', path: '/employee-portal/time-management?tab=adjust' },
+        { name: 'Off Day Swap (Comp Off)', tab: 'offday-swap', path: '/employee-portal/time-management?tab=offday-swap' },
+        { name: 'Weekend Swap', tab: 'weekend-swap', path: '/employee-portal/time-management?tab=weekend-swap' },
+        { name: 'Shift Swap', tab: 'shift-swap', path: '/employee-portal/time-management?tab=shift-swap' },
+        { name: 'Overtime', tab: 'overtime', path: '/employee-portal/time-management?tab=overtime' },
+        { name: 'Attendance Reports', tab: 'reports', path: '/employee-portal/time-management?tab=reports' },
+        { name: 'Attendance History', tab: 'history', path: '/employee-portal/time-management?tab=history' },
+      ]
+    },
     { name: 'Leave & Movement', path: '/employee-portal/leave-movement', icon: ArrowLeftRight },
     { name: 'Payroll', path: '/employee-portal/payslip', icon: CreditCard },
     { name: 'Expenses', path: '/employee-portal/expenses', icon: Receipt },
@@ -73,14 +97,14 @@ export default function EssLayout() {
 
       {/* LEFT SIDEBAR */}
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-[270px] bg-white border-r border-slate-200/90 flex flex-col justify-between transform transition-transform duration-200 ease-in-out shrink-0 ${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        className={`fixed lg:static inset-y-0 left-0 z-50 w-[270px] bg-white border-r border-slate-200/90 flex flex-col justify-between shrink-0 max-lg:transition-transform max-lg:duration-200 max-lg:ease-in-out ${isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
           }`}
       >
         {/* BRAND & LOGO HEADER */}
         <div>
           <div className="h-16 px-5 flex items-center justify-between border-b border-slate-100">
             <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/employee-portal/dashboard')}>
-              <div className="w-9 h-9 rounded-[4px]bg-gradient-to-tr from-[#3730A3] via-[#4338CA] to-[#4F46E5] text-white flex items-center justify-center shadow-md shadow-indigo-500/20">
+              <div className="w-9 h-9 rounded-md bg-gradient-to-tr from-[#3730A3] via-[#4338CA] to-[#4F46E5] text-white flex items-center justify-center shadow-md shadow-indigo-500/20">
                 <Hexagon size={22} className="fill-white/20 stroke-[2.2]" />
               </div>
               <div className="flex flex-col">
@@ -103,29 +127,76 @@ export default function EssLayout() {
           </div>
 
           {/* SIDEBAR NAVIGATION ITEMS */}
-          <nav className="p-3 space-y-1 overflow-y-auto max-h-[calc(100vh-340px)] custom-scrollbar">
+          <nav className="p-3 space-y-1 overflow-y-auto max-h-[calc(100vh-280px)] custom-scrollbar">
             {mainNavItems.map((item) => {
               const active = isItemActive(item.path);
               const Icon = item.icon;
+              const hasSubItems = item.subItems && item.subItems.length > 0;
+
               return (
-                <button
-                  key={item.name}
-                  onClick={() => {
-                    navigate(item.path);
-                    setIsMobileSidebarOpen(false);
-                  }}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-[8px]font-semibold text-[13.5px] transition-all duration-150 group cursor-pointer ${active
-                    ? 'bg-[#3730A3] text-white shadow-md shadow-indigo-500/20'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                    }`}
-                >
-                  <Icon
-                    size={18}
-                    className={`shrink-0 transition-colors ${active ? 'text-white' : 'text-slate-400 group-hover:text-slate-600'
+                <div key={item.name} className="space-y-0.5">
+                  <button
+                    onClick={() => {
+                      if (hasSubItems) {
+                        setIsAttendanceExpanded(!isAttendanceExpanded);
+                        if (!location.pathname.startsWith(item.path)) {
+                          navigate(item.subItems[0].path);
+                        }
+                      } else {
+                        navigate(item.path);
+                        setIsMobileSidebarOpen(false);
+                      }
+                    }}
+                    className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-md font-semibold text-[13.5px] transition-colors duration-75 group cursor-pointer ${active
+                      ? 'bg-[#4F46E5] text-white shadow-md shadow-indigo-500/20'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                       }`}
-                  />
-                  <span className="truncate">{item.name}</span>
-                </button>
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <Icon
+                        size={18}
+                        className={`shrink-0 transition-colors ${active ? 'text-white' : 'text-slate-400 group-hover:text-slate-600'
+                          }`}
+                      />
+                      <span className="truncate">{item.name}</span>
+                    </div>
+                    {hasSubItems && (
+                      <span className="shrink-0 ml-1">
+                        {isAttendanceExpanded ? (
+                          <ChevronDown size={15} className={active ? 'text-white' : 'text-slate-400'} />
+                        ) : (
+                          <ChevronRight size={15} className={active ? 'text-white' : 'text-slate-400'} />
+                        )}
+                      </span>
+                    )}
+                  </button>
+
+                  {hasSubItems && isAttendanceExpanded && (
+                    <div className="pl-4 space-y-0.5 my-1">
+                      {item.subItems.map((sub) => {
+                        const searchTab = new URLSearchParams(location.search).get('tab');
+                        const isSubActive = location.pathname.startsWith('/employee-portal/time-management') &&
+                          (searchTab === sub.tab || (!searchTab && sub.tab === 'my-attendance'));
+
+                        return (
+                          <button
+                            key={sub.name}
+                            onClick={() => {
+                              navigate(sub.path);
+                              setIsMobileSidebarOpen(false);
+                            }}
+                            className={`w-full flex items-center justify-between px-3 py-1.5 rounded-md text-[12px] transition-colors duration-75 cursor-pointer ${isSubActive
+                              ? 'bg-indigo-50 text-[#4F46E5] font-bold border border-indigo-100/80 shadow-2xs'
+                              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-medium'
+                              }`}
+                          >
+                            <span className="truncate">{sub.name}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               );
             })}
 
@@ -147,7 +218,7 @@ export default function EssLayout() {
                     setIsMobileSidebarOpen(false);
                   }}
                   className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-md font-semibold text-[13.5px] transition-all duration-150 group cursor-pointer ${active
-                    ? 'bg-[#3730A3] text-white shadow-md shadow-indigo-500/20'
+                    ? 'bg-[#4F46E5] text-white shadow-md shadow-indigo-500/20'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                     }`}
                 >
@@ -242,7 +313,7 @@ export default function EssLayout() {
 
             {/* GLOBAL SEARCH */}
             <div className="relative w-full max-w-md hidden sm:block">
-              <div className="flex items-center bg-slate-50 hover:bg-slate-100/80 focus-within:bg-white border border-slate-200 focus-within:border-indigo-500 rounded-[3px]px-3 py-1.5 transition-all">
+              <div className="flex items-center bg-slate-50 hover:bg-slate-100/80 focus-within:bg-white border border-slate-200 focus-within:border-indigo-500 rounded-md px-3 py-1.5 transition-all">
                 <Search size={15} className="text-slate-400 mr-2 shrink-0" />
                 <input
                   type="text"
@@ -261,7 +332,7 @@ export default function EssLayout() {
             {/* MODULE SELECTOR (9-DOTS) */}
             <button
               onClick={() => setIsModuleModalOpen(true)}
-              className="p-2 rounded-[3px]text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
+              className="p-2 rounded-md text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer"
               title="Switch Module"
             >
               <LayoutGrid size={18} />
@@ -270,7 +341,7 @@ export default function EssLayout() {
             {/* CALENDAR */}
             <button
               onClick={() => navigate('/employee-portal/calendar')}
-              className="p-2 rounded-[3px]text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer hidden sm:flex"
+              className="p-2 rounded-md text-slate-600 hover:bg-slate-100 transition-colors cursor-pointer hidden sm:flex"
               title="Calendar"
             >
               <Calendar size={18} />
@@ -278,7 +349,7 @@ export default function EssLayout() {
 
             {/* NOTIFICATIONS */}
             <button
-              className="p-2 rounded-[3px]text-slate-600 hover:bg-slate-100 transition-colors relative cursor-pointer"
+              className="p-2 rounded-md text-slate-600 hover:bg-slate-100 transition-colors relative cursor-pointer"
               title="Notifications"
             >
               <Bell size={18} />
@@ -289,7 +360,7 @@ export default function EssLayout() {
 
             {/* MESSAGES */}
             <button
-              className="p-2 rounded-[3px]text-slate-600 hover:bg-slate-100 transition-colors relative cursor-pointer hidden sm:flex"
+              className="p-2 rounded-md text-slate-600 hover:bg-slate-100 transition-colors relative cursor-pointer hidden sm:flex"
               title="Messages"
             >
               <Mail size={18} />
@@ -329,7 +400,7 @@ export default function EssLayout() {
                   logout();
                   navigate('/web/login');
                 }}
-                className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-[3px]transition-colors cursor-pointer"
+                className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50 rounded-md transition-colors cursor-pointer"
                 title="Sign Out"
               >
                 <LogOut size={17} />
@@ -339,7 +410,7 @@ export default function EssLayout() {
         </header>
 
         {/* MAIN SCROLLABLE CONTENT AREA */}
-        <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#F8FAFC]">
+        <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#F8FAFC] custom-scrollbar [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           <Outlet />
         </main>
       </div>

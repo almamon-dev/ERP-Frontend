@@ -348,10 +348,10 @@ export default function KpiBonusPage() {
       {/* PAGE HEADER TITLE & TOP MAIN TAB NAVIGATION */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-1 border-b border-slate-200">
         <div>
-          <h1 className="text-[15px] font-extrabold text-slate-900 tracking-tight leading-snug">
+          <h1 className="text-[20px] font-bold text-slate-900 tracking-tight">
             {mainPageTab === 'summary' ? 'KPI & Bonus Dashboard' : mainPageTab === 'operations' ? 'Operations Project History' : 'Campaign & Sales Commission'}
           </h1>
-          <p className="text-[11px] font-medium text-slate-500">
+          <p className="text-[13px] font-medium text-slate-500 mt-0.5">
             Operations projects, order history, team bonuses, carry and penalty records.
           </p>
         </div>

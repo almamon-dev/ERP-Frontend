@@ -165,7 +165,7 @@ export default function EmployeeDashboardPage() {
   ];
 
   return (
-    <div className="w-full max-w-full p-3.5 sm:p-4 bg-[#f8fafc] min-h-screen space-y-3.5 font-['Poppins',sans-serif] antialiased">
+    <div className="w-full max-w-full p-3.5 sm:p-4 bg-[#f8fafc] min-h-screen space-y-3.5 font-['Poppins',sans-serif] antialiased custom-scrollbar [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
 
       {/* TOP HEADER GREETING */}
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 px-1">

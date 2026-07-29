@@ -13,6 +13,7 @@ export interface DatePickerProps {
   size?: 'sm' | 'md' | 'lg';
   variant?: 'default' | 'compact' | 'ghost';
   format?: 'full' | 'monthYear';
+  align?: 'left' | 'right' | 'auto';
 }
 
 const MONTH_NAMES = [
@@ -34,14 +35,70 @@ export default function DatePicker({
   disabled = false,
   size = 'md',
   variant = 'default',
-  format = 'full'
+  format = 'full',
+  align = 'auto'
 }: DatePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 6, 27)); // Default July 27, 2026
-  const [selectedDay, setSelectedDay] = useState<number | null>(27);
+  const [currentDate, setCurrentDate] = useState(() => {
+    if (value) {
+      const parts = value.split('-');
+      if (parts.length === 3) {
+        const y = parseInt(parts[0], 10);
+        const m = parseInt(parts[1], 10) - 1;
+        const d = parseInt(parts[2], 10);
+        if (!isNaN(y) && !isNaN(m) && !isNaN(d)) return new Date(y, m, d);
+      }
+    }
+    return new Date(2026, 6, 1);
+  });
+  const [selectedDay, setSelectedDay] = useState<number | null>(() => {
+    if (value) {
+      const parts = value.split('-');
+      if (parts.length === 3) {
+        const d = parseInt(parts[2], 10);
+        if (!isNaN(d)) return d;
+      }
+    }
+    return 1;
+  });
   const [viewMode, setViewMode] = useState<'calendar' | 'months'>('calendar');
+  const [popoverAlign, setPopoverAlign] = useState<'left' | 'right'>('left');
 
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Sync value prop whenever it changes externally
+  useEffect(() => {
+    if (value) {
+      const parts = value.split('-');
+      if (parts.length === 3) {
+        const y = parseInt(parts[0], 10);
+        const m = parseInt(parts[1], 10) - 1;
+        const d = parseInt(parts[2], 10);
+        if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+          setCurrentDate(new Date(y, m, d));
+          setSelectedDay(d);
+          return;
+        }
+      }
+      const parsedDate = new Date(value);
+      if (!isNaN(parsedDate.getTime())) {
+        setCurrentDate(parsedDate);
+        setSelectedDay(parsedDate.getDate());
+      }
+    }
+  }, [value]);
+
+  useEffect(() => {
+    if (isOpen && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const windowWidth = window.innerWidth;
+      if (align === 'right' || rect.left + 260 > windowWidth - 16) {
+        setPopoverAlign('right');
+      } else {
+        setPopoverAlign('left');
+      }
+    }
+  }, [isOpen, align]);
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
@@ -85,11 +142,31 @@ export default function DatePicker({
     setIsOpen(false);
   };
 
-  const formattedSelectedValue = format === 'monthYear'
-    ? `${SHORT_MONTH_NAMES[month]} ${year}`
-    : selectedDay
-      ? `${SHORT_MONTH_NAMES[month]} ${selectedDay}, ${year}`
-      : value || '';
+  const formattedSelectedValue = (() => {
+    if (value) {
+      const parts = value.split('-');
+      if (parts.length === 3) {
+        const y = parseInt(parts[0], 10);
+        const m = parseInt(parts[1], 10) - 1;
+        const d = parseInt(parts[2], 10);
+        if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+          return format === 'monthYear'
+            ? `${SHORT_MONTH_NAMES[m]} ${y}`
+            : `${SHORT_MONTH_NAMES[m]} ${String(d).padStart(2, '0')}, ${y}`;
+        }
+      }
+      const parsedDate = new Date(value);
+      if (!isNaN(parsedDate.getTime())) {
+        return format === 'monthYear'
+          ? `${SHORT_MONTH_NAMES[parsedDate.getMonth()]} ${parsedDate.getFullYear()}`
+          : `${SHORT_MONTH_NAMES[parsedDate.getMonth()]} ${String(parsedDate.getDate()).padStart(2, '0')}, ${parsedDate.getFullYear()}`;
+      }
+      return value;
+    }
+    return selectedDay
+      ? `${SHORT_MONTH_NAMES[month]} ${String(selectedDay).padStart(2, '0')}, ${year}`
+      : placeholder;
+  })();
 
   // Height and Padding Classes matching Input component
   const sizeClasses = size === 'sm'
@@ -131,7 +208,10 @@ export default function DatePicker({
 
         {/* --- CUSTOM POPOVER CALENDAR MATCHING SCREENSHOT --- */}
         {isOpen && (
-          <div className="absolute left-0 top-full mt-1 w-[260px] bg-white border border-slate-200 rounded-lg shadow-xl z-[100] p-3 font-sans text-slate-800 animate-in fade-in zoom-in-95 duration-100">
+          <div className={cn(
+            "absolute top-full mt-1 w-[260px] bg-white border border-slate-200 rounded-lg shadow-xl z-[100] p-3 font-sans text-slate-800 animate-in fade-in zoom-in-95 duration-100",
+            popoverAlign === 'right' ? "right-0" : "left-0"
+          )}>
 
             {/* HEADER: << <   Jul 2033   > >> MATCHING SCREENSHOT */}
             <div className="flex items-center justify-between pb-2 border-b border-slate-100">

@@ -237,10 +237,10 @@ export default function LeaveAndMovementPage() {
       {/* PAGE HEADER TITLE & DESCRIPTION */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
         <div>
-          <h1 className="text-[17px] font-extrabold text-slate-900 tracking-tight leading-snug">
+          <h1 className="text-[20px] font-bold text-slate-900 tracking-tight">
             {mainTab === 'leave' ? 'Leave Application' : 'Movement Application'}
           </h1>
-          <p className="text-[12.5px] font-medium text-slate-500 mt-0.5">
+          <p className="text-[13px] font-medium text-slate-500 mt-0.5">
             {mainTab === 'leave'
               ? 'Apply for casual, sick, or earn leaves and track leave balance allocations.'
               : 'Submit official or personal movement requisitions and track approval status.'}

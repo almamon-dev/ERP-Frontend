@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { 
-  CheckSquare, Plus, Trash2, CheckCircle2, Circle, Search, Filter
+  CheckSquare, Plus, Trash2, CheckCircle2, Circle, Search, Filter,
+  ListTodo, Clock, AlertTriangle, CheckCheck, Tag
 } from 'lucide-react';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
@@ -62,7 +63,7 @@ export default function TodoListPage() {
   const handleAddTodo = (e: React.FormEvent) => {
     e.preventDefault();
     if (!taskTitle.trim()) {
-      alert('Please enter a task title.');
+      alert('Please enter a task description.');
       return;
     }
 
@@ -104,204 +105,274 @@ export default function TodoListPage() {
     return true;
   });
 
+  const completedCount = todos.filter(t => t.completed).length;
+  const pendingCount = todos.filter(t => !t.completed).length;
+  const highPriorityCount = todos.filter(t => t.priority === 'High' && !t.completed).length;
+  const completionPercentage = todos.length > 0 ? Math.round((completedCount / todos.length) * 100) : 0;
+
   return (
-    <div className="max-w-[1520px] mx-auto p-4 bg-[#f8fafc] min-h-screen text-slate-800 space-y-4 font-sans antialiased pb-16">
+    <div className="p-4 w-full max-w-none mx-auto bg-[#f8f9fa] min-h-screen text-slate-800 space-y-4 font-sans antialiased pb-20">
       
-      {/* PAGE TITLE */}
-      <div className="flex items-center justify-between">
+      {/* PAGE HEADER TITLE & DESCRIPTION */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1">
         <div>
-          <h1 className="text-[17px] font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <CheckSquare size={18} className="text-[#008060]" />
+          <h1 className="text-[20px] font-bold text-slate-900 tracking-tight flex items-center gap-2">
+            <CheckSquare size={20} className="text-[#008060]" />
             <span>Todo List & Tasks</span>
           </h1>
-          <p className="text-[11.5px] font-medium text-slate-500">
+          <p className="text-[13px] font-medium text-slate-500 mt-0.5">
             Create, track, and manage your personal daily work items and task priorities.
           </p>
         </div>
+
+        {/* METRIC COUNTER BADGES */}
+        <div className="flex items-center gap-3 font-normal text-[13px]">
+          <div className="flex items-stretch border-l-[3px] border-emerald-500 pl-2.5 text-left py-0.5">
+            <div className="flex flex-col">
+              <span className="font-extrabold text-[15px] text-slate-800 leading-none">{completedCount}/{todos.length}</span>
+              <span className="text-[#64748b] text-[11px] font-medium leading-none mt-1">Completed ({completionPercentage}%)</span>
+            </div>
+          </div>
+
+          <div className="flex items-stretch border-l-[3px] border-amber-500 pl-2.5 text-left py-0.5">
+            <div className="flex flex-col">
+              <span className="font-extrabold text-[15px] text-amber-600 leading-none">{pendingCount}</span>
+              <span className="text-[#64748b] text-[11px] font-medium leading-none mt-1">Pending</span>
+            </div>
+          </div>
+
+          {highPriorityCount > 0 && (
+            <div className="flex items-stretch border-l-[3px] border-rose-500 pl-2.5 text-left py-0.5 hidden sm:flex">
+              <div className="flex flex-col">
+                <span className="font-extrabold text-[15px] text-rose-600 leading-none">{highPriorityCount}</span>
+                <span className="text-[#64748b] text-[11px] font-medium leading-none mt-1">High Priority</span>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* COMPACT INPUT FORM CARD */}
-      <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-2xs space-y-3">
-        <form onSubmit={handleAddTodo} className="space-y-2.5">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-2.5 items-end">
-            
-            <div className="md:col-span-5">
-              <Input 
-                label="Task Description"
-                placeholder="What needs to be done?"
-                value={taskTitle}
-                onChange={(e) => setTaskTitle(e.target.value)}
-                className="h-8 text-[12px]"
-              />
+      {/* MAIN 2-COLUMN LAYOUT GRID */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+        
+        {/* LEFT COLUMN (4 COLS): ADD TASK FORM & PROGRESS */}
+        <div className="lg:col-span-4 space-y-4">
+          
+          {/* CREATE TASK FORM CARD */}
+          <div className="bg-white p-4 rounded-sm border border-slate-200 shadow-2xs space-y-3.5">
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+              <h2 className="text-[13.5px] font-bold text-slate-900 leading-tight flex items-center gap-1.5">
+                <Plus size={16} className="text-[#008060]" />
+                <span>Create New Task</span>
+              </h2>
+              <span className="text-[11px] font-semibold text-slate-400">Quick Add</span>
             </div>
 
-            <div className="md:col-span-2">
-              <DatePicker 
-                label="Target Due Date"
-                value={dueDate}
-                onChange={(val) => setDueDate(val)}
-                className="w-full h-8 text-[12px]"
-              />
-            </div>
+            <form onSubmit={handleAddTodo} className="space-y-3">
+              <div className="flex flex-col gap-1 w-full">
+                <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                  <span className="text-rose-500 mr-0.5">*</span> Task Description
+                </FormLabel>
+                <Input 
+                  placeholder="What needs to be done?"
+                  value={taskTitle}
+                  onChange={(e) => setTaskTitle(e.target.value)}
+                  className="text-[12px]"
+                />
+              </div>
 
-            <div className="md:col-span-2">
-              <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-1">Priority</FormLabel>
-              <Select
-                value={priority}
-                onChange={(e) => setPriority(e.target.value)}
-                options={[
-                  { id: 'High', name: 'High' },
-                  { id: 'Medium', name: 'Medium' },
-                  { id: 'Low', name: 'Low' },
-                ]}
-              />
-            </div>
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="flex flex-col gap-1 w-full">
+                  <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <span className="text-rose-500 mr-0.5">*</span> Category
+                  </FormLabel>
+                  <Select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    options={[
+                      { id: 'Work Task', name: 'Work Task' },
+                      { id: 'HR Requisition', name: 'HR Requisition' },
+                      { id: 'Meeting Prep', name: 'Meeting Prep' },
+                      { id: 'Compliance', name: 'Compliance' },
+                    ]}
+                  />
+                </div>
 
-            <div className="md:col-span-2">
-              <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-1">Category</FormLabel>
-              <Select
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                options={[
-                  { id: 'Work Task', name: 'Work Task' },
-                  { id: 'HR Requisition', name: 'HR Requisition' },
-                  { id: 'Meeting Prep', name: 'Meeting Prep' },
-                  { id: 'Compliance', name: 'Compliance' },
-                ]}
-              />
-            </div>
+                <div className="flex flex-col gap-1 w-full">
+                  <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                    <span className="text-rose-500 mr-0.5">*</span> Priority
+                  </FormLabel>
+                  <Select
+                    value={priority}
+                    onChange={(e) => setPriority(e.target.value)}
+                    options={[
+                      { id: 'High', name: 'High' },
+                      { id: 'Medium', name: 'Medium' },
+                      { id: 'Low', name: 'Low' },
+                    ]}
+                  />
+                </div>
+              </div>
 
-            <div className="md:col-span-1">
+              <div className="flex flex-col gap-1 w-full">
+                <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                  <span className="text-rose-500 mr-0.5">*</span> Target Due Date
+                </FormLabel>
+                <DatePicker 
+                  value={dueDate}
+                  onChange={(val) => setDueDate(val)}
+                  className="w-full"
+                />
+              </div>
+
               <Button
                 type="submit"
-                className="w-full bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-8 rounded transition-colors shadow-2xs cursor-pointer flex items-center justify-center gap-1"
+                className="w-full bg-[#008060] hover:bg-[#006e52] text-white text-[12px] font-bold h-8 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center justify-center gap-1.5 mt-1"
               >
-                <Plus size={14} />
-                <span>Add</span>
+                <Plus size={15} />
+                <span>Add Task to List</span>
               </Button>
+            </form>
+          </div>
+
+          {/* PROGRESS SUMMARY CARD */}
+          <div className="bg-white p-3.5 rounded-sm border border-slate-200 shadow-2xs space-y-2.5">
+            <div className="flex items-center justify-between text-[12px] font-bold text-slate-800">
+              <span>Task Completion Progress</span>
+              <span className="text-[#008060] font-extrabold">{completionPercentage}%</span>
             </div>
-
-          </div>
-        </form>
-      </div>
-
-      {/* COMPACT DATA TABLE & FILTER BAR CARD */}
-      <div className="bg-white p-3.5 rounded-lg border border-slate-200 shadow-2xs space-y-3">
-        
-        {/* Compact Filter Pills & Search */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 border-b border-slate-100">
-          
-          <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-md">
-            <button
-              onClick={() => setActiveFilter('all')}
-              className={`px-2.5 py-0.5 text-[11px] font-bold rounded transition-colors cursor-pointer ${activeFilter === 'all' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-600 hover:text-slate-900'}`}
-            >
-              All ({todos.length})
-            </button>
-
-            <button
-              onClick={() => setActiveFilter('pending')}
-              className={`px-2.5 py-0.5 text-[11px] font-bold rounded transition-colors cursor-pointer ${activeFilter === 'pending' ? 'bg-white text-amber-700 shadow-2xs' : 'text-slate-600 hover:text-slate-900'}`}
-            >
-              Pending ({todos.filter(t => !t.completed).length})
-            </button>
-
-            <button
-              onClick={() => setActiveFilter('completed')}
-              className={`px-2.5 py-0.5 text-[11px] font-bold rounded transition-colors cursor-pointer ${activeFilter === 'completed' ? 'bg-white text-emerald-700 shadow-2xs' : 'text-slate-600 hover:text-slate-900'}`}
-            >
-              Completed ({todos.filter(t => t.completed).length})
-            </button>
-          </div>
-
-          <div className="relative w-full sm:w-56">
-            <input 
-              type="text" 
-              placeholder="Search task title..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full h-7 px-2.5 pr-7 text-[11.5px] border border-slate-200 rounded outline-none focus:border-[#008060] font-medium bg-slate-50 focus:bg-white"
-            />
-            <Search size={13} className="absolute right-2 top-1.5 text-slate-400 pointer-events-none" />
+            <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-[#008060] transition-all duration-300 rounded-full" 
+                style={{ width: `${completionPercentage}%` }} 
+              />
+            </div>
+            <p className="text-[11px] text-slate-500 font-medium">
+              {completedCount} of {todos.length} tasks completed. Keep up the momentum!
+            </p>
           </div>
 
         </div>
 
-        {/* HIGH DENSITY COMPACT TABLE */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
-            <thead>
-              <tr className="bg-slate-50 border-b border-slate-200 text-slate-700 font-bold text-[11px]">
-                <th className="py-1.5 px-2 border-r border-slate-200 text-center w-10">Status</th>
-                <th className="py-1.5 px-2.5 border-r border-slate-200">Task Title</th>
-                <th className="py-1.5 px-2.5 border-r border-slate-200 w-36">Category</th>
-                <th className="py-1.5 px-2 border-r border-slate-200 text-center w-24">Priority</th>
-                <th className="py-1.5 px-2.5 border-r border-slate-200 text-center w-28">Due Date</th>
-                <th className="py-1.5 px-2 text-center w-12">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
-              {filteredTodos.length > 0 ? (
-                filteredTodos.map((item) => (
-                  <tr key={item.id} className={`hover:bg-slate-50/80 transition-colors ${item.completed ? 'bg-slate-50/40 opacity-70' : ''}`}>
-                    
-                    <td className="py-1.5 px-2 border-r border-slate-200 text-center">
-                      <button 
-                        onClick={() => toggleTodo(item.id)}
-                        className="text-slate-400 hover:text-[#008060] transition-colors cursor-pointer flex items-center justify-center mx-auto"
-                        title={item.completed ? 'Mark Incomplete' : 'Mark Complete'}
-                      >
-                        {item.completed ? (
-                          <CheckCircle2 size={16} className="text-[#008060]" />
-                        ) : (
-                          <Circle size={16} />
-                        )}
-                      </button>
-                    </td>
+        {/* RIGHT COLUMN (8 COLS): TASK LIST TABLE */}
+        <div className="lg:col-span-8 bg-white p-3.5 sm:p-4 rounded-sm border border-slate-200 shadow-2xs space-y-3">
+          
+          {/* FILTER TABS & SEARCH BAR */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-slate-100">
+            
+            <div className="flex items-center gap-1 bg-slate-100 p-0.5 rounded-sm border border-slate-200/60">
+              <button
+                onClick={() => setActiveFilter('all')}
+                className={`px-3 py-1 text-[11.5px] font-bold rounded-sm transition-all cursor-pointer ${activeFilter === 'all' ? 'bg-white text-slate-900 shadow-2xs border border-slate-200' : 'text-slate-600 hover:text-slate-900'}`}
+              >
+                All ({todos.length})
+              </button>
 
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 font-bold text-slate-900">
-                      <span className={item.completed ? 'line-through text-slate-400 font-normal' : ''}>
-                        {item.title}
-                      </span>
-                    </td>
+              <button
+                onClick={() => setActiveFilter('pending')}
+                className={`px-3 py-1 text-[11.5px] font-bold rounded-sm transition-all cursor-pointer ${activeFilter === 'pending' ? 'bg-white text-amber-700 shadow-2xs border border-slate-200' : 'text-slate-600 hover:text-slate-900'}`}
+              >
+                Pending ({todos.filter(t => !t.completed).length})
+              </button>
 
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-slate-600">
-                      <span className="px-1.5 py-0.2 bg-slate-100 text-slate-700 rounded text-[10.5px] font-semibold border border-slate-200/60">
-                        {item.category}
-                      </span>
-                    </td>
+              <button
+                onClick={() => setActiveFilter('completed')}
+                className={`px-3 py-1 text-[11.5px] font-bold rounded-sm transition-all cursor-pointer ${activeFilter === 'completed' ? 'bg-white text-emerald-700 shadow-2xs border border-slate-200' : 'text-slate-600 hover:text-slate-900'}`}
+              >
+                Completed ({todos.filter(t => t.completed).length})
+              </button>
+            </div>
 
-                    <td className="py-1.5 px-2 border-r border-slate-200 text-center">
-                      <span className={`px-1.5 py-0.2 text-[10px] font-bold rounded border ${item.priorityBadge}`}>
-                        {item.priority}
-                      </span>
-                    </td>
+            <div className="relative w-full sm:w-60">
+              <input 
+                type="text" 
+                placeholder="Search task title..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full h-8 px-3 pr-8 text-[12px] border border-slate-200 rounded-sm outline-none focus:border-[#008060] font-medium bg-slate-50 focus:bg-white"
+              />
+              <Search size={14} className="absolute right-2.5 top-2 text-slate-400 pointer-events-none" />
+            </div>
 
-                    <td className="py-1.5 px-2.5 border-r border-slate-200 text-center font-bold text-slate-800 text-[11.5px] whitespace-nowrap">
-                      {item.dueDate}
-                    </td>
+          </div>
 
-                    <td className="py-1.5 px-2 text-center">
-                      <button 
-                        onClick={() => deleteTodo(item.id)}
-                        className="w-6 h-6 rounded bg-slate-100 hover:bg-rose-100 text-slate-500 hover:text-rose-600 flex items-center justify-center transition-colors cursor-pointer mx-auto"
-                        title="Delete Task"
-                      >
-                        <Trash2 size={12} />
-                      </button>
-                    </td>
-
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={6} className="py-6 text-center text-slate-400 font-medium">
-                    No tasks found matching your filter.
-                  </td>
+          {/* HIGH DENSITY DATA TABLE */}
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+              <thead>
+                <tr className="bg-[#f8f9fa] border-b border-slate-200 text-slate-800 font-bold">
+                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-10">Status</th>
+                  <th className="py-2 px-3 border-r border-slate-200">Task Title</th>
+                  <th className="py-2 px-3 border-r border-slate-200 w-36">Category</th>
+                  <th className="py-2 px-2.5 border-r border-slate-200 text-center w-24">Priority</th>
+                  <th className="py-2 px-3 border-r border-slate-200 text-center w-28">Due Date</th>
+                  <th className="py-2 px-2 text-center w-12">Action</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+                {filteredTodos.length > 0 ? (
+                  filteredTodos.map((item) => (
+                    <tr key={item.id} className={`hover:bg-slate-50/80 transition-colors ${item.completed ? 'bg-slate-50/50 opacity-75' : ''}`}>
+                      
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
+                        <button 
+                          onClick={() => toggleTodo(item.id)}
+                          className="text-slate-400 hover:text-[#008060] transition-colors cursor-pointer flex items-center justify-center mx-auto"
+                          title={item.completed ? 'Mark Incomplete' : 'Mark Complete'}
+                        >
+                          {item.completed ? (
+                            <CheckCircle2 size={17} className="text-[#008060]" />
+                          ) : (
+                            <Circle size={17} />
+                          )}
+                        </button>
+                      </td>
+
+                      <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-900">
+                        <span className={item.completed ? 'line-through text-slate-400 font-normal' : ''}>
+                          {item.title}
+                        </span>
+                      </td>
+
+                      <td className="py-2 px-3 border-r border-slate-200 text-slate-600">
+                        <span className="px-2 py-0.5 bg-slate-100 text-slate-700 rounded-sm text-[11px] font-semibold border border-slate-200/80 inline-block">
+                          {item.category}
+                        </span>
+                      </td>
+
+                      <td className="py-2 px-2.5 border-r border-slate-200 text-center">
+                        <span className={`px-2 py-0.5 text-[10.5px] font-bold rounded-sm border inline-block ${item.priorityBadge}`}>
+                          {item.priority}
+                        </span>
+                      </td>
+
+                      <td className="py-2 px-3 border-r border-slate-200 text-center font-bold text-slate-800 text-[11.5px] whitespace-nowrap">
+                        {item.dueDate}
+                      </td>
+
+                      <td className="py-2 px-2 text-center">
+                        <button 
+                          onClick={() => deleteTodo(item.id)}
+                          className="w-6.5 h-6.5 rounded-sm bg-slate-100 hover:bg-rose-100 text-slate-500 hover:text-rose-600 flex items-center justify-center transition-colors cursor-pointer mx-auto"
+                          title="Delete Task"
+                        >
+                          <Trash2 size={13} />
+                        </button>
+                      </td>
+
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={6} className="py-8 text-center text-slate-400 font-medium">
+                      No tasks found matching your filter.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
         </div>
 
       </div>

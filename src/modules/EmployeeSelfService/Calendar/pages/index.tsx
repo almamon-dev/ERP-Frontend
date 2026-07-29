@@ -106,11 +106,11 @@ export default function CalendarMeetingsPage() {
       {/* PAGE HEADER & ACTION BAR */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
-          <h1 className="text-[17px] font-bold text-slate-900 tracking-tight flex items-center gap-2">
-            <CalendarIcon size={18} className="text-[#008060]" />
+          <h1 className="text-[20px] font-bold text-slate-900 tracking-tight flex items-center gap-2">
+            <CalendarIcon size={20} className="text-[#008060]" />
             <span>Calendar & Meetings</span>
           </h1>
-          <p className="text-[11.5px] font-medium text-slate-500">
+          <p className="text-[13px] font-medium text-slate-500 mt-0.5">
             Schedule meetings, set work reminders, and keep track of upcoming team appointments.
           </p>
         </div>

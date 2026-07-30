@@ -253,7 +253,7 @@ const MOCK_USERS: Record<RoleType, AuthUser> = {
 const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  // Default: logged in as Employee (Al Mamon) — change for testing
+  // Default: logged in as Employee (Al Mamon) for instant dev access
   const [user, setUser] = useState<AuthUser | null>(MOCK_USERS[ROLES.EMPLOYEE]);
 
   const login = (role: RoleType) => {

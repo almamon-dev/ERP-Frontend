@@ -315,79 +315,85 @@ export const navigationMap: Record<string, any[]> = {
         { category: 'Main Menu', name: 'Stock Adjustment', path: '/inventory/stock-adjustment', icon: Settings },
     ],
     'hr': [
-        { category: 'Overview', name: 'Dashboard', path: '/hr/dashboard', icon: LayoutDashboard },
+        { category: 'Overview', name: 'HR Portal Selector', path: '/hr/dashboard', icon: LayoutDashboard },
         {
-            category: 'Workforce & Time',
-            group: 'Employee Management',
-            icon: Users,
+            category: 'My Workspace (ESS)',
+            group: 'Self-Service',
+            icon: UserCheck,
             items: [
-                { name: 'Staff Self-Service Portal', path: '/hr/portal', icon: UserCheck },
-                { name: 'Employee Directory', path: '/hr/employees', icon: Users },
-                { name: 'Onboarding & Joining', path: '/hr/onboarding', icon: UserPlus },
-                { name: 'Transfers & Promotions', path: '/hr/transfers', icon: Layers },
-                { name: 'Exit & Offboarding', path: '/hr/offboarding', icon: UserCircle },
+                { name: 'My Dashboard', path: '/hr/workspace/dashboard', icon: LayoutDashboard },
+                { name: 'My Profile', path: '/hr/workspace/profile', icon: UserCircle },
+                { name: 'My Attendance', path: '/hr/workspace/attendance', icon: Clock },
+                { name: 'My Leave & Movement', path: '/hr/workspace/leave', icon: Calendar },
+                { name: 'My Payslips', path: '/hr/workspace/payslips', icon: Receipt },
+                { name: 'My Documents', path: '/hr/workspace/documents', icon: FileText },
+                { name: 'My Performance', path: '/hr/workspace/performance', icon: Target },
+                { name: 'My Training', path: '/hr/workspace/training', icon: FileCheck },
+                { name: 'My Benefits', path: '/hr/workspace/benefits', icon: HandCoins },
+                { name: 'My Requests', path: '/hr/workspace/requests', icon: ClipboardList },
+                { name: 'My Expenses', path: '/hr/workspace/expenses', icon: DollarSign },
+                { name: 'My Assets', path: '/hr/workspace/assets', icon: HardDrive },
             ]
         },
         {
-            category: 'Workforce & Time',
+            category: 'HR Management',
+            group: 'Workforce & Operations',
+            icon: Users,
+            items: [
+                { name: 'Management Dashboard', path: '/hr/management/dashboard', icon: LayoutDashboard },
+                { name: 'Employee Directory', path: '/hr/management/employees', icon: Users },
+                { name: 'Job Openings', path: '/hr/management/recruitment/jobs', icon: Briefcase },
+                { name: 'Job Applicants', path: '/hr/management/recruitment/applicants', icon: UserPlus },
+                { name: 'Interview Schedules', path: '/hr/management/recruitment/interviews', icon: Calendar },
+                { name: 'Onboarding', path: '/hr/management/onboarding', icon: UserPlus },
+                { name: 'Offboarding & Exit', path: '/hr/management/offboarding', icon: UserCircle },
+                { name: 'Transfers & Promotions', path: '/hr/management/transfers', icon: Layers },
+            ]
+        },
+        {
+            category: 'HR Management',
             group: 'Time & Attendance',
             icon: Calendar,
             items: [
-                { name: 'Daily Attendance', path: '/hr/attendance', icon: Calendar },
-                { name: 'Shifts & Rosters', path: '/hr/shifts', icon: Clock },
-                { name: 'Overtime Tracking', path: '/hr/overtime', icon: Activity },
-                { name: 'Holidays Calendar', path: '/hr/holidays', icon: CheckCircle },
+                { name: 'Daily Attendance', path: '/hr/management/attendance', icon: Calendar },
+                { name: 'Shifts & Rosters', path: '/hr/management/shifts', icon: Clock },
+                { name: 'Overtime Tracking', path: '/hr/management/overtime', icon: Activity },
+                { name: 'Holidays Calendar', path: '/hr/management/holidays', icon: CheckCircle },
             ]
         },
         {
-            category: 'Workforce & Time',
+            category: 'HR Management',
             group: 'Leave Management',
             icon: Home,
             items: [
-                { name: 'Leave Requests', path: '/hr/leave/requests', icon: Home },
-                { name: 'Leave Allocations', path: '/hr/leave/allocations', icon: ClipboardList },
-                { name: 'Leave Policies', path: '/hr/leave/policies', icon: FileText },
+                { name: 'Leave Requests', path: '/hr/management/leave/requests', icon: Home },
+                { name: 'Leave Allocations', path: '/hr/management/leave/allocations', icon: ClipboardList },
+                { name: 'Leave Policies', path: '/hr/management/leave/policies', icon: FileText },
             ]
         },
         {
-            category: 'Compensation & Growth',
+            category: 'HR Management',
             group: 'Payroll & Benefits',
             icon: HandCoins,
             items: [
-                { name: 'Monthly Payroll', path: '/hr/payroll', icon: HandCoins },
-                { name: 'Salary Structures', path: '/hr/salary-structures', icon: Calculator },
-                { name: 'Payslips Generator', path: '/hr/payslips', icon: Receipt },
-                { name: 'Provident Fund & Gratuity', path: '/hr/benefits', icon: DollarSign },
+                { name: 'Monthly Payroll', path: '/hr/management/payroll', icon: HandCoins },
+                { name: 'Salary Structures', path: '/hr/management/salary-structures', icon: Calculator },
+                { name: 'Payslips Generator', path: '/hr/management/payslips', icon: Receipt },
+                { name: 'Provident & Benefits', path: '/hr/management/benefits', icon: DollarSign },
             ]
         },
         {
-            category: 'Compensation & Growth',
-            group: 'Recruitment & Talent',
-            icon: UserPlus,
-            items: [
-                { name: 'Job Openings', path: '/hr/recruitment/jobs', icon: Briefcase },
-                { name: 'Job Applicants', path: '/hr/recruitment/applicants', icon: UserPlus },
-                { name: 'Interview Schedules', path: '/hr/recruitment/interviews', icon: Calendar },
-            ]
-        },
-        {
-            category: 'Compensation & Growth',
-            group: 'Performance & Training',
+            category: 'HR Management',
+            group: 'Performance & Settings',
             icon: Target,
             items: [
-                { name: 'Appraisal Reviews', path: '/hr/performance', icon: Target },
-                { name: 'KPI & Goals Setup', path: '/hr/kpi-goals', icon: Zap },
-                { name: 'Training Programs', path: '/hr/training', icon: FileCheck },
-            ]
-        },
-        {
-            category: 'Administration',
-            group: 'HR Documents & Settings',
-            icon: Settings,
-            items: [
-                { name: 'HR Documents', path: '/hr/documents', icon: FileText },
-                { name: 'General HR Settings', path: '/hr/settings/general', icon: Settings },
-                { name: 'Organization Setup', path: '/hr/settings/organization', icon: Building2 },
+                { name: 'Appraisal Reviews', path: '/hr/management/performance', icon: Target },
+                { name: 'KPI & Goals Setup', path: '/hr/management/kpi-goals', icon: Zap },
+                { name: 'Training Programs', path: '/hr/management/training', icon: FileCheck },
+                { name: 'HR Documents', path: '/hr/management/documents', icon: FileText },
+                { name: 'Reports & Analytics', path: '/hr/management/reports', icon: FileBarChart },
+                { name: 'General Settings', path: '/hr/management/settings/general', icon: Settings },
+                { name: 'Organization Setup', path: '/hr/management/settings/organization', icon: Building2 },
             ]
         },
     ],

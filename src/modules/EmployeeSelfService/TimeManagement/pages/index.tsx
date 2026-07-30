@@ -404,11 +404,56 @@ export default function TimeManagementPage() {
       {activeTab === 'my-attendance' && (
         <div className="bg-white rounded-sm border border-slate-200 shadow-2xs overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-2.5 px-3 border-b border-slate-200 bg-white">
-            <h2 className="text-[14px] font-bold text-slate-900 leading-tight">Daily Punch & Log Records (July 2026)</h2>
-            <div className="flex items-center gap-2">
-              <DatePicker value={adjustFromDate} onChange={(val) => setAdjustFromDate(val)} size="sm" className="w-36" />
-              <span className="text-slate-400 font-bold text-[12px]">-</span>
-              <DatePicker value={adjustToDate} onChange={(val) => setAdjustToDate(val)} size="sm" className="w-36" />
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-full bg-slate-700 text-white font-extrabold flex items-center justify-center text-[12px]">
+                AM
+              </div>
+              <div>
+                <h2 className="text-[13.5px] font-bold text-slate-900 leading-tight">Daily Punch & Log Records (July 2026)</h2>
+                <p className="text-[11.5px] font-medium text-slate-500">Track your daily in/out time, working hours, and punch regularization status.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <div className="flex items-center gap-1.5">
+                <DatePicker value={adjustFromDate} onChange={(val) => setAdjustFromDate(val)} size="sm" className="w-36" />
+                <span className="text-slate-400 font-bold text-[12px]">-</span>
+                <DatePicker value={adjustToDate} onChange={(val) => setAdjustToDate(val)} size="sm" className="w-36" />
+              </div>
+
+              <Button
+                onClick={() => window.print()}
+                className="bg-slate-100 hover:bg-slate-200 text-slate-800 text-[11.5px] font-bold h-8 px-3 rounded-sm border border-slate-200 cursor-pointer flex items-center gap-1.5"
+              >
+                <Printer size={14} />
+                <span>Print</span>
+              </Button>
+
+              <Button
+                onClick={() => alert('Exporting Attendance Excel...')}
+                className="bg-slate-100 hover:bg-slate-200 text-slate-800 text-[11.5px] font-bold h-8 px-3 rounded-sm border border-slate-200 cursor-pointer flex items-center gap-1.5"
+              >
+                <Download size={14} />
+                <span>Export</span>
+              </Button>
+
+              <Button
+                onClick={() => {
+                  if (selectedAdjustIds.length > 0) {
+                    const selectedItem = adjustData.find(d => selectedAdjustIds.includes(d.id));
+                    if (selectedItem) setReqDate(selectedItem.isoDate);
+                  }
+                  setIsAttendanceModalOpen(true);
+                }}
+                className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] font-bold h-8 px-3 py-1 rounded-sm transition-colors shadow-2xs cursor-pointer flex items-center gap-1.5"
+              >
+                <Plus size={14} />
+                <span>
+                  {selectedAdjustIds.length > 0
+                    ? `Apply Adjustment (${selectedAdjustIds.length})`
+                    : 'Apply Adjustment'}
+                </span>
+              </Button>
             </div>
           </div>
 
@@ -417,7 +462,12 @@ export default function TimeManagementPage() {
               <thead>
                 <tr className="bg-[#fafafa] border-b border-slate-100 text-slate-600 font-medium text-[12px]">
                   <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">
-                    <input type="checkbox" className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                    <input
+                      type="checkbox"
+                      checked={selectedAdjustIds.length === displayRows.length && displayRows.length > 0}
+                      onChange={toggleSelectAllAdjust}
+                      className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                    />
                   </th>
                   <th className="py-1.5 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
                   <th className="py-1.5 px-2.5 border-r border-slate-100 whitespace-nowrap">Attendance Date</th>
@@ -436,7 +486,12 @@ export default function TimeManagementPage() {
                 {displayRows.map((row, idx) => (
                   <tr key={row.id} className="hover:bg-[#f9fafb] transition-colors border-b border-slate-100">
                     <td className="py-1.5 px-2.5 border-r border-slate-100 text-center">
-                      <input type="checkbox" className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
+                      <input
+                        type="checkbox"
+                        checked={selectedAdjustIds.includes(row.id)}
+                        onChange={() => toggleSelectAdjust(row.id)}
+                        className="w-4 h-4 rounded-xs border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                      />
                     </td>
                     <td className="py-1.5 px-2.5 border-r border-slate-100 text-center text-slate-400 font-normal text-[12px] leading-[18px]">{idx + 1}</td>
                     <td className="py-1.5 px-2.5 border-r border-slate-100 text-slate-600 font-normal text-[12px] leading-[18px] whitespace-nowrap">{row.date}</td>
@@ -963,7 +1018,89 @@ export default function TimeManagementPage() {
 
       {/* ================= MODALS ================= */}
 
+      {/* 1. ATTENDANCE ADJUSTMENT MODAL */}
+      <Modal
+        isOpen={isAttendanceModalOpen}
+        onClose={() => setIsAttendanceModalOpen(false)}
+        title="Attendance Adjustment Requisition"
+        description="Request punch time correction or attendance regularization for a specific date"
+        size="md"
+        footer={
+          <>
+            <Button variant="outline" onClick={() => setIsAttendanceModalOpen(false)} className="h-7.5 text-[11.5px] font-bold">
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSubmitAttendanceAdjust}
+              className="bg-[#008060] hover:bg-[#006e52] text-white text-[11.5px] h-7.5 px-3.5 font-bold"
+            >
+              Submit Adjustment
+            </Button>
+          </>
+        }
+      >
+        <form onSubmit={handleSubmitAttendanceAdjust} className="space-y-3 text-left">
+          <div className="flex flex-col gap-1 w-full">
+            <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+              <span className="text-rose-500 mr-0.5">*</span> Attendance Date (যেই দিনের হাজিরা ঠিক করতে হবে)
+            </FormLabel>
+            <Select
+              value={reqDate}
+              onChange={(e) => setReqDate(e.target.value)}
+              options={dateOptionsWithDetails.map(d => ({ id: d.isoDate, name: d.name }))}
+            />
+          </div>
 
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col gap-1">
+              <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                <span className="text-rose-500 mr-0.5">*</span> Manual In-Time
+              </FormLabel>
+              <Input
+                type="time"
+                value={manualInTime}
+                onChange={(e) => setManualInTime(e.target.value)}
+                className="text-[12px]"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">
+                <span className="text-rose-500 mr-0.5">*</span> Manual Out-Time
+              </FormLabel>
+              <Input
+                type="time"
+                value={manualOutTime}
+                onChange={(e) => setManualOutTime(e.target.value)}
+                className="text-[12px]"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-1 w-full">
+            <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">Request Attendance Status</FormLabel>
+            <Select
+              value={reqAttendanceType}
+              onChange={(e) => setReqAttendanceType(e.target.value)}
+              options={[
+                { id: 'Present', name: 'Present' },
+                { id: 'Late', name: 'Late' },
+                { id: 'Offday', name: 'Offday (Worked)' },
+              ]}
+            />
+          </div>
+
+          <div className="flex flex-col gap-1 w-full">
+            <FormLabel className="text-[11.5px] font-bold text-slate-700 !mb-0">Reason for Adjustment</FormLabel>
+            <Textarea
+              placeholder="Explain reason (e.g. fingerprint machine error, forgot to punch, etc.)"
+              value={reqReason}
+              onChange={(e) => setReqReason(e.target.value)}
+              rows={2}
+              className="text-[12px] resize-none"
+            />
+          </div>
+        </form>
+      </Modal>
 
       {/* 2. OFFDAY SWAP MODAL */}
       <Modal

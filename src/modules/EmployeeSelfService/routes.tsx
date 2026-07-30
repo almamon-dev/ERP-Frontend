@@ -18,6 +18,8 @@ import SalaryCertificatePage from './SalaryCertificate/pages';
 import TodoListPage from './Todo/pages';
 import CalendarMeetingsPage from './Calendar/pages';
 import KpiBonusPage from './KpiBonus/pages';
+import EssSettingsPage from './Settings/pages';
+import EssSupportPage from './Support/pages';
 
 export const employeeSelfServiceRoutes: RouteObject[] = [
   {
@@ -44,6 +46,8 @@ export const employeeSelfServiceRoutes: RouteObject[] = [
       { path: 'todo', element: <TodoListPage /> },
       { path: 'calendar', element: <CalendarMeetingsPage /> },
       { path: 'kpi-bonus', element: <KpiBonusPage /> },
+      { path: 'settings', element: <EssSettingsPage /> },
+      { path: 'support', element: <EssSupportPage /> },
     ]
   }
 ];

@@ -427,187 +427,171 @@ export default function KpiBonusPage() {
 
       {/* ================= VIEW 1: KPI & BONUS SUMMARY ================= */}
       {mainPageTab === 'summary' && (
-        <div className="bg-white p-3 rounded-md border border-slate-200 shadow-2xs space-y-2.5">
+        <div className="space-y-4">
 
-          {/* 8 MINIMAL DYNAMIC STAT METRIC CARDS */}
+          {/* 8 COMPACT STAT METRIC CARDS */}
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-2">
-            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
-              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider flex items-center gap-1">
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[54px]">
+              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider flex items-center justify-between">
                 <span>TARGET ($)</span>
                 <span className="text-[8.5px] bg-[#008060] text-white px-1 py-0 rounded font-black">{qCode}</span>
               </span>
-              <h2 className="text-[14.5px] font-extrabold text-slate-900 leading-none">{currentAlMamonData.targetPeriod || '$ 3,300'}</h2>
+              <h2 className="text-[14px] font-extrabold text-slate-900 leading-none">{currentAlMamonData.targetPeriod || '$ 3,300'}</h2>
             </div>
 
-            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[54px]">
               <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">SALES ($)</span>
-              <h2 className="text-[14.5px] font-extrabold text-emerald-700 leading-none">{currentAlMamonData.totalSales || '$ 1,724'}</h2>
+              <h2 className="text-[14px] font-extrabold text-emerald-700 leading-none">{currentAlMamonData.totalSales || '$ 1,724'}</h2>
             </div>
 
-            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[54px]">
               <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">UNPAID ($)</span>
-              <h2 className="text-[14.5px] font-extrabold text-rose-600 leading-none">{currentAlMamonData.unpaid || '$ 2,560'}</h2>
+              <h2 className="text-[14px] font-extrabold text-rose-600 leading-none">{currentAlMamonData.unpaid || '$ 2,560'}</h2>
             </div>
 
-            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[54px]">
               <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">EL. BONUS</span>
-              <h2 className="text-[14.5px] font-extrabold text-slate-900 leading-none">{currentAlMamonData.elBonus || '৳ 0'}</h2>
+              <h2 className="text-[14px] font-extrabold text-slate-900 leading-none">{currentAlMamonData.elBonus || '৳ 0'}</h2>
             </div>
 
-            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[54px]">
               <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">CUR. BONUS</span>
-              <h2 className="text-[14.5px] font-extrabold text-slate-900 leading-none">{currentAlMamonData.currentBonus || '৳ 0'}</h2>
+              <h2 className="text-[14px] font-extrabold text-slate-900 leading-none">{currentAlMamonData.currentBonus || '৳ 0'}</h2>
             </div>
 
-            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[54px]">
               <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">NEW CARRY</span>
-              <h2 className="text-[14.5px] font-extrabold text-orange-600 leading-none">{currentAlMamonData.newCarry || '৳ 0'}</h2>
+              <h2 className="text-[14px] font-extrabold text-orange-600 leading-none">{currentAlMamonData.newCarry || '৳ 0'}</h2>
             </div>
 
-            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
+            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[54px]">
               <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">TOT. CARRY</span>
-              <h2 className="text-[14.5px] font-extrabold text-indigo-700 leading-none">{currentAlMamonData.totalCarry || '৳ 7,437'}</h2>
+              <h2 className="text-[14px] font-extrabold text-indigo-700 leading-none">{currentAlMamonData.totalCarry || '৳ 7,437'}</h2>
             </div>
 
-            <div className="bg-white p-2 rounded border border-slate-200/90 shadow-2xs flex flex-col justify-between h-[56px]">
-              <span className="text-[9.5px] font-bold text-slate-500 tracking-wider">BONUS AMT</span>
-              <h2 className="text-[14.5px] font-extrabold text-[#008060] leading-none">{currentAlMamonData.bonusAmount || '৳ 2,484'}</h2>
+            <div className="bg-emerald-50/70 p-2 rounded border border-emerald-200/90 shadow-2xs flex flex-col justify-between h-[54px]">
+              <span className="text-[9.5px] font-bold text-[#008060] tracking-wider">BONUS AMT</span>
+              <h2 className="text-[14px] font-extrabold text-[#008060] leading-none">{currentAlMamonData.bonusAmount || '৳ 2,484'}</h2>
             </div>
           </div>
 
-          {/* CONDITIONAL CONTENT: SUMMARY TABLE VS DETAILED RECORD PAGE */}
+          {/* CONDITIONAL CONTENT: SINGLE MAIN CARD MATCHING REFERENCE SCREENSHOT */}
           {!selectedRowDetail ? (
-            /* MAIN MULTI-USER KPI & BONUS SUMMARY TABLE WITH ASSIGNED PROJECTS & VALUES */
-            <div className="space-y-2.5 pt-1.5">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="bg-white p-4 rounded-md border border-slate-200 shadow-2xs space-y-3">
+              
+              {/* Card Header & Search */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
                 <div className="flex items-center gap-2">
-                  <h3 className="text-[14px] font-bold text-slate-900">KPI & Bonus Summary Ledger</h3>
-                  <span className="px-2 py-0.5 text-[10px] font-extrabold bg-[#008060]/10 text-[#008060] rounded border border-[#008060]/20 flex items-center gap-1">
+                  <h2 className="text-[15px] font-semibold text-slate-800">KPI & Bonus Summary Ledger</h2>
+                  <span className="px-2 py-0.5 text-[10px] font-bold bg-emerald-50 text-[#008060] rounded border border-emerald-200 flex items-center gap-1">
                     <Target size={11} />
-                    <span>Quarter Wise Target Ledger</span>
+                    <span>Quarter Target Ledger</span>
                   </span>
                 </div>
 
-                {/* Search Bar */}
-                <div className="relative w-full sm:w-60">
+                <div className="relative w-full sm:w-64">
                   <input
                     type="text"
-                    placeholder="Search project or ID..."
+                    placeholder="Search ref no, project or ID..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full h-7 px-2.5 pr-7 text-[11px] border border-slate-200 rounded outline-none focus:border-[#008060] bg-slate-50 focus:bg-white"
+                    className="w-full h-8 px-3 pr-8 text-[12px] border border-slate-200 rounded outline-none focus:border-[#008060] bg-slate-50 focus:bg-white"
                   />
-                  <Search size={13} className="absolute right-2 top-1.5 text-slate-400 pointer-events-none" />
+                  <Search size={14} className="absolute right-2.5 top-2.5 text-slate-400 pointer-events-none" />
                 </div>
               </div>
 
-              <div className="border border-slate-200/80 rounded-sm overflow-hidden">
-                <table className="w-full text-left text-[12px] border-collapse">
+              {/* Data Table Matching Reference Screenshot */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-[11.5px] border border-slate-100 border-collapse">
                   <thead>
-                    <tr className="bg-slate-100 border-b border-slate-200 text-slate-800 font-semibold">
-                      <th className="py-1.5 px-2 border-r border-slate-200 text-center w-6">
+                    <tr className="bg-slate-100 border-b border-slate-200 text-slate-800 font-bold text-[11px]">
+                      <th className="py-1.5 px-2 border-r border-slate-100 text-center w-6">
                         <input
                           type="checkbox"
                           checked={selectedRows.length === displayedLedgerData.length && displayedLedgerData.length > 0}
-                          onChange={() => setSelectedRows(selectedRows.length === displayedLedgerData.length ? [] : displayedLedgerData.map(d => d.id))}
+                          onChange={() => setSelectedRows(selectedRows.length === displayedLedgerData.length ? [] : displayedLedgerData.map(d => d.rawId))}
                           className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer"
                         />
                       </th>
-                      <th className="py-1.5 px-2 border-r border-slate-200 text-center w-6">SL</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200">Employee</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200">Role</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200">Assign Project</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">Value ($)</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200 text-center">Sales</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200">Period</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">
-                        <div className="flex items-center justify-end gap-1 text-slate-800 font-semibold">
-                          <span>Target ($)</span>
-                          <span className="bg-[#008060] text-white px-1 py-0 rounded text-[9px] font-medium">{qCode}</span>
-                        </div>
-                      </th>
-                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">Total Sales ($)</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">Unpaid ($)</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">Carry (৳)</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200 text-right">Bonus (৳)</th>
-                      <th className="py-1.5 px-2 border-r border-slate-200 text-center">Status</th>
-                      <th className="py-1.5 px-2 text-center">Action</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100 text-center w-8">SL</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100">Employee</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100">Role</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100">Assign Project</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100 text-right">Value ($)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100 text-center">Sales</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100">Period</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100 text-right">Target ($)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100 text-right">Total Sales ($)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100 text-right">Unpaid ($)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100 text-right">Carry (৳)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100 text-right">Bonus (৳)</th>
+                      <th className="py-1.5 px-2 border-r border-slate-100 text-center">Status</th>
+                      <th className="py-1.5 px-2 text-center">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-100 text-slate-700 font-medium leading-[18px]">
+                  <tbody className="divide-y divide-slate-100 text-slate-700 font-medium leading-[16px]">
                     {displayedLedgerData.length > 0 ? (
                       displayedLedgerData.map((row, idx) => (
                         <tr key={row.id} className="hover:bg-slate-50/70 transition-colors">
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-center">
+                          <td className="py-1 px-2 border-r border-slate-100 text-center">
                             <input
                               type="checkbox"
-                              checked={selectedRows.includes(row.id)}
-                              onChange={() => toggleSelectRow(row.id)}
+                              checked={selectedRows.includes(row.rawId)}
+                              onChange={() => toggleSelectRow(row.rawId)}
                               className="rounded border-slate-300 text-[#008060] focus:ring-[#008060] cursor-pointer"
                             />
                           </td>
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-center text-slate-500 font-medium">{idx + 1}</td>
-                          <td className="py-1.5 px-2 border-r border-slate-200 font-semibold text-slate-800">
-                            <div>
+                          <td className="py-1 px-2 border-r border-slate-100 text-center text-slate-400 font-semibold">{idx + 1}</td>
+                          <td className="py-1 px-2 border-r border-slate-100 font-semibold text-slate-800">
+                            <div className="leading-tight py-0.5">
                               <span>{row.employee}</span>
-                              <span className="text-[10px] text-slate-400 font-normal block">ID: {row.empId}</span>
+                              <span className="text-[9.5px] text-slate-400 font-normal block font-mono">ID: {row.empId}</span>
                             </div>
                           </td>
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-slate-700">{row.role}</td>
-
-                          {/* ASSIGN PROJECT COLUMN */}
-                          <td className="py-1.5 px-2 border-r border-slate-200 font-medium text-[#008060]">
+                          <td className="py-1 px-2 border-r border-slate-100 text-slate-700">{row.role}</td>
+                          <td className="py-1 px-2 border-r border-slate-100 font-medium text-[#008060]">
                             <div className="flex items-center gap-1">
-                              <Briefcase size={12} className="text-[#008060] shrink-0" />
+                              <Briefcase size={11} className="text-[#008060] shrink-0" />
                               <span>{row.assignProject}</span>
                             </div>
                           </td>
-
-                          {/* PROJECT VALUE COLUMN */}
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold text-slate-800">
-                            {row.projectValue}
-                          </td>
-
-                          {/* SALES COUNT COLUMN */}
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-center font-semibold text-indigo-700">
-                            {row.salesCount}
-                          </td>
-
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-slate-600">{row.period}</td>
-
-                          {/* QUARTER WISE TARGET VALUE COLUMN WITH BADGE */}
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold">
+                          <td className="py-1 px-2 border-r border-slate-100 text-right font-semibold text-slate-800">{row.projectValue}</td>
+                          <td className="py-1 px-2 border-r border-slate-100 text-center font-semibold text-indigo-700">{row.salesCount}</td>
+                          <td className="py-1 px-2 border-r border-slate-100 text-slate-600 whitespace-nowrap">{row.period}</td>
+                          <td className="py-1 px-2 border-r border-slate-100 text-right font-semibold">
                             <div className="flex items-center justify-end gap-1">
-                              <span className="text-slate-800">{row.targetPeriod}</span>
-                              <span className="text-[9px] font-medium text-emerald-700 bg-emerald-50 px-1 py-0 rounded border border-emerald-200">{row.qCode}</span>
+                              <span>{row.targetPeriod}</span>
+                              <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-50 px-1 py-0.2 rounded border border-emerald-200">{row.qCode}</span>
                             </div>
                           </td>
-
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold text-emerald-700">{row.totalSales}</td>
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold text-rose-600">{row.unpaid}</td>
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold text-indigo-700">{row.totalCarry}</td>
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-right font-semibold text-[#008060]">{row.bonusAmount}</td>
-                          <td className="py-1.5 px-2 border-r border-slate-200 text-center">
-                            <span className={`inline-block px-2 py-0.5 text-[11px] font-medium rounded border ${row.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                                row.status === 'Calculated' ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                                  'bg-amber-50 text-amber-700 border-amber-200'
-                              }`}>
+                          <td className="py-1 px-2 border-r border-slate-100 text-right font-semibold text-emerald-700">{row.totalSales}</td>
+                          <td className="py-1 px-2 border-r border-slate-100 text-right font-semibold text-rose-600">{row.unpaid}</td>
+                          <td className="py-1 px-2 border-r border-slate-100 text-right font-semibold text-indigo-700">{row.totalCarry}</td>
+                          <td className="py-1 px-2 border-r border-slate-100 text-right font-bold text-[#008060]">{row.bonusAmount}</td>
+                          <td className="py-1 px-2 border-r border-slate-100 text-center">
+                            <span className={`inline-block px-1.5 py-0.2 text-[10px] font-semibold rounded border ${
+                              row.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                              row.status === 'Calculated' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                              'bg-amber-50 text-amber-700 border-amber-200'
+                            }`}>
                               {row.status}
                             </span>
                           </td>
-                          <td className="py-1.5 px-2 text-center">
+                          <td className="py-1 px-2 text-center">
                             <button
                               onClick={() => setSelectedRowDetail(row)}
-                              className="px-2 py-0.5 text-[11px] font-medium bg-[#008060] text-white rounded hover:bg-[#006e52] cursor-pointer transition-colors"
+                              className="p-0.5 text-slate-500 hover:text-emerald-700 rounded hover:bg-slate-100 cursor-pointer inline-flex items-center justify-center"
+                              title="View Details"
                             >
-                              View
+                              <Eye size={14} />
                             </button>
                           </td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan={15} className="py-4 text-center text-slate-400 font-medium">No record found</td>
+                        <td colSpan={15} className="py-6 text-center text-slate-400 font-medium">No performance records found</td>
                       </tr>
                     )}
                   </tbody>
@@ -616,7 +600,9 @@ export default function KpiBonusPage() {
             </div>
           ) : (
             /* DETAILED RECORD PAGE VIEW */
-            <div className="space-y-4 animate-in fade-in duration-150 pt-2">
+            <div className="bg-white rounded-md border border-slate-200 shadow-2xs p-4 space-y-4 animate-in fade-in duration-150">
+              
+              {/* Detail Header Navigation */}
               <div className="flex items-center justify-between pb-2 border-b border-slate-100">
                 <button
                   onClick={() => setSelectedRowDetail(null)}
@@ -631,153 +617,126 @@ export default function KpiBonusPage() {
                     <span>In Progress</span>
                   </div>
                   <ChevronRight size={13} className="text-slate-400 mx-0.5" />
-                  <div className="px-2.5 py-0.5 text-slate-500 hover:text-slate-800 transition-colors">
+                  <div className="px-2.5 py-0.5 text-slate-500">
                     <span>Confirmed</span>
                   </div>
                   <ChevronRight size={13} className="text-slate-400 mx-0.5" />
-                  <div className="px-2.5 py-0.5 text-slate-500 hover:text-slate-800 transition-colors">
+                  <div className="px-2.5 py-0.5 text-slate-500">
                     <span>Paid</span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-50/80 p-3 rounded-lg border border-slate-200/80">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-[20px] font-black text-[#008060] tracking-tight">{selectedRowDetail.employee}</h2>
-                  <span className="text-[11.5px] font-bold text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded">{selectedRowDetail.role}</span>
-                  <span className="text-[11.5px] font-bold text-[#008060] bg-emerald-100/60 px-2 py-0.5 rounded">Project: {selectedRowDetail.assignProject}</span>
+              {/* Employee & Project Summary Banner */}
+              <div className="bg-slate-50/80 p-3 rounded-lg border border-slate-200/80 flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h2 className="text-[20px] font-black text-[#008060] tracking-tight">{selectedRowDetail.employee}</h2>
+                    <span className="text-[11.5px] font-bold text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded">{selectedRowDetail.role}</span>
+                  </div>
+                  <p className="text-[12px] font-semibold text-slate-600 mt-0.5 flex items-center gap-1">
+                    <Briefcase size={13} className="text-[#008060]" />
+                    <span>Project: {selectedRowDetail.assignProject}</span>
+                  </p>
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2 text-[11px] font-bold">
                   <div className="flex items-center gap-1.5 bg-white border border-slate-200 px-2.5 py-1 rounded shadow-2xs">
-                    <div className="w-4.5 h-4.5 rounded bg-emerald-100 text-[#008060] flex items-center justify-center">
-                      <Edit3 size={11} />
-                    </div>
-                    <span>Operations</span>
+                    <Edit3 size={11} className="text-[#008060]" />
+                    <span>Operations:</span>
                     <span className="text-[#008060] font-black">{selectedRowDetail.salesCount}</span>
                   </div>
 
                   <div className="flex items-center gap-1.5 bg-white border border-slate-200 px-2.5 py-1 rounded shadow-2xs">
-                    <div className="w-4.5 h-4.5 rounded bg-teal-100 text-teal-700 flex items-center justify-center">
-                      <DollarSign size={11} />
-                    </div>
-                    <span>Carry/ Unpaid Operations</span>
+                    <DollarSign size={11} className="text-teal-700" />
+                    <span>Unpaid Ops:</span>
                     <span className="text-teal-700 font-black">4</span>
                   </div>
 
                   <div className="flex items-center gap-1.5 bg-white border border-slate-200 px-2.5 py-1 rounded shadow-2xs">
-                    <div className="w-4.5 h-4.5 rounded bg-[#008060]/10 text-[#008060] flex items-center justify-center">
-                      <RotateCcw size={11} />
-                    </div>
-                    <span>Carry from Previous Quarter</span>
-                    <span className="text-[#008060] font-black">1</span>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 bg-white border border-slate-200 px-2.5 py-1 rounded shadow-2xs">
-                    <div className="w-4.5 h-4.5 rounded bg-blue-100 text-blue-700 flex items-center justify-center">
-                      <Layers size={11} />
-                    </div>
-                    <span>Total Operations</span>
-                    <span className="text-blue-700 font-black">{selectedRowDetail.salesCount + 1}</span>
+                    <RotateCcw size={11} className="text-indigo-600" />
+                    <span>Total Carry:</span>
+                    <span className="text-indigo-600 font-black">{selectedRowDetail.totalCarry}</span>
                   </div>
                 </div>
               </div>
 
               {/* EMPLOYEE METADATA GRID WITH PROJECT DETAILS */}
-              <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-3">
-                <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-                  <h3 className="text-[14px] font-bold text-slate-900">Assigned Project & Performance Breakdown</h3>
-                  <button
-                    onClick={() => setActiveTab('penaltyRecord')}
-                    className="px-2.5 py-0.5 bg-amber-50 text-amber-700 hover:bg-amber-100 text-[11px] font-bold rounded border border-amber-200 transition-colors cursor-pointer flex items-center gap-1"
-                  >
-                    <ShieldAlert size={12} />
-                    <span>Penalty Record</span>
-                  </button>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-[12px]">
+                
+                {/* CARD 1: PROJECT & ASSIGNMENT DETAILS */}
+                <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-3">
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                    <h3 className="text-[14px] font-bold text-slate-900 flex items-center gap-1.5">
+                      <Briefcase size={15} className="text-[#008060]" />
+                      <span>Project & Team Information</span>
+                    </h3>
+                  </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-1.5 text-[12px] font-medium pt-1">
-                  <div className="space-y-1.5">
+                  <div className="space-y-1.5 font-medium">
                     <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Role</span>
+                      <span className="text-slate-500 font-semibold">Role</span>
                       <span className="font-bold text-[#008060]">{selectedRowDetail.role}</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Assigned Project</span>
-                      <span className="font-bold text-[#008060]">{selectedRowDetail.assignProject}</span>
+                      <span className="text-slate-500 font-semibold">Assigned Project</span>
+                      <span className="font-bold text-slate-800">{selectedRowDetail.assignProject}</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Project Contract Value ($)</span>
-                      <span className="font-extrabold text-slate-900">{selectedRowDetail.projectValue}</span>
+                      <span className="text-slate-500 font-semibold">Contract Value ($)</span>
+                      <span className="font-bold text-slate-900">{selectedRowDetail.projectValue}</span>
                     </div>
                     <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Project Manager</span>
+                      <span className="text-slate-500 font-semibold">Project Manager</span>
                       <span className="font-bold text-slate-800">{selectedRowDetail.projectManager}</span>
                     </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Team Leader</span>
+                    <div className="flex justify-between py-1">
+                      <span className="text-slate-500 font-semibold">Team Leader</span>
                       <span className="font-bold text-slate-800">{selectedRowDetail.teamLeader}</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Minimum Target</span>
-                      <span className="font-extrabold text-slate-900">{selectedRowDetail.targetPeriod}</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Current Total Achieved($)</span>
-                      <span className="font-extrabold text-slate-900">{selectedRowDetail.totalSales}</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Current Total Paid($)</span>
-                      <span className="font-extrabold text-slate-900">{selectedRowDetail.bonusAmount}</span>
-                    </div>
-                    <div className="flex justify-between py-1">
-                      <span className="text-slate-500 font-bold">Current Total Unpaid($)</span>
-                      <span className="font-extrabold text-slate-900">{selectedRowDetail.unpaid}</span>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Period Start</span>
-                      <span className="font-bold text-slate-800">Apr 1</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Period End</span>
-                      <span className="font-bold text-slate-800">Jun 30</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Year</span>
-                      <span className="font-bold text-slate-800">2,026</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Quarter</span>
-                      <span className="font-bold text-slate-800">Q4 (Apr - Jun)</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">El. Bonus For Current Value(৳)</span>
-                      <span className="font-extrabold text-slate-900">{selectedRowDetail.elBonus}</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Current Bonus(৳)</span>
-                      <span className="font-extrabold text-slate-900">{selectedRowDetail.currentBonus}</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold flex items-center gap-1">
-                        <span>Pre. Carry Bonus(৳)</span>
-                        <HelpCircle size={11} className="text-slate-400" />
-                      </span>
-                      <span className="font-extrabold text-slate-900">682.93</span>
-                    </div>
-                    <div className="flex justify-between py-1 border-b border-slate-100">
-                      <span className="text-slate-500 font-bold">Remaining Carry (৳)</span>
-                      <span className="font-extrabold text-slate-900">{selectedRowDetail.totalCarry}</span>
-                    </div>
-                    <div className="flex justify-between py-1">
-                      <span className="text-slate-500 font-bold">Total Carry(৳)</span>
-                      <span className="font-extrabold text-slate-900">{selectedRowDetail.totalCarry}</span>
                     </div>
                   </div>
                 </div>
+
+                {/* CARD 2: FINANCIAL & BONUS BREAKDOWN */}
+                <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-2xs space-y-3">
+                  <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+                    <h3 className="text-[14px] font-bold text-slate-900 flex items-center gap-1.5">
+                      <Wallet size={15} className="text-[#008060]" />
+                      <span>Financial & Bonus Ledger</span>
+                    </h3>
+                    <button
+                      onClick={() => setActiveTab('penaltyRecord')}
+                      className="px-2.5 py-0.5 bg-amber-50 text-amber-700 hover:bg-amber-100 text-[11px] font-bold rounded border border-amber-200 transition-colors cursor-pointer flex items-center gap-1"
+                    >
+                      <ShieldAlert size={12} />
+                      <span>Penalties</span>
+                    </button>
+                  </div>
+
+                  <div className="space-y-1.5 font-medium">
+                    <div className="flex justify-between py-1 border-b border-slate-100">
+                      <span className="text-slate-500 font-semibold">Quarter Target ($)</span>
+                      <span className="font-bold text-slate-900">{selectedRowDetail.targetPeriod}</span>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-slate-100">
+                      <span className="text-slate-500 font-semibold">Total Achieved ($)</span>
+                      <span className="font-bold text-emerald-700">{selectedRowDetail.totalSales}</span>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-slate-100">
+                      <span className="text-slate-500 font-semibold">Unpaid Settlement ($)</span>
+                      <span className="font-bold text-rose-600">{selectedRowDetail.unpaid}</span>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-slate-100">
+                      <span className="text-slate-500 font-semibold">Eligible Bonus (৳)</span>
+                      <span className="font-bold text-slate-800">{selectedRowDetail.elBonus}</span>
+                    </div>
+                    <div className="flex justify-between py-1">
+                      <span className="text-slate-500 font-semibold">Net Bonus Payout (৳)</span>
+                      <span className="font-extrabold text-[#008060]">{selectedRowDetail.bonusAmount}</span>
+                    </div>
+                  </div>
+                </div>
+
               </div>
 
               {/* BOTTOM TABBED SECTION WITH PROJECT DETAILS */}
@@ -785,68 +744,65 @@ export default function KpiBonusPage() {
                 <div className="flex items-center gap-2 border-b border-slate-200 px-3 pt-2.5 bg-slate-50/50">
                   <button
                     onClick={() => setActiveTab('kpiLines')}
-                    className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-t transition-colors cursor-pointer ${activeTab === 'kpiLines'
+                    className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-t transition-colors cursor-pointer ${
+                      activeTab === 'kpiLines'
                         ? 'bg-white border-t-2 border-[#008060] text-[#008060] shadow-2xs'
                         : 'text-slate-500 hover:text-slate-800'
-                      }`}
+                    }`}
                   >
                     KPI Lines
                   </button>
 
                   <button
                     onClick={() => setActiveTab('penaltyRecord')}
-                    className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-t transition-colors cursor-pointer ${activeTab === 'penaltyRecord'
+                    className={`px-3.5 py-1.5 text-[12px] font-extrabold rounded-t transition-colors cursor-pointer ${
+                      activeTab === 'penaltyRecord'
                         ? 'bg-white border-t-2 border-[#008060] text-[#008060] shadow-2xs'
                         : 'text-slate-500 hover:text-slate-800'
-                      }`}
+                    }`}
                   >
                     Penalty Records
                   </button>
                 </div>
 
                 <div className="p-3">
-                  {activeTab === 'kpiLines' ? (
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left text-[11.5px] border border-slate-200 border-collapse">
+                  {activeTab === 'kpiLines' && (
+                    <div className="overflow-x-auto border border-slate-100 border-collapse">
+                      <table className="w-full text-left text-[11.5px] border border-slate-100 border-collapse">
                         <thead>
-                          <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold">
-                            <th className="py-2.5 px-3 border-r border-slate-200 text-center w-8">
-                              <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
-                            </th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 whitespace-nowrap">Name</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 whitespace-nowrap">Date</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 whitespace-nowrap">Company</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 whitespace-nowrap">Service Line</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 text-right whitespace-nowrap">Total Amount ($)</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 text-center whitespace-nowrap">Order Status</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 text-right whitespace-nowrap">Sales Bonus (৳)</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 text-center whitespace-nowrap">KPI Status</th>
+                          <tr className="bg-slate-100 border-b border-slate-200 text-slate-900 font-bold">
+                            <th className="py-2 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                            <th className="py-2 px-2.5 border-r border-slate-100">Order Name</th>
+                            <th className="py-2 px-2.5 border-r border-slate-100">Date</th>
+                            <th className="py-2 px-2.5 border-r border-slate-100">Company</th>
+                            <th className="py-2 px-2.5 border-r border-slate-100">Service Line</th>
+                            <th className="py-2 px-2.5 border-r border-slate-100 text-right">Total Amount ($)</th>
+                            <th className="py-2 px-2.5 border-r border-slate-100 text-center">Order Status</th>
+                            <th className="py-2 px-2.5 border-r border-slate-100 text-right">Sales Bonus (৳)</th>
+                            <th className="py-2 px-2.5 text-center">KPI Status</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <tbody className="divide-y divide-slate-100 text-slate-700 font-medium">
                           {operationsHistoryLines.map((line, idx) => (
                             <tr key={line.sn} className="hover:bg-slate-50/80 transition-colors">
-                              <td className="py-2 px-3 border-r border-slate-200 text-center">
-                                <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
-                              </td>
-                              <td className="py-2 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                              <td className="py-2 px-3 border-r border-slate-200 font-bold text-[#008060]">{line.name}</td>
-                              <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-800 whitespace-nowrap">{line.date}</td>
-                              <td className="py-2 px-3 border-r border-slate-200 text-slate-800 font-semibold">{line.company}</td>
-                              <td className="py-2 px-3 border-r border-slate-200 text-slate-600">{line.serviceLine}</td>
-                              <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-slate-900">{line.totalAmount}</td>
-                              <td className="py-2 px-3 border-r border-slate-200 text-center">
-                                <span className="px-2 py-0.5 text-[10.5px] font-bold bg-emerald-50 text-emerald-600 border border-emerald-300 rounded-full">
+                              <td className="py-2 px-2.5 border-r border-slate-100 text-center text-slate-500 font-medium">{idx + 1}</td>
+                              <td className="py-2 px-2.5 border-r border-slate-100 font-bold text-[#008060]">{line.name}</td>
+                              <td className="py-2 px-2.5 border-r border-slate-100 text-slate-800">{line.date}</td>
+                              <td className="py-2 px-2.5 border-r border-slate-100 text-slate-800 font-semibold">{line.company}</td>
+                              <td className="py-2 px-2.5 border-r border-slate-100 text-slate-600">{line.serviceLine}</td>
+                              <td className="py-2 px-2.5 border-r border-slate-100 text-right font-bold text-slate-900">{line.totalAmount}</td>
+                              <td className="py-2 px-2.5 border-r border-slate-100 text-center">
+                                <span className="px-2 py-0.5 text-[11px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-[3px]">
                                   {line.orderStatus}
                                 </span>
                               </td>
-                              <td className="py-2 px-3 border-r border-slate-200 text-right font-bold text-[#008060]">{line.salesBonus}</td>
-                              <td className="py-2 px-3 border-r border-slate-200 text-center">
-                                <span className={`px-2 py-0.5 text-[10.5px] font-bold rounded-full border ${line.kpiStatus === 'Approved'
-                                    ? 'bg-emerald-50 text-emerald-600 border-emerald-300'
-                                    : 'bg-amber-50 text-amber-600 border-amber-300'
-                                  }`}>
+                              <td className="py-2 px-2.5 border-r border-slate-100 text-right font-bold text-[#008060]">{line.salesBonus}</td>
+                              <td className="py-2 px-2.5 text-center">
+                                <span className={`px-2 py-0.5 text-[11px] font-medium rounded-[3px] border ${
+                                  line.kpiStatus === 'Approved'
+                                    ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                                    : 'bg-amber-50 text-amber-700 border-amber-200'
+                                }`}>
                                   {line.kpiStatus}
                                 </span>
                               </td>
@@ -855,33 +811,29 @@ export default function KpiBonusPage() {
                         </tbody>
                       </table>
                     </div>
-                  ) : (
+                  )}
+
+                  {activeTab === 'penaltyRecord' && (
                     <div className="overflow-x-auto">
-                      <table className="w-full text-left text-[12px] border border-slate-200 border-collapse">
+                      <table className="w-full text-left text-[12px] border border-slate-100 border-collapse">
                         <thead>
-                          <tr className="bg-slate-50 border-b border-slate-200 text-slate-900 font-bold">
-                            <th className="py-2.5 px-3 border-r border-slate-200 text-center w-8">
-                              <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
-                            </th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 text-center w-10">SL</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 whitespace-nowrap">Date</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200">Deduction Reason</th>
-                            <th className="py-2.5 px-3 border-r border-slate-200 text-right">Deducted Amount</th>
-                            <th className="py-2.5 px-3 text-center">Status</th>
+                          <tr className="bg-slate-100 border-b border-slate-200 text-slate-900 font-bold">
+                            <th className="py-2 px-2.5 border-r border-slate-100 text-center w-10">SL</th>
+                            <th className="py-2 px-2.5 border-r border-slate-100">Date</th>
+                            <th className="py-2 px-2.5 border-r border-slate-100">Deduction Reason</th>
+                            <th className="py-2 px-2.5 border-r border-slate-100 text-right">Deducted Amount</th>
+                            <th className="py-2 px-2.5 text-center">Status</th>
                           </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-200 text-slate-700 font-medium">
+                        <tbody className="divide-y divide-slate-100 text-slate-700 font-medium">
                           {penaltyRecords.map((p, idx) => (
                             <tr key={p.id} className="hover:bg-slate-50/80 transition-colors">
-                              <td className="py-2 px-3 border-r border-slate-200 text-center">
-                                <input type="checkbox" className="rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer" />
-                              </td>
-                              <td className="py-2 px-3 border-r border-slate-200 text-center text-slate-500 font-semibold">{idx + 1}</td>
-                              <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-800 whitespace-nowrap">{p.date}</td>
-                              <td className="py-2 px-3 border-r border-slate-200 font-bold text-slate-900">{p.reason}</td>
-                              <td className="py-2 px-3 border-r border-slate-200 text-right font-extrabold text-rose-600">{p.deducted}</td>
-                              <td className="py-2 px-3 text-center">
-                                <span className="px-2 py-0.5 text-[10.5px] font-bold bg-amber-50 text-amber-600 border border-amber-300 rounded-full">
+                              <td className="py-2 px-2.5 border-r border-slate-100 text-center text-slate-500 font-medium">{idx + 1}</td>
+                              <td className="py-2 px-2.5 border-r border-slate-100 text-slate-800">{p.date}</td>
+                              <td className="py-2 px-2.5 border-r border-slate-100 font-bold text-slate-900">{p.reason}</td>
+                              <td className="py-2 px-2.5 border-r border-slate-100 text-right font-bold text-rose-600">{p.deducted}</td>
+                              <td className="py-2 px-2.5 text-center">
+                                <span className="px-2 py-0.5 text-[11px] font-medium bg-amber-50 text-amber-700 border border-amber-200 rounded-[3px]">
                                   {p.status}
                                 </span>
                               </td>
@@ -893,6 +845,7 @@ export default function KpiBonusPage() {
                   )}
                 </div>
               </div>
+
             </div>
           )}
 

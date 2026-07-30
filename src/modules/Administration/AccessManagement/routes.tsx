@@ -10,10 +10,16 @@ import { usergroupsRoutes } from './UserGroups/routes';
 import AccessPoliciesModule from './AccessPolicies';
 import { accesspoliciesRoutes } from './AccessPolicies/routes';
 
+import AccessDashboard from './Dashboard';
+
 export const accessManagementRoutes: RouteObject[] = [
   {
     index: true,
-    element: <Navigate to="users" replace />
+    element: <Navigate to="dashboard" replace />
+  },
+  {
+    path: 'dashboard',
+    element: <AccessDashboard />
   },
   { 
     path: 'users', 

@@ -44,6 +44,7 @@ export const hrRoutes: RouteObject[] = [
         element: <Navigate to="portal" replace />,
       },
       { path: 'portal', element: <StaffPortalPage /> },
+      { path: 'dashboard', element: <StaffPortalPage /> },
       { path: 'employees', element: <EmployeesPage /> },
       { path: 'onboarding', element: <OnboardingPage /> },
       { path: 'transfers', element: <TransfersPage /> },

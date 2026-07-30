@@ -37,9 +37,10 @@ export const navigationMap: Record<string, any[]> = {
             group: 'Access Management',
             icon: ShieldAlert,
             items: [
+                { name: 'Access Dashboard', path: '/administration/access/dashboard', icon: LayoutDashboard },
                 { name: 'Users', path: '/administration/access/users', icon: UserCircle },
                 { name: 'Roles', path: '/administration/access/roles', icon: ShieldCheck },
-                { name: 'Permissions', path: '/administration/access/permissions', icon: Key },
+                { name: 'Permissions Matrix', path: '/administration/access/permissions', icon: Key },
                 { name: 'User Groups', path: '/administration/access/user-groups', icon: Users },
                 { name: 'Access Policies', path: '/administration/access/policies', icon: FileCheck },
             ]
@@ -314,6 +315,7 @@ export const navigationMap: Record<string, any[]> = {
         { category: 'Main Menu', name: 'Stock Adjustment', path: '/inventory/stock-adjustment', icon: Settings },
     ],
     'hr': [
+        { category: 'Overview', name: 'Dashboard', path: '/hr/dashboard', icon: LayoutDashboard },
         {
             category: 'Workforce & Time',
             group: 'Employee Management',
